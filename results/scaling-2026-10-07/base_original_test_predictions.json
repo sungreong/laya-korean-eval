@@ -1,0 +1,2202 @@
+[
+  {
+    "id": "8792905",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5676,
+      "B": 0.4324
+    },
+    "confidence": 0.5676,
+    "latency_ms": 206.03671803837642
+  },
+  {
+    "id": "8348951",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4187,
+      "B": 0.5813
+    },
+    "confidence": 0.5813,
+    "latency_ms": 274.0649090264924
+  },
+  {
+    "id": "4969710",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.396,
+      "B": 0.604
+    },
+    "confidence": 0.604,
+    "latency_ms": 157.74881502147764
+  },
+  {
+    "id": "9791027",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6932,
+      "B": 0.3068
+    },
+    "confidence": 0.6932,
+    "latency_ms": 262.6722219865769
+  },
+  {
+    "id": "9083844",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4606,
+      "B": 0.5394
+    },
+    "confidence": 0.5394,
+    "latency_ms": 179.18970598839223
+  },
+  {
+    "id": "8818288",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6142,
+      "B": 0.3858
+    },
+    "confidence": 0.6142,
+    "latency_ms": 304.7190729994327
+  },
+  {
+    "id": "3075978",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.595,
+      "B": 0.405
+    },
+    "confidence": 0.595,
+    "latency_ms": 198.65266501437873
+  },
+  {
+    "id": "8126477",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2368,
+      "B": 0.7632
+    },
+    "confidence": 0.7632,
+    "latency_ms": 165.7767549622804
+  },
+  {
+    "id": "2509398",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3855,
+      "B": 0.6145
+    },
+    "confidence": 0.6145,
+    "latency_ms": 170.7474659779109
+  },
+  {
+    "id": "3620904",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3711,
+      "B": 0.6289
+    },
+    "confidence": 0.6289,
+    "latency_ms": 140.66095399903134
+  },
+  {
+    "id": "7031021",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.8779,
+      "B": 0.1221
+    },
+    "confidence": 0.8779,
+    "latency_ms": 162.68509096698835
+  },
+  {
+    "id": "3534986",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3887,
+      "B": 0.6113
+    },
+    "confidence": 0.6113,
+    "latency_ms": 184.4331449829042
+  },
+  {
+    "id": "7224627",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7635,
+      "B": 0.2365
+    },
+    "confidence": 0.7635,
+    "latency_ms": 163.39672700269148
+  },
+  {
+    "id": "9521386",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7267,
+      "B": 0.2733
+    },
+    "confidence": 0.7267,
+    "latency_ms": 150.23785998346284
+  },
+  {
+    "id": "9164209",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5978,
+      "B": 0.4022
+    },
+    "confidence": 0.5978,
+    "latency_ms": 198.87856603600085
+  },
+  {
+    "id": "466294",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7808,
+      "B": 0.2192
+    },
+    "confidence": 0.7808,
+    "latency_ms": 171.36076599126682
+  },
+  {
+    "id": "9245827",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3446,
+      "B": 0.6554
+    },
+    "confidence": 0.6554,
+    "latency_ms": 175.1161870197393
+  },
+  {
+    "id": "9311903",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6105,
+      "B": 0.3895
+    },
+    "confidence": 0.6105,
+    "latency_ms": 176.1333750328049
+  },
+  {
+    "id": "3678497",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.1879,
+      "B": 0.8121
+    },
+    "confidence": 0.8121,
+    "latency_ms": 180.44333899160847
+  },
+  {
+    "id": "5455387",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4656,
+      "B": 0.5344
+    },
+    "confidence": 0.5344,
+    "latency_ms": 208.13482900848612
+  },
+  {
+    "id": "9597448",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3036,
+      "B": 0.6964
+    },
+    "confidence": 0.6964,
+    "latency_ms": 151.4078399632126
+  },
+  {
+    "id": "6971886",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4172,
+      "B": 0.5828
+    },
+    "confidence": 0.5828,
+    "latency_ms": 178.1248759943992
+  },
+  {
+    "id": "403754",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5963,
+      "B": 0.4037
+    },
+    "confidence": 0.5963,
+    "latency_ms": 149.99494602670893
+  },
+  {
+    "id": "8188546",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4111,
+      "B": 0.5889
+    },
+    "confidence": 0.5889,
+    "latency_ms": 180.09126605466008
+  },
+  {
+    "id": "4531638",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7458,
+      "B": 0.2542
+    },
+    "confidence": 0.7458,
+    "latency_ms": 187.37111904192716
+  },
+  {
+    "id": "8872645",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2936,
+      "B": 0.7064
+    },
+    "confidence": 0.7064,
+    "latency_ms": 283.09836803236976
+  },
+  {
+    "id": "9311056",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.8626,
+      "B": 0.1374
+    },
+    "confidence": 0.8626,
+    "latency_ms": 147.22051401622593
+  },
+  {
+    "id": "9219330",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4102,
+      "B": 0.5898
+    },
+    "confidence": 0.5898,
+    "latency_ms": 272.7261959807947
+  },
+  {
+    "id": "3747689",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7797,
+      "B": 0.2203
+    },
+    "confidence": 0.7797,
+    "latency_ms": 190.9141459618695
+  },
+  {
+    "id": "4763583",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3412,
+      "B": 0.6588
+    },
+    "confidence": 0.6588,
+    "latency_ms": 172.63610701775178
+  },
+  {
+    "id": "9274741",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3738,
+      "B": 0.6262
+    },
+    "confidence": 0.6262,
+    "latency_ms": 179.24562201369554
+  },
+  {
+    "id": "2811904",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5753,
+      "B": 0.4247
+    },
+    "confidence": 0.5753,
+    "latency_ms": 166.90749098779634
+  },
+  {
+    "id": "7812230",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5993,
+      "B": 0.4007
+    },
+    "confidence": 0.5993,
+    "latency_ms": 193.37173295207322
+  },
+  {
+    "id": "1947715",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5139,
+      "B": 0.4861
+    },
+    "confidence": 0.5139,
+    "latency_ms": 215.3498510015197
+  },
+  {
+    "id": "3120860",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2238,
+      "B": 0.7762
+    },
+    "confidence": 0.7762,
+    "latency_ms": 172.30895400280133
+  },
+  {
+    "id": "4825870",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4644,
+      "B": 0.5356
+    },
+    "confidence": 0.5356,
+    "latency_ms": 198.76270496752113
+  },
+  {
+    "id": "9981256",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4419,
+      "B": 0.5581
+    },
+    "confidence": 0.5581,
+    "latency_ms": 219.34733900707215
+  },
+  {
+    "id": "9470869",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4399,
+      "B": 0.5601
+    },
+    "confidence": 0.5601,
+    "latency_ms": 197.86576798651367
+  },
+  {
+    "id": "5507470",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2638,
+      "B": 0.7362
+    },
+    "confidence": 0.7362,
+    "latency_ms": 155.39232396986336
+  },
+  {
+    "id": "5986679",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4308,
+      "B": 0.5692
+    },
+    "confidence": 0.5692,
+    "latency_ms": 179.65847498271614
+  },
+  {
+    "id": "6300287",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.1287,
+      "B": 0.8713
+    },
+    "confidence": 0.8713,
+    "latency_ms": 177.38780297804624
+  },
+  {
+    "id": "9963734",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5102,
+      "B": 0.4898
+    },
+    "confidence": 0.5102,
+    "latency_ms": 162.13922295719385
+  },
+  {
+    "id": "9670324",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.0721,
+      "B": 0.9279
+    },
+    "confidence": 0.9279,
+    "latency_ms": 257.7311799977906
+  },
+  {
+    "id": "9088889",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2647,
+      "B": 0.7353
+    },
+    "confidence": 0.7353,
+    "latency_ms": 196.54401700245216
+  },
+  {
+    "id": "9977242",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3707,
+      "B": 0.6293
+    },
+    "confidence": 0.6293,
+    "latency_ms": 244.9049069546163
+  },
+  {
+    "id": "7134016",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5942,
+      "B": 0.4058
+    },
+    "confidence": 0.5942,
+    "latency_ms": 216.61528700497
+  },
+  {
+    "id": "7844005",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5618,
+      "B": 0.4382
+    },
+    "confidence": 0.5618,
+    "latency_ms": 175.3884599893354
+  },
+  {
+    "id": "8221010",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3331,
+      "B": 0.6669
+    },
+    "confidence": 0.6669,
+    "latency_ms": 167.75397100718692
+  },
+  {
+    "id": "1876367",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2845,
+      "B": 0.7155
+    },
+    "confidence": 0.7155,
+    "latency_ms": 142.19289098400623
+  },
+  {
+    "id": "5216072",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4086,
+      "B": 0.5914
+    },
+    "confidence": 0.5914,
+    "latency_ms": 201.323161018081
+  },
+  {
+    "id": "7498795",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6954,
+      "B": 0.3046
+    },
+    "confidence": 0.6954,
+    "latency_ms": 183.716713974718
+  },
+  {
+    "id": "9751939",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5151,
+      "B": 0.4849
+    },
+    "confidence": 0.5151,
+    "latency_ms": 178.5812900052406
+  },
+  {
+    "id": "9861382",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7845,
+      "B": 0.2155
+    },
+    "confidence": 0.7845,
+    "latency_ms": 174.34610205236822
+  },
+  {
+    "id": "7353329",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2252,
+      "B": 0.7748
+    },
+    "confidence": 0.7748,
+    "latency_ms": 265.88885800447315
+  },
+  {
+    "id": "6930269",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5642,
+      "B": 0.4358
+    },
+    "confidence": 0.5642,
+    "latency_ms": 202.15048996033147
+  },
+  {
+    "id": "8427466",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.45,
+      "B": 0.55
+    },
+    "confidence": 0.55,
+    "latency_ms": 191.9941899832338
+  },
+  {
+    "id": "8192649",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7505,
+      "B": 0.2495
+    },
+    "confidence": 0.7505,
+    "latency_ms": 164.04317499836907
+  },
+  {
+    "id": "9989324",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7514,
+      "B": 0.2486
+    },
+    "confidence": 0.7514,
+    "latency_ms": 163.60213101143017
+  },
+  {
+    "id": "6998685",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6024,
+      "B": 0.3976
+    },
+    "confidence": 0.6024,
+    "latency_ms": 185.391299019102
+  },
+  {
+    "id": "3852741",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3134,
+      "B": 0.6866
+    },
+    "confidence": 0.6866,
+    "latency_ms": 222.25283598527312
+  },
+  {
+    "id": "10111901",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5545,
+      "B": 0.4455
+    },
+    "confidence": 0.5545,
+    "latency_ms": 235.85267504677176
+  },
+  {
+    "id": "9360937",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3162,
+      "B": 0.6838
+    },
+    "confidence": 0.6838,
+    "latency_ms": 167.19539603218436
+  },
+  {
+    "id": "5876332",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.1875,
+      "B": 0.8125
+    },
+    "confidence": 0.8125,
+    "latency_ms": 196.26998400781304
+  },
+  {
+    "id": "6726235",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3707,
+      "B": 0.6293
+    },
+    "confidence": 0.6293,
+    "latency_ms": 156.94540698314086
+  },
+  {
+    "id": "9998557",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2357,
+      "B": 0.7643
+    },
+    "confidence": 0.7643,
+    "latency_ms": 202.32312002917752
+  },
+  {
+    "id": "10092341",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7207,
+      "B": 0.2793
+    },
+    "confidence": 0.7207,
+    "latency_ms": 171.23532999539748
+  },
+  {
+    "id": "9814471",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3191,
+      "B": 0.6809
+    },
+    "confidence": 0.6809,
+    "latency_ms": 210.5968790128827
+  },
+  {
+    "id": "8639486",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4975,
+      "B": 0.5025
+    },
+    "confidence": 0.5025,
+    "latency_ms": 153.78261398291215
+  },
+  {
+    "id": "8043846",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4926,
+      "B": 0.5074
+    },
+    "confidence": 0.5074,
+    "latency_ms": 265.4007070232183
+  },
+  {
+    "id": "4591422",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.1891,
+      "B": 0.8109
+    },
+    "confidence": 0.8109,
+    "latency_ms": 169.3678490119055
+  },
+  {
+    "id": "3544246",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5845,
+      "B": 0.4155
+    },
+    "confidence": 0.5845,
+    "latency_ms": 198.18177103297785
+  },
+  {
+    "id": "7100167",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7324,
+      "B": 0.2676
+    },
+    "confidence": 0.7324,
+    "latency_ms": 233.72388497227803
+  },
+  {
+    "id": "8674258",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4138,
+      "B": 0.5862
+    },
+    "confidence": 0.5862,
+    "latency_ms": 162.20272303326055
+  },
+  {
+    "id": "9971567",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4298,
+      "B": 0.5702
+    },
+    "confidence": 0.5702,
+    "latency_ms": 165.42086098343134
+  },
+  {
+    "id": "4544896",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3971,
+      "B": 0.6029
+    },
+    "confidence": 0.6029,
+    "latency_ms": 151.8633239902556
+  },
+  {
+    "id": "4599695",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3584,
+      "B": 0.6416
+    },
+    "confidence": 0.6416,
+    "latency_ms": 140.68459498230368
+  },
+  {
+    "id": "2601105",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5233,
+      "B": 0.4767
+    },
+    "confidence": 0.5233,
+    "latency_ms": 169.9257029686123
+  },
+  {
+    "id": "6670004",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.611,
+      "B": 0.389
+    },
+    "confidence": 0.611,
+    "latency_ms": 160.13344802195206
+  },
+  {
+    "id": "9052101",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4604,
+      "B": 0.5396
+    },
+    "confidence": 0.5396,
+    "latency_ms": 159.93516898015514
+  },
+  {
+    "id": "5634919",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2843,
+      "B": 0.7157
+    },
+    "confidence": 0.7157,
+    "latency_ms": 171.3615339831449
+  },
+  {
+    "id": "10254501",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7447,
+      "B": 0.2553
+    },
+    "confidence": 0.7447,
+    "latency_ms": 170.86581198964268
+  },
+  {
+    "id": "6175637",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6602,
+      "B": 0.3398
+    },
+    "confidence": 0.6602,
+    "latency_ms": 161.47878899937496
+  },
+  {
+    "id": "9638393",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5543,
+      "B": 0.4457
+    },
+    "confidence": 0.5543,
+    "latency_ms": 210.86039795773104
+  },
+  {
+    "id": "9937054",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5773,
+      "B": 0.4227
+    },
+    "confidence": 0.5773,
+    "latency_ms": 273.7272929516621
+  },
+  {
+    "id": "7920718",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6033,
+      "B": 0.3967
+    },
+    "confidence": 0.6033,
+    "latency_ms": 161.75753000425175
+  },
+  {
+    "id": "8688114",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4074,
+      "B": 0.5926
+    },
+    "confidence": 0.5926,
+    "latency_ms": 191.75334397004917
+  },
+  {
+    "id": "6813400",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2503,
+      "B": 0.7497
+    },
+    "confidence": 0.7497,
+    "latency_ms": 178.6561209592037
+  },
+  {
+    "id": "9876304",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4307,
+      "B": 0.5693
+    },
+    "confidence": 0.5693,
+    "latency_ms": 151.4596960041672
+  },
+  {
+    "id": "8038671",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3087,
+      "B": 0.6913
+    },
+    "confidence": 0.6913,
+    "latency_ms": 159.97135394718498
+  },
+  {
+    "id": "9433997",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4613,
+      "B": 0.5387
+    },
+    "confidence": 0.5387,
+    "latency_ms": 229.77294295560569
+  },
+  {
+    "id": "3043105",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7119,
+      "B": 0.2881
+    },
+    "confidence": 0.7119,
+    "latency_ms": 170.24037998635322
+  },
+  {
+    "id": "6683239",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6608,
+      "B": 0.3392
+    },
+    "confidence": 0.6608,
+    "latency_ms": 173.24579204432666
+  },
+  {
+    "id": "10276682",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.8219,
+      "B": 0.1781
+    },
+    "confidence": 0.8219,
+    "latency_ms": 178.70636796578765
+  },
+  {
+    "id": "9349788",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7387,
+      "B": 0.2613
+    },
+    "confidence": 0.7387,
+    "latency_ms": 184.8703550058417
+  },
+  {
+    "id": "8837634",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5075,
+      "B": 0.4925
+    },
+    "confidence": 0.5075,
+    "latency_ms": 143.93953297985718
+  },
+  {
+    "id": "9303461",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2921,
+      "B": 0.7079
+    },
+    "confidence": 0.7079,
+    "latency_ms": 240.02852500416338
+  },
+  {
+    "id": "3604101",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.1725,
+      "B": 0.8275
+    },
+    "confidence": 0.8275,
+    "latency_ms": 164.6997900097631
+  },
+  {
+    "id": "10200450",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.216,
+      "B": 0.784
+    },
+    "confidence": 0.784,
+    "latency_ms": 172.71954996977001
+  },
+  {
+    "id": "5564481",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.731,
+      "B": 0.269
+    },
+    "confidence": 0.731,
+    "latency_ms": 194.52735502272844
+  },
+  {
+    "id": "7916905",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5637,
+      "B": 0.4363
+    },
+    "confidence": 0.5637,
+    "latency_ms": 245.42613100493327
+  },
+  {
+    "id": "9684523",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2815,
+      "B": 0.7185
+    },
+    "confidence": 0.7185,
+    "latency_ms": 197.23142200382426
+  },
+  {
+    "id": "4266173",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.1699,
+      "B": 0.8301
+    },
+    "confidence": 0.8301,
+    "latency_ms": 199.78487398475409
+  },
+  {
+    "id": "6918096",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2503,
+      "B": 0.7497
+    },
+    "confidence": 0.7497,
+    "latency_ms": 182.83424101537094
+  },
+  {
+    "id": "10132784",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2815,
+      "B": 0.7185
+    },
+    "confidence": 0.7185,
+    "latency_ms": 153.693447005935
+  },
+  {
+    "id": "1961239",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4689,
+      "B": 0.5311
+    },
+    "confidence": 0.5311,
+    "latency_ms": 156.59867000067607
+  },
+  {
+    "id": "3063869",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7756,
+      "B": 0.2244
+    },
+    "confidence": 0.7756,
+    "latency_ms": 196.92349602701142
+  },
+  {
+    "id": "4945982",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2061,
+      "B": 0.7939
+    },
+    "confidence": 0.7939,
+    "latency_ms": 168.21634903317317
+  },
+  {
+    "id": "9089777",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.8869,
+      "B": 0.1131
+    },
+    "confidence": 0.8869,
+    "latency_ms": 260.2332539972849
+  },
+  {
+    "id": "837835",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4804,
+      "B": 0.5196
+    },
+    "confidence": 0.5196,
+    "latency_ms": 155.76844499446452
+  },
+  {
+    "id": "9789211",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2484,
+      "B": 0.7516
+    },
+    "confidence": 0.7516,
+    "latency_ms": 178.57954697683454
+  },
+  {
+    "id": "9016069",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3204,
+      "B": 0.6796
+    },
+    "confidence": 0.6796,
+    "latency_ms": 203.9180460269563
+  },
+  {
+    "id": "5458964",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5929,
+      "B": 0.4071
+    },
+    "confidence": 0.5929,
+    "latency_ms": 186.66630203370005
+  },
+  {
+    "id": "3727730",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.379,
+      "B": 0.621
+    },
+    "confidence": 0.621,
+    "latency_ms": 238.37303702021018
+  },
+  {
+    "id": "1691225",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3597,
+      "B": 0.6403
+    },
+    "confidence": 0.6403,
+    "latency_ms": 176.58668401418254
+  },
+  {
+    "id": "7896535",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4537,
+      "B": 0.5463
+    },
+    "confidence": 0.5463,
+    "latency_ms": 190.6608000281267
+  },
+  {
+    "id": "8728054",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3507,
+      "B": 0.6493
+    },
+    "confidence": 0.6493,
+    "latency_ms": 236.03403597371653
+  },
+  {
+    "id": "8188594",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7008,
+      "B": 0.2992
+    },
+    "confidence": 0.7008,
+    "latency_ms": 176.44531599944457
+  },
+  {
+    "id": "2494364",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3049,
+      "B": 0.6951
+    },
+    "confidence": 0.6951,
+    "latency_ms": 176.77792999893427
+  },
+  {
+    "id": "6921489",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.8125,
+      "B": 0.1875
+    },
+    "confidence": 0.8125,
+    "latency_ms": 169.5884150103666
+  },
+  {
+    "id": "10218871",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3785,
+      "B": 0.6215
+    },
+    "confidence": 0.6215,
+    "latency_ms": 154.61618796689436
+  },
+  {
+    "id": "5916049",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3611,
+      "B": 0.6389
+    },
+    "confidence": 0.6389,
+    "latency_ms": 155.92714701779187
+  },
+  {
+    "id": "10230497",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4306,
+      "B": 0.5694
+    },
+    "confidence": 0.5694,
+    "latency_ms": 199.8749430058524
+  },
+  {
+    "id": "4412062",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.8041,
+      "B": 0.1959
+    },
+    "confidence": 0.8041,
+    "latency_ms": 157.94005704810843
+  },
+  {
+    "id": "9228907",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.8596,
+      "B": 0.1404
+    },
+    "confidence": 0.8596,
+    "latency_ms": 162.16483805328608
+  },
+  {
+    "id": "3350961",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7376,
+      "B": 0.2624
+    },
+    "confidence": 0.7376,
+    "latency_ms": 177.13756597368047
+  },
+  {
+    "id": "9180216",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5266,
+      "B": 0.4734
+    },
+    "confidence": 0.5266,
+    "latency_ms": 300.4937539808452
+  },
+  {
+    "id": "8115499",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2801,
+      "B": 0.7199
+    },
+    "confidence": 0.7199,
+    "latency_ms": 171.6633890173398
+  },
+  {
+    "id": "6591538",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.895,
+      "B": 0.105
+    },
+    "confidence": 0.895,
+    "latency_ms": 189.14587597828358
+  },
+  {
+    "id": "6368939",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4364,
+      "B": 0.5636
+    },
+    "confidence": 0.5636,
+    "latency_ms": 141.82035002158955
+  },
+  {
+    "id": "5909335",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5189,
+      "B": 0.4811
+    },
+    "confidence": 0.5189,
+    "latency_ms": 139.90947202546522
+  },
+  {
+    "id": "7279234",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2512,
+      "B": 0.7488
+    },
+    "confidence": 0.7488,
+    "latency_ms": 156.0794020188041
+  },
+  {
+    "id": "4038094",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2774,
+      "B": 0.7226
+    },
+    "confidence": 0.7226,
+    "latency_ms": 154.77777202613652
+  },
+  {
+    "id": "1945535",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5054,
+      "B": 0.4946
+    },
+    "confidence": 0.5054,
+    "latency_ms": 153.60082197003067
+  },
+  {
+    "id": "6129252",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2244,
+      "B": 0.7756
+    },
+    "confidence": 0.7756,
+    "latency_ms": 186.76623498322442
+  },
+  {
+    "id": "9918712",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3119,
+      "B": 0.6881
+    },
+    "confidence": 0.6881,
+    "latency_ms": 175.5388749879785
+  },
+  {
+    "id": "10199768",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7554,
+      "B": 0.2446
+    },
+    "confidence": 0.7554,
+    "latency_ms": 171.76460102200508
+  },
+  {
+    "id": "124067",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7492,
+      "B": 0.2508
+    },
+    "confidence": 0.7492,
+    "latency_ms": 196.40141498530284
+  },
+  {
+    "id": "9939467",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.549,
+      "B": 0.451
+    },
+    "confidence": 0.549,
+    "latency_ms": 202.7029040036723
+  },
+  {
+    "id": "9807133",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.8144,
+      "B": 0.1856
+    },
+    "confidence": 0.8144,
+    "latency_ms": 189.91619802545756
+  },
+  {
+    "id": "5010754",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4816,
+      "B": 0.5184
+    },
+    "confidence": 0.5184,
+    "latency_ms": 181.80828203912824
+  },
+  {
+    "id": "7831352",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.545,
+      "B": 0.455
+    },
+    "confidence": 0.545,
+    "latency_ms": 160.3734189993702
+  },
+  {
+    "id": "3575517",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3445,
+      "B": 0.6555
+    },
+    "confidence": 0.6555,
+    "latency_ms": 152.31158200185746
+  },
+  {
+    "id": "9915743",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.8086,
+      "B": 0.1914
+    },
+    "confidence": 0.8086,
+    "latency_ms": 177.02151602134109
+  },
+  {
+    "id": "9823536",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5221,
+      "B": 0.4779
+    },
+    "confidence": 0.5221,
+    "latency_ms": 190.07635198067874
+  },
+  {
+    "id": "10251606",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2417,
+      "B": 0.7583
+    },
+    "confidence": 0.7583,
+    "latency_ms": 170.70773598970845
+  },
+  {
+    "id": "9614855",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.9335,
+      "B": 0.0665
+    },
+    "confidence": 0.9335,
+    "latency_ms": 260.6877469806932
+  },
+  {
+    "id": "2239005",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3617,
+      "B": 0.6383
+    },
+    "confidence": 0.6383,
+    "latency_ms": 165.69654998602346
+  },
+  {
+    "id": "9907920",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.185,
+      "B": 0.815
+    },
+    "confidence": 0.815,
+    "latency_ms": 154.42255098605528
+  },
+  {
+    "id": "3250273",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.669,
+      "B": 0.331
+    },
+    "confidence": 0.669,
+    "latency_ms": 195.12652198318392
+  },
+  {
+    "id": "1975012",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7054,
+      "B": 0.2946
+    },
+    "confidence": 0.7054,
+    "latency_ms": 218.0424109683372
+  },
+  {
+    "id": "8977457",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2203,
+      "B": 0.7797
+    },
+    "confidence": 0.7797,
+    "latency_ms": 183.356876950711
+  },
+  {
+    "id": "9241145",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3547,
+      "B": 0.6453
+    },
+    "confidence": 0.6453,
+    "latency_ms": 172.47345502255484
+  },
+  {
+    "id": "7537086",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5129,
+      "B": 0.4871
+    },
+    "confidence": 0.5129,
+    "latency_ms": 198.9585249684751
+  },
+  {
+    "id": "3079391",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3225,
+      "B": 0.6775
+    },
+    "confidence": 0.6775,
+    "latency_ms": 254.78708499576896
+  },
+  {
+    "id": "5754567",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4454,
+      "B": 0.5546
+    },
+    "confidence": 0.5546,
+    "latency_ms": 177.18056897865608
+  },
+  {
+    "id": "8934044",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2761,
+      "B": 0.7239
+    },
+    "confidence": 0.7239,
+    "latency_ms": 176.03140498977154
+  },
+  {
+    "id": "6406745",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5145,
+      "B": 0.4855
+    },
+    "confidence": 0.5145,
+    "latency_ms": 211.24328399309888
+  },
+  {
+    "id": "5531942",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.8162,
+      "B": 0.1838
+    },
+    "confidence": 0.8162,
+    "latency_ms": 196.78589701652527
+  },
+  {
+    "id": "2745590",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3986,
+      "B": 0.6014
+    },
+    "confidence": 0.6014,
+    "latency_ms": 181.22284597484395
+  },
+  {
+    "id": "10145753",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2102,
+      "B": 0.7898
+    },
+    "confidence": 0.7898,
+    "latency_ms": 234.56795298261568
+  },
+  {
+    "id": "8772983",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5632,
+      "B": 0.4368
+    },
+    "confidence": 0.5632,
+    "latency_ms": 204.73994099302217
+  },
+  {
+    "id": "3883006",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7235,
+      "B": 0.2765
+    },
+    "confidence": 0.7235,
+    "latency_ms": 231.32055398309603
+  },
+  {
+    "id": "6965821",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7807,
+      "B": 0.2193
+    },
+    "confidence": 0.7807,
+    "latency_ms": 178.86043700855225
+  },
+  {
+    "id": "99990",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.1745,
+      "B": 0.8255
+    },
+    "confidence": 0.8255,
+    "latency_ms": 171.36664199642837
+  },
+  {
+    "id": "9177568",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4109,
+      "B": 0.5891
+    },
+    "confidence": 0.5891,
+    "latency_ms": 184.45018702186644
+  },
+  {
+    "id": "9816980",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2891,
+      "B": 0.7109
+    },
+    "confidence": 0.7109,
+    "latency_ms": 172.18457703711465
+  },
+  {
+    "id": "7941554",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6314,
+      "B": 0.3686
+    },
+    "confidence": 0.6314,
+    "latency_ms": 168.40909200254828
+  },
+  {
+    "id": "8683655",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5097,
+      "B": 0.4903
+    },
+    "confidence": 0.5097,
+    "latency_ms": 178.7447590031661
+  },
+  {
+    "id": "7608703",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2303,
+      "B": 0.7697
+    },
+    "confidence": 0.7697,
+    "latency_ms": 177.17906297184527
+  },
+  {
+    "id": "5476648",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.391,
+      "B": 0.609
+    },
+    "confidence": 0.609,
+    "latency_ms": 212.3763269628398
+  },
+  {
+    "id": "9956643",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2751,
+      "B": 0.7249
+    },
+    "confidence": 0.7249,
+    "latency_ms": 175.02054199576378
+  },
+  {
+    "id": "7273163",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6642,
+      "B": 0.3358
+    },
+    "confidence": 0.6642,
+    "latency_ms": 182.35665501561016
+  },
+  {
+    "id": "9682958",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3999,
+      "B": 0.6001
+    },
+    "confidence": 0.6001,
+    "latency_ms": 152.87630300736055
+  },
+  {
+    "id": "8185235",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2935,
+      "B": 0.7065
+    },
+    "confidence": 0.7065,
+    "latency_ms": 183.1499679828994
+  },
+  {
+    "id": "5987352",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3439,
+      "B": 0.6561
+    },
+    "confidence": 0.6561,
+    "latency_ms": 167.12569299852476
+  },
+  {
+    "id": "1060310",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.6255,
+      "B": 0.3745
+    },
+    "confidence": 0.6255,
+    "latency_ms": 160.7574259978719
+  },
+  {
+    "id": "9324477",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.1879,
+      "B": 0.8121
+    },
+    "confidence": 0.8121,
+    "latency_ms": 155.4672180209309
+  },
+  {
+    "id": "5983959",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.855,
+      "B": 0.145
+    },
+    "confidence": 0.855,
+    "latency_ms": 174.60168298566714
+  },
+  {
+    "id": "10018785",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3622,
+      "B": 0.6378
+    },
+    "confidence": 0.6378,
+    "latency_ms": 152.49007503734902
+  },
+  {
+    "id": "8671362",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3156,
+      "B": 0.6844
+    },
+    "confidence": 0.6844,
+    "latency_ms": 187.9623749991879
+  },
+  {
+    "id": "9470503",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2292,
+      "B": 0.7708
+    },
+    "confidence": 0.7708,
+    "latency_ms": 202.10686401696876
+  },
+  {
+    "id": "9221978",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5834,
+      "B": 0.4166
+    },
+    "confidence": 0.5834,
+    "latency_ms": 191.81068701436743
+  },
+  {
+    "id": "8180250",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.4579,
+      "B": 0.5421
+    },
+    "confidence": 0.5421,
+    "latency_ms": 189.972965978086
+  },
+  {
+    "id": "8791702",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.9252,
+      "B": 0.0748
+    },
+    "confidence": 0.9252,
+    "latency_ms": 181.67036498198286
+  },
+  {
+    "id": "9644499",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.125,
+      "B": 0.875
+    },
+    "confidence": 0.875,
+    "latency_ms": 197.80167803401127
+  },
+  {
+    "id": "10242213",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5192,
+      "B": 0.4808
+    },
+    "confidence": 0.5192,
+    "latency_ms": 190.96744095440954
+  },
+  {
+    "id": "4731628",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7011,
+      "B": 0.2989
+    },
+    "confidence": 0.7011,
+    "latency_ms": 167.16414398979396
+  },
+  {
+    "id": "9901084",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5099,
+      "B": 0.4901
+    },
+    "confidence": 0.5099,
+    "latency_ms": 176.80572997778654
+  },
+  {
+    "id": "8361377",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7846,
+      "B": 0.2154
+    },
+    "confidence": 0.7846,
+    "latency_ms": 157.480200054124
+  },
+  {
+    "id": "7411951",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2488,
+      "B": 0.7512
+    },
+    "confidence": 0.7512,
+    "latency_ms": 258.7487429846078
+  },
+  {
+    "id": "9661966",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3368,
+      "B": 0.6632
+    },
+    "confidence": 0.6632,
+    "latency_ms": 167.35048103146255
+  },
+  {
+    "id": "9964272",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.254,
+      "B": 0.746
+    },
+    "confidence": 0.746,
+    "latency_ms": 161.23659099685028
+  },
+  {
+    "id": "9140717",
+    "expected": "B",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.5067,
+      "B": 0.4933
+    },
+    "confidence": 0.5067,
+    "latency_ms": 158.8752630050294
+  },
+  {
+    "id": "4877350",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2946,
+      "B": 0.7054
+    },
+    "confidence": 0.7054,
+    "latency_ms": 218.99826597655192
+  },
+  {
+    "id": "9488908",
+    "expected": "A",
+    "predicted": "A",
+    "probabilities": {
+      "A": 0.7744,
+      "B": 0.2256
+    },
+    "confidence": 0.7744,
+    "latency_ms": 249.1549410042353
+  },
+  {
+    "id": "9305501",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3793,
+      "B": 0.6207
+    },
+    "confidence": 0.6207,
+    "latency_ms": 196.85694301733747
+  },
+  {
+    "id": "5372728",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2402,
+      "B": 0.7598
+    },
+    "confidence": 0.7598,
+    "latency_ms": 187.08713399246335
+  },
+  {
+    "id": "1592609",
+    "expected": "A",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.325,
+      "B": 0.675
+    },
+    "confidence": 0.675,
+    "latency_ms": 163.00678998231888
+  },
+  {
+    "id": "9278435",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.2379,
+      "B": 0.7621
+    },
+    "confidence": 0.7621,
+    "latency_ms": 190.13853801880032
+  },
+  {
+    "id": "9220132",
+    "expected": "B",
+    "predicted": "B",
+    "probabilities": {
+      "A": 0.3662,
+      "B": 0.6338
+    },
+    "confidence": 0.6338,
+    "latency_ms": 160.56548996130005
+  }
+]

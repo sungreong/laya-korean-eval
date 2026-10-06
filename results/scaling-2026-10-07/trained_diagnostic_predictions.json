@@ -1,0 +1,362 @@
+[
+  {
+    "id": "d00",
+    "expected": "billing",
+    "predicted": "billing",
+    "probabilities": {
+      "billing": 0.9214,
+      "technical": 0.0198,
+      "delivery": 0.004,
+      "sales": 0.0081,
+      "account": 0.0078,
+      "other": 0.0389
+    },
+    "confidence": 0.9214,
+    "latency_ms": 291.3239559857175
+  },
+  {
+    "id": "d01",
+    "expected": "technical",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0009,
+      "technical": 0.9746,
+      "delivery": 0.0017,
+      "sales": 0.0025,
+      "account": 0.013,
+      "other": 0.0074
+    },
+    "confidence": 0.9746,
+    "latency_ms": 264.77893796982244
+  },
+  {
+    "id": "d02",
+    "expected": "delivery",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0034,
+      "technical": 0.0271,
+      "delivery": 0.952,
+      "sales": 0.0086,
+      "account": 0.0014,
+      "other": 0.0076
+    },
+    "confidence": 0.952,
+    "latency_ms": 307.2298109764233
+  },
+  {
+    "id": "d03",
+    "expected": "sales",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0931,
+      "technical": 0.7082,
+      "delivery": 0.0326,
+      "sales": 0.0763,
+      "account": 0.0336,
+      "other": 0.0563
+    },
+    "confidence": 0.7082,
+    "latency_ms": 304.44622901268303
+  },
+  {
+    "id": "d04",
+    "expected": "account",
+    "predicted": "account",
+    "probabilities": {
+      "billing": 0.0251,
+      "technical": 0.0036,
+      "delivery": 0.0013,
+      "sales": 0.0013,
+      "account": 0.9672,
+      "other": 0.0016
+    },
+    "confidence": 0.9672,
+    "latency_ms": 288.20047300541773
+  },
+  {
+    "id": "d05",
+    "expected": "billing",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0005,
+      "technical": 0.0003,
+      "delivery": 0.9978,
+      "sales": 0.0003,
+      "account": 0.0001,
+      "other": 0.001
+    },
+    "confidence": 0.9978,
+    "latency_ms": 284.21538503607735
+  },
+  {
+    "id": "d06",
+    "expected": "technical",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.1326,
+      "technical": 0.8516,
+      "delivery": 0.0014,
+      "sales": 0.0025,
+      "account": 0.0012,
+      "other": 0.0108
+    },
+    "confidence": 0.8516,
+    "latency_ms": 298.3126490144059
+  },
+  {
+    "id": "d07",
+    "expected": "delivery",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0046,
+      "technical": 0.0055,
+      "delivery": 0.9765,
+      "sales": 0.0048,
+      "account": 0.0041,
+      "other": 0.0046
+    },
+    "confidence": 0.9765,
+    "latency_ms": 333.81066797301173
+  },
+  {
+    "id": "d08",
+    "expected": "account",
+    "predicted": "account",
+    "probabilities": {
+      "billing": 0.0146,
+      "technical": 0.0211,
+      "delivery": 0.0024,
+      "sales": 0.0025,
+      "account": 0.9559,
+      "other": 0.0034
+    },
+    "confidence": 0.9559,
+    "latency_ms": 318.86282603954896
+  },
+  {
+    "id": "d09",
+    "expected": "sales",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0018,
+      "technical": 0.9634,
+      "delivery": 0.0082,
+      "sales": 0.0086,
+      "account": 0.0119,
+      "other": 0.0061
+    },
+    "confidence": 0.9634,
+    "latency_ms": 326.47370896302164
+  },
+  {
+    "id": "d10",
+    "expected": "billing",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0,
+      "technical": 0.0,
+      "delivery": 1.0,
+      "sales": 0.0,
+      "account": 0.0,
+      "other": 0.0
+    },
+    "confidence": 1.0,
+    "latency_ms": 334.4444910180755
+  },
+  {
+    "id": "d11",
+    "expected": "other",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0962,
+      "technical": 0.2211,
+      "delivery": 0.3526,
+      "sales": 0.1136,
+      "account": 0.0273,
+      "other": 0.1893
+    },
+    "confidence": 0.3526,
+    "latency_ms": 298.50923496996984
+  },
+  {
+    "id": "d12",
+    "expected": "technical",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.001,
+      "technical": 0.99,
+      "delivery": 0.0016,
+      "sales": 0.0022,
+      "account": 0.0009,
+      "other": 0.0043
+    },
+    "confidence": 0.99,
+    "latency_ms": 293.532170006074
+  },
+  {
+    "id": "d13",
+    "expected": "delivery",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0037,
+      "technical": 0.092,
+      "delivery": 0.8691,
+      "sales": 0.007,
+      "account": 0.0031,
+      "other": 0.0252
+    },
+    "confidence": 0.8691,
+    "latency_ms": 301.9830079865642
+  },
+  {
+    "id": "d14",
+    "expected": "sales",
+    "predicted": "billing",
+    "probabilities": {
+      "billing": 0.6966,
+      "technical": 0.0291,
+      "delivery": 0.0039,
+      "sales": 0.2238,
+      "account": 0.0098,
+      "other": 0.0368
+    },
+    "confidence": 0.6966,
+    "latency_ms": 285.8677330077626
+  },
+  {
+    "id": "d15",
+    "expected": "account",
+    "predicted": "account",
+    "probabilities": {
+      "billing": 0.0004,
+      "technical": 0.0139,
+      "delivery": 0.0002,
+      "sales": 0.0003,
+      "account": 0.984,
+      "other": 0.0013
+    },
+    "confidence": 0.984,
+    "latency_ms": 286.5053819841705
+  },
+  {
+    "id": "d16",
+    "expected": "billing",
+    "predicted": "billing",
+    "probabilities": {
+      "billing": 0.8897,
+      "technical": 0.0059,
+      "delivery": 0.004,
+      "sales": 0.0884,
+      "account": 0.004,
+      "other": 0.0079
+    },
+    "confidence": 0.8897,
+    "latency_ms": 297.91508900234476
+  },
+  {
+    "id": "d17",
+    "expected": "technical",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0017,
+      "technical": 0.9852,
+      "delivery": 0.0025,
+      "sales": 0.0016,
+      "account": 0.0016,
+      "other": 0.0073
+    },
+    "confidence": 0.9852,
+    "latency_ms": 281.9657120271586
+  },
+  {
+    "id": "d18",
+    "expected": "delivery",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.001,
+      "technical": 0.0097,
+      "delivery": 0.9847,
+      "sales": 0.0015,
+      "account": 0.001,
+      "other": 0.002
+    },
+    "confidence": 0.9847,
+    "latency_ms": 277.0358939887956
+  },
+  {
+    "id": "d19",
+    "expected": "sales",
+    "predicted": "sales",
+    "probabilities": {
+      "billing": 0.2009,
+      "technical": 0.0048,
+      "delivery": 0.0162,
+      "sales": 0.7656,
+      "account": 0.0017,
+      "other": 0.0107
+    },
+    "confidence": 0.7656,
+    "latency_ms": 276.02817700244486
+  },
+  {
+    "id": "d20",
+    "expected": "account",
+    "predicted": "account",
+    "probabilities": {
+      "billing": 0.0499,
+      "technical": 0.2399,
+      "delivery": 0.0494,
+      "sales": 0.0494,
+      "account": 0.5268,
+      "other": 0.0846
+    },
+    "confidence": 0.5268,
+    "latency_ms": 279.5219279942103
+  },
+  {
+    "id": "d21",
+    "expected": "other",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0102,
+      "technical": 0.7408,
+      "delivery": 0.1243,
+      "sales": 0.0315,
+      "account": 0.0136,
+      "other": 0.0795
+    },
+    "confidence": 0.7408,
+    "latency_ms": 278.9370809914544
+  },
+  {
+    "id": "d22",
+    "expected": "other",
+    "predicted": "other",
+    "probabilities": {
+      "billing": 0.0721,
+      "technical": 0.1561,
+      "delivery": 0.1979,
+      "sales": 0.1544,
+      "account": 0.0562,
+      "other": 0.3633
+    },
+    "confidence": 0.3633,
+    "latency_ms": 272.7899449528195
+  },
+  {
+    "id": "d23",
+    "expected": "other",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0446,
+      "technical": 0.5842,
+      "delivery": 0.0997,
+      "sales": 0.0504,
+      "account": 0.0431,
+      "other": 0.1779
+    },
+    "confidence": 0.5842,
+    "latency_ms": 268.18299398291856
+  }
+]

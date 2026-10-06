@@ -1,3 +1,4 @@
 * text=auto eol=lf
 # Preserve the byte-exact historical execution file for SHA256 verification.
 results/pilot-2026-10-05/executed-run_evaluation.py -text
+results/**/executed-*.py -text
