@@ -1,0 +1,154 @@
+[
+  {
+    "position": "front",
+    "max_len": 1024,
+    "state_tokens": 1229,
+    "expected": "billing",
+    "latency_ms": 1742.5719460006803,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.9845,
+            "technical": 0.003,
+            "delivery": 0.0008,
+            "sales": 0.0007,
+            "account": 0.006,
+            "other": 0.005
+          },
+          "confidence": 0.9438,
+          "answer_confidence": 0.9845,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 1024,
+        "output_tokens": 0,
+        "state_tokens": 1229,
+        "state_tokens_dropped": 348,
+        "truncated": true,
+        "truncated_questions": [
+          "department"
+        ]
+      }
+    }
+  },
+  {
+    "position": "front",
+    "max_len": 2048,
+    "state_tokens": 1229,
+    "expected": "billing",
+    "latency_ms": 2609.79802699876,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.9878,
+            "technical": 0.003,
+            "delivery": 0.0007,
+            "sales": 0.0007,
+            "account": 0.0019,
+            "other": 0.006
+          },
+          "confidence": 0.9542,
+          "answer_confidence": 0.9878,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 1372,
+        "output_tokens": 0,
+        "state_tokens": 1229,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "position": "back",
+    "max_len": 1024,
+    "state_tokens": 1229,
+    "expected": "billing",
+    "latency_ms": 1746.107448998373,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.0888,
+            "technical": 0.5359,
+            "delivery": 0.0403,
+            "sales": 0.0409,
+            "account": 0.0497,
+            "other": 0.2444
+          },
+          "confidence": 0.2727,
+          "answer_confidence": 0.5359,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 1024,
+        "output_tokens": 0,
+        "state_tokens": 1229,
+        "state_tokens_dropped": 348,
+        "truncated": true,
+        "truncated_questions": [
+          "department"
+        ]
+      }
+    }
+  },
+  {
+    "position": "back",
+    "max_len": 2048,
+    "state_tokens": 1229,
+    "expected": "billing",
+    "latency_ms": 2743.8965830078814,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.6785,
+            "technical": 0.1498,
+            "delivery": 0.0341,
+            "sales": 0.0261,
+            "account": 0.0185,
+            "other": 0.0929
+          },
+          "confidence": 0.4125,
+          "answer_confidence": 0.6785,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 1372,
+        "output_tokens": 0,
+        "state_tokens": 1229,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  }
+]

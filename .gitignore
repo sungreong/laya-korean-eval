@@ -1,0 +1,14 @@
+# Downloaded upstream code, datasets, checkpoints and new experiment runs
+/research/laya/
+/research/tmp*/
+/evaluation/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*.safetensors
+*.pt
+*.pth
+.env
+.env.*
+.cache/

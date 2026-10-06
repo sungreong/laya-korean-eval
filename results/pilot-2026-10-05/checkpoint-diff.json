@@ -1,0 +1,24 @@
+{
+  "act_head": {
+    "tensors": 4,
+    "changed_tensors": 0,
+    "elements": 198402,
+    "changed_elements": 0,
+    "max_abs_delta": 0.0
+  },
+  "encoder": {
+    "tensors": 134,
+    "changed_tensors": 0,
+    "elements": 306939648,
+    "changed_elements": 0,
+    "max_abs_delta": 0.0
+  },
+  "decision_head": {
+    "tensors": 32,
+    "changed_tensors": 31,
+    "elements": 14770948,
+    "changed_elements": 11206708,
+    "max_abs_delta": 0.00146484375
+  },
+  "note": "Comparison of exported fp16 checkpoint tensors; does not rebenchmark exported model predictions."
+}

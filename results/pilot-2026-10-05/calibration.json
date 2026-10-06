@@ -1,0 +1,11 @@
+{
+  "temperature": [
+    0.8575441241264343,
+    1.0,
+    1.0
+  ],
+  "temperature_by_options": {},
+  "n_by_bucket": {
+    "choice:2": 80
+  }
+}

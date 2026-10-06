@@ -1,0 +1,38 @@
+[
+  {
+    "ko": "결제가 두 번 됐어요.",
+    "en": "I was charged twice.",
+    "ko_tokens": 10,
+    "en_tokens": 5
+  },
+  {
+    "ko": "배송이 아직 도착하지 않았습니다.",
+    "en": "The delivery has not arrived yet.",
+    "ko_tokens": 11,
+    "en_tokens": 7
+  },
+  {
+    "ko": "비밀번호를 변경하고 싶어요.",
+    "en": "I want to change my password.",
+    "ko_tokens": 10,
+    "en_tokens": 7
+  },
+  {
+    "ko": "이 영화는 정말 재미있었어요.",
+    "en": "This movie was really entertaining.",
+    "ko_tokens": 12,
+    "en_tokens": 6
+  },
+  {
+    "ko": "오류는 해결됐지만 환불은 아직입니다.",
+    "en": "The error is fixed but the refund is still pending.",
+    "ko_tokens": 14,
+    "en_tokens": 11
+  },
+  {
+    "ko": "웹훅 수신 서버가 응답하지 않습니다.",
+    "en": "The webhook receiving server is not responding.",
+    "ko_tokens": 12,
+    "en_tokens": 8
+  }
+]

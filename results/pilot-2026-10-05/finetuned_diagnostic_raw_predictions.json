@@ -1,0 +1,1130 @@
+[
+  {
+    "id": "d00",
+    "slice": "natural",
+    "state": "요금이 두 번 빠져나갔어요. 하나는 돌려주세요.",
+    "expected": "billing",
+    "predicted": "billing",
+    "probabilities": {
+      "billing": 0.9362,
+      "technical": 0.0161,
+      "delivery": 0.0038,
+      "sales": 0.0075,
+      "account": 0.0073,
+      "other": 0.0292
+    },
+    "confidence": 0.9362,
+    "latency_ms": 265.6686200061813,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.9362,
+            "technical": 0.0161,
+            "delivery": 0.0038,
+            "sales": 0.0075,
+            "account": 0.0073,
+            "other": 0.0292
+          },
+          "confidence": 0.8187,
+          "answer_confidence": 0.9362,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 176,
+        "output_tokens": 0,
+        "state_tokens": 19,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d01",
+    "slice": "natural",
+    "state": "앱에서 확인 버튼을 눌러도 아무 반응이 없네요.",
+    "expected": "technical",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0007,
+      "technical": 0.9787,
+      "delivery": 0.0015,
+      "sales": 0.0023,
+      "account": 0.0104,
+      "other": 0.0063
+    },
+    "confidence": 0.9787,
+    "latency_ms": 267.8998159826733,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.0007,
+            "technical": 0.9787,
+            "delivery": 0.0015,
+            "sales": 0.0023,
+            "account": 0.0104,
+            "other": 0.0063
+          },
+          "confidence": 0.9276,
+          "answer_confidence": 0.9787,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 176,
+        "output_tokens": 0,
+        "state_tokens": 19,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d02",
+    "slice": "natural",
+    "state": "지난주 주문한 물건이 아직 안 왔어요. 어디쯤인가요?",
+    "expected": "delivery",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0033,
+      "technical": 0.0239,
+      "delivery": 0.9548,
+      "sales": 0.0089,
+      "account": 0.0013,
+      "other": 0.0079
+    },
+    "confidence": 0.9548,
+    "latency_ms": 255.10115499491803,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "delivery",
+          "probabilities": {
+            "billing": 0.0033,
+            "technical": 0.0239,
+            "delivery": 0.9548,
+            "sales": 0.0089,
+            "account": 0.0013,
+            "other": 0.0079
+          },
+          "confidence": 0.8656,
+          "answer_confidence": 0.9548,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 181,
+        "output_tokens": 0,
+        "state_tokens": 24,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d03",
+    "slice": "natural",
+    "state": "우리 팀 스무 명이 쓸 건데 얼마인지 알려주세요.",
+    "expected": "sales",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.1007,
+      "technical": 0.6646,
+      "delivery": 0.0399,
+      "sales": 0.0849,
+      "account": 0.0414,
+      "other": 0.0686
+    },
+    "confidence": 0.6646,
+    "latency_ms": 256.11674101674,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.1007,
+            "technical": 0.6646,
+            "delivery": 0.0399,
+            "sales": 0.0849,
+            "account": 0.0414,
+            "other": 0.0686
+          },
+          "confidence": 0.3547,
+          "answer_confidence": 0.6646,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 177,
+        "output_tokens": 0,
+        "state_tokens": 20,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d04",
+    "slice": "negation",
+    "state": "환불을 원하지는 않아요. 비밀번호를 바꾸고 싶어요.",
+    "expected": "account",
+    "predicted": "account",
+    "probabilities": {
+      "billing": 0.0217,
+      "technical": 0.0037,
+      "delivery": 0.0011,
+      "sales": 0.0012,
+      "account": 0.9707,
+      "other": 0.0017
+    },
+    "confidence": 0.9707,
+    "latency_ms": 255.12976999743842,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "account",
+          "probabilities": {
+            "billing": 0.0217,
+            "technical": 0.0037,
+            "delivery": 0.0011,
+            "sales": 0.0012,
+            "account": 0.9707,
+            "other": 0.0017
+          },
+          "confidence": 0.9114,
+          "answer_confidence": 0.9707,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 178,
+        "output_tokens": 0,
+        "state_tokens": 21,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d05",
+    "slice": "negation",
+    "state": "배송이 늦은 게 아닙니다. 돈이 중복해서 나갔어요.",
+    "expected": "billing",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0003,
+      "technical": 0.0002,
+      "delivery": 0.9985,
+      "sales": 0.0002,
+      "account": 0.0001,
+      "other": 0.0007
+    },
+    "confidence": 0.9985,
+    "latency_ms": 273.99985599913634,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "delivery",
+          "probabilities": {
+            "billing": 0.0003,
+            "technical": 0.0002,
+            "delivery": 0.9985,
+            "sales": 0.0002,
+            "account": 0.0001,
+            "other": 0.0007
+          },
+          "confidence": 0.9924,
+          "answer_confidence": 0.9985,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 179,
+        "output_tokens": 0,
+        "state_tokens": 22,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d06",
+    "slice": "negation",
+    "state": "가격을 물어보는 게 아니라 결제 후 화면이 멈추는 문제예요.",
+    "expected": "technical",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.1061,
+      "technical": 0.8778,
+      "delivery": 0.0014,
+      "sales": 0.0026,
+      "account": 0.0011,
+      "other": 0.011
+    },
+    "confidence": 0.8778,
+    "latency_ms": 277.3912900011055,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.1061,
+            "technical": 0.8778,
+            "delivery": 0.0014,
+            "sales": 0.0026,
+            "account": 0.0011,
+            "other": 0.011
+          },
+          "confidence": 0.7576,
+          "answer_confidence": 0.8778,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 179,
+        "output_tokens": 0,
+        "state_tokens": 22,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d07",
+    "slice": "negation",
+    "state": "물건을 취소하려는 건 아니에요. 택배 위치만 확인해 주세요.",
+    "expected": "delivery",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0052,
+      "technical": 0.0079,
+      "delivery": 0.9704,
+      "sales": 0.0062,
+      "account": 0.0052,
+      "other": 0.0051
+    },
+    "confidence": 0.9704,
+    "latency_ms": 260.254987020744,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "delivery",
+          "probabilities": {
+            "billing": 0.0052,
+            "technical": 0.0079,
+            "delivery": 0.9704,
+            "sales": 0.0062,
+            "account": 0.0052,
+            "other": 0.0051
+          },
+          "confidence": 0.8993,
+          "answer_confidence": 0.9704,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 179,
+        "output_tokens": 0,
+        "state_tokens": 22,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d08",
+    "slice": "context",
+    "state": "이전 상담: 환불을 문의함. 고객의 현재 요청: 환불은 해결됐습니다. 이제 계정을 삭제해 주세요.",
+    "expected": "account",
+    "predicted": "account",
+    "probabilities": {
+      "billing": 0.0154,
+      "technical": 0.0212,
+      "delivery": 0.0023,
+      "sales": 0.0023,
+      "account": 0.955,
+      "other": 0.0038
+    },
+    "confidence": 0.955,
+    "latency_ms": 278.4076669777278,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "account",
+          "probabilities": {
+            "billing": 0.0154,
+            "technical": 0.0212,
+            "delivery": 0.0023,
+            "sales": 0.0023,
+            "account": 0.955,
+            "other": 0.0038
+          },
+          "confidence": 0.8666,
+          "answer_confidence": 0.955,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 193,
+        "output_tokens": 0,
+        "state_tokens": 36,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d09",
+    "slice": "context",
+    "state": "이전 상담: 앱 오류 접수. 고객의 현재 요청: 오류는 고쳤어요. 회사 도입 견적을 받고 싶습니다.",
+    "expected": "sales",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0016,
+      "technical": 0.971,
+      "delivery": 0.0064,
+      "sales": 0.0067,
+      "account": 0.009,
+      "other": 0.0052
+    },
+    "confidence": 0.971,
+    "latency_ms": 279.52206999179907,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.0016,
+            "technical": 0.971,
+            "delivery": 0.0064,
+            "sales": 0.0067,
+            "account": 0.009,
+            "other": 0.0052
+          },
+          "confidence": 0.9025,
+          "answer_confidence": 0.971,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 196,
+        "output_tokens": 0,
+        "state_tokens": 39,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d10",
+    "slice": "context",
+    "state": "상담원: 배송 문의인가요? 고객: 아니요, 상품은 받았는데 청구 금액이 주문 금액보다 큽니다.",
+    "expected": "billing",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0,
+      "technical": 0.0,
+      "delivery": 1.0,
+      "sales": 0.0,
+      "account": 0.0,
+      "other": 0.0
+    },
+    "confidence": 1.0,
+    "latency_ms": 275.9909699962009,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "delivery",
+          "probabilities": {
+            "billing": 0.0,
+            "technical": 0.0,
+            "delivery": 1.0,
+            "sales": 0.0,
+            "account": 0.0,
+            "other": 0.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 194,
+        "output_tokens": 0,
+        "state_tokens": 37,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d11",
+    "slice": "context",
+    "state": "상담원: 무엇을 도와드릴까요? 고객: 따로 요청은 없고 오늘 친절한 상담 감사드립니다.",
+    "expected": "other",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.1136,
+      "technical": 0.2189,
+      "delivery": 0.3094,
+      "sales": 0.1266,
+      "account": 0.0332,
+      "other": 0.1983
+    },
+    "confidence": 0.3094,
+    "latency_ms": 265.8348510158248,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "delivery",
+          "probabilities": {
+            "billing": 0.1136,
+            "technical": 0.2189,
+            "delivery": 0.3094,
+            "sales": 0.1266,
+            "account": 0.0332,
+            "other": 0.1983
+          },
+          "confidence": 0.0857,
+          "answer_confidence": 0.3094,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 193,
+        "output_tokens": 0,
+        "state_tokens": 36,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d12",
+    "slice": "mixed",
+    "state": "API request가 계속 timeout 납니다. endpoint 장애를 확인해 주세요.",
+    "expected": "technical",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0009,
+      "technical": 0.9906,
+      "delivery": 0.0015,
+      "sales": 0.0021,
+      "account": 0.0007,
+      "other": 0.0041
+    },
+    "confidence": 0.9906,
+    "latency_ms": 273.4239969868213,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.0009,
+            "technical": 0.9906,
+            "delivery": 0.0015,
+            "sales": 0.0021,
+            "account": 0.0007,
+            "other": 0.0041
+          },
+          "confidence": 0.9628,
+          "answer_confidence": 0.9906,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 176,
+        "output_tokens": 0,
+        "state_tokens": 19,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d13",
+    "slice": "mixed",
+    "state": "tracking number는 있는데 parcel 위치가 며칠째 그대로예요.",
+    "expected": "delivery",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0049,
+      "technical": 0.0925,
+      "delivery": 0.8603,
+      "sales": 0.009,
+      "account": 0.0032,
+      "other": 0.0301
+    },
+    "confidence": 0.8603,
+    "latency_ms": 255.2617570036091,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "delivery",
+          "probabilities": {
+            "billing": 0.0049,
+            "technical": 0.0925,
+            "delivery": 0.8603,
+            "sales": 0.009,
+            "account": 0.0032,
+            "other": 0.0301
+          },
+          "confidence": 0.6975,
+          "answer_confidence": 0.8603,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 174,
+        "output_tokens": 0,
+        "state_tokens": 17,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d14",
+    "slice": "mixed",
+    "state": "Enterprise plan 50 seats 기준 quotation 부탁드립니다.",
+    "expected": "sales",
+    "predicted": "billing",
+    "probabilities": {
+      "billing": 0.6946,
+      "technical": 0.0371,
+      "delivery": 0.0048,
+      "sales": 0.2026,
+      "account": 0.0138,
+      "other": 0.047
+    },
+    "confidence": 0.6946,
+    "latency_ms": 345.99765099119395,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.6946,
+            "technical": 0.0371,
+            "delivery": 0.0048,
+            "sales": 0.2026,
+            "account": 0.0138,
+            "other": 0.047
+          },
+          "confidence": 0.4824,
+          "answer_confidence": 0.6946,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 172,
+        "output_tokens": 0,
+        "state_tokens": 15,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d15",
+    "slice": "mixed",
+    "state": "password를 변경하고 profile에 등록한 이름도 수정하고 싶어요.",
+    "expected": "account",
+    "predicted": "account",
+    "probabilities": {
+      "billing": 0.0003,
+      "technical": 0.0075,
+      "delivery": 0.0001,
+      "sales": 0.0002,
+      "account": 0.9909,
+      "other": 0.0009
+    },
+    "confidence": 0.9909,
+    "latency_ms": 338.0700100096874,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "account",
+          "probabilities": {
+            "billing": 0.0003,
+            "technical": 0.0075,
+            "delivery": 0.0001,
+            "sales": 0.0002,
+            "account": 0.9909,
+            "other": 0.0009
+          },
+          "confidence": 0.9678,
+          "answer_confidence": 0.9909,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 173,
+        "output_tokens": 0,
+        "state_tokens": 16,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d16",
+    "slice": "terminology",
+    "state": "매입 확정 전 승인 취소한 거래가 청구서에 반영됐습니다. 정정해 주세요.",
+    "expected": "billing",
+    "predicted": "billing",
+    "probabilities": {
+      "billing": 0.9147,
+      "technical": 0.0056,
+      "delivery": 0.0038,
+      "sales": 0.0648,
+      "account": 0.0039,
+      "other": 0.0072
+    },
+    "confidence": 0.9147,
+    "latency_ms": 346.31997501128353,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "billing",
+          "probabilities": {
+            "billing": 0.9147,
+            "technical": 0.0056,
+            "delivery": 0.0038,
+            "sales": 0.0648,
+            "account": 0.0039,
+            "other": 0.0072
+          },
+          "confidence": 0.7956,
+          "answer_confidence": 0.9147,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 185,
+        "output_tokens": 0,
+        "state_tokens": 28,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d17",
+    "slice": "terminology",
+    "state": "웹훅 수신 서버가 502를 반환하고 재시도 큐가 누적됩니다.",
+    "expected": "technical",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0014,
+      "technical": 0.986,
+      "delivery": 0.0025,
+      "sales": 0.0015,
+      "account": 0.0014,
+      "other": 0.0072
+    },
+    "confidence": 0.986,
+    "latency_ms": 331.4931520144455,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.0014,
+            "technical": 0.986,
+            "delivery": 0.0025,
+            "sales": 0.0015,
+            "account": 0.0014,
+            "other": 0.0072
+          },
+          "confidence": 0.9483,
+          "answer_confidence": 0.986,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 182,
+        "output_tokens": 0,
+        "state_tokens": 25,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d18",
+    "slice": "terminology",
+    "state": "운송장 조회에 간선하차 이후 이동 이력이 없습니다. 배송 상태 확인 부탁드립니다.",
+    "expected": "delivery",
+    "predicted": "delivery",
+    "probabilities": {
+      "billing": 0.0009,
+      "technical": 0.0083,
+      "delivery": 0.9867,
+      "sales": 0.0015,
+      "account": 0.0008,
+      "other": 0.0019
+    },
+    "confidence": 0.9867,
+    "latency_ms": 366.75446599838324,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "delivery",
+          "probabilities": {
+            "billing": 0.0009,
+            "technical": 0.0083,
+            "delivery": 0.9867,
+            "sales": 0.0015,
+            "account": 0.0008,
+            "other": 0.0019
+          },
+          "confidence": 0.9519,
+          "answer_confidence": 0.9867,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 184,
+        "output_tokens": 0,
+        "state_tokens": 27,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d19",
+    "slice": "terminology",
+    "state": "계약 전 대량 구매 단가와 연간 약정 할인율을 제안해 주세요.",
+    "expected": "sales",
+    "predicted": "sales",
+    "probabilities": {
+      "billing": 0.161,
+      "technical": 0.0049,
+      "delivery": 0.0141,
+      "sales": 0.8084,
+      "account": 0.0018,
+      "other": 0.0099
+    },
+    "confidence": 0.8084,
+    "latency_ms": 343.1404640141409,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "sales",
+          "probabilities": {
+            "billing": 0.161,
+            "technical": 0.0049,
+            "delivery": 0.0141,
+            "sales": 0.8084,
+            "account": 0.0018,
+            "other": 0.0099
+          },
+          "confidence": 0.6601,
+          "answer_confidence": 0.8084,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 181,
+        "output_tokens": 0,
+        "state_tokens": 24,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d20",
+    "slice": "translationese",
+    "state": "나는 나의 계정으로부터 탈퇴를 수행하는 것을 원합니다.",
+    "expected": "account",
+    "predicted": "account",
+    "probabilities": {
+      "billing": 0.0432,
+      "technical": 0.2514,
+      "delivery": 0.0404,
+      "sales": 0.0415,
+      "account": 0.5251,
+      "other": 0.0983
+    },
+    "confidence": 0.5251,
+    "latency_ms": 293.92975399969146,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "account",
+          "probabilities": {
+            "billing": 0.0432,
+            "technical": 0.2514,
+            "delivery": 0.0404,
+            "sales": 0.0415,
+            "account": 0.5251,
+            "other": 0.0983
+          },
+          "confidence": 0.2683,
+          "answer_confidence": 0.5251,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 175,
+        "output_tokens": 0,
+        "state_tokens": 18,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d21",
+    "slice": "translationese",
+    "state": "나는 당신에게 좋은 아침을 기원하는 중입니다. 별도의 요청은 없습니다.",
+    "expected": "other",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.0135,
+      "technical": 0.6815,
+      "delivery": 0.1445,
+      "sales": 0.0438,
+      "account": 0.0187,
+      "other": 0.098
+    },
+    "confidence": 0.6815,
+    "latency_ms": 269.7379110031761,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.0135,
+            "technical": 0.6815,
+            "delivery": 0.1445,
+            "sales": 0.0438,
+            "account": 0.0187,
+            "other": 0.098
+          },
+          "confidence": 0.4207,
+          "answer_confidence": 0.6815,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 177,
+        "output_tokens": 0,
+        "state_tokens": 20,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d22",
+    "slice": "translationese",
+    "state": "당신의 친절에 대한 감사를 표현하고 싶습니다. 추가 지원은 필요하지 않습니다.",
+    "expected": "other",
+    "predicted": "other",
+    "probabilities": {
+      "billing": 0.0845,
+      "technical": 0.1589,
+      "delivery": 0.1945,
+      "sales": 0.1588,
+      "account": 0.0645,
+      "other": 0.3387
+    },
+    "confidence": 0.3387,
+    "latency_ms": 310.3006689925678,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "other",
+          "probabilities": {
+            "billing": 0.0845,
+            "technical": 0.1589,
+            "delivery": 0.1945,
+            "sales": 0.1588,
+            "account": 0.0645,
+            "other": 0.3387
+          },
+          "confidence": 0.0761,
+          "answer_confidence": 0.3387,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 179,
+        "output_tokens": 0,
+        "state_tokens": 22,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  },
+  {
+    "id": "d23",
+    "slice": "translationese",
+    "state": "이 메시지의 목적은 인사를 전달하는 것입니다. 처리 요청은 존재하지 않습니다.",
+    "expected": "other",
+    "predicted": "technical",
+    "probabilities": {
+      "billing": 0.056,
+      "technical": 0.5249,
+      "delivery": 0.1124,
+      "sales": 0.0629,
+      "account": 0.054,
+      "other": 0.1898
+    },
+    "confidence": 0.5249,
+    "latency_ms": 281.6027670050971,
+    "response": {
+      "model": "laya-rl-agent",
+      "answers": {
+        "department": {
+          "type": "choice",
+          "choice": "technical",
+          "probabilities": {
+            "billing": 0.056,
+            "technical": 0.5249,
+            "delivery": 0.1124,
+            "sales": 0.0629,
+            "account": 0.054,
+            "other": 0.1898
+          },
+          "confidence": 0.2229,
+          "answer_confidence": 0.5249,
+          "action": {
+            "act_probability": 1.0
+          }
+        }
+      },
+      "usage": {
+        "input_tokens": 181,
+        "output_tokens": 0,
+        "state_tokens": 24,
+        "state_tokens_dropped": 0,
+        "truncated": false,
+        "truncated_questions": []
+      }
+    }
+  }
+]

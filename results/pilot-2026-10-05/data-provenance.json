@@ -1,0 +1,28 @@
+{
+  "seed": 42,
+  "nsmc_commit": "cc0670e872d4ac27bfe36c87456783004b39ef6c",
+  "sources": [
+    {
+      "url": "https://raw.githubusercontent.com/e9t/nsmc/cc0670e872d4ac27bfe36c87456783004b39ef6c/ratings_train.txt",
+      "sha256": "e03b7d14e9e41be8d464a28057cd25d7396c53e67aa7fd5f7e552c59b0ee2940",
+      "bytes": 14628807
+    },
+    {
+      "url": "https://raw.githubusercontent.com/e9t/nsmc/cc0670e872d4ac27bfe36c87456783004b39ef6c/ratings_test.txt",
+      "sha256": "8ac9f64052f11dbf6ae0acb5e038f03d90a76f0eda7820cfb3a92d02edfcebda",
+      "bytes": 4893335
+    }
+  ],
+  "selected_sha256": {
+    "train.jsonl": "94310c017e474886951cf704991390e572ce99e98dfbf7d931c3ecd6a8ff6a2b",
+    "calibration.jsonl": "20a5611827b119133735a56840c47a79629a020134b601b996211ac087f8d1d9",
+    "test.jsonl": "cb3eddb1871200c3f8ea8a25d6f94159007cce0c611a79323c76c4e6f9248619",
+    "diagnostics.jsonl": "e6fdd07fec00d2b12a6ffc915c80ad6c4c2d3d4a614515bdd063904d6f264a71"
+  },
+  "sizes": {
+    "train": 200,
+    "calibration": 80,
+    "test": 200,
+    "diagnostic": 24
+  }
+}
