@@ -1,0 +1,91 @@
+{
+  "status": "complete",
+  "model": "evaluation/complaint-hierarchical-prefix-e1/selected-model",
+  "taxonomy": "datasets/complaints/taxonomy.json",
+  "retrieval": "evaluation/embeddinggemma2-main27-r3/predictions.json",
+  "dimension": 256,
+  "ks": [
+    3,
+    5,
+    8,
+    12
+  ],
+  "taxonomy_sha256": "9dd4496820650f7e72608391cde782ebee8687c43232542d4e837d8883d1ff8b",
+  "retrieval_sha256": "13f4ccc5d527fac7dbc06bc2ad7aee0087459462f7bf1cc4347c4c07107e0174",
+  "candidate_description": "Existing flat leaf name and description; no full-path format change.",
+  "metrics": {
+    "3": {
+      "n": 81,
+      "gold_retrieved": 74,
+      "retrieval_recall": 0.9135802469135802,
+      "correct": 41,
+      "accuracy": 0.5061728395061729,
+      "accuracy_given_gold_retrieved": 0.5540540540540541,
+      "wilson95_accuracy": [
+        0.39950784707318215,
+        0.6122788432301215
+      ],
+      "under_specified_n": 9,
+      "under_specified_acceptable_hits": 7,
+      "retrieval_latency_ms_p50": 155.0933525140863,
+      "rerank_latency_ms_p50": 356.6886309708934,
+      "end_to_end_latency_ms_p50": 572.9270500014536,
+      "end_to_end_latency_ms_p95": 1058.282190369209
+    },
+    "5": {
+      "n": 81,
+      "gold_retrieved": 80,
+      "retrieval_recall": 0.9876543209876543,
+      "correct": 37,
+      "accuracy": 0.4567901234567901,
+      "accuracy_given_gold_retrieved": 0.4625,
+      "wilson95_accuracy": [
+        0.3527333268436488,
+        0.5647598410332264
+      ],
+      "under_specified_n": 9,
+      "under_specified_acceptable_hits": 5,
+      "retrieval_latency_ms_p50": 155.0933525140863,
+      "rerank_latency_ms_p50": 408.0165775085334,
+      "end_to_end_latency_ms_p50": 580.9593419835437,
+      "end_to_end_latency_ms_p95": 1085.4941352677997
+    },
+    "8": {
+      "n": 81,
+      "gold_retrieved": 81,
+      "retrieval_recall": 1.0,
+      "correct": 38,
+      "accuracy": 0.4691358024691358,
+      "accuracy_given_gold_retrieved": 0.4691358024691358,
+      "wilson95_accuracy": [
+        0.3643337335618261,
+        0.5767328149216562
+      ],
+      "under_specified_n": 9,
+      "under_specified_acceptable_hits": 4,
+      "retrieval_latency_ms_p50": 155.0933525140863,
+      "rerank_latency_ms_p50": 538.7333564867731,
+      "end_to_end_latency_ms_p50": 744.6025695244316,
+      "end_to_end_latency_ms_p95": 1179.0460650256136
+    },
+    "12": {
+      "n": 81,
+      "gold_retrieved": 81,
+      "retrieval_recall": 1.0,
+      "correct": 30,
+      "accuracy": 0.37037037037037035,
+      "accuracy_given_gold_retrieved": 0.37037037037037035,
+      "wilson95_accuracy": [
+        0.27331684253955174,
+        0.4791626610910738
+      ],
+      "under_specified_n": 9,
+      "under_specified_acceptable_hits": 6,
+      "retrieval_latency_ms_p50": 155.0933525140863,
+      "rerank_latency_ms_p50": 770.6614900089335,
+      "end_to_end_latency_ms_p50": 951.4484165410977,
+      "end_to_end_latency_ms_p95": 1385.1095672784138
+    }
+  },
+  "scope": "Synthetic author-defined diagnostic; no independent human review; not a production benchmark."
+}

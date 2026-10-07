@@ -1,0 +1,42 @@
+{
+  "experiment_date": "2026-10-07",
+  "artifacts": {
+    "retrieval-main27": [
+      "predictions.json",
+      "summary.json",
+      "executed-run_embedding_retrieval.py"
+    ],
+    "retrieval-main36": [
+      "predictions.json",
+      "summary.json",
+      "executed-run_embedding_retrieval.py"
+    ],
+    "retrieval-unseen36": [
+      "predictions.json",
+      "summary.json",
+      "executed-run_embedding_retrieval.py"
+    ],
+    "rerank-main27": [
+      "rerank_k12_predictions.json",
+      "rerank_k3_predictions.json",
+      "rerank_k5_predictions.json",
+      "rerank_k8_predictions.json",
+      "summary.json",
+      "executed-run_retrieval_rerank.py"
+    ],
+    "rerank-main36": [
+      "rerank_k3_predictions.json",
+      "rerank_k5_predictions.json",
+      "rerank_k8_predictions.json",
+      "summary.json",
+      "executed-run_retrieval_rerank.py"
+    ],
+    "rerank-unseen36": [
+      "rerank_k3_predictions.json",
+      "rerank_k5_predictions.json",
+      "rerank_k8_predictions.json",
+      "summary.json",
+      "executed-run_retrieval_rerank.py"
+    ]
+  }
+}

@@ -1,3 +1,5 @@
 **
 !Dockerfile
+!Dockerfile.retrieval
 !requirements-docker.txt
+!requirements-retrieval.txt

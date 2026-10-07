@@ -37,3 +37,33 @@ services:
       service: evaluate
     profiles: ["test"]
     command: ["python", "-m", "unittest", "discover", "-s", "tests", "-v"]
+  retrieval:
+    build:
+      context: .
+      dockerfile: Dockerfile.retrieval
+    image: laya-korean-retrieval:local
+    working_dir: /work
+    init: true
+    cpus: 4.0
+    mem_limit: 8g
+    shm_size: 256m
+    network_mode: none
+    environment:
+      TOKENIZERS_PARALLELISM: "false"
+      OMP_NUM_THREADS: "4"
+      MKL_NUM_THREADS: "4"
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      PYTHONDONTWRITEBYTECODE: "1"
+    volumes:
+      - ./:/work
+    command: ["python", "-u", "research/run_embedding_retrieval.py"]
+  prepare-retrieval:
+    extends:
+      service: retrieval
+    profiles: ["setup"]
+    network_mode: bridge
+    environment:
+      HF_HUB_OFFLINE: "0"
+      TRANSFORMERS_OFFLINE: "0"
+    command: ["python", "-u", "research/prepare_embeddinggemma2.py"]

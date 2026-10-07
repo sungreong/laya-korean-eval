@@ -1,0 +1,7 @@
+FROM python:3.12-slim@sha256:090ba77e2958f6af52a5341f788b50b032dd4ca28377d2893dcf1ecbdfdfe203
+ENV PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=1 TOKENIZERS_PARALLELISM=false
+RUN pip install --no-cache-dir torch==2.8.0 torchvision==0.23.0 --index-url https://download.pytorch.org/whl/cpu
+COPY requirements-retrieval.txt /tmp/requirements-retrieval.txt
+RUN pip install --no-cache-dir -r /tmp/requirements-retrieval.txt
+WORKDIR /work
+CMD ["python", "-u", "research/run_embedding_retrieval.py"]

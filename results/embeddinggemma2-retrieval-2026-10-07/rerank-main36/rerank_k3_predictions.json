@@ -1,0 +1,4332 @@
+[
+  {
+    "id": "L01-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "종량제 봉투를 정해진 시간에 내놓았으나 이틀째 수거되지 않아 수거를 요청함.",
+    "expected_leaf": "L01",
+    "acceptable_leaves": [
+      "L01"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L01",
+      "L28",
+      "L21"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L21",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "처리 지연·공무원 응대"
+    ],
+    "retrieval_latency_ms": 481.5957540413365,
+    "rerank_latency_ms": 368.8617220032029,
+    "end_to_end_latency_ms": 850.4574760445394,
+    "answer": {
+      "type": "choice",
+      "choice": "L21",
+      "probabilities": {
+        "L01": 0.2242,
+        "L28": 0.0169,
+        "L21": 0.7589
+      },
+      "confidence": 0.4416,
+      "answer_confidence": 0.7589,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 208,
+      "output_tokens": 0,
+      "state_tokens": 45,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L01-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "수요일 저녁마다 집 앞 지정 장소에 놓는 봉투들이 이번 주에는 그대로 남아 있어 가져가 달라고 함.",
+    "expected_leaf": "L01",
+    "acceptable_leaves": [
+      "L01"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L28",
+      "L01",
+      "L03"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L28",
+    "predicted_path": [
+      "생활환경",
+      "청소·폐기물",
+      "재활용품 분리배출"
+    ],
+    "retrieval_latency_ms": 362.5925869564526,
+    "rerank_latency_ms": 349.9867990030907,
+    "end_to_end_latency_ms": 712.5793859595433,
+    "answer": {
+      "type": "choice",
+      "choice": "L28",
+      "probabilities": {
+        "L28": 0.8232,
+        "L01": 0.0486,
+        "L03": 0.1281
+      },
+      "confidence": 0.4808,
+      "answer_confidence": 0.8232,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 212,
+      "output_tokens": 0,
+      "state_tokens": 51,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L01-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "쌓인 봉투에서 냄새가 나지만 별도 악취 조사보다 배출 규칙을 지킨 쓰레기를 먼저 가져가 달라는 요청임.",
+    "expected_leaf": "L01",
+    "acceptable_leaves": [
+      "L01"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L02",
+      "L03",
+      "L01"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L01",
+    "predicted_path": [
+      "생활환경",
+      "청소·폐기물",
+      "생활쓰레기 수거"
+    ],
+    "retrieval_latency_ms": 523.7304239999503,
+    "rerank_latency_ms": 366.5294719976373,
+    "end_to_end_latency_ms": 890.2598959975876,
+    "answer": {
+      "type": "choice",
+      "choice": "L01",
+      "probabilities": {
+        "L02": 0.1204,
+        "L03": 0.2055,
+        "L01": 0.6741
+      },
+      "confidence": 0.2301,
+      "answer_confidence": 0.6741,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 200,
+      "output_tokens": 0,
+      "state_tokens": 55,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L02-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "골목 공터에 누군가 생활쓰레기를 무단 투기하여 단속과 제거를 요청함.",
+    "expected_leaf": "L02",
+    "acceptable_leaves": [
+      "L02"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L01",
+      "L02",
+      "L09"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L01",
+    "predicted_path": [
+      "생활환경",
+      "청소·폐기물",
+      "생활쓰레기 수거"
+    ],
+    "retrieval_latency_ms": 763.0245049949735,
+    "rerank_latency_ms": 380.99873095052317,
+    "end_to_end_latency_ms": 1144.0232359454967,
+    "answer": {
+      "type": "choice",
+      "choice": "L01",
+      "probabilities": {
+        "L01": 0.8587,
+        "L02": 0.0941,
+        "L09": 0.0473
+      },
+      "confidence": 0.5472,
+      "answer_confidence": 0.8587,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 177,
+      "output_tokens": 0,
+      "state_tokens": 42,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L02-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "밤마다 모르는 차량이 빈터에 검은 봉투를 내려놓고 가므로 누가 버리는지 확인해 달라고 함.",
+    "expected_leaf": "L02",
+    "acceptable_leaves": [
+      "L02"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L12",
+      "L10",
+      "L01"
+    ],
+    "gold_retrieved": false,
+    "predicted_leaf": "L10",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "retrieval_latency_ms": 1016.3635979988612,
+    "rerank_latency_ms": 393.6407699948177,
+    "end_to_end_latency_ms": 1410.004367993679,
+    "answer": {
+      "type": "choice",
+      "choice": "L10",
+      "probabilities": {
+        "L12": 0.0036,
+        "L10": 0.7415,
+        "L01": 0.2549
+      },
+      "confidence": 0.4627,
+      "answer_confidence": 0.7415,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 202,
+      "output_tokens": 0,
+      "state_tokens": 51,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L02-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "골목길 통행도 불편하지만 도로 보수 요청은 아니며, 외부인이 버리고 간 폐기물을 조사하고 치워 달라는 민원임.",
+    "expected_leaf": "L02",
+    "acceptable_leaves": [
+      "L02"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L14",
+      "L18",
+      "L29"
+    ],
+    "gold_retrieved": false,
+    "predicted_leaf": "L14",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "가로등 고장"
+    ],
+    "retrieval_latency_ms": 687.7652420080267,
+    "rerank_latency_ms": 360.3239430231042,
+    "end_to_end_latency_ms": 1048.089185031131,
+    "answer": {
+      "type": "choice",
+      "choice": "L14",
+      "probabilities": {
+        "L14": 0.6584,
+        "L18": 0.2699,
+        "L29": 0.0716
+      },
+      "confidence": 0.2559,
+      "answer_confidence": 0.6584,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 205,
+      "output_tokens": 0,
+      "state_tokens": 57,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L03-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "소파를 버리려는데 대형폐기물 신고 방법과 수수료를 문의함.",
+    "expected_leaf": "L03",
+    "acceptable_leaves": [
+      "L03"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L03",
+      "L01",
+      "L28"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L03",
+    "predicted_path": [
+      "생활환경",
+      "청소·폐기물",
+      "대형폐기물 배출"
+    ],
+    "retrieval_latency_ms": 491.33285001153126,
+    "rerank_latency_ms": 371.7695960076526,
+    "end_to_end_latency_ms": 863.1024460191838,
+    "answer": {
+      "type": "choice",
+      "choice": "L03",
+      "probabilities": {
+        "L03": 0.8988,
+        "L01": 0.0702,
+        "L28": 0.031
+      },
+      "confidence": 0.645,
+      "answer_confidence": 0.8988,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 199,
+      "output_tokens": 0,
+      "state_tokens": 38,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L03-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "이사하면서 침대 틀을 내놓을 예정이며 어디서 접수하고 무엇을 붙여야 가져가는지 질문함.",
+    "expected_leaf": "L03",
+    "acceptable_leaves": [
+      "L03"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L03",
+      "L12",
+      "L36"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L36",
+    "predicted_path": [
+      "교육·문화",
+      "도서관 서비스",
+      "도서 대출 문제"
+    ],
+    "retrieval_latency_ms": 516.0595320048742,
+    "rerank_latency_ms": 426.5040449681692,
+    "end_to_end_latency_ms": 942.5635769730434,
+    "answer": {
+      "type": "choice",
+      "choice": "L36",
+      "probabilities": {
+        "L03": 0.2561,
+        "L12": 0.1978,
+        "L36": 0.5462
+      },
+      "confidence": 0.09,
+      "answer_confidence": 0.5462,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 202,
+      "output_tokens": 0,
+      "state_tokens": 52,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L03-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "이삿날 주차 문제는 관리사무소와 해결했으며, 남은 책장을 합법적으로 내놓는 절차를 안내받고 싶어 함.",
+    "expected_leaf": "L03",
+    "acceptable_leaves": [
+      "L03"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L12",
+      "L03",
+      "L01"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L12",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "견인·과태료 이의"
+    ],
+    "retrieval_latency_ms": 586.2265550531447,
+    "rerank_latency_ms": 413.3790209889412,
+    "end_to_end_latency_ms": 999.6055760420859,
+    "answer": {
+      "type": "choice",
+      "choice": "L12",
+      "probabilities": {
+        "L12": 0.4832,
+        "L03": 0.1237,
+        "L01": 0.3932
+      },
+      "confidence": 0.1107,
+      "answer_confidence": 0.4832,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 206,
+      "output_tokens": 0,
+      "state_tokens": 53,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L04-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "아침 일찍 시작하는 옆 건물 공사 소음에 대해 현장 측정과 조치를 요청함.",
+    "expected_leaf": "L04",
+    "acceptable_leaves": [
+      "L04"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L04",
+      "L34",
+      "L21"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L04",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "공사장 소음"
+    ],
+    "retrieval_latency_ms": 483.68409200338647,
+    "rerank_latency_ms": 346.7830579611473,
+    "end_to_end_latency_ms": 830.4671499645337,
+    "answer": {
+      "type": "choice",
+      "choice": "L04",
+      "probabilities": {
+        "L04": 0.9889,
+        "L34": 0.0058,
+        "L21": 0.0053
+      },
+      "confidence": 0.9375,
+      "answer_confidence": 0.9889,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 194,
+      "output_tokens": 0,
+      "state_tokens": 43,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L04-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "옆집 건물을 부수는 기계가 새벽부터 울려 잠을 못 잔다며 작업 시간을 확인해 달라고 함.",
+    "expected_leaf": "L04",
+    "acceptable_leaves": [
+      "L04"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L34",
+      "L10",
+      "L04"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L04",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "공사장 소음"
+    ],
+    "retrieval_latency_ms": 537.773157004267,
+    "rerank_latency_ms": 303.0791390337981,
+    "end_to_end_latency_ms": 840.8522960380651,
+    "answer": {
+      "type": "choice",
+      "choice": "L04",
+      "probabilities": {
+        "L34": 0.0617,
+        "L10": 0.0535,
+        "L04": 0.8848
+      },
+      "confidence": 0.6025,
+      "answer_confidence": 0.8848,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 196,
+      "output_tokens": 0,
+      "state_tokens": 49,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L04-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "공사 차량이 길을 막은 일은 해소됐고, 현재는 드릴 소리 때문에 생활이 어려워 소음 측정을 요청함.",
+    "expected_leaf": "L04",
+    "acceptable_leaves": [
+      "L04"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L29",
+      "L04",
+      "L10"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L04",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "공사장 소음"
+    ],
+    "retrieval_latency_ms": 704.4434170238674,
+    "rerank_latency_ms": 298.18337404867634,
+    "end_to_end_latency_ms": 1002.6267910725437,
+    "answer": {
+      "type": "choice",
+      "choice": "L04",
+      "probabilities": {
+        "L29": 0.0152,
+        "L04": 0.9351,
+        "L10": 0.0497
+      },
+      "confidence": 0.7492,
+      "answer_confidence": 0.9351,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 197,
+      "output_tokens": 0,
+      "state_tokens": 54,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L05-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "주택가 술집의 심야 음악 소음에 대해 단속을 요청함.",
+    "expected_leaf": "L05",
+    "acceptable_leaves": [
+      "L05"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L05",
+      "L10",
+      "L12"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L05",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "영업장 소음"
+    ],
+    "retrieval_latency_ms": 834.3531370046549,
+    "rerank_latency_ms": 261.9915260002017,
+    "end_to_end_latency_ms": 1096.3446630048566,
+    "answer": {
+      "type": "choice",
+      "choice": "L05",
+      "probabilities": {
+        "L05": 0.4619,
+        "L10": 0.3374,
+        "L12": 0.2008
+      },
+      "confidence": 0.0481,
+      "answer_confidence": 0.4619,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 178,
+      "output_tokens": 0,
+      "state_tokens": 35,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L05-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "아래층 가게가 문을 닫을 때까지 스피커를 크게 틀어 밤마다 벽이 울린다고 호소함.",
+    "expected_leaf": "L05",
+    "acceptable_leaves": [
+      "L05"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L05",
+      "L10",
+      "L06"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L05",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "영업장 소음"
+    ],
+    "retrieval_latency_ms": 1133.8549869833514,
+    "rerank_latency_ms": 313.20173596031964,
+    "end_to_end_latency_ms": 1447.056722943671,
+    "answer": {
+      "type": "choice",
+      "choice": "L05",
+      "probabilities": {
+        "L05": 0.7546,
+        "L10": 0.0616,
+        "L06": 0.1839
+      },
+      "confidence": 0.367,
+      "answer_confidence": 0.7546,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 183,
+      "output_tokens": 0,
+      "state_tokens": 51,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L05-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "가게 손님의 주차도 불편하지만 이번 상담에서는 밤늦게 이어지는 음악 소리에 대한 조치를 요청함.",
+    "expected_leaf": "L05",
+    "acceptable_leaves": [
+      "L05"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L05",
+      "L12",
+      "L11"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L05",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "영업장 소음"
+    ],
+    "retrieval_latency_ms": 807.0400599972345,
+    "rerank_latency_ms": 333.0695860204287,
+    "end_to_end_latency_ms": 1140.1096460176632,
+    "answer": {
+      "type": "choice",
+      "choice": "L05",
+      "probabilities": {
+        "L05": 0.9801,
+        "L12": 0.0055,
+        "L11": 0.0144
+      },
+      "confidence": 0.9004,
+      "answer_confidence": 0.9801,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 191,
+      "output_tokens": 0,
+      "state_tokens": 50,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L06-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "동네에 반복되는 악취의 원인 조사와 저감 조치를 요청함.",
+    "expected_leaf": "L06",
+    "acceptable_leaves": [
+      "L06"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L06",
+      "L21",
+      "L10"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L06",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "악취"
+    ],
+    "retrieval_latency_ms": 358.73950901441276,
+    "rerank_latency_ms": 307.8166740015149,
+    "end_to_end_latency_ms": 666.5561830159277,
+    "answer": {
+      "type": "choice",
+      "choice": "L06",
+      "probabilities": {
+        "L06": 0.9712,
+        "L21": 0.0156,
+        "L10": 0.0132
+      },
+      "confidence": 0.863,
+      "answer_confidence": 0.9712,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 176,
+      "output_tokens": 0,
+      "state_tokens": 37,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L06-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "저녁만 되면 창문을 열 수 없을 정도로 역한 냄새가 들어오는데 어디서 나는지 모르겠다고 함.",
+    "expected_leaf": "L06",
+    "acceptable_leaves": [
+      "L06"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L06",
+      "L10",
+      "L05"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L06",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "악취"
+    ],
+    "retrieval_latency_ms": 735.6152660213411,
+    "rerank_latency_ms": 299.19176804833114,
+    "end_to_end_latency_ms": 1034.8070340696722,
+    "answer": {
+      "type": "choice",
+      "choice": "L06",
+      "probabilities": {
+        "L06": 0.9287,
+        "L10": 0.0193,
+        "L05": 0.0519
+      },
+      "confidence": 0.7283,
+      "answer_confidence": 0.9287,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 181,
+      "output_tokens": 0,
+      "state_tokens": 49,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L06-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "배수구 주변에서 냄새가 나지만 물이 넘치거나 막히지는 않았으며, 냄새의 원인을 조사해 달라고 함.",
+    "expected_leaf": "L06",
+    "acceptable_leaves": [
+      "L06"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L06",
+      "L15",
+      "L01"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L15",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "retrieval_latency_ms": 658.4094120189548,
+    "rerank_latency_ms": 347.8556069894694,
+    "end_to_end_latency_ms": 1006.2650190084241,
+    "answer": {
+      "type": "choice",
+      "choice": "L15",
+      "probabilities": {
+        "L06": 0.029,
+        "L15": 0.9574,
+        "L01": 0.0136
+      },
+      "confidence": 0.8153,
+      "answer_confidence": 0.9574,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 193,
+      "output_tokens": 0,
+      "state_tokens": 54,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L07-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "가로수 가지가 주택 창문을 가리고 있어 가지치기를 요청함.",
+    "expected_leaf": "L07",
+    "acceptable_leaves": [
+      "L07"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L07",
+      "L31",
+      "L14"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L31",
+    "predicted_path": [
+      "생활환경",
+      "동물보호",
+      "유기동물 구조"
+    ],
+    "retrieval_latency_ms": 1958.853316027671,
+    "rerank_latency_ms": 286.463628988713,
+    "end_to_end_latency_ms": 2245.316945016384,
+    "answer": {
+      "type": "choice",
+      "choice": "L31",
+      "probabilities": {
+        "L07": 0.1058,
+        "L31": 0.7975,
+        "L14": 0.0967
+      },
+      "confidence": 0.4139,
+      "answer_confidence": 0.7975,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 172,
+      "output_tokens": 0,
+      "state_tokens": 33,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L07-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "집 앞 나무의 긴 가지가 전선에 닿을 듯 흔들려 잘라 달라고 함.",
+    "expected_leaf": "L07",
+    "acceptable_leaves": [
+      "L07"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L07",
+      "L31",
+      "L10"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L07",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "수목 관리"
+    ],
+    "retrieval_latency_ms": 1160.5665590032004,
+    "rerank_latency_ms": 276.84239903464913,
+    "end_to_end_latency_ms": 1437.4089580378495,
+    "answer": {
+      "type": "choice",
+      "choice": "L07",
+      "probabilities": {
+        "L07": 0.8544,
+        "L31": 0.1327,
+        "L10": 0.0129
+      },
+      "confidence": 0.5825,
+      "answer_confidence": 0.8544,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 182,
+      "output_tokens": 0,
+      "state_tokens": 41,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L07-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "나뭇잎 때문에 보도가 지저분한 점보다 부러질 듯 기운 큰 가지가 위험하여 수목 안전 조치를 우선 요청함.",
+    "expected_leaf": "L07",
+    "acceptable_leaves": [
+      "L07"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L07",
+      "L34",
+      "L03"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L07",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "수목 관리"
+    ],
+    "retrieval_latency_ms": 475.7090479834005,
+    "rerank_latency_ms": 344.5499259978533,
+    "end_to_end_latency_ms": 820.2589739812538,
+    "answer": {
+      "type": "choice",
+      "choice": "L07",
+      "probabilities": {
+        "L07": 0.9922,
+        "L34": 0.0071,
+        "L03": 0.0007
+      },
+      "confidence": 0.9564,
+      "answer_confidence": 0.9922,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 203,
+      "output_tokens": 0,
+      "state_tokens": 52,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L08-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "동네 공원 벤치가 부서져 있어 수리를 요청함.",
+    "expected_leaf": "L08",
+    "acceptable_leaves": [
+      "L08"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L08",
+      "L09",
+      "L17"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L08",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "공원시설 파손"
+    ],
+    "retrieval_latency_ms": 704.1988389682956,
+    "rerank_latency_ms": 301.20976897887886,
+    "end_to_end_latency_ms": 1005.4086079471745,
+    "answer": {
+      "type": "choice",
+      "choice": "L08",
+      "probabilities": {
+        "L08": 0.8596,
+        "L09": 0.1387,
+        "L17": 0.0017
+      },
+      "confidence": 0.6223,
+      "answer_confidence": 0.8596,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 169,
+      "output_tokens": 0,
+      "state_tokens": 32,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L08-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "산책하는 곳의 야외 운동기구 손잡이가 빠져 이용자가 다칠 것 같다고 알림.",
+    "expected_leaf": "L08",
+    "acceptable_leaves": [
+      "L08"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L08",
+      "L27",
+      "L25"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "retrieval_latency_ms": 1702.518702019006,
+    "rerank_latency_ms": 282.82504103844985,
+    "end_to_end_latency_ms": 1985.3437430574559,
+    "answer": {
+      "type": "choice",
+      "choice": "L27",
+      "probabilities": {
+        "L08": 0.2051,
+        "L27": 0.7535,
+        "L25": 0.0414
+      },
+      "confidence": 0.3901,
+      "answer_confidence": 0.7535,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 188,
+      "output_tokens": 0,
+      "state_tokens": 41,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L08-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "주변에 쓰레기도 조금 있지만 핵심 요청은 공원 미끄럼틀의 깨진 부분을 막고 수리해 달라는 것임.",
+    "expected_leaf": "L08",
+    "acceptable_leaves": [
+      "L08"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L08",
+      "L09",
+      "L07"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L08",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "공원시설 파손"
+    ],
+    "retrieval_latency_ms": 426.632726972457,
+    "rerank_latency_ms": 314.71215799683705,
+    "end_to_end_latency_ms": 741.3448849692941,
+    "answer": {
+      "type": "choice",
+      "choice": "L08",
+      "probabilities": {
+        "L08": 0.4886,
+        "L09": 0.3363,
+        "L07": 0.1751
+      },
+      "confidence": 0.0702,
+      "answer_confidence": 0.4886,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 186,
+      "output_tokens": 0,
+      "state_tokens": 54,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L09-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "공원 휴지통이 넘치고 산책로에 쓰레기가 흩어져 청소를 요청함.",
+    "expected_leaf": "L09",
+    "acceptable_leaves": [
+      "L09"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L09",
+      "L01",
+      "L08"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L09",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "공원 청결"
+    ],
+    "retrieval_latency_ms": 1067.1634780010208,
+    "rerank_latency_ms": 306.27401103265584,
+    "end_to_end_latency_ms": 1373.4374890336767,
+    "answer": {
+      "type": "choice",
+      "choice": "L09",
+      "probabilities": {
+        "L09": 0.6517,
+        "L01": 0.2243,
+        "L08": 0.1241
+      },
+      "confidence": 0.2051,
+      "answer_confidence": 0.6517,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 183,
+      "output_tokens": 0,
+      "state_tokens": 42,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L09-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "아침 운동을 하는 녹지 안에 전날 먹고 남긴 용기들이 널려 있어 이용 전에 정리해 달라고 함.",
+    "expected_leaf": "L09",
+    "acceptable_leaves": [
+      "L09"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L09",
+      "L01",
+      "L07"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L09",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "공원 청결"
+    ],
+    "retrieval_latency_ms": 714.7881609853357,
+    "rerank_latency_ms": 294.97499798890203,
+    "end_to_end_latency_ms": 1009.7631589742377,
+    "answer": {
+      "type": "choice",
+      "choice": "L09",
+      "probabilities": {
+        "L09": 0.4892,
+        "L01": 0.4103,
+        "L07": 0.1006
+      },
+      "confidence": 0.1387,
+      "answer_confidence": 0.4892,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 185,
+      "output_tokens": 0,
+      "state_tokens": 49,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L09-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "공원 쓰레기 때문에 냄새도 나지만 원인 조사보다 공원 안 휴지통을 비우고 산책로를 청소해 달라는 요청임.",
+    "expected_leaf": "L09",
+    "acceptable_leaves": [
+      "L09"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L09",
+      "L01",
+      "L08"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L01",
+    "predicted_path": [
+      "생활환경",
+      "청소·폐기물",
+      "생활쓰레기 수거"
+    ],
+    "retrieval_latency_ms": 569.5995170390233,
+    "rerank_latency_ms": 293.8134490395896,
+    "end_to_end_latency_ms": 863.412966078613,
+    "answer": {
+      "type": "choice",
+      "choice": "L01",
+      "probabilities": {
+        "L09": 0.327,
+        "L01": 0.5148,
+        "L08": 0.1582
+      },
+      "confidence": 0.0906,
+      "answer_confidence": 0.5148,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 194,
+      "output_tokens": 0,
+      "state_tokens": 53,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L10-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "횡단보도 위에 불법 주차한 차량의 단속을 요청함.",
+    "expected_leaf": "L10",
+    "acceptable_leaves": [
+      "L10"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L10",
+      "L12",
+      "L18"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L10",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "retrieval_latency_ms": 884.595236973837,
+    "rerank_latency_ms": 304.84291701577604,
+    "end_to_end_latency_ms": 1189.438153989613,
+    "answer": {
+      "type": "choice",
+      "choice": "L10",
+      "probabilities": {
+        "L10": 0.915,
+        "L12": 0.0494,
+        "L18": 0.0357
+      },
+      "confidence": 0.6825,
+      "answer_confidence": 0.915,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 183,
+      "output_tokens": 0,
+      "state_tokens": 36,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L10-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "유모차를 밀고 건너야 하는 턱 낮은 부분을 차가 계속 막고 있어 이동시켜 달라고 함.",
+    "expected_leaf": "L10",
+    "acceptable_leaves": [
+      "L10"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L10",
+      "L12",
+      "L16"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L16",
+    "predicted_path": [
+      "도로·교통",
+      "대중교통",
+      "버스 운행"
+    ],
+    "retrieval_latency_ms": 1374.193491996266,
+    "rerank_latency_ms": 307.7104020048864,
+    "end_to_end_latency_ms": 1681.9038940011524,
+    "answer": {
+      "type": "choice",
+      "choice": "L16",
+      "probabilities": {
+        "L10": 0.3169,
+        "L12": 0.1654,
+        "L16": 0.5177
+      },
+      "confidence": 0.0874,
+      "answer_confidence": 0.5177,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 190,
+      "output_tokens": 0,
+      "state_tokens": 48,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L10-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "근처 주차장이 부족하다는 사정은 이해하지만 현재 요청은 소화전 앞을 막은 차량을 단속해 달라는 것임.",
+    "expected_leaf": "L10",
+    "acceptable_leaves": [
+      "L10"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L10",
+      "L11",
+      "L12"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L11",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "주차시설 이용"
+    ],
+    "retrieval_latency_ms": 769.4110780139454,
+    "rerank_latency_ms": 313.10195598052815,
+    "end_to_end_latency_ms": 1082.5130339944735,
+    "answer": {
+      "type": "choice",
+      "choice": "L11",
+      "probabilities": {
+        "L10": 0.0037,
+        "L11": 0.9941,
+        "L12": 0.0022
+      },
+      "confidence": 0.9635,
+      "answer_confidence": 0.9941,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 197,
+      "output_tokens": 0,
+      "state_tokens": 53,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L11-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "공영주차장 정기권 신청 방법과 월 요금을 문의함.",
+    "expected_leaf": "L11",
+    "acceptable_leaves": [
+      "L11"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L11",
+      "L12",
+      "L10"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L11",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "주차시설 이용"
+    ],
+    "retrieval_latency_ms": 2300.675419974141,
+    "rerank_latency_ms": 286.498193978332,
+    "end_to_end_latency_ms": 2587.173613952473,
+    "answer": {
+      "type": "choice",
+      "choice": "L11",
+      "probabilities": {
+        "L11": 0.8736,
+        "L12": 0.0772,
+        "L10": 0.0491
+      },
+      "confidence": 0.5778,
+      "answer_confidence": 0.8736,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 178,
+      "output_tokens": 0,
+      "state_tokens": 34,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L11-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "구청에서 운영하는 주차 공간을 매일 쓰려는데 하루씩 내지 않고 한 달 단위로 결제할 수 있는지 질문함.",
+    "expected_leaf": "L11",
+    "acceptable_leaves": [
+      "L11"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L11",
+      "L12",
+      "L10"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L11",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "주차시설 이용"
+    ],
+    "retrieval_latency_ms": 1945.3094510245137,
+    "rerank_latency_ms": 303.6900860024616,
+    "end_to_end_latency_ms": 2248.9995370269753,
+    "answer": {
+      "type": "choice",
+      "choice": "L11",
+      "probabilities": {
+        "L11": 0.6386,
+        "L12": 0.0004,
+        "L10": 0.361
+      },
+      "confidence": 0.4019,
+      "answer_confidence": 0.6386,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 197,
+      "output_tokens": 0,
+      "state_tokens": 53,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L11-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "주변 골목의 주차 단속에 항의하려는 것이 아니라 공영주차장 할인 대상과 이용 요금을 확인하려는 상담임.",
+    "expected_leaf": "L11",
+    "acceptable_leaves": [
+      "L11"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L11",
+      "L12",
+      "L10"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L11",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "주차시설 이용"
+    ],
+    "retrieval_latency_ms": 1167.918956023641,
+    "rerank_latency_ms": 292.09643200738356,
+    "end_to_end_latency_ms": 1460.0153880310245,
+    "answer": {
+      "type": "choice",
+      "choice": "L11",
+      "probabilities": {
+        "L11": 0.9072,
+        "L12": 0.0082,
+        "L10": 0.0846
+      },
+      "confidence": 0.6934,
+      "answer_confidence": 0.9072,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 195,
+      "output_tokens": 0,
+      "state_tokens": 51,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L12-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "불법주차 과태료 고지서를 받아 이의신청 절차를 문의함.",
+    "expected_leaf": "L12",
+    "acceptable_leaves": [
+      "L12"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L12",
+      "L10",
+      "L11"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L12",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "견인·과태료 이의"
+    ],
+    "retrieval_latency_ms": 685.9114560065791,
+    "rerank_latency_ms": 315.10090199299157,
+    "end_to_end_latency_ms": 1001.0123579995707,
+    "answer": {
+      "type": "choice",
+      "choice": "L12",
+      "probabilities": {
+        "L12": 0.6127,
+        "L10": 0.2073,
+        "L11": 0.18
+      },
+      "confidence": 0.1489,
+      "answer_confidence": 0.6127,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 183,
+      "output_tokens": 0,
+      "state_tokens": 39,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L12-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "차를 세워 둔 곳에 돌아오니 차량이 없어졌고 구청에서 가져갔다는 안내를 받아 보관 장소와 반환 방법을 묻음.",
+    "expected_leaf": "L12",
+    "acceptable_leaves": [
+      "L12"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L01",
+      "L12",
+      "L10"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L10",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "retrieval_latency_ms": 554.5333650079556,
+    "rerank_latency_ms": 343.0666170315817,
+    "end_to_end_latency_ms": 897.5999820395373,
+    "answer": {
+      "type": "choice",
+      "choice": "L10",
+      "probabilities": {
+        "L01": 0.1196,
+        "L12": 0.052,
+        "L10": 0.8284
+      },
+      "confidence": 0.4868,
+      "answer_confidence": 0.8284,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 208,
+      "output_tokens": 0,
+      "state_tokens": 57,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L12-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "골목의 다른 차량을 신고하는 것이 아니라 본인에게 부과된 주차 위반 금액이 잘못됐다며 취소 절차를 문의함.",
+    "expected_leaf": "L12",
+    "acceptable_leaves": [
+      "L12"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L12",
+      "L10",
+      "L11"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L10",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "retrieval_latency_ms": 614.671841962263,
+    "rerank_latency_ms": 318.7486869865097,
+    "end_to_end_latency_ms": 933.4205289487727,
+    "answer": {
+      "type": "choice",
+      "choice": "L10",
+      "probabilities": {
+        "L12": 0.0033,
+        "L10": 0.5234,
+        "L11": 0.4734
+      },
+      "confidence": 0.3523,
+      "answer_confidence": 0.5234,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 198,
+      "output_tokens": 0,
+      "state_tokens": 54,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L13-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "차도에 포트홀이 생겨 차량이 충격을 받으므로 도로 보수를 요청함.",
+    "expected_leaf": "L13",
+    "acceptable_leaves": [
+      "L13"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L13",
+      "L10",
+      "L12"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L13",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "노면·보도 파손"
+    ],
+    "retrieval_latency_ms": 342.71832200465724,
+    "rerank_latency_ms": 283.80733903031796,
+    "end_to_end_latency_ms": 626.5256610349752,
+    "answer": {
+      "type": "choice",
+      "choice": "L13",
+      "probabilities": {
+        "L13": 0.9127,
+        "L10": 0.0138,
+        "L12": 0.0735
+      },
+      "confidence": 0.6955,
+      "answer_confidence": 0.9127,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 184,
+      "output_tokens": 0,
+      "state_tokens": 40,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L13-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "집 앞 보행로 돌이 들떠 발이 걸리고 넘어질 뻔했다며 평평하게 고쳐 달라고 함.",
+    "expected_leaf": "L13",
+    "acceptable_leaves": [
+      "L13"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L31",
+      "L18",
+      "L12"
+    ],
+    "gold_retrieved": false,
+    "predicted_leaf": "L31",
+    "predicted_path": [
+      "생활환경",
+      "동물보호",
+      "유기동물 구조"
+    ],
+    "retrieval_latency_ms": 416.25830001430586,
+    "rerank_latency_ms": 315.37479703547433,
+    "end_to_end_latency_ms": 731.6330970497802,
+    "answer": {
+      "type": "choice",
+      "choice": "L31",
+      "probabilities": {
+        "L31": 0.9977,
+        "L18": 0.0013,
+        "L12": 0.001
+      },
+      "confidence": 0.9836,
+      "answer_confidence": 0.9977,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 194,
+      "output_tokens": 0,
+      "state_tokens": 45,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L13-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "비가 오면 물도 고이지만 배수관 점검보다 움푹 패인 아스팔트 구멍 자체를 메워 달라는 요청임.",
+    "expected_leaf": "L13",
+    "acceptable_leaves": [
+      "L13"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L15",
+      "L12",
+      "L10"
+    ],
+    "gold_retrieved": false,
+    "predicted_leaf": "L15",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "retrieval_latency_ms": 645.1382410014048,
+    "rerank_latency_ms": 339.6626869798638,
+    "end_to_end_latency_ms": 984.8009279812686,
+    "answer": {
+      "type": "choice",
+      "choice": "L15",
+      "probabilities": {
+        "L15": 0.9279,
+        "L12": 0.0195,
+        "L10": 0.0526
+      },
+      "confidence": 0.726,
+      "answer_confidence": 0.9279,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 195,
+      "output_tokens": 0,
+      "state_tokens": 50,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L14-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "골목 가로등이 켜지지 않아 수리를 요청함.",
+    "expected_leaf": "L14",
+    "acceptable_leaves": [
+      "L14"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L14",
+      "L26",
+      "L31"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L31",
+    "predicted_path": [
+      "생활환경",
+      "동물보호",
+      "유기동물 구조"
+    ],
+    "retrieval_latency_ms": 960.7246149680577,
+    "rerank_latency_ms": 325.3984040347859,
+    "end_to_end_latency_ms": 1286.1230190028436,
+    "answer": {
+      "type": "choice",
+      "choice": "L31",
+      "probabilities": {
+        "L14": 0.3108,
+        "L26": 0.0653,
+        "L31": 0.624
+      },
+      "confidence": 0.2394,
+      "answer_confidence": 0.624,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 170,
+      "output_tokens": 0,
+      "state_tokens": 32,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L14-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "해가 지면 집 앞 길만 캄캄해지며 전봇대에 달린 등이 며칠째 들어오지 않는다고 함.",
+    "expected_leaf": "L14",
+    "acceptable_leaves": [
+      "L14"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L14",
+      "L01",
+      "L15"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L14",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "가로등 고장"
+    ],
+    "retrieval_latency_ms": 497.72984301671386,
+    "rerank_latency_ms": 322.33856100356206,
+    "end_to_end_latency_ms": 820.0684040202759,
+    "answer": {
+      "type": "choice",
+      "choice": "L14",
+      "probabilities": {
+        "L14": 0.9552,
+        "L01": 0.0297,
+        "L15": 0.0151
+      },
+      "confidence": 0.8075,
+      "answer_confidence": 0.9552,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 192,
+      "output_tokens": 0,
+      "state_tokens": 47,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L14-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "어두워서 불법주차가 더 위험하게 느껴지지만 이번 요청은 차량 단속이 아니라 꺼진 도로 조명을 고치는 것임.",
+    "expected_leaf": "L14",
+    "acceptable_leaves": [
+      "L14"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L10",
+      "L14",
+      "L12"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L10",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "retrieval_latency_ms": 809.7754589980468,
+    "rerank_latency_ms": 308.09220200171694,
+    "end_to_end_latency_ms": 1117.8676609997638,
+    "answer": {
+      "type": "choice",
+      "choice": "L10",
+      "probabilities": {
+        "L10": 0.5813,
+        "L14": 0.418,
+        "L12": 0.0007
+      },
+      "confidence": 0.3764,
+      "answer_confidence": 0.5813,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 200,
+      "output_tokens": 0,
+      "state_tokens": 56,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L15-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "도로 빗물받이가 막혀 비가 오면 침수되므로 배수로 정비를 요청함.",
+    "expected_leaf": "L15",
+    "acceptable_leaves": [
+      "L15"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L15",
+      "L10",
+      "L18"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L15",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "retrieval_latency_ms": 251.66819099104032,
+    "rerank_latency_ms": 366.4985020295717,
+    "end_to_end_latency_ms": 618.166693020612,
+    "answer": {
+      "type": "choice",
+      "choice": "L15",
+      "probabilities": {
+        "L15": 0.961,
+        "L10": 0.0111,
+        "L18": 0.0279
+      },
+      "confidence": 0.8288,
+      "answer_confidence": 0.961,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 186,
+      "output_tokens": 0,
+      "state_tokens": 43,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L15-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "비만 오면 인도 가장자리 철제 덮개 쪽으로 물이 빠지지 않아 가게 입구까지 차오른다고 함.",
+    "expected_leaf": "L15",
+    "acceptable_leaves": [
+      "L15"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L15",
+      "L05",
+      "L12"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L05",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "영업장 소음"
+    ],
+    "retrieval_latency_ms": 1785.7007100246847,
+    "rerank_latency_ms": 320.06469095358625,
+    "end_to_end_latency_ms": 2105.765400978271,
+    "answer": {
+      "type": "choice",
+      "choice": "L05",
+      "probabilities": {
+        "L15": 0.1882,
+        "L05": 0.802,
+        "L12": 0.0098
+      },
+      "confidence": 0.5115,
+      "answer_confidence": 0.802,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 192,
+      "output_tokens": 0,
+      "state_tokens": 50,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L15-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "낙엽이 원인으로 보이지만 나무 가지치기 요청은 아니며, 빗물이 빠지도록 도로 배수구를 뚫어 달라고 함.",
+    "expected_leaf": "L15",
+    "acceptable_leaves": [
+      "L15"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L15",
+      "L07",
+      "L10"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L15",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "retrieval_latency_ms": 1010.7770509785041,
+    "rerank_latency_ms": 310.8435650356114,
+    "end_to_end_latency_ms": 1321.6206160141155,
+    "answer": {
+      "type": "choice",
+      "choice": "L15",
+      "probabilities": {
+        "L15": 0.9983,
+        "L07": 0.0005,
+        "L10": 0.0013
+      },
+      "confidence": 0.9875,
+      "answer_confidence": 0.9983,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 191,
+      "output_tokens": 0,
+      "state_tokens": 53,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L16-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "정류장에서 기다렸으나 버스가 무정차 통과하여 운행 개선을 요청함.",
+    "expected_leaf": "L16",
+    "acceptable_leaves": [
+      "L16"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L16",
+      "L17",
+      "L18"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L16",
+    "predicted_path": [
+      "도로·교통",
+      "대중교통",
+      "버스 운행"
+    ],
+    "retrieval_latency_ms": 1685.4226230061613,
+    "rerank_latency_ms": 299.94162399088964,
+    "end_to_end_latency_ms": 1985.364246997051,
+    "answer": {
+      "type": "choice",
+      "choice": "L16",
+      "probabilities": {
+        "L16": 0.992,
+        "L17": 0.0072,
+        "L18": 0.0008
+      },
+      "confidence": 0.9554,
+      "answer_confidence": 0.992,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 182,
+      "output_tokens": 0,
+      "state_tokens": 41,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L16-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "안내된 간격보다 훨씬 오래 기다렸고 같은 번호 차량 두 대가 붙어서 와 출근이 늦었다고 함.",
+    "expected_leaf": "L16",
+    "acceptable_leaves": [
+      "L16"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L21",
+      "L12",
+      "L10"
+    ],
+    "gold_retrieved": false,
+    "predicted_leaf": "L21",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "처리 지연·공무원 응대"
+    ],
+    "retrieval_latency_ms": 239.71610399894416,
+    "rerank_latency_ms": 351.88761400058866,
+    "end_to_end_latency_ms": 591.6037179995328,
+    "answer": {
+      "type": "choice",
+      "choice": "L21",
+      "probabilities": {
+        "L21": 0.6616,
+        "L12": 0.088,
+        "L10": 0.2504
+      },
+      "confidence": 0.2409,
+      "answer_confidence": 0.6616,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 201,
+      "output_tokens": 0,
+      "state_tokens": 51,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L16-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "기사 말투에 대한 불편도 있었으나 주된 요청은 승객이 기다리는 정류장을 지나치는 운행을 개선해 달라는 것임.",
+    "expected_leaf": "L16",
+    "acceptable_leaves": [
+      "L16"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L18",
+      "L21",
+      "L17"
+    ],
+    "gold_retrieved": false,
+    "predicted_leaf": "L18",
+    "predicted_path": [
+      "도로·교통",
+      "대중교통",
+      "운수종사자 응대"
+    ],
+    "retrieval_latency_ms": 159.57909799180925,
+    "rerank_latency_ms": 489.692080009263,
+    "end_to_end_latency_ms": 649.2711780010723,
+    "answer": {
+      "type": "choice",
+      "choice": "L18",
+      "probabilities": {
+        "L18": 0.8148,
+        "L21": 0.1079,
+        "L17": 0.0773
+      },
+      "confidence": 0.4492,
+      "answer_confidence": 0.8148,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 206,
+      "output_tokens": 0,
+      "state_tokens": 57,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L17-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "버스정류장 도착안내 전광판이 고장 나 수리를 요청함.",
+    "expected_leaf": "L17",
+    "acceptable_leaves": [
+      "L17"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L17",
+      "L21",
+      "L18"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L21",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "처리 지연·공무원 응대"
+    ],
+    "retrieval_latency_ms": 124.30074898293242,
+    "rerank_latency_ms": 345.56920296745375,
+    "end_to_end_latency_ms": 469.86995195038617,
+    "answer": {
+      "type": "choice",
+      "choice": "L21",
+      "probabilities": {
+        "L17": 0.0534,
+        "L21": 0.8984,
+        "L18": 0.0481
+      },
+      "confidence": 0.6371,
+      "answer_confidence": 0.8984,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 184,
+      "output_tokens": 0,
+      "state_tokens": 35,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L17-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "버스를 기다리는 곳의 지붕이 깨져 비를 피할 수 없으니 고쳐 달라고 함.",
+    "expected_leaf": "L17",
+    "acceptable_leaves": [
+      "L17"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L17",
+      "L18",
+      "L16"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L18",
+    "predicted_path": [
+      "도로·교통",
+      "대중교통",
+      "운수종사자 응대"
+    ],
+    "retrieval_latency_ms": 149.08690901938826,
+    "rerank_latency_ms": 325.8749839733355,
+    "end_to_end_latency_ms": 474.96189299272373,
+    "answer": {
+      "type": "choice",
+      "choice": "L18",
+      "probabilities": {
+        "L17": 0.2377,
+        "L18": 0.4186,
+        "L16": 0.3436
+      },
+      "confidence": 0.0232,
+      "answer_confidence": 0.4186,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 184,
+      "output_tokens": 0,
+      "state_tokens": 43,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L17-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "버스가 늦는다고 생각했으나 실제 핵심은 멈춰 있는 도착안내 화면이며, 정류장 전광판 수리를 요청함.",
+    "expected_leaf": "L17",
+    "acceptable_leaves": [
+      "L17"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L17",
+      "L16",
+      "L18"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L17",
+    "predicted_path": [
+      "도로·교통",
+      "대중교통",
+      "정류장 시설"
+    ],
+    "retrieval_latency_ms": 190.15075801871717,
+    "rerank_latency_ms": 333.7996529880911,
+    "end_to_end_latency_ms": 523.9504110068083,
+    "answer": {
+      "type": "choice",
+      "choice": "L17",
+      "probabilities": {
+        "L17": 0.7623,
+        "L16": 0.1645,
+        "L18": 0.0732
+      },
+      "confidence": 0.3671,
+      "answer_confidence": 0.7623,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 194,
+      "output_tokens": 0,
+      "state_tokens": 53,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L18-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "버스 운전자의 불친절한 응대에 대해 민원을 제기함.",
+    "expected_leaf": "L18",
+    "acceptable_leaves": [
+      "L18"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L18",
+      "L21",
+      "L16"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L16",
+    "predicted_path": [
+      "도로·교통",
+      "대중교통",
+      "버스 운행"
+    ],
+    "retrieval_latency_ms": 170.0078439898789,
+    "rerank_latency_ms": 347.62767399661243,
+    "end_to_end_latency_ms": 517.6355179864913,
+    "answer": {
+      "type": "choice",
+      "choice": "L16",
+      "probabilities": {
+        "L18": 0.0017,
+        "L21": 0.0002,
+        "L16": 0.9981
+      },
+      "confidence": 0.9867,
+      "answer_confidence": 0.9981,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 180,
+      "output_tokens": 0,
+      "state_tokens": 36,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L18-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "택시에서 목적지를 다시 설명하자 기사가 큰 소리로 면박을 주었다며 응대 개선을 원함.",
+    "expected_leaf": "L18",
+    "acceptable_leaves": [
+      "L18"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L18",
+      "L21",
+      "L12"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L21",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "처리 지연·공무원 응대"
+    ],
+    "retrieval_latency_ms": 306.5315670100972,
+    "rerank_latency_ms": 449.87023097928613,
+    "end_to_end_latency_ms": 756.4017979893833,
+    "answer": {
+      "type": "choice",
+      "choice": "L21",
+      "probabilities": {
+        "L18": 0.158,
+        "L21": 0.8294,
+        "L12": 0.0126
+      },
+      "confidence": 0.5432,
+      "answer_confidence": 0.8294,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 198,
+      "output_tokens": 0,
+      "state_tokens": 47,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L18-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "배차나 정류장 시설에는 문제가 없었으며, 승차 중 기사가 모욕적인 말을 한 행위에 대한 답변을 요청함.",
+    "expected_leaf": "L18",
+    "acceptable_leaves": [
+      "L18"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L18",
+      "L17",
+      "L16"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L16",
+    "predicted_path": [
+      "도로·교통",
+      "대중교통",
+      "버스 운행"
+    ],
+    "retrieval_latency_ms": 402.7802919736132,
+    "rerank_latency_ms": 340.68623097846285,
+    "end_to_end_latency_ms": 743.466522952076,
+    "answer": {
+      "type": "choice",
+      "choice": "L16",
+      "probabilities": {
+        "L18": 0.3903,
+        "L17": 0.1481,
+        "L16": 0.4616
+      },
+      "confidence": 0.0835,
+      "answer_confidence": 0.4616,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 194,
+      "output_tokens": 0,
+      "state_tokens": 53,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L19-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "주민등록등본 발급에 필요한 준비물과 수수료를 문의함.",
+    "expected_leaf": "L19",
+    "acceptable_leaves": [
+      "L19"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L19",
+      "L24",
+      "L23"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L19",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "증명서 발급"
+    ],
+    "retrieval_latency_ms": 382.739866967313,
+    "rerank_latency_ms": 332.31339597841725,
+    "end_to_end_latency_ms": 715.0532629457302,
+    "answer": {
+      "type": "choice",
+      "choice": "L19",
+      "probabilities": {
+        "L19": 0.7902,
+        "L24": 0.11,
+        "L23": 0.0998
+      },
+      "confidence": 0.4002,
+      "answer_confidence": 0.7902,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 176,
+      "output_tokens": 0,
+      "state_tokens": 37,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L19-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "은행에 제출할 주소 이력 서류를 가족이 대신 떼려는데 무엇을 가져가야 하는지 질문함.",
+    "expected_leaf": "L19",
+    "acceptable_leaves": [
+      "L19"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L23",
+      "L19",
+      "L33"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L19",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "증명서 발급"
+    ],
+    "retrieval_latency_ms": 233.73436101246625,
+    "rerank_latency_ms": 314.97183797182515,
+    "end_to_end_latency_ms": 548.7061989842914,
+    "answer": {
+      "type": "choice",
+      "choice": "L19",
+      "probabilities": {
+        "L23": 0.1493,
+        "L19": 0.7184,
+        "L33": 0.1323
+      },
+      "confidence": 0.2817,
+      "answer_confidence": 0.7184,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 195,
+      "output_tokens": 0,
+      "state_tokens": 49,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L19-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "복지 신청에 사용할 서류이지만 수급 자격 상담은 아니며, 주민등록초본을 대리 발급받는 절차를 문의함.",
+    "expected_leaf": "L19",
+    "acceptable_leaves": [
+      "L19"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L24",
+      "L19",
+      "L22"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L24",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "신청·제출 서류"
+    ],
+    "retrieval_latency_ms": 246.18349503725767,
+    "rerank_latency_ms": 307.4455189635046,
+    "end_to_end_latency_ms": 553.6290140007623,
+    "answer": {
+      "type": "choice",
+      "choice": "L24",
+      "probabilities": {
+        "L24": 0.7703,
+        "L19": 0.0749,
+        "L22": 0.1548
+      },
+      "confidence": 0.3775,
+      "answer_confidence": 0.7703,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 196,
+      "output_tokens": 0,
+      "state_tokens": 55,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L20-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "온라인 민원 사이트에서 본인인증 오류가 발생해 접수하지 못하므로 복구를 요청함.",
+    "expected_leaf": "L20",
+    "acceptable_leaves": [
+      "L20"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L20",
+      "L23",
+      "L21"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L20",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "온라인 민원 장애"
+    ],
+    "retrieval_latency_ms": 208.60504696611315,
+    "rerank_latency_ms": 323.0617030058056,
+    "end_to_end_latency_ms": 531.6667499719188,
+    "answer": {
+      "type": "choice",
+      "choice": "L20",
+      "probabilities": {
+        "L20": 0.9959,
+        "L23": 0.0027,
+        "L21": 0.0014
+      },
+      "confidence": 0.9733,
+      "answer_confidence": 0.9959,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 192,
+      "output_tokens": 0,
+      "state_tokens": 44,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L20-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "구청 홈페이지에서 마지막 전송 버튼을 누르면 첫 화면으로 돌아가 신청 번호가 생기지 않는다고 함.",
+    "expected_leaf": "L20",
+    "acceptable_leaves": [
+      "L20"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L23",
+      "L24",
+      "L20"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L20",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "온라인 민원 장애"
+    ],
+    "retrieval_latency_ms": 342.46314299525693,
+    "rerank_latency_ms": 318.59105598414317,
+    "end_to_end_latency_ms": 661.0541989794001,
+    "answer": {
+      "type": "choice",
+      "choice": "L20",
+      "probabilities": {
+        "L23": 0.0099,
+        "L24": 0.2415,
+        "L20": 0.7486
+      },
+      "confidence": 0.4488,
+      "answer_confidence": 0.7486,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 188,
+      "output_tokens": 0,
+      "state_tokens": 47,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L20-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "복지 지원 신청 중 발생했지만 서류나 자격 문제가 아니라 지자체 사이트가 첨부파일 전송 때 멈추는 오류 해결을 요청함.",
+    "expected_leaf": "L20",
+    "acceptable_leaves": [
+      "L20"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L23",
+      "L24",
+      "L20"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L20",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "온라인 민원 장애"
+    ],
+    "retrieval_latency_ms": 174.13837602362037,
+    "rerank_latency_ms": 310.675069980789,
+    "end_to_end_latency_ms": 484.81344600440934,
+    "answer": {
+      "type": "choice",
+      "choice": "L20",
+      "probabilities": {
+        "L23": 0.2072,
+        "L24": 0.0395,
+        "L20": 0.7532
+      },
+      "confidence": 0.3925,
+      "answer_confidence": 0.7532,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 198,
+      "output_tokens": 0,
+      "state_tokens": 57,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L21-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "접수한 구청 민원이 처리기한을 지나도 답변이 없어 처리 상황을 문의함.",
+    "expected_leaf": "L21",
+    "acceptable_leaves": [
+      "L21"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L21",
+      "L23",
+      "L20"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L21",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "처리 지연·공무원 응대"
+    ],
+    "retrieval_latency_ms": 203.54913000483066,
+    "rerank_latency_ms": 299.48285402497277,
+    "end_to_end_latency_ms": 503.0319840298034,
+    "answer": {
+      "type": "choice",
+      "choice": "L21",
+      "probabilities": {
+        "L21": 0.9493,
+        "L23": 0.0124,
+        "L20": 0.0384
+      },
+      "confidence": 0.7916,
+      "answer_confidence": 0.9493,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 191,
+      "output_tokens": 0,
+      "state_tokens": 43,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L21-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "주민센터에 전화할 때마다 담당자가 다르다며 전화를 돌리고 답을 주지 않아 책임 있는 안내를 요청함.",
+    "expected_leaf": "L21",
+    "acceptable_leaves": [
+      "L21"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L30",
+      "L21",
+      "L12"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L12",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "견인·과태료 이의"
+    ],
+    "retrieval_latency_ms": 925.2162270131521,
+    "rerank_latency_ms": 361.5605789818801,
+    "end_to_end_latency_ms": 1286.7768059950322,
+    "answer": {
+      "type": "choice",
+      "choice": "L12",
+      "probabilities": {
+        "L30": 0.1711,
+        "L21": 0.1996,
+        "L12": 0.6293
+      },
+      "confidence": 0.1669,
+      "answer_confidence": 0.6293,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 206,
+      "output_tokens": 0,
+      "state_tokens": 53,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L21-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "처음 민원을 낸 계기는 도로 파손이었으나 보수는 끝났고, 지금은 기한을 넘긴 공식 답변과 담당자의 응대에 대한 설명을 원함.",
+    "expected_leaf": "L21",
+    "acceptable_leaves": [
+      "L21"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L21",
+      "L12",
+      "L13"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L13",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "노면·보도 파손"
+    ],
+    "retrieval_latency_ms": 2233.2318740081973,
+    "rerank_latency_ms": 368.70367400115356,
+    "end_to_end_latency_ms": 2601.935548009351,
+    "answer": {
+      "type": "choice",
+      "choice": "L13",
+      "probabilities": {
+        "L21": 0.4362,
+        "L12": 0.1166,
+        "L13": 0.4472
+      },
+      "confidence": 0.115,
+      "answer_confidence": 0.4472,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 214,
+      "output_tokens": 0,
+      "state_tokens": 66,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L22-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "소득이 줄어 생계 지원 대상에 해당하는지 자격 기준을 문의함.",
+    "expected_leaf": "L22",
+    "acceptable_leaves": [
+      "L22"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L22",
+      "L24",
+      "L35"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L22",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "지원 자격"
+    ],
+    "retrieval_latency_ms": 2064.242547028698,
+    "rerank_latency_ms": 321.34965097066015,
+    "end_to_end_latency_ms": 2385.592197999358,
+    "answer": {
+      "type": "choice",
+      "choice": "L22",
+      "probabilities": {
+        "L22": 0.7784,
+        "L24": 0.1361,
+        "L35": 0.0855
+      },
+      "confidence": 0.384,
+      "answer_confidence": 0.7784,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 185,
+      "output_tokens": 0,
+      "state_tokens": 39,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L22-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "혼자 사는 부모님이 받을 수 있는 생활비 지원이 있는지, 나이와 재산 때문에 제외되는지 질문함.",
+    "expected_leaf": "L22",
+    "acceptable_leaves": [
+      "L22"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L22",
+      "L03",
+      "L23"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L22",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "지원 자격"
+    ],
+    "retrieval_latency_ms": 1099.3093409924768,
+    "rerank_latency_ms": 373.5659659723751,
+    "end_to_end_latency_ms": 1472.875306964852,
+    "answer": {
+      "type": "choice",
+      "choice": "L22",
+      "probabilities": {
+        "L22": 0.8656,
+        "L03": 0.0225,
+        "L23": 0.1119
+      },
+      "confidence": 0.5855,
+      "answer_confidence": 0.8656,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 194,
+      "output_tokens": 0,
+      "state_tokens": 49,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L22-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "신청서를 제출하기 전이며 접수 방법보다 본인 가구의 소득 수준으로 지원 대상이 되는지를 먼저 확인하려는 상담임.",
+    "expected_leaf": "L22",
+    "acceptable_leaves": [
+      "L22"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L24",
+      "L22",
+      "L23"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L24",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "신청·제출 서류"
+    ],
+    "retrieval_latency_ms": 778.7956389947794,
+    "rerank_latency_ms": 351.63517598994076,
+    "end_to_end_latency_ms": 1130.4308149847202,
+    "answer": {
+      "type": "choice",
+      "choice": "L24",
+      "probabilities": {
+        "L24": 0.9773,
+        "L22": 0.0095,
+        "L23": 0.0132
+      },
+      "confidence": 0.8873,
+      "answer_confidence": 0.9773,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 195,
+      "output_tokens": 0,
+      "state_tokens": 55,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L23-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "승인된 복지 지원금이 예정일에 입금되지 않아 지급 확인을 요청함.",
+    "expected_leaf": "L23",
+    "acceptable_leaves": [
+      "L23"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L23",
+      "L22",
+      "L24"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L23",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "지급 누락·지연"
+    ],
+    "retrieval_latency_ms": 1000.758771027904,
+    "rerank_latency_ms": 386.99314900441095,
+    "end_to_end_latency_ms": 1387.751920032315,
+    "answer": {
+      "type": "choice",
+      "choice": "L23",
+      "probabilities": {
+        "L23": 0.9702,
+        "L22": 0.0264,
+        "L24": 0.0034
+      },
+      "confidence": 0.8686,
+      "answer_confidence": 0.9702,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 177,
+      "output_tokens": 0,
+      "state_tokens": 37,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L23-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "지난달까지 들어오던 돌봄 지원 금액이 이번 달 통장에는 보이지 않아 누락 여부를 묻음.",
+    "expected_leaf": "L23",
+    "acceptable_leaves": [
+      "L23"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L23",
+      "L21",
+      "L30"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L23",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "지급 누락·지연"
+    ],
+    "retrieval_latency_ms": 2152.590283018071,
+    "rerank_latency_ms": 399.9852950219065,
+    "end_to_end_latency_ms": 2552.5755780399777,
+    "answer": {
+      "type": "choice",
+      "choice": "L23",
+      "probabilities": {
+        "L23": 0.9812,
+        "L21": 0.0154,
+        "L30": 0.0034
+      },
+      "confidence": 0.907,
+      "answer_confidence": 0.9812,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 197,
+      "output_tokens": 0,
+      "state_tokens": 48,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L23-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "본인인증과 서류 제출은 끝났고 선정 통지도 받았으며, 현재는 약속한 날짜가 지난 지원금의 미입금만 확인하고 싶어 함.",
+    "expected_leaf": "L23",
+    "acceptable_leaves": [
+      "L23"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L23",
+      "L24",
+      "L22"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L24",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "신청·제출 서류"
+    ],
+    "retrieval_latency_ms": 752.9592989594676,
+    "rerank_latency_ms": 389.2359219607897,
+    "end_to_end_latency_ms": 1142.1952209202573,
+    "answer": {
+      "type": "choice",
+      "choice": "L24",
+      "probabilities": {
+        "L23": 0.3152,
+        "L24": 0.5489,
+        "L22": 0.136
+      },
+      "confidence": 0.1221,
+      "answer_confidence": 0.5489,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 199,
+      "output_tokens": 0,
+      "state_tokens": 59,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L24-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "복지 지원을 신청하려는데 제출 서류와 접수 장소를 문의함.",
+    "expected_leaf": "L24",
+    "acceptable_leaves": [
+      "L24"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L24",
+      "L22",
+      "L23"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L24",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "신청·제출 서류"
+    ],
+    "retrieval_latency_ms": 408.07838703040034,
+    "rerank_latency_ms": 318.7626849976368,
+    "end_to_end_latency_ms": 726.8410720280372,
+    "answer": {
+      "type": "choice",
+      "choice": "L24",
+      "probabilities": {
+        "L24": 0.9793,
+        "L22": 0.009,
+        "L23": 0.0117
+      },
+      "confidence": 0.8953,
+      "answer_confidence": 0.9793,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 177,
+      "output_tokens": 0,
+      "state_tokens": 37,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L24-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "담당자로부터 지원 대상이라고 안내받았으며 이제 통장 사본 말고 무엇을 준비해 어느 창구에 내야 하는지 질문함.",
+    "expected_leaf": "L24",
+    "acceptable_leaves": [
+      "L24"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L23",
+      "L24",
+      "L22"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L22",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "지원 자격"
+    ],
+    "retrieval_latency_ms": 556.4271580078639,
+    "rerank_latency_ms": 334.7365279914811,
+    "end_to_end_latency_ms": 891.163685999345,
+    "answer": {
+      "type": "choice",
+      "choice": "L22",
+      "probabilities": {
+        "L23": 0.1447,
+        "L24": 0.0206,
+        "L22": 0.8348
+      },
+      "confidence": 0.5354,
+      "answer_confidence": 0.8348,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 196,
+      "output_tokens": 0,
+      "state_tokens": 56,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L24-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "사이트 오류는 해결됐고 자격도 확인했으며, 남은 요청은 돌봄 지원 신청에 필요한 소득 증빙 서류 목록을 알려 달라는 것임.",
+    "expected_leaf": "L24",
+    "acceptable_leaves": [
+      "L24"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L23",
+      "L22",
+      "L24"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L23",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "지급 누락·지연"
+    ],
+    "retrieval_latency_ms": 1292.7213029470295,
+    "rerank_latency_ms": 347.76624699588865,
+    "end_to_end_latency_ms": 1640.4875499429181,
+    "answer": {
+      "type": "choice",
+      "choice": "L23",
+      "probabilities": {
+        "L23": 0.4101,
+        "L22": 0.3597,
+        "L24": 0.2303
+      },
+      "confidence": 0.0247,
+      "answer_confidence": 0.4101,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 198,
+      "output_tokens": 0,
+      "state_tokens": 58,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L25-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "공공체육관 대관 예약과 취소 절차를 문의함.",
+    "expected_leaf": "L25",
+    "acceptable_leaves": [
+      "L25"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L25",
+      "L36",
+      "L30"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L25",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "이용 예약"
+    ],
+    "retrieval_latency_ms": 544.2160199745558,
+    "rerank_latency_ms": 364.88282796926796,
+    "end_to_end_latency_ms": 909.0988479438238,
+    "answer": {
+      "type": "choice",
+      "choice": "L25",
+      "probabilities": {
+        "L25": 0.4894,
+        "L36": 0.3356,
+        "L30": 0.175
+      },
+      "confidence": 0.0705,
+      "answer_confidence": 0.4894,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 180,
+      "output_tokens": 0,
+      "state_tokens": 33,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L25-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "주민들이 모일 방을 다음 주에 빌리고 싶은데 빈 시간을 확인하고 신청하는 방법을 묻음.",
+    "expected_leaf": "L25",
+    "acceptable_leaves": [
+      "L25"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L30",
+      "L21",
+      "L25"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L21",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "처리 지연·공무원 응대"
+    ],
+    "retrieval_latency_ms": 655.3070559748448,
+    "rerank_latency_ms": 427.9320740024559,
+    "end_to_end_latency_ms": 1083.2391299773008,
+    "answer": {
+      "type": "choice",
+      "choice": "L21",
+      "probabilities": {
+        "L30": 0.1194,
+        "L21": 0.6262,
+        "L25": 0.2543
+      },
+      "confidence": 0.1853,
+      "answer_confidence": 0.6262,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 195,
+      "output_tokens": 0,
+      "state_tokens": 46,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L25-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "지난번 시설 이용 불편에 대한 항의가 아니라 다음 달 수영 강좌 자리를 신청하고 취소할 수 있는 기한을 문의함.",
+    "expected_leaf": "L25",
+    "acceptable_leaves": [
+      "L25"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L25",
+      "L27",
+      "L21"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "retrieval_latency_ms": 498.0076829669997,
+    "rerank_latency_ms": 339.70373996999115,
+    "end_to_end_latency_ms": 837.7114229369909,
+    "answer": {
+      "type": "choice",
+      "choice": "L27",
+      "probabilities": {
+        "L25": 0.0381,
+        "L27": 0.9542,
+        "L21": 0.0077
+      },
+      "confidence": 0.8117,
+      "answer_confidence": 0.9542,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 201,
+      "output_tokens": 0,
+      "state_tokens": 51,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L26-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "summary": "구립도서관 냉방기가 고장 나 수리를 요청함.",
+    "expected_leaf": "L26",
+    "acceptable_leaves": [
+      "L26"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L26",
+      "L36",
+      "L17"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L36",
+    "predicted_path": [
+      "교육·문화",
+      "도서관 서비스",
+      "도서 대출 문제"
+    ],
+    "retrieval_latency_ms": 617.3897249973379,
+    "rerank_latency_ms": 306.0158860171214,
+    "end_to_end_latency_ms": 923.4056110144593,
+    "answer": {
+      "type": "choice",
+      "choice": "L36",
+      "probabilities": {
+        "L26": 0.1058,
+        "L36": 0.7122,
+        "L17": 0.182
+      },
+      "confidence": 0.2815,
+      "answer_confidence": 0.7122,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 174,
+      "output_tokens": 0,
+      "state_tokens": 33,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L26-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "summary": "주민센터 안 화장실 수도꼭지가 잠기지 않아 계속 물이 흐른다고 알림.",
+    "expected_leaf": "L26",
+    "acceptable_leaves": [
+      "L26"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L27",
+      "L21",
+      "L25"
+    ],
+    "gold_retrieved": false,
+    "predicted_leaf": "L21",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "처리 지연·공무원 응대"
+    ],
+    "retrieval_latency_ms": 704.8860259819776,
+    "rerank_latency_ms": 296.0063709761016,
+    "end_to_end_latency_ms": 1000.8923969580792,
+    "answer": {
+      "type": "choice",
+      "choice": "L21",
+      "probabilities": {
+        "L27": 0.315,
+        "L21": 0.631,
+        "L25": 0.054
+      },
+      "confidence": 0.2609,
+      "answer_confidence": 0.631,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 193,
+      "output_tokens": 0,
+      "state_tokens": 43,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L26-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "summary": "체육관 운영 시간이 짧다는 의견도 있으나 이번 민원의 핵심은 샤워기에서 뜨거운 물이 나오지 않는 설비를 고쳐 달라는 것임.",
+    "expected_leaf": "L26",
+    "acceptable_leaves": [
+      "L26"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L27",
+      "L25",
+      "L21"
+    ],
+    "gold_retrieved": false,
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "retrieval_latency_ms": 447.51205696957186,
+    "rerank_latency_ms": 343.11663097469136,
+    "end_to_end_latency_ms": 790.6286879442632,
+    "answer": {
+      "type": "choice",
+      "choice": "L27",
+      "probabilities": {
+        "L27": 0.797,
+        "L25": 0.1575,
+        "L21": 0.0455
+      },
+      "confidence": 0.4425,
+      "answer_confidence": 0.797,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 215,
+      "output_tokens": 0,
+      "state_tokens": 65,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L27-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "summary": "구립도서관의 주말 운영시간 연장을 요청함.",
+    "expected_leaf": "L27",
+    "acceptable_leaves": [
+      "L27"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L36",
+      "L27",
+      "L25"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "retrieval_latency_ms": 575.3280029748566,
+    "rerank_latency_ms": 280.53231799276546,
+    "end_to_end_latency_ms": 855.8603209676221,
+    "answer": {
+      "type": "choice",
+      "choice": "L27",
+      "probabilities": {
+        "L36": 0.0,
+        "L27": 0.9996,
+        "L25": 0.0004
+      },
+      "confidence": 0.9964,
+      "answer_confidence": 0.9996,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 179,
+      "output_tokens": 0,
+      "state_tokens": 31,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L27-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "summary": "퇴근 후에는 이미 문이 닫혀 동네 체육시설을 이용할 수 없으니 저녁에도 열어 달라고 함.",
+    "expected_leaf": "L27",
+    "acceptable_leaves": [
+      "L27"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L25",
+      "L27",
+      "L26"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L25",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "이용 예약"
+    ],
+    "retrieval_latency_ms": 269.34939803322777,
+    "rerank_latency_ms": 318.00085096620023,
+    "end_to_end_latency_ms": 587.350248999428,
+    "answer": {
+      "type": "choice",
+      "choice": "L25",
+      "probabilities": {
+        "L25": 0.6845,
+        "L27": 0.1607,
+        "L26": 0.1548
+      },
+      "confidence": 0.2335,
+      "answer_confidence": 0.6845,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 189,
+      "output_tokens": 0,
+      "state_tokens": 48,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "L27-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "summary": "예약은 정상적으로 완료했고 기구도 고장 나지 않았지만 안내와 달리 현장에서 이용 시간을 줄여 운영 기준 개선을 요청함.",
+    "expected_leaf": "L27",
+    "acceptable_leaves": [
+      "L27"
+    ],
+    "needs_clarification": false,
+    "retrieval_candidates": [
+      "L25",
+      "L27",
+      "L30"
+    ],
+    "gold_retrieved": true,
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "retrieval_latency_ms": 1374.811577028595,
+    "rerank_latency_ms": 335.58809402165934,
+    "end_to_end_latency_ms": 1710.3996710502543,
+    "answer": {
+      "type": "choice",
+      "choice": "L27",
+      "probabilities": {
+        "L25": 0.103,
+        "L27": 0.8942,
+        "L30": 0.0028
+      },
+      "confidence": 0.6808,
+      "answer_confidence": 0.8942,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 205,
+      "output_tokens": 0,
+      "state_tokens": 56,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "ambiguous-01",
+    "channel": "인터넷 상담",
+    "slice": "under_specified",
+    "summary": "공원 입구 쪽에 쓰레기가 쌓이고 냄새가 심하다며 정리를 요청했으나 공원 안인지 도로 쪽인지와 배출 경위는 확인되지 않음.",
+    "expected_leaf": null,
+    "acceptable_leaves": [
+      "L01",
+      "L02",
+      "L09"
+    ],
+    "needs_clarification": true,
+    "retrieval_candidates": [
+      "L09",
+      "L01",
+      "L03"
+    ],
+    "gold_retrieved": null,
+    "predicted_leaf": "L03",
+    "predicted_path": [
+      "생활환경",
+      "청소·폐기물",
+      "대형폐기물 배출"
+    ],
+    "retrieval_latency_ms": 1357.085628027562,
+    "rerank_latency_ms": 382.3561070021242,
+    "end_to_end_latency_ms": 1739.4417350296862,
+    "answer": {
+      "type": "choice",
+      "choice": "L03",
+      "probabilities": {
+        "L09": 0.124,
+        "L01": 0.1557,
+        "L03": 0.7203
+      },
+      "confidence": 0.2857,
+      "answer_confidence": 0.7203,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 206,
+      "output_tokens": 0,
+      "state_tokens": 64,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "ambiguous-02",
+    "channel": "콜센터",
+    "slice": "under_specified",
+    "summary": "도로의 움푹 팬 부분에 비가 올 때마다 물이 고여 지나가기 어렵다는 요약만 있으며 파손 보수와 배수 조치 중 우선 요청은 없음.",
+    "expected_leaf": null,
+    "acceptable_leaves": [
+      "L13",
+      "L15"
+    ],
+    "needs_clarification": true,
+    "retrieval_candidates": [
+      "L15",
+      "L13",
+      "L16"
+    ],
+    "gold_retrieved": null,
+    "predicted_leaf": "L15",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "retrieval_latency_ms": 320.51879400387406,
+    "rerank_latency_ms": 321.13953097723424,
+    "end_to_end_latency_ms": 641.6583249811083,
+    "answer": {
+      "type": "choice",
+      "choice": "L15",
+      "probabilities": {
+        "L15": 0.9922,
+        "L13": 0.0071,
+        "L16": 0.0008
+      },
+      "confidence": 0.956,
+      "answer_confidence": 0.9922,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 198,
+      "output_tokens": 0,
+      "state_tokens": 62,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "ambiguous-03",
+    "channel": "인터넷 상담",
+    "slice": "under_specified",
+    "summary": "복지 신청을 하다가 진행이 안 된다며 도움을 요청했으나 화면 오류인지 필수 서류를 몰라서인지 기록에 없음.",
+    "expected_leaf": null,
+    "acceptable_leaves": [
+      "L20",
+      "L24"
+    ],
+    "needs_clarification": true,
+    "retrieval_candidates": [
+      "L24",
+      "L23",
+      "L22"
+    ],
+    "gold_retrieved": null,
+    "predicted_leaf": "L23",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "지급 누락·지연"
+    ],
+    "retrieval_latency_ms": 267.9669360513799,
+    "rerank_latency_ms": 331.96908101672307,
+    "end_to_end_latency_ms": 599.936017068103,
+    "answer": {
+      "type": "choice",
+      "choice": "L23",
+      "probabilities": {
+        "L24": 0.2151,
+        "L23": 0.7608,
+        "L22": 0.0241
+      },
+      "confidence": 0.4279,
+      "answer_confidence": 0.7608,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 199,
+      "output_tokens": 0,
+      "state_tokens": 59,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "ambiguous-04",
+    "channel": "콜센터",
+    "slice": "under_specified",
+    "summary": "지원금을 받을 수 있다고 들었는데 돈이 오지 않는다며 상담했으나 정식 선정 통지를 받았는지는 확인되지 않음.",
+    "expected_leaf": null,
+    "acceptable_leaves": [
+      "L22",
+      "L23"
+    ],
+    "needs_clarification": true,
+    "retrieval_candidates": [
+      "L23",
+      "L22",
+      "L24"
+    ],
+    "gold_retrieved": null,
+    "predicted_leaf": "L23",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "지급 누락·지연"
+    ],
+    "retrieval_latency_ms": 191.8361090356484,
+    "rerank_latency_ms": 379.0500739705749,
+    "end_to_end_latency_ms": 570.8861830062233,
+    "answer": {
+      "type": "choice",
+      "choice": "L23",
+      "probabilities": {
+        "L23": 0.8913,
+        "L22": 0.0943,
+        "L24": 0.0144
+      },
+      "confidence": 0.6484,
+      "answer_confidence": 0.8913,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 193,
+      "output_tokens": 0,
+      "state_tokens": 53,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "ambiguous-05",
+    "channel": "인터넷 상담",
+    "slice": "under_specified",
+    "summary": "밤마다 옆 건물에서 큰 소리가 난다고 하나 공사 작업인지 영업장의 음악인지 요약에 적혀 있지 않음.",
+    "expected_leaf": null,
+    "acceptable_leaves": [
+      "L04",
+      "L05"
+    ],
+    "needs_clarification": true,
+    "retrieval_candidates": [
+      "L05",
+      "L04",
+      "L18"
+    ],
+    "gold_retrieved": null,
+    "predicted_leaf": "L04",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "공사장 소음"
+    ],
+    "retrieval_latency_ms": 163.24842005269602,
+    "rerank_latency_ms": 311.6745320148766,
+    "end_to_end_latency_ms": 474.9229520675726,
+    "answer": {
+      "type": "choice",
+      "choice": "L04",
+      "probabilities": {
+        "L05": 0.0049,
+        "L04": 0.9937,
+        "L18": 0.0014
+      },
+      "confidence": 0.9623,
+      "answer_confidence": 0.9937,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 189,
+      "output_tokens": 0,
+      "state_tokens": 54,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "ambiguous-06",
+    "channel": "콜센터",
+    "slice": "under_specified",
+    "summary": "구청 체육관을 사용할 수 없어 항의했으나 예약이 안 된 것인지 현장에서 운영시간이 바뀐 것인지 불명확함.",
+    "expected_leaf": null,
+    "acceptable_leaves": [
+      "L25",
+      "L27"
+    ],
+    "needs_clarification": true,
+    "retrieval_candidates": [
+      "L25",
+      "L27",
+      "L26"
+    ],
+    "gold_retrieved": null,
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "retrieval_latency_ms": 137.10086100036278,
+    "rerank_latency_ms": 335.2290379698388,
+    "end_to_end_latency_ms": 472.3298989702016,
+    "answer": {
+      "type": "choice",
+      "choice": "L27",
+      "probabilities": {
+        "L25": 0.1401,
+        "L27": 0.8472,
+        "L26": 0.0127
+      },
+      "confidence": 0.571,
+      "answer_confidence": 0.8472,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 196,
+      "output_tokens": 0,
+      "state_tokens": 55,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "ambiguous-07",
+    "channel": "인터넷 상담",
+    "slice": "under_specified",
+    "summary": "버스 이용 중 기사 때문에 불편했다는 내용만 있으며 정류장을 지나친 것인지 불친절한 발언인지 구체적 설명이 없음.",
+    "expected_leaf": null,
+    "acceptable_leaves": [
+      "L16",
+      "L18"
+    ],
+    "needs_clarification": true,
+    "retrieval_candidates": [
+      "L18",
+      "L16",
+      "L17"
+    ],
+    "gold_retrieved": null,
+    "predicted_leaf": "L16",
+    "predicted_path": [
+      "도로·교통",
+      "대중교통",
+      "버스 운행"
+    ],
+    "retrieval_latency_ms": 178.35176101652905,
+    "rerank_latency_ms": 353.0340679571964,
+    "end_to_end_latency_ms": 531.3858289737254,
+    "answer": {
+      "type": "choice",
+      "choice": "L16",
+      "probabilities": {
+        "L18": 0.3507,
+        "L16": 0.3841,
+        "L17": 0.2652
+      },
+      "confidence": 0.0106,
+      "answer_confidence": 0.3841,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 196,
+      "output_tokens": 0,
+      "state_tokens": 55,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "ambiguous-08",
+    "channel": "콜센터",
+    "slice": "under_specified",
+    "summary": "차량 때문에 민원을 넣고 싶다고 하며 다른 차의 통행 방해인지 본인 차량의 견인 조치에 대한 항의인지 확인되지 않음.",
+    "expected_leaf": null,
+    "acceptable_leaves": [
+      "L10",
+      "L12"
+    ],
+    "needs_clarification": true,
+    "retrieval_candidates": [
+      "L12",
+      "L10",
+      "L18"
+    ],
+    "gold_retrieved": null,
+    "predicted_leaf": "L10",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "retrieval_latency_ms": 185.19212200772017,
+    "rerank_latency_ms": 372.86135100293905,
+    "end_to_end_latency_ms": 558.0534730106592,
+    "answer": {
+      "type": "choice",
+      "choice": "L10",
+      "probabilities": {
+        "L12": 0.4066,
+        "L10": 0.4319,
+        "L18": 0.1615
+      },
+      "confidence": 0.0689,
+      "answer_confidence": 0.4319,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 204,
+      "output_tokens": 0,
+      "state_tokens": 57,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  },
+  {
+    "id": "ambiguous-09",
+    "channel": "인터넷 상담",
+    "slice": "under_specified",
+    "summary": "행정복지센터에서 서류를 준비해 오라고 했으나 주민등록 서류 발급을 위한 것인지 복지 신청 첨부서류인지 요약만으로 구별되지 않음.",
+    "expected_leaf": null,
+    "acceptable_leaves": [
+      "L19",
+      "L24"
+    ],
+    "needs_clarification": true,
+    "retrieval_candidates": [
+      "L24",
+      "L19",
+      "L23"
+    ],
+    "gold_retrieved": null,
+    "predicted_leaf": "L19",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "증명서 발급"
+    ],
+    "retrieval_latency_ms": 211.58977498998865,
+    "rerank_latency_ms": 328.61770200543106,
+    "end_to_end_latency_ms": 540.2074769954197,
+    "answer": {
+      "type": "choice",
+      "choice": "L19",
+      "probabilities": {
+        "L24": 0.2208,
+        "L19": 0.4605,
+        "L23": 0.3187
+      },
+      "confidence": 0.0397,
+      "answer_confidence": 0.4605,
+      "action": {
+        "act_probability": 1.0
+      }
+    },
+    "usage": {
+      "input_tokens": 206,
+      "output_tokens": 0,
+      "state_tokens": 67,
+      "state_tokens_dropped": 0,
+      "truncated": false,
+      "truncated_questions": []
+    }
+  }
+]

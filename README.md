@@ -4,6 +4,22 @@ Docker Compose로 LAYA Multilingual의 **한국어 분류 성능, 추론 지연,
 
 전체 배경, Jev와의 차이, 아키텍처, 한국어 NSMC 실험, 27개 민원 유형 후속 실험, 300개 유형 확장안과 Jev 한국어 전망을 한 문서로 읽으려면 [standalone Technical Deep Dive](docs/laya-technical-deep-dive/blog.html)를 내려받아 브라우저에서 여세요. 수정 가능한 [Markdown 원고](docs/laya-technical-deep-dive/blog.md)와 [출처 목록](docs/laya-technical-deep-dive/sources.md)도 함께 제공합니다.
 
+후속편에서는 EmbeddingGemma 2를 text-only 검색기로 붙여 같은 민원 시험지를 다시 평가했습니다. 256차원 검색 단독은 27개 유형에서 71.6%, 검색 top-3를 기존 LAYA가 재순위화한 결과는 50.6%였습니다. 새 9개 유형은 설명만 index에 추가해 59.3% top-1을 얻었습니다. [2편 standalone 글](docs/laya-embeddinggemma2-retrieval-part2/blog.html), [원고](docs/laya-embeddinggemma2-retrieval-part2/blog.md), [실험 결과](results/embeddinggemma2-retrieval-2026-10-07/README.md)를 제공합니다.
+
+### EmbeddingGemma 2 검색 실험 빠른 실행
+
+```bash
+docker compose build retrieval
+docker compose --profile setup run --rm prepare-retrieval
+docker compose run --rm retrieval python -u research/run_embedding_retrieval.py \
+  --model evaluation/models/embeddinggemma-2-914f7f89142e \
+  --taxonomy datasets/complaints/taxonomy.json \
+  --cases datasets/complaints/cases.json \
+  --out evaluation/my-retrieval-run
+```
+
+`prepare-retrieval`만 네트워크를 사용합니다. `retrieval`은 이미지·음성 encoder를 끈 270M text-only 구성으로 offline 실행합니다. 모델 snapshot revision은 `914f7f89142e33e77833254d9c9b90c3cef7303b`로 고정했습니다.
+
 ## 빠른 시작
 
 Docker Desktop의 Linux 컨테이너(또는 Linux Docker Engine)와 Docker Compose v2가 필요합니다. CPU 전용이며 컨테이너에는 CPU 4개 quota와 메모리 8GiB를 할당합니다. 기본 모델과 학습 모델을 저장할 디스크 공간도 필요합니다.

@@ -1,0 +1,72 @@
+{
+  "status": "complete",
+  "model": "evaluation/complaint-hierarchical-prefix-e1/selected-model",
+  "taxonomy": "datasets/complaints/unseen/taxonomy.json",
+  "retrieval": "evaluation/embeddinggemma2-main36/predictions.json",
+  "dimension": 256,
+  "ks": [
+    3,
+    5,
+    8
+  ],
+  "taxonomy_sha256": "ada6fc90ec2d0e66eaa09f6a01b99f6d40dd49c3566b04f591d26bea90fc51e1",
+  "retrieval_sha256": "e9866d8385f0fc7cff6f9ebf992feb0a6efea6050f82d2e7c49c494888b9ab9d",
+  "candidate_description": "Existing flat leaf name and description; no full-path format change.",
+  "metrics": {
+    "3": {
+      "n": 81,
+      "gold_retrieved": 73,
+      "retrieval_recall": 0.9012345679012346,
+      "correct": 41,
+      "accuracy": 0.5061728395061729,
+      "accuracy_given_gold_retrieved": 0.5616438356164384,
+      "wilson95_accuracy": [
+        0.39950784707318215,
+        0.6122788432301215
+      ],
+      "under_specified_n": 9,
+      "under_specified_acceptable_hits": 7,
+      "retrieval_latency_ms_p50": 572.46376000694,
+      "rerank_latency_ms_p50": 327.24634298938327,
+      "end_to_end_latency_ms_p50": 916.2522294791415,
+      "end_to_end_latency_ms_p95": 2247.3423706222093
+    },
+    "5": {
+      "n": 81,
+      "gold_retrieved": 78,
+      "retrieval_recall": 0.9629629629629629,
+      "correct": 40,
+      "accuracy": 0.49382716049382713,
+      "accuracy_given_gold_retrieved": 0.5128205128205128,
+      "wilson95_accuracy": [
+        0.3877211567698785,
+        0.6004921529268179
+      ],
+      "under_specified_n": 9,
+      "under_specified_acceptable_hits": 5,
+      "retrieval_latency_ms_p50": 572.46376000694,
+      "rerank_latency_ms_p50": 404.45011350675486,
+      "end_to_end_latency_ms_p50": 992.9759555088822,
+      "end_to_end_latency_ms_p95": 2371.6849116783123
+    },
+    "8": {
+      "n": 81,
+      "gold_retrieved": 81,
+      "retrieval_recall": 1.0,
+      "correct": 39,
+      "accuracy": 0.48148148148148145,
+      "accuracy_given_gold_retrieved": 0.48148148148148145,
+      "wilson95_accuracy": [
+        0.37599641612884926,
+        0.58864351296124
+      ],
+      "under_specified_n": 9,
+      "under_specified_acceptable_hits": 5,
+      "retrieval_latency_ms_p50": 572.46376000694,
+      "rerank_latency_ms_p50": 559.8241130064707,
+      "end_to_end_latency_ms_p50": 1156.100861961022,
+      "end_to_end_latency_ms_p95": 2513.131114622229
+    }
+  },
+  "scope": "Synthetic author-defined diagnostic; no independent human review; not a production benchmark."
+}

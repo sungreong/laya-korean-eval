@@ -1,0 +1,35 @@
+[
+  {
+    "original": "01-method-accuracy.png",
+    "optimized": "01-method-accuracy.webp",
+    "dimensions": [
+      1800,
+      918
+    ],
+    "original_bytes": 63182,
+    "optimized_bytes": 23864,
+    "reduction_pct": 62.2
+  },
+  {
+    "original": "02-recall-at-k.png",
+    "optimized": "02-recall-at-k.webp",
+    "dimensions": [
+      1800,
+      918
+    ],
+    "original_bytes": 115153,
+    "optimized_bytes": 39252,
+    "reduction_pct": 65.9
+  },
+  {
+    "original": "03-generalization.png",
+    "optimized": "03-generalization.webp",
+    "dimensions": [
+      1800,
+      917
+    ],
+    "original_bytes": 65185,
+    "optimized_bytes": 24596,
+    "reduction_pct": 62.3
+  }
+]

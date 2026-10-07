@@ -1,0 +1,72 @@
+{
+  "status": "complete",
+  "model": "evaluation/complaint-hierarchical-prefix-e1/selected-model",
+  "taxonomy": "datasets/complaints/unseen/taxonomy.json",
+  "retrieval": "evaluation/embeddinggemma2-unseen36/predictions.json",
+  "dimension": 256,
+  "ks": [
+    3,
+    5,
+    8
+  ],
+  "taxonomy_sha256": "ada6fc90ec2d0e66eaa09f6a01b99f6d40dd49c3566b04f591d26bea90fc51e1",
+  "retrieval_sha256": "cbc9386a58ba9a0485efd63c9970435e51d804e64ddd669e77a436cbb0d1bbb0",
+  "candidate_description": "Existing flat leaf name and description; no full-path format change.",
+  "metrics": {
+    "3": {
+      "n": 27,
+      "gold_retrieved": 24,
+      "retrieval_recall": 0.8888888888888888,
+      "correct": 15,
+      "accuracy": 0.5555555555555556,
+      "accuracy_given_gold_retrieved": 0.625,
+      "wilson95_accuracy": [
+        0.37313024513224935,
+        0.7241414182297661
+      ],
+      "under_specified_n": 0,
+      "under_specified_acceptable_hits": 0,
+      "retrieval_latency_ms_p50": 545.1350309886038,
+      "rerank_latency_ms_p50": 340.71290399879217,
+      "end_to_end_latency_ms_p50": 941.7609659722075,
+      "end_to_end_latency_ms_p95": 1783.8161899067927
+    },
+    "5": {
+      "n": 27,
+      "gold_retrieved": 25,
+      "retrieval_recall": 0.9259259259259259,
+      "correct": 11,
+      "accuracy": 0.4074074074074074,
+      "accuracy_given_gold_retrieved": 0.44,
+      "wilson95_accuracy": [
+        0.24514757074395926,
+        0.5927329903193483
+      ],
+      "under_specified_n": 0,
+      "under_specified_acceptable_hits": 0,
+      "retrieval_latency_ms_p50": 545.1350309886038,
+      "rerank_latency_ms_p50": 400.8881470072083,
+      "end_to_end_latency_ms_p50": 992.9702839581296,
+      "end_to_end_latency_ms_p95": 1860.55617670645
+    },
+    "8": {
+      "n": 27,
+      "gold_retrieved": 27,
+      "retrieval_recall": 1.0,
+      "correct": 12,
+      "accuracy": 0.4444444444444444,
+      "accuracy_given_gold_retrieved": 0.4444444444444444,
+      "wilson95_accuracy": [
+        0.27585858177023387,
+        0.6268697548677507
+      ],
+      "under_specified_n": 0,
+      "under_specified_acceptable_hits": 0,
+      "retrieval_latency_ms_p50": 545.1350309886038,
+      "rerank_latency_ms_p50": 546.5488600311801,
+      "end_to_end_latency_ms_p50": 1188.307685952168,
+      "end_to_end_latency_ms_p95": 2021.2319562153425
+    }
+  },
+  "scope": "Synthetic author-defined diagnostic; no independent human review; not a production benchmark."
+}
