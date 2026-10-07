@@ -24,6 +24,8 @@
   - `MultipleNegativesRankingLoss`, cached variant, Matryoshka loss의 입력 조건 확인.
 - Sentence Transformers, [PEFT adapters](https://www.sbert.net/examples/sentence_transformer/training/peft/README.html)
   - `add_adapter()`를 이용한 LoRA 지원 범위 확인. EmbeddingGemma 2 민원 성능 근거로 사용하지 않음.
+- Sentence Transformers, [Retrieve & Re-Rank](https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html)
+  - bi-encoder 후보 검색 뒤 cross-encoder가 query와 candidate를 함께 평가하는 일반적인 2단계 구조와 계산 trade-off 확인.
 
 ## 발견 경로
 

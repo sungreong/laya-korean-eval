@@ -422,6 +422,40 @@ Sentence Transformers는 `SentenceTransformer.add_adapter()`를 통한 LoRA/PEFT
 
 fine-tuning의 성공 기준도 “training 정확도 상승”이 아니다. 독립 test에서 71.6%를 넘고, Recall@k를 유지하며, 새 유형과 일반 한국어 의미 검색이 크게 나빠지지 않아야 한다. LAYA reranker를 다시 학습한다면 EmbeddingGemma top-3에 정답이 있는 74건 중 현재 41건인 조건부 정답 수가 얼마나 늘었는지를 별도로 본다.
 
+## 그래도 ‘판단 단계’가 필요하다는 생각은 남는다
+
+이번 실험을 시작할 때의 기대는 명확했다. **EmbeddingGemma 2가 관련 후보를 빠르게 찾고, LAYA가 문맥과 후보를 함께 읽어 미세한 차이를 판단하면 두 장점이 결합돼 정확도가 올라갈 것**이라고 예상했다. 실제 결과는 반대였다. EmbeddingGemma 2 top-1만 사용한 71.6%가 검색+LAYA top-3의 50.6%보다 높았다. 범용 embedding 하나가 추가 학습한 decision model과 결합한 구조보다 크게 앞선 것은 예상 밖이었고, 이번 후속 실험에서 가장 흥미로운 결과다.
+
+그렇다고 판단 모델이 필요 없다는 결론은 아니다. EmbeddingGemma top-1도 81건 중 23건을 틀렸다. 그런데 그 23건 가운데 **16건은 정답이 이미 top-3 안에 있었다.** 다시 말해 검색 top-1은 58건을 맞혔지만, 완벽한 top-3 판단기가 있다면 최대 74건, **91.4%**까지 갈 수 있는 후보 정보가 남아 있었다. top-5에는 80건의 정답이 있으므로 이론적 상한은 **98.8%**다.
+
+| 단계 | 정답 수 | 정확도 | 의미 |
+| --- | ---: | ---: | --- |
+| EmbeddingGemma top-1 | 58/81 | 71.6% | 현재 가장 좋은 실제 결과 |
+| EmbeddingGemma top-3 후보 보존 | 74/81 | 91.4% | 좋은 판단기가 회수할 수 있는 이론적 상한 |
+| EmbeddingGemma top-5 후보 보존 | 80/81 | 98.8% | 후보를 더 넓혔을 때의 이론적 상한 |
+| 현재 LAYA top-3 판단 | 41/81 | 50.6% | 후보 정보 활용에 실패한 실제 결과 |
+
+이 차이는 “판단이 쓸모없다”보다 **현재 판단기가 이 후보군에 맞지 않았다**는 뜻에 가깝다. Sentence Transformers의 공식 retrieve-and-rerank 문서도 bi-encoder가 넓은 corpus에서 후보를 찾고, cross-encoder가 query와 후보를 함께 읽어 정밀하게 다시 점수화하는 구성을 설명한다. cross-encoder는 두 문장 사이 attention을 직접 계산할 수 있어 일반적으로 더 정밀하지만 모든 문서를 처리하기에는 느리므로 작은 후보군에 사용한다. [Retrieve & Re-Rank](https://sbert.net/examples/sentence_transformer/applications/retrieve_rerank/README.html)
+
+Google의 Decision Maker 지침도 EmbeddingGemma 계열을 고처리량 bi-encoder, LAYA 계열을 context와 label을 함께 보는 cross-encoder로 구분한다. cross-encoder는 모든 후보가 256∼512 token window에 들어가는 **약 8개 이하의 compact option set**에 적합하다고 안내한다. 이는 결합 방향 자체가 잘못됐다기보다, LAYA를 어떤 데이터와 후보 형식으로 학습했는지가 중요하다는 근거다. [Decision Maker architecture](https://developers.google.com/edge/mediapipe/solutions/decision/decision_maker), [schema best practices](https://developers.google.com/edge/mediapipe/solutions/decision/decision_maker/best-practices)
+
+### 다음 결합은 항상 덮어쓰는 구조가 아니어야 한다
+
+이번 구현은 LAYA가 검색 순위를 무조건 새로 정했다. 개선 실험은 다음 세 방법을 분리해 비교해야 한다.
+
+1. **선택적 판단:** EmbeddingGemma top-1과 top-2의 margin이 충분히 크면 top-1을 유지한다. margin이 작거나 score가 낮은 사례만 reranker로 보낸다.
+2. **점수 결합:** embedding cosine과 calibration한 reranker score를 validation에서 정한 가중치로 합친다. reranker가 검색 근거를 완전히 버리지 못하게 한다.
+3. **hard-negative 전용 학습:** 각 민원의 EmbeddingGemma top-3·5 오답을 모아 query–candidate pair의 정답 여부를 학습한다. 무관한 쉬운 후보보다 실제로 헷갈린 sibling 유형을 집중해서 보여 준다.
+
+```text
+if top1_score - top2_score >= threshold:
+    final = embedding_top1
+else:
+    final = rerank(top_k, embedding_scores)
+```
+
+이 구조라면 쉬운 58건의 검색 정답을 보존하면서 애매한 후보만 판단 모델에 맡길 수 있다. 목표는 reranker 사용 자체가 아니라, **현재 58건에서 top-3 상한 74건 사이의 16건을 얼마나 안전하게 회수하는가**다. validation에서 threshold를 정하고, test에서는 고정한 뒤 정확도·사람 검토율·지연시간을 함께 보고 판단해야 한다.
+
 ## 대→중→소 분류를 계속 써야 한다면
 
 검색 결과가 좋다고 계층을 버릴 필요는 없다. 계층은 운영 규칙, 담당 조직, 설명 가능성에 유용하다. 다만 **예측 순서를 강제하는 hard cascade** 대신 검색된 leaf의 경로를 이용해 대·중 후보 점수를 모으는 편이 낫다.
@@ -481,13 +515,15 @@ final_score_i = α × embedding_score_i + (1 - α) × calibrated_laya_score_i
 
 ## 최종 판단
 
-이번 후속 실험에서 핵심 변화는 **LAYA에게 27개를 더 잘 고르라고 계속 요구하는 대신, 유형 설명을 검색 가능한 지식으로 바꾼 것**이다. EmbeddingGemma 2의 bi-encoder 구조는 label vector를 미리 계산할 수 있고, MRL로 256차원까지 줄여도 이번 과제에서는 오히려 가장 높은 top-1을 냈다.
+이번 후속 실험은 처음 예상과 다르게 끝났다. 필자는 **EmbeddingGemma 2 검색과 LAYA 판단을 결합하면 성능이 좋아질 것**이라고 기대했다. 그러나 핵심 변화는 LAYA에게 27개를 더 잘 고르라고 요구한 것이 아니라, 유형 설명을 검색 가능한 지식으로 바꾼 데서 나왔다. EmbeddingGemma 2의 bi-encoder 구조는 label vector를 미리 계산할 수 있고, MRL로 256차원까지 줄여도 이번 과제에서는 가장 높은 top-1을 냈다. 별도 민원 fine-tuning도 하지 않은 embedding 모델 하나가 71.6%를 기록한 것은 솔직히 놀라운 결과였다.
 
-기존 대비 실제 개선은 분명했다. 같은 81건에서 LAYA flat27 34.6%가 검색 단독 71.6%로 **37.0%p 상승**했다. 새 9개 유형도 설명만 추가해 59.3% top-1을 얻었다. 반면 LAYA 재순위화는 검색 top-1보다 나빴다. 따라서 **EmbeddingGemma 2와 LAYA를 연결할 수는 있지만, 연결 자체가 개선을 보장하지 않는다.** 기존 LAYA checkpoint를 그대로 reranker로 쓰는 방식은 현재 권장하지 않는다.
+기존 대비 실제 개선은 분명했다. 같은 81건에서 LAYA flat27 34.6%가 검색 단독 71.6%로 **37.0%p 상승**했다. 새 9개 유형도 설명만 추가해 59.3% top-1을 얻었다. 반면 기존 LAYA 재순위화는 검색 top-1보다 나빴다. 따라서 **EmbeddingGemma 2와 LAYA를 연결할 수는 있지만, 연결 자체가 개선을 보장하지 않는다.** 기존 LAYA checkpoint가 embedding 검색의 어려운 오답을 판별하도록 학습되지 않았기 때문이다.
+
+그럼에도 더 높은 정확도를 얻으려면 판단 단계가 필요할 수 있다는 생각은 유지된다. 검색 top-1은 58건을 맞혔지만 top-3에는 74건의 정답이 있었다. 이 16건의 차이가 판단 모델이 해결할 수 있는 공간이다. 다음 판단기는 모든 결과를 덮어쓰는 범용 LAYA가 아니라, **EmbeddingGemma의 낮은 margin 사례와 hard negative를 학습한 선택적 reranker**여야 한다.
 
 한국어 장점이 유지되는가라는 질문에는 “짧은 합성 민원 의미 검색에서는 유의미한 신호가 나왔다”까지 답할 수 있다. 실제 도입 가치는 taxonomy가 자주 바뀌고 label description을 잘 관리할 수 있는 민원 routing, FAQ routing, 내부 문서 분류에 있다. 고정 유형과 충분한 라벨 데이터가 있다면 KoBERT·ModernBERT 같은 전용 classifier도 같은 split에서 다시 비교해야 한다.
 
-Production에 바로 자동 처분기로 적용할 단계는 아니다. 먼저 실제 익명화 민원으로 300개 유형 Recall@k, top-1, open-set 거부율, 유형별 최소 성능, 사람 검토율, latency와 memory를 측정해야 한다. 다음 실험의 우선순위는 **실제 오답 hard negative로 EmbeddingGemma 2를 contrastive fine-tuning하는 실험**, **검색 후보에 특화한 LAYA reranker**, **embedding score와 LAYA score의 보정 결합**, **한국어 전용 embedding baseline**, **실제 300유형 평가**다.
+Production에 바로 자동 처분기로 적용할 단계는 아니다. 먼저 실제 익명화 민원으로 300개 유형 Recall@k, top-1, open-set 거부율, 유형별 최소 성능, 사람 검토율, latency와 memory를 측정해야 한다. 다음 실험의 우선순위는 **실제 오답 hard negative로 EmbeddingGemma 2를 contrastive fine-tuning하는 실험**, **낮은 margin 사례만 처리하는 검색 후보 특화 reranker**, **embedding score와 판단 score의 보정 결합**, **한국어 전용 embedding baseline**, **실제 300유형 평가**다. 지금의 결론은 “판단 모델을 버리자”가 아니라, **검색 단독 기준선을 먼저 인정하고 그 기준선을 실제로 넘는 판단기만 결합하자**는 것이다.
 
 코드, Docker Compose, 고정 revision, 문항별 예측과 summary JSON은 [laya-korean-eval GitHub 저장소](https://github.com/sungreong/laya-korean-eval)에 공개했다.
 
