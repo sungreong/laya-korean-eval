@@ -2370,6 +2370,24 @@ config = TrainConfig(
     <p class="md-paragraph" data-block-id="laya-학습-방법과-결과__paragraph_7">이 한 사례는 일괄 방식이 항상 우월하다는 증거가 아니다. 다만 계층식 분류를 평가할 때 최종 정확도만 보지 말고 <strong>대분류 정확도, 대+중 누적 정확도, 대·중이 맞았다는 조건에서의 소분류 정확도, 첫 오류가 발생한 단계</strong>를 함께 기록해야 한다는 점을 보여 준다. 계층 구조로 출력 경로의 모양은 보장할 수 있어도, 그것이 모델이 계층 의미를 정확히 학습했다는 증거는 아니다.</p>
     </section>
   
+    <section class="md-section level-3 template-default" data-section-id="특이-사례-배수구라는-단어와-실제-요청이-충돌했을-때" data-template="default">
+      <h3 id="특이-사례-배수구라는-단어와-실제-요청이-충돌했을-때" class="section-heading level-3">특이 사례: <code>배수구</code>라는 단어와 실제 요청이 충돌했을 때</h3>
+      <p class="md-paragraph" data-block-id="특이-사례-배수구라는-단어와-실제-요청이-충돌했을-때__paragraph_1">반대로 계층 방식이 도움이 된 사례도 있었다.</p><blockquote class="md-blockquote " data-block-id="특이-사례-배수구라는-단어와-실제-요청이-충돌했을-때__quote_1"><p class="md-paragraph" data-block-id="특이-사례-배수구라는-단어와-실제-요청이-충돌했을-때__quote_1__body__paragraph_1"><strong>입력:</strong> “배수구 주변에서 냄새가 나지만 물이 넘치거나 막히지는 않았으며, 냄새의 원인을 조사해 달라고 함.” <strong>정답:</strong> 생활환경 → 소음·악취 → 악취</p></blockquote><p class="md-paragraph" data-block-id="특이-사례-배수구라는-단어와-실제-요청이-충돌했을-때__paragraph_2">이 문장에는 <code>배수구</code>와 <code>냄새</code>가 함께 등장한다. 민원인은 배수 문제가 아니라고 명시했지만, 27개 일괄 방식은 <code>도로·교통 → 도로시설 → 도로 배수</code>를 <strong>62.86%</strong>로 골랐다. 정답인 <code>생활환경 → 소음·악취 → 악취</code>는 <strong>11.44%</strong>였다.</p><p class="md-paragraph" data-block-id="특이-사례-배수구라는-단어와-실제-요청이-충돌했을-때__paragraph_3">계층 방식은 같은 입력을 다음과 같이 분류해 정답을 맞혔다.</p>
+      <div class="md-table-shell" data-block-id="특이-사례-배수구라는-단어와-실제-요청이-충돌했을-때__table_1">
+        
+        <table class="md-table">
+          
+          <thead>
+            <tr><th class="align-left">단계</th><th class="align-left">비교한 후보</th><th class="align-left">선택과 확률</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="align-left">대분류</td><td class="align-left">생활환경 / 도로·교통 / 행정·복지</td><td class="align-left"><strong>생활환경 96.47%</strong></td></tr><tr><td class="align-left">중분류</td><td class="align-left">청소·폐기물 / 소음·악취 / 공원·녹지</td><td class="align-left"><strong>소음·악취 89.53%</strong></td></tr><tr><td class="align-left">소분류</td><td class="align-left">공사장 소음 / 영업장 소음 / 악취</td><td class="align-left"><strong>악취 70.56%</strong></td></tr>
+          </tbody>
+        </table>
+      </div>
+    <p class="md-paragraph" data-block-id="특이-사례-배수구라는-단어와-실제-요청이-충돌했을-때__paragraph_4">측정 결과만 보면, 27개를 동시에 비교할 때는 <code>배수구</code>와 <code>도로 배수</code>의 표면적 연관성이 부정 표현인 “넘치거나 막히지는 않았다”보다 강하게 작용한 패턴이 나타났다. 후보를 계층별 세 개로 제한하자 각 단계에서 정답 경로가 유지됐다. 다만 이 설명은 출력 확률에서 도출한 <strong>해석</strong>이다. attention이나 attribution을 측정하지 않았으므로 모델이 실제로 특정 단어만 보고 판단했다고 단정할 수 없다.</p><p class="md-paragraph" data-block-id="특이-사례-배수구라는-단어와-실제-요청이-충돌했을-때__paragraph_5">앞의 종량제 봉투 사례에서는 일괄 방식만 맞았고, 이 배수구 냄새 사례에서는 계층 방식만 맞았다. 따라서 한 방식이 언제나 낫다고 결론 내리기보다, <strong>상위 단계 오류 전파</strong>와 <strong>많은 후보 사이의 표현 혼동</strong>이라는 서로 다른 실패 유형을 실제 업무 자료에서 함께 측정해야 한다.</p>
+    </section>
+  
     <section class="md-section level-3 template-default" data-section-id="kobert에서도-실제-mask를-후보-marker로-쓸-수-있나" data-template="default">
       <h3 id="kobert에서도-실제-mask를-후보-marker로-쓸-수-있나" class="section-heading level-3">KoBERT에서도 실제 <code>[MASK]</code>를 후보 marker로 쓸 수 있나</h3>
       <p class="md-paragraph" data-block-id="kobert에서도-실제-mask를-후보-marker로-쓸-수-있나__paragraph_1">기술적으로는 가능하다. 이번 구현은 <a href="https://github.com/SKTBrain/KoBERT" target="_blank" rel="noreferrer">SKTBrain KoBERT</a>에 후보마다 실제 <code>[MASK]</code> token을 넣었다. tokenizer에서 확인한 mask token ID는 <code>4</code>였고, 모든 예측 trace에서 marker 위치의 ID가 실제로 <code>4</code>인지 검사했다.</p>
