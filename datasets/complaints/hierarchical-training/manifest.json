@@ -1,0 +1,30 @@
+{
+  "generator": "research/prepare_hierarchical_training.py",
+  "source": "datasets/complaints/training",
+  "tasks": {
+    "flat27": "27 leaf names plus natural-language descriptions",
+    "major3": "3 major names plus their middle-category lists",
+    "middle3": "3 middle names plus their leaf-category lists under the gold major",
+    "leaf3": "3 leaf names plus natural-language descriptions under the gold middle"
+  },
+  "teacher_forcing": "Middle and leaf training use the gold parent path; inference uses the predicted parent path.",
+  "outputs": {
+    "train": {
+      "source_rows": 729,
+      "expanded_rows": 2916,
+      "rows_per_source": 4,
+      "sha256_utf8_lf": "ed5d6ac9b62d71850bf600b8be295bd3bb0f0c6ea1a59d168f3dc21ec46dcdc8"
+    },
+    "validation": {
+      "source_rows": 243,
+      "expanded_rows": 972,
+      "rows_per_source": 4,
+      "sha256_utf8_lf": "472bc3c7b14dd0ad10386e16553a4f57b3b2f5cf7975bd48f12648bfde3cd752"
+    }
+  },
+  "limitations": [
+    "No new unique complaint text; four task views are derived from each source example.",
+    "No independent human review.",
+    "Gold-parent teacher forcing does not expose the model to recovery from a wrong predicted parent."
+  ]
+}

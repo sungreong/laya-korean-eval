@@ -1,0 +1,108 @@
+{
+  "status": "complete",
+  "base_model": "evaluation/complaint-training-diverse-e5/selected-model",
+  "data": "datasets/complaints/hierarchical-training",
+  "available_task_views": 2916,
+  "train_rows": 972,
+  "validation_rows": 972,
+  "unique_train_states": 729,
+  "tasks": [
+    "flat27",
+    "major3",
+    "middle3",
+    "leaf3"
+  ],
+  "sampling": "Each of 729 unique states supplies one balanced hierarchy stage; 243 also supply flat27 rehearsal.",
+  "epochs_planned": 2,
+  "selected_epoch": 2,
+  "selection": "highest teacher-forced hierarchy macro accuracy, then all-task mean NLL",
+  "settings": {
+    "freeze_encoder": true,
+    "loss": "soft-ce",
+    "head_lr": 5e-05,
+    "micro_batch": 4,
+    "grad_accum": 4,
+    "max_len": 2048,
+    "head_max_len": 1536,
+    "seed": 43,
+    "device": "cpu",
+    "threads": 4
+  },
+  "epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.9192191159099709,
+      "validation": {
+        "flat27": {
+          "n": 243,
+          "correct": 100,
+          "accuracy": 0.411522633744856,
+          "nll": 2.103225830508002
+        },
+        "major3": {
+          "n": 243,
+          "correct": 153,
+          "accuracy": 0.6296296296296297,
+          "nll": 0.8270426367171497
+        },
+        "middle3": {
+          "n": 243,
+          "correct": 164,
+          "accuracy": 0.6748971193415638,
+          "nll": 0.8228479813950831
+        },
+        "leaf3": {
+          "n": 243,
+          "correct": 171,
+          "accuracy": 0.7037037037037037,
+          "nll": 0.72972660037839
+        },
+        "hierarchy_macro_accuracy": 0.6694101508916325,
+        "all_task_macro_accuracy": 0.6049382716049383,
+        "all_task_mean_nll": 1.1207107622496562
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.9442802136878908,
+      "validation": {
+        "flat27": {
+          "n": 243,
+          "correct": 100,
+          "accuracy": 0.411522633744856,
+          "nll": 2.0982220810504937
+        },
+        "major3": {
+          "n": 243,
+          "correct": 152,
+          "accuracy": 0.6255144032921811,
+          "nll": 0.8255616139445716
+        },
+        "middle3": {
+          "n": 243,
+          "correct": 165,
+          "accuracy": 0.6790123456790124,
+          "nll": 0.8166505309350125
+        },
+        "leaf3": {
+          "n": 243,
+          "correct": 171,
+          "accuracy": 0.7037037037037037,
+          "nll": 0.7255956577169854
+        },
+        "hierarchy_macro_accuracy": 0.6694101508916325,
+        "all_task_macro_accuracy": 0.6049382716049383,
+        "all_task_mean_nll": 1.1165074709117657
+      }
+    }
+  ],
+  "script_sha256": "4a84a9d89216373e8b424a01b02745195d732dbadc1acdaee457624032a14e3e",
+  "training_and_validation_seconds": 5716.881910961005,
+  "epoch_losses": [
+    0.9192191159099709,
+    0.9442802136878908
+  ],
+  "selected_checkpoint": "evaluation/complaint-hierarchical-balanced-e2/selected-model",
+  "export_dtype": "float16",
+  "total_seconds": 5738.732889870007
+}

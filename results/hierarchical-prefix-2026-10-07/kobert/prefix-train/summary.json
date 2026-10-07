@@ -1,0 +1,103 @@
+{
+  "status": "complete",
+  "model": "skt/kobert-base-v1 real-[MASK] shared scorer",
+  "base_checkpoint": "evaluation/kobert-mask-hierarchical-balanced-e2/selected-model",
+  "base_config": {
+    "base_revision": "359874884642d748079d4dd4ff547f2cdbff67d6",
+    "max_length": 512,
+    "hierarchical_joint": true,
+    "head_layers": 0
+  },
+  "data": "datasets/complaints/hierarchical-prefix-training",
+  "available_task_views": 2916,
+  "train_rows": 972,
+  "validation_rows": 972,
+  "unique_train_states": 729,
+  "tasks": [
+    "flat27",
+    "major3",
+    "middle3",
+    "leaf3"
+  ],
+  "sampling": "Each of 729 unique states supplies one balanced hierarchy stage; 243 also supply flat27 rehearsal.",
+  "epochs_planned": 1,
+  "selected_epoch": 1,
+  "selection": "highest teacher-forced hierarchy macro accuracy, then all-task mean NLL",
+  "settings": {
+    "freeze_encoder": true,
+    "batch_size": 8,
+    "grad_accum": 2,
+    "head_lr": 0.0005,
+    "max_length": 512,
+    "seed": 43,
+    "device": "cpu",
+    "threads": 4
+  },
+  "epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 1.5618926570063731,
+      "validation": {
+        "flat27": {
+          "n": 243,
+          "correct": 32,
+          "accuracy": 0.13168724279835392,
+          "nll": 3.2169122992780745
+        },
+        "major3": {
+          "n": 243,
+          "correct": 128,
+          "accuracy": 0.5267489711934157,
+          "nll": 1.0233124950127928
+        },
+        "middle3": {
+          "n": 243,
+          "correct": 135,
+          "accuracy": 0.5555555555555556,
+          "nll": 0.9407100843096106
+        },
+        "leaf3": {
+          "n": 243,
+          "correct": 145,
+          "accuracy": 0.5967078189300411,
+          "nll": 0.8987499490206181
+        },
+        "hierarchy_macro_accuracy": 0.5596707818930041,
+        "all_task_macro_accuracy": 0.4526748971193416,
+        "all_task_mean_nll": 1.519921206905274
+      }
+    }
+  ],
+  "script_sha256": "38a57a26bba414b0902bb46741e49446369d059aafd16b27913065c8020e5459",
+  "validation_before_training": {
+    "flat27": {
+      "n": 243,
+      "correct": 33,
+      "accuracy": 0.13580246913580246,
+      "nll": 3.2313595139800366
+    },
+    "major3": {
+      "n": 243,
+      "correct": 101,
+      "accuracy": 0.4156378600823045,
+      "nll": 1.0475912382241315
+    },
+    "middle3": {
+      "n": 243,
+      "correct": 98,
+      "accuracy": 0.40329218106995884,
+      "nll": 0.999325423487694
+    },
+    "leaf3": {
+      "n": 243,
+      "correct": 123,
+      "accuracy": 0.5061728395061729,
+      "nll": 0.9275209445368986
+    },
+    "hierarchy_macro_accuracy": 0.44170096021947874,
+    "all_task_macro_accuracy": 0.36522633744855965,
+    "all_task_mean_nll": 1.5514492800571904
+  },
+  "selected_checkpoint": "evaluation/kobert-mask-hierarchical-prefix-e1/selected-model",
+  "total_seconds": 1314.9472823059768
+}

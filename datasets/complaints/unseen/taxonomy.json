@@ -1,0 +1,574 @@
+{
+  "majors": [
+    {
+      "id": "A1",
+      "name": "생활환경",
+      "children": [
+        {
+          "id": "A1B1",
+          "name": "청소·폐기물",
+          "children": [
+            "L01",
+            "L02",
+            "L03",
+            "L28"
+          ]
+        },
+        {
+          "id": "A1B2",
+          "name": "소음·악취",
+          "children": [
+            "L04",
+            "L05",
+            "L06"
+          ]
+        },
+        {
+          "id": "A1B3",
+          "name": "공원·녹지",
+          "children": [
+            "L07",
+            "L08",
+            "L09"
+          ]
+        },
+        {
+          "id": "A1B4",
+          "name": "동물보호",
+          "children": [
+            "L31"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A2",
+      "name": "도로·교통",
+      "children": [
+        {
+          "id": "A2B1",
+          "name": "주정차",
+          "children": [
+            "L10",
+            "L11",
+            "L12"
+          ]
+        },
+        {
+          "id": "A2B2",
+          "name": "도로시설",
+          "children": [
+            "L13",
+            "L14",
+            "L15",
+            "L29"
+          ]
+        },
+        {
+          "id": "A2B3",
+          "name": "대중교통",
+          "children": [
+            "L16",
+            "L17",
+            "L18"
+          ]
+        },
+        {
+          "id": "A2B4",
+          "name": "자전거·보행",
+          "children": [
+            "L32"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A3",
+      "name": "행정·복지",
+      "children": [
+        {
+          "id": "A3B1",
+          "name": "민원행정",
+          "children": [
+            "L19",
+            "L20",
+            "L21"
+          ]
+        },
+        {
+          "id": "A3B2",
+          "name": "복지지원",
+          "children": [
+            "L22",
+            "L23",
+            "L24",
+            "L30"
+          ]
+        },
+        {
+          "id": "A3B3",
+          "name": "공공시설",
+          "children": [
+            "L25",
+            "L26",
+            "L27"
+          ]
+        },
+        {
+          "id": "A3B4",
+          "name": "지방세",
+          "children": [
+            "L33"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A4",
+      "name": "주택·건축",
+      "children": [
+        {
+          "id": "A4B1",
+          "name": "건축물 안전",
+          "children": [
+            "L34"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A5",
+      "name": "경제·일자리",
+      "children": [
+        {
+          "id": "A5B1",
+          "name": "취업지원",
+          "children": [
+            "L35"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "A6",
+      "name": "교육·문화",
+      "children": [
+        {
+          "id": "A6B1",
+          "name": "도서관 서비스",
+          "children": [
+            "L36"
+          ]
+        }
+      ]
+    }
+  ],
+  "leaves": [
+    {
+      "id": "L01",
+      "major_id": "A1",
+      "middle_id": "A1B1",
+      "path": [
+        "생활환경",
+        "청소·폐기물",
+        "생활쓰레기 수거"
+      ],
+      "description": "정해진 장소에 배출한 일반 종량제 쓰레기의 수거 누락"
+    },
+    {
+      "id": "L02",
+      "major_id": "A1",
+      "middle_id": "A1B1",
+      "path": [
+        "생활환경",
+        "청소·폐기물",
+        "불법투기"
+      ],
+      "description": "무단으로 버린 쓰레기의 조사와 제거"
+    },
+    {
+      "id": "L03",
+      "major_id": "A1",
+      "middle_id": "A1B1",
+      "path": [
+        "생활환경",
+        "청소·폐기물",
+        "대형폐기물 배출"
+      ],
+      "description": "가구 등 대형폐기물 배출 신고와 수수료 안내"
+    },
+    {
+      "id": "L04",
+      "major_id": "A1",
+      "middle_id": "A1B2",
+      "path": [
+        "생활환경",
+        "소음·악취",
+        "공사장 소음"
+      ],
+      "description": "건축·철거 공사에서 발생하는 소음"
+    },
+    {
+      "id": "L05",
+      "major_id": "A1",
+      "middle_id": "A1B2",
+      "path": [
+        "생활환경",
+        "소음·악취",
+        "영업장 소음"
+      ],
+      "description": "음식점·상점 등의 음악 및 영업 소음"
+    },
+    {
+      "id": "L06",
+      "major_id": "A1",
+      "middle_id": "A1B2",
+      "path": [
+        "생활환경",
+        "소음·악취",
+        "악취"
+      ],
+      "description": "발생원 확인이 필요한 냄새 피해 조사"
+    },
+    {
+      "id": "L07",
+      "major_id": "A1",
+      "middle_id": "A1B3",
+      "path": [
+        "생활환경",
+        "공원·녹지",
+        "수목 관리"
+      ],
+      "description": "공원·가로수의 가지치기와 위험 수목 관리"
+    },
+    {
+      "id": "L08",
+      "major_id": "A1",
+      "middle_id": "A1B3",
+      "path": [
+        "생활환경",
+        "공원·녹지",
+        "공원시설 파손"
+      ],
+      "description": "공원 내 벤치·운동기구·놀이시설 파손"
+    },
+    {
+      "id": "L09",
+      "major_id": "A1",
+      "middle_id": "A1B3",
+      "path": [
+        "생활환경",
+        "공원·녹지",
+        "공원 청결"
+      ],
+      "description": "공원 내부 청소와 휴지통 관리"
+    },
+    {
+      "id": "L10",
+      "major_id": "A2",
+      "middle_id": "A2B1",
+      "path": [
+        "도로·교통",
+        "주정차",
+        "불법주정차"
+      ],
+      "description": "통행을 막거나 금지구역에 세운 차량의 단속"
+    },
+    {
+      "id": "L11",
+      "major_id": "A2",
+      "middle_id": "A2B1",
+      "path": [
+        "도로·교통",
+        "주정차",
+        "주차시설 이용"
+      ],
+      "description": "공영주차장 요금·정기권·운영 안내"
+    },
+    {
+      "id": "L12",
+      "major_id": "A2",
+      "middle_id": "A2B1",
+      "path": [
+        "도로·교통",
+        "주정차",
+        "견인·과태료 이의"
+      ],
+      "description": "주차 단속 후 견인 또는 과태료에 대한 확인·이의"
+    },
+    {
+      "id": "L13",
+      "major_id": "A2",
+      "middle_id": "A2B2",
+      "path": [
+        "도로·교통",
+        "도로시설",
+        "노면·보도 파손"
+      ],
+      "description": "차도 포트홀과 보도블록 파손 보수"
+    },
+    {
+      "id": "L14",
+      "major_id": "A2",
+      "middle_id": "A2B2",
+      "path": [
+        "도로·교통",
+        "도로시설",
+        "가로등 고장"
+      ],
+      "description": "도로·골목 가로등 미점등과 조명 고장"
+    },
+    {
+      "id": "L15",
+      "major_id": "A2",
+      "middle_id": "A2B2",
+      "path": [
+        "도로·교통",
+        "도로시설",
+        "도로 배수"
+      ],
+      "description": "도로 빗물받이 막힘과 침수·배수 문제"
+    },
+    {
+      "id": "L16",
+      "major_id": "A2",
+      "middle_id": "A2B3",
+      "path": [
+        "도로·교통",
+        "대중교통",
+        "버스 운행"
+      ],
+      "description": "버스 배차·지연·무정차 등 운행 문제"
+    },
+    {
+      "id": "L17",
+      "major_id": "A2",
+      "middle_id": "A2B3",
+      "path": [
+        "도로·교통",
+        "대중교통",
+        "정류장 시설"
+      ],
+      "description": "버스정류장 쉼터·의자·도착안내판 고장"
+    },
+    {
+      "id": "L18",
+      "major_id": "A2",
+      "middle_id": "A2B3",
+      "path": [
+        "도로·교통",
+        "대중교통",
+        "운수종사자 응대"
+      ],
+      "description": "버스·택시 운전자의 불친절 등 대인 응대"
+    },
+    {
+      "id": "L19",
+      "major_id": "A3",
+      "middle_id": "A3B1",
+      "path": [
+        "행정·복지",
+        "민원행정",
+        "증명서 발급"
+      ],
+      "description": "주민등록 등 행정 증명서 발급 절차·수수료"
+    },
+    {
+      "id": "L20",
+      "major_id": "A3",
+      "middle_id": "A3B1",
+      "path": [
+        "행정·복지",
+        "민원행정",
+        "온라인 민원 장애"
+      ],
+      "description": "지자체 민원 웹사이트 접속·인증·제출 오류"
+    },
+    {
+      "id": "L21",
+      "major_id": "A3",
+      "middle_id": "A3B1",
+      "path": [
+        "행정·복지",
+        "민원행정",
+        "처리 지연·공무원 응대"
+      ],
+      "description": "접수한 행정 민원의 지연과 공무원 응대 불만"
+    },
+    {
+      "id": "L22",
+      "major_id": "A3",
+      "middle_id": "A3B2",
+      "path": [
+        "행정·복지",
+        "복지지원",
+        "지원 자격"
+      ],
+      "description": "복지 급여·지원사업의 대상과 소득 등 자격 조건"
+    },
+    {
+      "id": "L23",
+      "major_id": "A3",
+      "middle_id": "A3B2",
+      "path": [
+        "행정·복지",
+        "복지지원",
+        "지급 누락·지연"
+      ],
+      "description": "승인된 복지 지원금의 미입금·금액 확인"
+    },
+    {
+      "id": "L24",
+      "major_id": "A3",
+      "middle_id": "A3B2",
+      "path": [
+        "행정·복지",
+        "복지지원",
+        "신청·제출 서류"
+      ],
+      "description": "복지 지원 신청 접수 방법과 구비서류"
+    },
+    {
+      "id": "L25",
+      "major_id": "A3",
+      "middle_id": "A3B3",
+      "path": [
+        "행정·복지",
+        "공공시설",
+        "이용 예약"
+      ],
+      "description": "공공 체육관·강좌·회의실 등의 예약과 취소"
+    },
+    {
+      "id": "L26",
+      "major_id": "A3",
+      "middle_id": "A3B3",
+      "path": [
+        "행정·복지",
+        "공공시설",
+        "시설 고장"
+      ],
+      "description": "공공 실내 시설의 설비 고장과 수리"
+    },
+    {
+      "id": "L27",
+      "major_id": "A3",
+      "middle_id": "A3B3",
+      "path": [
+        "행정·복지",
+        "공공시설",
+        "운영·이용 불편"
+      ],
+      "description": "공공시설 운영시간·이용 규칙·현장 운영 개선"
+    },
+    {
+      "id": "L28",
+      "major_id": "A1",
+      "middle_id": "A1B1",
+      "path": [
+        "생활환경",
+        "청소·폐기물",
+        "재활용품 분리배출"
+      ],
+      "description": "종이·플라스틱·유리 등 재활용품의 분리배출 방법과 수거 안내",
+      "novelty": "new_leaf"
+    },
+    {
+      "id": "L29",
+      "major_id": "A2",
+      "middle_id": "A2B2",
+      "path": [
+        "도로·교통",
+        "도로시설",
+        "도로공사 안전관리"
+      ],
+      "description": "도로 공사 구간의 안전펜스·표지·통행 안전 조치",
+      "novelty": "new_leaf"
+    },
+    {
+      "id": "L30",
+      "major_id": "A3",
+      "middle_id": "A3B2",
+      "path": [
+        "행정·복지",
+        "복지지원",
+        "복지 상담 예약"
+      ],
+      "description": "복지 담당자와의 방문·전화 상담 일정 예약과 변경",
+      "novelty": "new_leaf"
+    },
+    {
+      "id": "L31",
+      "major_id": "A1",
+      "middle_id": "A1B4",
+      "path": [
+        "생활환경",
+        "동물보호",
+        "유기동물 구조"
+      ],
+      "description": "도로와 주택가의 다친 유기동물 구조와 보호 요청",
+      "novelty": "new_middle"
+    },
+    {
+      "id": "L32",
+      "major_id": "A2",
+      "middle_id": "A2B4",
+      "path": [
+        "도로·교통",
+        "자전거·보행",
+        "자전거도로 장애물"
+      ],
+      "description": "자전거도로를 막는 적치물·차량의 이동과 통행 확보",
+      "novelty": "new_middle"
+    },
+    {
+      "id": "L33",
+      "major_id": "A3",
+      "middle_id": "A3B4",
+      "path": [
+        "행정·복지",
+        "지방세",
+        "지방세 납부"
+      ],
+      "description": "재산세·자동차세 등 지방세의 납부 방법과 내역 확인",
+      "novelty": "new_middle"
+    },
+    {
+      "id": "L34",
+      "major_id": "A4",
+      "middle_id": "A4B1",
+      "path": [
+        "주택·건축",
+        "건축물 안전",
+        "건축물 붕괴 위험"
+      ],
+      "description": "균열·기울어짐 등 건축물의 붕괴 위험 점검과 안전 조치",
+      "novelty": "new_major"
+    },
+    {
+      "id": "L35",
+      "major_id": "A5",
+      "middle_id": "A5B1",
+      "path": [
+        "경제·일자리",
+        "취업지원",
+        "직업훈련 신청"
+      ],
+      "description": "구직자를 위한 직업교육 과정의 자격·신청·일정 안내",
+      "novelty": "new_major"
+    },
+    {
+      "id": "L36",
+      "major_id": "A6",
+      "middle_id": "A6B1",
+      "path": [
+        "교육·문화",
+        "도서관 서비스",
+        "도서 대출 문제"
+      ],
+      "description": "공공도서관 도서 대출·반납·예약 상태의 확인과 처리",
+      "novelty": "new_major"
+    }
+  ],
+  "notes": "독립 검수 없는 작성자 정의의 가상 민원 분류 체계. 공식 지자체 분류표가 아님. L28-L36 are inference-only labels absent from all training and validation rows."
+}

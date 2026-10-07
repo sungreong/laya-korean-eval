@@ -1,0 +1,74 @@
+{
+  "status": "complete",
+  "base_model": "evaluation/complaint-hierarchical-balanced-e2/selected-model",
+  "data": "datasets/complaints/hierarchical-prefix-training",
+  "available_task_views": 2916,
+  "train_rows": 972,
+  "validation_rows": 972,
+  "unique_train_states": 729,
+  "tasks": [
+    "flat27",
+    "major3",
+    "middle3",
+    "leaf3"
+  ],
+  "sampling": "Each of 729 unique states supplies one balanced hierarchy stage; 243 also supply flat27 rehearsal.",
+  "epochs_planned": 1,
+  "selected_epoch": 1,
+  "selection": "highest teacher-forced hierarchy macro accuracy, then all-task mean NLL",
+  "settings": {
+    "freeze_encoder": true,
+    "loss": "soft-ce",
+    "head_lr": 5e-05,
+    "micro_batch": 4,
+    "grad_accum": 4,
+    "max_len": 2048,
+    "head_max_len": 1536,
+    "seed": 43,
+    "device": "cpu",
+    "threads": 4
+  },
+  "epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.9646103778095158,
+      "validation": {
+        "flat27": {
+          "n": 243,
+          "correct": 101,
+          "accuracy": 0.4156378600823045,
+          "nll": 2.088479596143225
+        },
+        "major3": {
+          "n": 243,
+          "correct": 154,
+          "accuracy": 0.6337448559670782,
+          "nll": 0.8202927326187213
+        },
+        "middle3": {
+          "n": 243,
+          "correct": 141,
+          "accuracy": 0.5802469135802469,
+          "nll": 0.9888099318325014
+        },
+        "leaf3": {
+          "n": 243,
+          "correct": 164,
+          "accuracy": 0.6748971193415638,
+          "nll": 0.7006677259274147
+        },
+        "hierarchy_macro_accuracy": 0.6296296296296297,
+        "all_task_macro_accuracy": 0.5761316872427984,
+        "all_task_mean_nll": 1.1495624966304656
+      }
+    }
+  ],
+  "script_sha256": "e6a22241364a58d8f6f1a86260a5a018fab7a51130f0ec80e46badfc38b205fc",
+  "training_and_validation_seconds": 2682.3752876339713,
+  "epoch_losses": [
+    0.9646103778095158
+  ],
+  "selected_checkpoint": "evaluation/complaint-hierarchical-prefix-e1/selected-model",
+  "export_dtype": "float16",
+  "total_seconds": 2691.682733938971
+}

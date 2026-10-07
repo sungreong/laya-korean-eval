@@ -1,0 +1,428 @@
+{
+  "status": "complete",
+  "model": "evaluation/complaint-hierarchical-prefix-e1/selected-model",
+  "fixture": "datasets/complaints/unseen",
+  "fixture_sha256": {
+    "taxonomy.json": "ada6fc90ec2d0e66eaa09f6a01b99f6d40dd49c3566b04f591d26bea90fc51e1",
+    "cases.json": "ea633b4b91dd36e7bd5f2b2335378bafdaacc572bc28ae088283e4e3300d5321"
+  },
+  "script_sha256": "f535e0628cd72f00d2e64f616c99b1befff39303ef68b92dac34c32f6be49a8a",
+  "counts": {
+    "major": 6,
+    "middle": 15,
+    "leaf": 36,
+    "strict_cases": 27,
+    "under_specified": 0
+  },
+  "settings": {
+    "max_len": 2048,
+    "head_max_len": 1536,
+    "max_option_tokens": 36,
+    "device": "cpu",
+    "threads": 4,
+    "temperature": 1.0,
+    "option_order": "fixed taxonomy order"
+  },
+  "scope": "Synthetic author-defined diagnostic; no independent human review; not a production benchmark.",
+  "methods": {
+    "flat27": {
+      "strict": {
+        "n": 27,
+        "correct_paths": 8,
+        "major_accuracy": 0.5555555555555556,
+        "middle_path_accuracy": 0.4074074074074074,
+        "exact_path_accuracy": 0.2962962962962963,
+        "wilson95_exact": [
+          0.1585304046978005,
+          0.4848068296414763
+        ],
+        "first_error_level": {
+          "major": 12,
+          "middle": 4,
+          "leaf": 3
+        },
+        "leaf_macro_f1": 0.08888888888888889
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 9,
+          "correct_paths": 4,
+          "major_accuracy": 0.6666666666666666,
+          "middle_path_accuracy": 0.6666666666666666,
+          "exact_path_accuracy": 0.4444444444444444,
+          "wilson95_exact": [
+            0.18877852109766918,
+            0.733348706504501
+          ],
+          "first_error_level": {
+            "major": 3,
+            "middle": 0,
+            "leaf": 2
+          },
+          "leaf_macro_f1": 0.1111111111111111
+        },
+        "implicit": {
+          "n": 9,
+          "correct_paths": 3,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.3333333333333333,
+          "exact_path_accuracy": 0.3333333333333333,
+          "wilson95_exact": [
+            0.12058381838691423,
+            0.6457978644195965
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 1,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.08333333333333333
+        },
+        "mixed_context": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.5555555555555556,
+          "middle_path_accuracy": 0.2222222222222222,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 4,
+            "middle": 3,
+            "leaf": 1
+          },
+          "leaf_macro_f1": 0.027777777777777776
+        }
+      },
+      "under_specified": {
+        "n": 0,
+        "acceptable_path_hits": 0,
+        "note": "Not single-answer accuracy. All these cases require clarification; the classifier was forced to choose."
+      },
+      "latency_ms_p50": 2156.386053946335,
+      "latency_ms_p95": 2339.9049950006884,
+      "cases_with_input_or_option_truncation": 0,
+      "by_novelty": {
+        "new_leaf": {
+          "n": 9,
+          "correct_paths": 2,
+          "major_accuracy": 0.6666666666666666,
+          "middle_path_accuracy": 0.5555555555555556,
+          "exact_path_accuracy": 0.2222222222222222,
+          "wilson95_exact": [
+            0.06322510711784873,
+            0.5474110308930027
+          ],
+          "first_error_level": {
+            "major": 3,
+            "middle": 1,
+            "leaf": 3
+          },
+          "leaf_macro_f1": 0.027777777777777776
+        },
+        "new_major": {
+          "n": 9,
+          "correct_paths": 0,
+          "major_accuracy": 0.0,
+          "middle_path_accuracy": 0.0,
+          "exact_path_accuracy": 0.0,
+          "wilson95_exact": [
+            0.0,
+            0.2991450484195325
+          ],
+          "first_error_level": {
+            "major": 9,
+            "middle": 0,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.0
+        },
+        "new_middle": {
+          "n": 9,
+          "correct_paths": 6,
+          "major_accuracy": 1.0,
+          "middle_path_accuracy": 0.6666666666666666,
+          "exact_path_accuracy": 0.6666666666666666,
+          "wilson95_exact": [
+            0.3542021355804034,
+            0.8794161816130857
+          ],
+          "first_error_level": {
+            "major": 0,
+            "middle": 3,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.06388888888888888
+        }
+      }
+    },
+    "cascade": {
+      "strict": {
+        "n": 27,
+        "correct_paths": 6,
+        "major_accuracy": 0.48148148148148145,
+        "middle_path_accuracy": 0.37037037037037035,
+        "exact_path_accuracy": 0.2222222222222222,
+        "wilson95_exact": [
+          0.10607239452360254,
+          0.40756928866632036
+        ],
+        "first_error_level": {
+          "major": 14,
+          "middle": 3,
+          "leaf": 4
+        },
+        "leaf_macro_f1": 0.06441798941798943
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 9,
+          "correct_paths": 4,
+          "major_accuracy": 0.5555555555555556,
+          "middle_path_accuracy": 0.5555555555555556,
+          "exact_path_accuracy": 0.4444444444444444,
+          "wilson95_exact": [
+            0.18877852109766918,
+            0.733348706504501
+          ],
+          "first_error_level": {
+            "major": 4,
+            "middle": 0,
+            "leaf": 1
+          },
+          "leaf_macro_f1": 0.09259259259259259
+        },
+        "implicit": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.3333333333333333,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 1,
+            "leaf": 2
+          },
+          "leaf_macro_f1": 0.013888888888888888
+        },
+        "mixed_context": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.2222222222222222,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 2,
+            "leaf": 1
+          },
+          "leaf_macro_f1": 0.018518518518518517
+        }
+      },
+      "under_specified": {
+        "n": 0,
+        "acceptable_path_hits": 0,
+        "note": "Not single-answer accuracy. All these cases require clarification; the classifier was forced to choose."
+      },
+      "latency_ms_p50": 955.7372750132345,
+      "latency_ms_p95": 1125.435376999667,
+      "cases_with_input_or_option_truncation": 0,
+      "by_novelty": {
+        "new_leaf": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.6666666666666666,
+          "middle_path_accuracy": 0.5555555555555556,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 3,
+            "middle": 1,
+            "leaf": 4
+          },
+          "leaf_macro_f1": 0.013888888888888888
+        },
+        "new_major": {
+          "n": 9,
+          "correct_paths": 3,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.3333333333333333,
+          "exact_path_accuracy": 0.3333333333333333,
+          "wilson95_exact": [
+            0.12058381838691423,
+            0.6457978644195965
+          ],
+          "first_error_level": {
+            "major": 6,
+            "middle": 0,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.037037037037037035
+        },
+        "new_middle": {
+          "n": 9,
+          "correct_paths": 2,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.2222222222222222,
+          "exact_path_accuracy": 0.2222222222222222,
+          "wilson95_exact": [
+            0.06322510711784873,
+            0.5474110308930027
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 2,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.027777777777777776
+        }
+      }
+    },
+    "cascade_prefix": {
+      "strict": {
+        "n": 27,
+        "correct_paths": 5,
+        "major_accuracy": 0.48148148148148145,
+        "middle_path_accuracy": 0.3333333333333333,
+        "exact_path_accuracy": 0.18518518518518517,
+        "wilson95_exact": [
+          0.08180707142976715,
+          0.3669868361854788
+        ],
+        "first_error_level": {
+          "major": 14,
+          "middle": 4,
+          "leaf": 4
+        },
+        "leaf_macro_f1": 0.04914021164021163
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 9,
+          "correct_paths": 3,
+          "major_accuracy": 0.5555555555555556,
+          "middle_path_accuracy": 0.4444444444444444,
+          "exact_path_accuracy": 0.3333333333333333,
+          "wilson95_exact": [
+            0.12058381838691423,
+            0.6457978644195965
+          ],
+          "first_error_level": {
+            "major": 4,
+            "middle": 1,
+            "leaf": 1
+          },
+          "leaf_macro_f1": 0.06481481481481481
+        },
+        "implicit": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.3333333333333333,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 1,
+            "leaf": 2
+          },
+          "leaf_macro_f1": 0.013888888888888888
+        },
+        "mixed_context": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.2222222222222222,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 2,
+            "leaf": 1
+          },
+          "leaf_macro_f1": 0.013888888888888888
+        }
+      },
+      "under_specified": {
+        "n": 0,
+        "acceptable_path_hits": 0,
+        "note": "Not single-answer accuracy. All these cases require clarification; the classifier was forced to choose."
+      },
+      "latency_ms_p50": 1029.6343510271981,
+      "latency_ms_p95": 1507.590131118195,
+      "cases_with_input_or_option_truncation": 0,
+      "by_novelty": {
+        "new_leaf": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.6666666666666666,
+          "middle_path_accuracy": 0.5555555555555556,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 3,
+            "middle": 1,
+            "leaf": 4
+          },
+          "leaf_macro_f1": 0.013888888888888888
+        },
+        "new_major": {
+          "n": 9,
+          "correct_paths": 3,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.3333333333333333,
+          "exact_path_accuracy": 0.3333333333333333,
+          "wilson95_exact": [
+            0.12058381838691423,
+            0.6457978644195965
+          ],
+          "first_error_level": {
+            "major": 6,
+            "middle": 0,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.037037037037037035
+        },
+        "new_middle": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.1111111111111111,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 3,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.009259259259259259
+        }
+      }
+    }
+  }
+}

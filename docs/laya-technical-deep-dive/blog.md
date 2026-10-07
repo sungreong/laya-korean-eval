@@ -14,7 +14,7 @@ viewer-chrome: hidden
 
 고정 BERT 분류기처럼 클래스별 출력 뉴런을 정해 두는 대신, 요청마다 주어진 후보 위치를 같은 채점기로 평가한다. 분류 체계를 바꾸기 쉽고 문장을 한 토큰씩 생성하지 않는다는 점이 주목할 부분이다. 동적 후보 분류 자체가 최초의 발명이라는 뜻은 아니다.
 
-한국어 도입 판단부터 말하면, **실험할 가치는 있지만 이 글의 결과만으로 전면 자동화할 근거는 부족하다.** Docker Compose CPU 환경에서 NSMC 리뷰 200개를 직접 평가했을 때 한국어 질문은 **66.0%**, 같은 한국어 본문에 영어 질문을 붙이면 **73.0%**였다. 이어서 27개 민원 유형용 합성 학습 729개를 만들자 LAYA의 독립 시험 정확도는 **24.7%에서 32.1%**로 올랐다. 반면 같은 입력 형식을 실제 `[MASK]` token으로 구현한 KoBERT 실험은 **4.9%**에 그쳤다. 한국어 encoder를 쓴다는 사실만으로 LAYA의 동적 판단 능력이 생기지는 않았다.
+한국어 도입 판단부터 말하면, **실험할 가치는 있지만 이 글의 결과만으로 전면 자동화할 근거는 부족하다.** Docker Compose CPU 환경에서 NSMC 리뷰 200개를 직접 평가했을 때 한국어 질문은 **66.0%**, 같은 한국어 본문에 영어 질문을 붙이면 **73.0%**였다. 이어서 27개 민원 유형용 합성 학습 729개를 만들자 LAYA의 독립 시험 일괄 정확도는 **24.7% → 32.1% → 34.6%**로 올랐다. 대·중·소를 따로 학습하고 앞 단계 예측을 prefix로 넘긴 순차 방식은 **23.5%**에 머물렀다. 실제 `[MASK]` token을 쓴 KoBERT adapter는 계층·prefix 학습 후 순차 정확도가 **6.2%에서 16.0%**로 올랐지만 절대 성능은 낮았다. 학습에서 제외한 9개 유형도 출력층 교체 없이 후보로 추가할 수 있었으나, 유형별 정확도는 0∼44.4%로 불안정했다. 한국어 encoder를 쓴다는 사실이나 동적 후보를 넣을 수 있다는 사실만으로 정확도가 보장되지는 않는다.
 
 분류 기준이 자주 바뀌는 문의 라우팅과 로컬 판단 기능에는 파일럿 후보가 된다. 반면 분류 체계가 안정돼 있고 충분한 라벨이 있다면 기존 전용 분류기를 먼저 비교해야 한다. 한국어 문장 생성·요약·답변 작성은 이 모델이 제공하는 기능이 아니다.
 
@@ -691,9 +691,26 @@ Windows 11의 Docker Desktop Linux 컨테이너에서 **Docker Compose**로 실�
 
 정보 부족 9개는 단일 정답 정확도에서 제외했다. 예를 들어 화면 오류와 제출 서류가 모두 가능한 복지 신청 사례에서 모델이 허용 경로 하나를 골랐더라도, 실제 상담에서는 원인을 묻는 추가 질문이 필요하다. 이 실험은 보류나 재질문 정책을 학습시키지 않았으므로 허용 경로 적중을 자동 처리 성공률로 해석하지 않았다.
 
-### LAYA 학습 방법과 결과
+### 1차 학습: 27개 일괄 분류부터 확인했다
 
 mmBERT encoder는 동결하고 배포된 LAYA decision head만 soft cross-entropy로 5 epoch 학습했다. micro-batch 4, gradient accumulation 4, head learning rate `1e-4`, seed 42다. 243개 validation의 전체 경로 정확도를 우선하고 동률이면 NLL이 낮은 epoch을 선택했다. 90개 시험셋은 선택 과정에서 보지 않았다. 선택된 5 epoch 모델은 FP16으로 저장한 뒤 다시 불러와 평가했다.
+
+여기서 “유형을 학습했다”는 것은 숫자 라벨 `L01`∼`L27`만 붙였다는 뜻이 아니다. 각 학습 입력에는 민원 요약과 함께 **27개 소분류의 이름·자연어 설명**이 후보로 들어갔다. 정답 ID는 loss를 계산하기 위한 one-hot 목표로 사용했다.
+
+```text
+본문: 민원 요약: 배출일에 내놓은 종량제 봉투가 남아 있다…
+
+후보 L01: 생활쓰레기 수거 — 정해진 장소에 배출한 일반 종량제 쓰레기의 수거 누락
+후보 L02: 불법투기 — 무단으로 버린 쓰레기의 조사와 제거
+후보 L03: 대형폐기물 배출 — 가구 등 대형폐기물 배출 신고와 수수료 안내
+… 나머지 후보를 포함해 총 27개
+
+학습 정답: L01=1, 나머지 후보=0
+```
+
+다만 이 학습은 `대분류 → 중분류 → 소분류`를 세 단계로 각각 감독한 계층 학습은 아니다. 학습 질문은 27개 소분류를 한 번에 비교하는 `flat27` 하나였다. 순차 시험에서는 대분류 후보에 하위 중분류 목록을, 중분류 후보에 하위 소분류 목록을 설명으로 제공하고, 마지막 단계에는 소분류의 자연어 설명을 제공했다. 즉 **설명이 있는 일괄 분류로 head를 학습한 뒤, 같은 head가 계층별 질문에도 전이되는지 평가한 것**이다.
+
+따라서 순차 방식이 24.7%에서 23.5%로 개선되지 않은 결과를 “설명을 붙여도 계층 학습이 실패했다”고 표현하면 부정확하다. 단계별 supervision과 계층 일관성 loss를 사용하지 않았기 때문이다. 대·중·소 각각의 학습 질문을 추가하거나, 부모 경로가 맞을 때 자식 loss를 계산하는 계층 전용 학습은 별도의 후속 실험이다.
 
 ![민원 27개 유형에서 LAYA와 KoBERT MASK 방식의 epoch별 학습 곡선](assets/08-complaint-training-curves.webp)
 
@@ -754,7 +771,7 @@ mmBERT encoder는 동결하고 배포된 LAYA decision head만 soft cross-entrop
 
 앞의 종량제 봉투 사례에서는 일괄 방식만 맞았고, 이 배수구 냄새 사례에서는 계층 방식만 맞았다. 따라서 한 방식이 언제나 낫다고 결론 내리기보다, **상위 단계 오류 전파**와 **많은 후보 사이의 표현 혼동**이라는 서로 다른 실패 유형을 실제 업무 자료에서 함께 측정해야 한다.
 
-### KoBERT에서도 실제 `[MASK]`를 후보 marker로 쓸 수 있나
+### 1차 KoBERT: 실제 `[MASK]`를 후보 marker로 쓸 수 있나
 
 기술적으로는 가능하다. 이번 구현은 [SKTBrain KoBERT](https://github.com/SKTBrain/KoBERT)에 후보마다 실제 `[MASK]` token을 넣었다. tokenizer에서 확인한 mask token ID는 `4`였고, 모든 예측 trace에서 marker 위치의 ID가 실제로 `4`인지 검사했다.
 
@@ -779,7 +796,151 @@ N개 logit → softmax → 하나 선택
 
 따라서 결론은 둘로 나뉜다. **실제 `[MASK]` 위치를 모아 후보 수만큼 점수를 계산하는 것은 된다.** 하지만 KoBERT에 이 입출력 형식과 729개 합성 자료만 붙여서는 LAYA의 판단 능력을 재현하지 못했다. encoder 동결, 짧아진 후보 설명, decision 목적의 사전학습 부재가 함께 영향을 줬을 가능성이 있다. 이는 원인 후보에 대한 해석이며, KoBERT의 한국어 이해 능력 자체가 낮다는 결론이 아니다.
 
-고정된 27개 유형만 운영한다면 일반적인 KoBERT `[CLS] → 27 logits` 분류기나 계층별 전용 분류기가 더 단순한 비교 대상이다. 추론 때 새로운 후보 설명을 추가해야 할 때만 `[MASK]` 공유 scorer의 유연성이 의미가 있다. 그 경우에도 encoder 일부·전체 학습, 더 큰 실제 데이터와 새 유형 holdout을 추가로 검증해야 한다.
+고정된 27개 유형만 운영한다면 일반적인 KoBERT `[CLS] → 27 logits` 분류기나 계층별 전용 분류기가 더 단순한 비교 대상이다. 추론 때 새로운 후보 설명을 추가해야 할 때만 `[MASK]` 공유 scorer의 유연성이 의미가 있다. 그래서 다음 2차 실험에서는 대·중·소 supervision과 prefix를 추가하고, 학습에서 제외한 새 유형을 추론 때만 넣어 직접 확인했다.
+
+### 2차 학습: 대·중·소를 각각 가르치고 prefix도 넣었다
+
+1차 실험의 약점은 27개 일괄 질문만 학습했다는 점이다. 이를 보완하려고 **기존 시험 문장을 학습에 재사용하지 않고**, 원래 학습 729개와 validation 243개를 네 가지 과제 보기로 확장했다.
+
+| 학습 과제 | 후보 수 | 모델이 배우는 질문 |
+| --- | ---: | --- |
+| `flat27` | 27 | 완전한 대→중→소 경로 중 하나 선택 |
+| `major3` | 3 | 대분류 하나 선택 |
+| `middle3` | 3 | 정답 대분류 아래 중분류 하나 선택 |
+| `leaf3` | 3 | 정답 중분류 아래 소분류 하나 선택 |
+
+원문 729개마다 네 보기를 만들면 2,916개 task view가 된다. 한 epoch에는 중복 노출을 줄이기 위해 `flat27`, `major3`, `middle3`, `leaf3`를 각각 243개씩 균형 표집했다. 총 972개 행이지만 고유 민원 문장은 729개다. 모든 문장은 숫자 라벨만 붙인 것이 아니라 **후보 이름과 구별 가능한 자연어 설명**을 함께 입력했다. 독립 시험 90개와 뒤의 미등록 유형 시험 27개는 학습·validation에 들어가지 않았고 exact text overlap은 0건이다.
+
+#### 앞 단계 선택을 prefix로 주는가
+
+그렇다. 다만 **학습과 실제 추론에서 prefix의 출처가 다르다.** 학습에서는 안정적으로 각 단계를 익히도록 정답 부모를 넣는 teacher forcing을 사용했다.
+
+```text
+1단계 입력
+민원 요약: 정해진 날 내놓은 종량제 봉투가 남아 있다
+후보: 생활환경 / 도로·교통 / 행정·복지
+→ 정답: 생활환경
+
+2단계 학습 입력
+민원 요약: ...
+이전 단계 선택 대분류: 생활환경          # gold prefix
+후보: 청소·폐기물 / 소음·악취 / 공원·녹지
+→ 정답: 청소·폐기물
+
+3단계 학습 입력
+민원 요약: ...
+이전 단계 선택 대분류: 생활환경
+이전 단계 선택 중분류: 청소·폐기물      # gold prefix
+후보: 생활쓰레기 수거 / 불법투기 / 대형폐기물 배출
+→ 정답: 생활쓰레기 수거
+```
+
+실제 시험에는 정답을 알 수 없으므로 1단계에서 **모델이 예측한 대분류**를 2단계 prefix로, 2단계에서 **모델이 예측한 중분류**를 3단계 prefix로 넘겼다. 코드의 `cascade_prefix`가 이 경로다. 비교용 `cascade`는 후보군만 이전 선택 아래로 제한하고 prefix 문장은 넣지 않는다.
+
+```text
+추론: 대분류 예측값 → 2단계 prefix → 중분류 예측값 → 3단계 prefix → 소분류
+```
+
+이 방식은 앞 단계 결정을 명시해 문맥을 이어 주지만, 첫 예측이 틀리면 잘못된 값을 더 강하게 반복한다. 학습 때는 gold prefix만 보다가 시험 때 predicted prefix를 받는 차이도 생긴다. 이를 **exposure bias**라고 하며, scheduled sampling이나 틀린 부모 prefix를 섞은 학습을 후속 비교할 이유다.
+
+#### Docker 컨테이너를 나눠 얼마나 학습했나
+
+LAYA와 KoBERT는 같은 CPU·메모리를 놓고 동시에 경쟁하지 않도록 별도 Docker Compose 컨테이너에서 각각 실행했다. 두 모델 모두 encoder는 동결하고 공유 decision scorer만 학습했다. 1차 모델에서 이어서 prefix 없는 계층 과제를 2 epoch 학습한 뒤, gold prefix 과제를 1 epoch 더 학습했다. seed는 43 하나다.
+
+| 모델 | 계층 2 epoch | prefix 1 epoch | 추가 학습 시간 |
+| --- | ---: | ---: | ---: |
+| LAYA | 약 95.3분 | 약 44.9분 | 약 140.2분 |
+| KoBERT `[MASK]` | 약 47.3분 | 약 21.9분 | 약 69.2분 |
+
+마지막 prefix 학습의 teacher-forced validation은 다음과 같았다. 이는 정답 부모를 넣은 단계별 측정이라 predicted-prefix 독립 시험보다 쉬운 조건이다.
+
+| 모델 | 27개 일괄 | 대분류 3개 | 중분류 3개 | 소분류 3개 |
+| --- | ---: | ---: | ---: | ---: |
+| LAYA | 41.6% | 63.4% | 58.0% | 67.5% |
+| KoBERT `[MASK]` | 13.2% | 52.7% | 55.6% | 59.7% |
+
+![계층 학습 후 독립 시험과 미등록 유형의 predicted-prefix 결과](assets/09-hierarchical-prefix-results.webp)
+
+그림 8. 대·중·소 계층 학습과 prefix 추가 학습을 마친 뒤의 독립 시험. 오른쪽은 학습에 없던 유형을 추론 때만 후보 설명으로 추가한 27개 사례다. [원 결과와 문항별 예측](https://github.com/sungreong/laya-korean-eval/tree/main/results/hierarchical-prefix-2026-10-07)
+
+#### Results: 정답을 모르는 실제 조건에서는 어땠나
+
+아래 표는 모델 선택에 쓰지 않은 기존 독립 시험 81개에서 측정했다. `순차+prefix`는 gold가 아니라 앞 단계의 **실제 예측값**을 넘겼다.
+
+| 모델·상태 | 추론 | 대분류 | 대+중 경로 | 전체 경로 | CPU p50 |
+| --- | --- | ---: | ---: | ---: | ---: |
+| 기본 LAYA | 27개 일괄 | 56.8% | 45.7% | 24.7% (20/81) | 1.45초 |
+| 1차 flat 학습 LAYA | 27개 일괄 | 67.9% | 56.8% | 32.1% (26/81) | 1.61초 |
+| **계층+prefix 학습 LAYA** | **27개 일괄** | **69.1%** | **59.3%** | **34.6% (28/81)** | 1.39초 |
+| 계층+prefix 학습 LAYA | 순차 | 59.3% | 35.8% | 23.5% (19/81) | 0.85초 |
+| 계층+prefix 학습 LAYA | 순차+predicted prefix | 59.3% | 37.0% | 23.5% (19/81) | 0.91초 |
+| 1차 KoBERT `[MASK]` | 27개 일괄 | 33.3% | 11.1% | 4.9% (4/81) | 0.72초 |
+| 계층+prefix 학습 KoBERT | 27개 일괄 | 33.3% | 14.8% | 6.2% (5/81) | 0.45초 |
+| 계층+prefix 학습 KoBERT | 순차 | 53.1% | 23.5% | 12.3% (10/81) | 0.44초 |
+| **계층+prefix 학습 KoBERT** | **순차+predicted prefix** | **53.1%** | **25.9%** | **16.0% (13/81)** | 0.46초 |
+
+LAYA의 일괄 결과는 1차 학습 32.1%에서 34.6%로 2건 늘었다. 하지만 순차 LAYA는 23.5%로 그대로였고 prefix도 최종 정답 수를 늘리지 못했다. KoBERT는 계층 과제를 직접 학습한 뒤 순차 12.3%, predicted-prefix 16.0%로 1차 순차 결과 6.2%보다 높아졌다. 그래도 절대 정확도는 낮다. 한 seed의 작은 합성 시험이므로 이 차이에 통계적·운영적 의미를 부여하지 않았다.
+
+#### 학습에 전혀 없던 유형도 후보 설명만 추가할 수 있나
+
+구조적으로는 가능하다. 기존 27개에 추론 때만 9개를 추가해 총 36개 소분류로 만들었다. 새 유형은 세 종류로 나눴다.
+
+| 미등록 유형 종류 | 추가 예 | 학습에 없던 부분 | 사례 수 |
+| --- | --- | --- | ---: |
+| 새 소분류 | 재활용 분리배출, 도로공사 안전, 복지상담 예약 | 기존 중분류 아래 소분류만 새로 추가 | 9 |
+| 새 중분류 | 유기동물 구조, 자전거도로 장애물, 지방세 납부 | 기존 대분류 아래 중·소분류 추가 | 9 |
+| 새 대분류 | 건축물 붕괴 위험, 직업훈련, 도서관 대출 | 대·중·소 경로 전체 추가 | 9 |
+
+각 유형은 직접 표현, 간접 표현, 다른 문제를 섞은 복합 문맥 한 건씩 만들었다. 27개 모두 학습·validation·기존 시험과 문장이 겹치지 않는다. 일괄 방식에서는 36개 설명을 한 번에 채점했고, 순차 방식은 새 대·중·소 후보를 해당 단계에 넣었다. 고정 `27 logits` head라면 출력층을 36개로 바꾸고 재학습해야 하지만, 공유 scorer는 파라미터 모양을 바꾸지 않았다.
+
+| 모델·추론 | 새 소분류 | 새 중분류 | 새 대분류 | 전체 |
+| --- | ---: | ---: | ---: | ---: |
+| 기본 LAYA · 일괄 36개 | 22.2% | 55.6% | 0.0% | 25.9% (7/27) |
+| 계층+prefix LAYA · 일괄 36개 | 22.2% | 66.7% | 0.0% | 29.6% (8/27) |
+| 계층+prefix LAYA · 순차 | 11.1% | 22.2% | 33.3% | 22.2% (6/27) |
+| 계층+prefix LAYA · 순차+prefix | 11.1% | 11.1% | 33.3% | 18.5% (5/27) |
+| 계층+prefix KoBERT · 일괄 36개 | 0.0% | 0.0% | 0.0% | 0.0% (0/27) |
+| 계층+prefix KoBERT · 순차 | 33.3% | 44.4% | 0.0% | 25.9% (7/27) |
+| 계층+prefix KoBERT · 순차+prefix | 33.3% | 0.0% | 0.0% | 11.1% (3/27) |
+
+이 결과는 **새 후보를 계산 그래프에 넣을 수 있음**을 확인하지만, **새 후보를 잘 일반화함**을 입증하지 않는다. 유형별 3건이라 Wilson 구간도 매우 넓다. 특히 KoBERT 일괄 36개는 모두 틀렸고 입력 27건 모두에서 길이 제한에 따른 후보 설명 truncation이 발생했다. LAYA도 일괄 방식의 새 대분류를 하나도 맞히지 못했다. 반대로 일부 순차 결과가 우연히 높게 나온 유형도 있어 더 큰 holdout 없이는 순위를 해석하면 안 된다.
+
+#### Discussion: prefix는 왜 항상 좋아지지 않았나
+
+prefix는 다음 단계에 “앞에서 무엇을 골랐는지”를 명시한다. 그러나 후보군도 이미 예측한 부모 아래 세 개로 제한되어 있어 정보가 중복된다. 앞 단계가 틀리면 정답 후보가 사라지는 데 더해 잘못된 부모 문장이 입력에 반복된다. teacher-forced validation과 predicted-prefix 시험의 차이가 큰 이유로 볼 수 있지만, attribution 실험을 하지 않았으므로 원인으로 단정하지 않는다.
+
+관측된 패턴은 모델마다 달랐다. LAYA는 일괄 성능이 조금 올랐지만 순차에서는 prefix의 최종 이득이 없었다. KoBERT는 기존 시험에서 prefix가 순차보다 3건 더 맞혔지만 미등록 유형에서는 7건에서 3건으로 줄었다. 따라서 prefix 사용 여부는 규칙으로 정할 문제가 아니라, **gold-prefix 단계 정확도와 predicted-prefix end-to-end 정확도를 둘 다 측정해 선택할 하이퍼파라미터**에 가깝다.
+
+### 이 결과만으로 모델의 우열을 결론 내릴 수 있나
+
+결론 내리기에는 부족하다. 이 결과는 특정 가설을 확인하기 위한 **소규모 테스트 케이스**다. 실제 서비스 성능이나 LAYA와 KoBERT 전체의 우열을 대표하지 않는다.
+
+| 한계 | 결과에 미칠 수 있는 영향 |
+| --- | --- |
+| 작성자가 만든 합성 학습·시험 자료 | 실제 상담 표현, 기관별 규정, 라벨 오류와 분포 변화를 충분히 반영하지 못함 |
+| 단일 정답 시험 81개 | 유형별 표본이 3개뿐이라 몇 건의 변화로 정확도가 크게 움직임 |
+| 독립 라벨 검수 없음 | 정답 체계와 애매한 사례 처리 기준에 작성자의 판단이 개입됨 |
+| CPU 4개·메모리 8GiB | 긴 탐색과 반복 학습을 제한함 |
+| encoder 동결, 단일 seed | 전체 fine-tuning, 여러 seed, 더 넓은 learning rate·구조 탐색 결과를 알 수 없음 |
+| 순차 학습은 gold prefix 사용 | 실제 predicted prefix의 오류 분포를 학습에서 충분히 보지 못함 |
+| 미등록 유형별 3건 | 새 유형 일반화의 평균 성능이나 유형 간 편차를 추정하기 어려움 |
+| 고정 `[CLS] → 27 logits` KoBERT 미실험 | 일반적인 지도학습 KoBERT와의 공정한 성능 비교가 아직 없음 |
+| LAYA와 KoBERT의 사전학습 목표 차이 | 이번 차이를 encoder 언어 능력 하나로 설명할 수 없음 |
+
+따라서 “LAYA가 KoBERT보다 우수하다”거나 “계층 학습이면 항상 좋아진다”는 결론은 이 실험에서 나오지 않는다. 관측된 사실은 **LAYA 일괄 방식이 24.7% → 32.1% → 34.6%로 변했고, LAYA 순차 방식은 최종 23.5%에 머물렀으며, KoBERT `[MASK]` predicted-prefix 방식은 1차 순차 6.2%에서 최종 16.0%가 됐다**는 것까지다. 자원 제약, 단일 seed, 합성 자료와 작은 시험셋 때문에 모두 탐색적 수치다.
+
+### 그래도 재사용 가능한 장점은 어디에 있나
+
+필자의 가설은 다음과 같다. **입력과 질문, 후보 설명의 관계를 잘 표현하도록 학습된 encoder와 명확한 유형 설명이 있다면, 공통 scorer를 사용하는 구조는 고정 분류 head보다 다양한 유형 체계에 재사용하기 쉽다.** 후보가 27개에서 28개로 바뀌어도 마지막 출력층을 `27 → 28`로 다시 만들 필요 없이, 새 후보 설명을 입력에 추가해 같은 scorer로 채점할 수 있기 때문이다. 부서명이나 업무 코드가 기관마다 달라도 설명을 함께 제시할 수 있고, 유형 정의가 자주 바뀌는 초기 라우팅 업무에서는 이 유연성이 실질적인 장점이 될 수 있다.
+
+이 주장은 아키텍처에서 도출한 **합리적인 가설**이다. 이번 미등록 유형 실험은 출력층을 바꾸지 않고 설명만으로 새 후보를 채점할 수 있다는 구현상의 장점까지는 확인했다. 그러나 정확도는 유형과 추론 방식에 따라 0%도 나왔으므로 성능상의 장점까지 입증하지는 못했다. 특히 “좋은 encoder”는 일반적인 한국어 문장 표현만 잘 만드는 encoder가 아니라, **본문과 자연어로 쓴 유형 설명을 비교해 업무 적합도를 판단하도록 학습된 encoder**여야 한다. KoBERT 실험은 한국어 MLM encoder에 `[MASK]`와 작은 scorer를 붙이는 것만으로는 그 능력이 자동으로 생기지 않는다는 점을 보여 줬다.
+
+정리하면 선택 기준은 다음과 같다.
+
+- 유형 27개가 고정되고 라벨 자료가 충분하면 일반적인 KoBERT `[CLS] → 27 logits` 분류기를 먼저 기준선으로 둔다.
+- 기관·고객마다 유형이 달라지거나 운영 중 후보를 자주 추가해야 한다면, 유형 설명을 입력으로 받는 LAYA식 공유 scorer의 가치가 커진다.
+- 이번 9개 unseen-category holdout은 구현 가능성만 확인했다. 실제 장점을 주장하려면 더 많은 미등록 유형과 실제 민원, 여러 seed로 반복해야 한다.
+- Production 판단 전에는 실제 민원, 독립 검수, 여러 seed, 전체 encoder 학습, 고정 KoBERT 기준선, 비용·지연 측정을 같은 분할에서 비교해야 한다.
 
 ### GitHub에서 그대로 재현하기
 
@@ -801,9 +962,24 @@ docker compose run --rm evaluate python research/run_complaints.py --model evalu
 # 실제 [MASK] KoBERT 학습과 같은 시험
 docker compose run --rm evaluate python research/train_kobert_mask.py --epochs 5 --head-layers 0 --head-lr 0.001 --out evaluation/kobert-mask-direct-e5
 docker compose run --rm evaluate python research/run_kobert_complaints.py --checkpoint evaluation/kobert-mask-direct-e5/selected-model --out evaluation/kobert-mask-direct-test
+
+# 대·중·소 계층 자료와 gold-prefix 학습 자료 생성
+python research/prepare_hierarchical_training.py
+python research/prepare_prefix_hierarchical_training.py
+python research/prepare_unseen_complaints.py
+
+# LAYA 계층 2 epoch + prefix 1 epoch + predicted-prefix 시험
+docker compose run --rm evaluate python research/train_hierarchical_complaints.py --epochs 2 --base-model evaluation/complaint-training-diverse-e5/selected-model --data datasets/complaints/hierarchical-training --out evaluation/complaint-hierarchical-balanced-e2
+docker compose run --rm evaluate python research/train_hierarchical_complaints.py --epochs 1 --base-model evaluation/complaint-hierarchical-balanced-e2/selected-model --data datasets/complaints/hierarchical-prefix-training --out evaluation/complaint-hierarchical-prefix-e1
+docker compose run --rm evaluate python research/run_complaints.py --model evaluation/complaint-hierarchical-prefix-e1/selected-model --out evaluation/complaints-hierarchical-prefix-final --methods flat27 cascade cascade_prefix
+
+# KoBERT도 별도 컨테이너에서 같은 순서로 실행
+docker compose run --rm evaluate python research/train_hierarchical_kobert_mask.py --epochs 2 --base-checkpoint evaluation/kobert-mask-direct-e5/selected-model --data datasets/complaints/hierarchical-training --out evaluation/kobert-mask-hierarchical-balanced-e2
+docker compose run --rm evaluate python research/train_hierarchical_kobert_mask.py --epochs 1 --base-checkpoint evaluation/kobert-mask-hierarchical-balanced-e2/selected-model --data datasets/complaints/hierarchical-prefix-training --out evaluation/kobert-mask-hierarchical-prefix-e1
+docker compose run --rm evaluate python research/run_kobert_complaints.py --checkpoint evaluation/kobert-mask-hierarchical-prefix-e1/selected-model --fixture datasets/complaints/unseen --out evaluation/unseen-kobert-hierarchical-prefix
 ```
 
-저장소에는 taxonomy, 학습·validation JSONL, 독립 시험 90개, 실행 스크립트, epoch별 예측, paired 통계와 최적화 그래프가 함께 있다. GitHub Actions에서는 모델을 내려받지 않는 14개 경량 검증을 통과했다. 성능 수치를 재현하려면 CPU 기준으로 LAYA 약 2시간 51분, KoBERT 약 1시간 20분이 걸렸다는 점을 고려해야 한다.
+저장소에는 taxonomy, 학습·validation JSONL, 독립 시험 90개, 미등록 유형 시험 27개, 실행 스크립트, epoch별 예측과 그래프가 함께 있다. 모델 체크포인트는 포함하지 않았다. 전체 1·2차 학습을 재현하려면 이 환경의 CPU 기준으로 LAYA 약 5시간 11분, KoBERT 약 2시간 29분이 걸렸다는 점을 고려해야 한다.
 
 ## 14. 실제 사용자들은 무엇을 경험했나
 
@@ -853,14 +1029,16 @@ Jev 평가 논문은 37개 데이터셋을 다루며 선택형 확률과 이진 
 
 **핵심 혁신은 무엇인가?** 자연어 질문·동적 후보·공통 채점·형식화된 확률 출력을 작은 인코더 기반 판단 시스템으로 묶었다는 데 있다. 고정 클래스의 출력층을 매번 수정하는 부담을 줄인다. 동적 분류 자체는 NLI와 label-conditioned 모델에서도 가능한 접근이다.
 
-**실제로 무엇이 좋아졌는가?** 후보를 입력으로 바꾸고 자유 생성 없이 구조화된 판단을 반환하는 사용 방식은 코드에서 확인했다. 민원 도메인 729개로 head를 학습하자 27개 일괄 시험은 24.7%에서 32.1%로 개선됐다. 하지만 순차 계층 분류는 학습 전 24.7%에서 학습 후 23.5%로 개선되지 않았고, NSMC에서도 TF-IDF 기준선보다 우월하다는 결과를 얻지 못했다. 데이터와 추론 방식에 따라 이득이 달랐다.
+**실제로 무엇이 좋아졌는가?** 후보를 입력으로 바꾸고 자유 생성 없이 구조화된 판단을 반환하는 사용 방식은 코드에서 확인했다. 민원 도메인 729개로 head를 학습하고 계층·prefix 과제를 추가하자 27개 일괄 시험은 24.7%에서 32.1%, 다시 34.6%로 변했다. 하지만 LAYA 순차 계층 분류는 최종 23.5%였고, prefix도 정답 수를 늘리지 못했다. KoBERT `[MASK]` 순차 방식은 6.2%에서 16.0%로 변했지만 여전히 낮았다. 데이터와 추론 방식에 따라 이득이 달랐다.
 
-**한국어에서도 장점이 유지되는가?** 한국어 텍스트에 동적 후보를 적용하고 민원 자료로 추가 학습할 수는 있었다. 정확도는 질문 표현과 과제에 민감했고, NSMC 표본은 66∼73%, 민원 27개 유형은 학습 후에도 32.1%였다. 실제 `[MASK]`를 쓴 KoBERT adapter는 4.9%에 그쳐 한국어 전용 encoder만으로 동적 판단 장점이 유지되지는 않았다. 다른 언어의 점수나 다국어·한국어 사전학습 규모를 품질의 대용 지표로 쓰면 안 된다.
+**한국어에서도 장점이 유지되는가?** 한국어 텍스트에 동적 후보를 적용하고 민원 자료로 추가 학습할 수는 있었다. 정확도는 질문 표현과 과제에 민감했고, NSMC 표본은 66∼73%, 민원 27개 유형의 최종 일괄 결과는 34.6%였다. KoBERT adapter의 최종 predicted-prefix 결과는 16.0%였다. 한국어 전용 encoder만으로 동적 판단 장점이 유지되지는 않았고, 다른 언어의 점수나 사전학습 규모를 품질의 대용 지표로 쓰면 안 된다.
+
+**좋은 encoder와 유형 설명이 있다면 기존 KoBERT보다 다양하게 활용할 수 있는가?** 가능성이 있다는 판단은 구조적으로 합당하다. 출력 뉴런마다 유형을 고정하는 대신 자연어 유형 설명을 같은 scorer로 평가하므로, 유형을 추가하거나 기관별 분류표로 바꾸기 쉽다. 실제로 이번 실험은 학습에 없던 유형 9개를 출력층 수정 없이 추가했다. 다만 정확도는 불안정했고 0%인 조건도 있었다. 일반 MLM encoder의 품질만으로는 부족하며, 본문·질문·유형 설명의 적합도를 학습한 encoder와 구별력 있는 설명이 필요하다.
 
 **어디에 쓰면 좋은가?** 후보가 적고 기준이 자주 바뀌는 문의 라우팅, 로컬 문서의 선택형 태깅, 사람이 검토할 항목의 1차 분류가 파일럿 후보다. 안정된 업무에 충분한 라벨이 있으면 전용 BERT나 가벼운 분류기가 유리할 수 있다. 후보 수가 매우 많으면 검색으로 줄이는 방법을, 설명·요약이 필요하면 생성 모델을 함께 검토한다. 이는 구조와 실험에 근거한 도입 의견이다.
 
-**Production에 지금 적용할 가치가 있는가?** 제한된 업무를 병행 처리하며 검증하는 단계에는 있다. 이 자료만으로 자동 처리 권한을 전면 위임할 근거는 부족하다. 입력 잘림과 버전 고정, 확률 보정, 사람에게 넘기는 조건, 오류 로그, 기본 모델로 되돌리는 경로까지 포함해 업무별 기준을 통과해야 한다. Docker 재현성은 품질 보증을 대신하지 않는다.
+**Production에 지금 적용할 가치가 있는가?** 제한된 업무를 병행 처리하며 가설을 검증하는 단계에는 있다. 합성 자료, 작은 시험셋, CPU 자원, 단일 seed와 동결 학습이라는 한계 때문에 이 자료만으로 자동 처리 권한을 전면 위임할 근거는 부족하다. 입력 잘림과 버전 고정, 확률 보정, 사람에게 넘기는 조건, 오류 로그, 기본 모델로 되돌리는 경로까지 포함해 업무별 기준을 통과해야 한다. Docker 재현성은 품질 보증을 대신하지 않는다.
 
-**추가로 무엇을 확인해야 하나?** 실제 한국어 문의를 독립 검수한 시험 세트, 새 유형을 학습에서 제외한 holdout, 질문의 여러 표현, 선택지 순서·수, 여러 seed의 추가 학습, 고정 27분류 KoBERT와의 비교, 기존 과제 회귀, 동일 조건의 Jev 비교와 부하 시험이다. 그 결과가 있어야 이 모델의 유연성이 운영 비용과 오류 감소로 이어지는지 판단할 수 있다.
+**추가로 무엇을 확인해야 하나?** 실제 한국어 문의를 독립 검수한 시험 세트, 더 큰 unseen-category holdout, 틀린 부모 prefix를 섞은 학습, 질문의 여러 표현, 선택지 순서·수, 여러 seed의 추가 학습, 고정 27분류 KoBERT와의 비교, 기존 과제 회귀, 동일 조건의 Jev 비교와 부하 시험이다. 그 결과가 있어야 이 모델의 유연성이 운영 비용과 오류 감소로 이어지는지 판단할 수 있다.
 
 전체 출처와 저장한 자료 목록은 [자료 수집 기록](sources.md), 최신 실행 코드와 산출물은 [GitHub 저장소](https://github.com/sungreong/laya-korean-eval)에 정리했다.

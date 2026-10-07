@@ -110,5 +110,21 @@
     "after_bytes": 40744,
     "reduction_percent": 48.41,
     "quality": 85
+  },
+  {
+    "original": "09-hierarchical-prefix-results.png",
+    "optimized": "09-hierarchical-prefix-results.webp",
+    "original_dimensions": [
+      2384,
+      897
+    ],
+    "display_dimensions": [
+      2384,
+      897
+    ],
+    "before_bytes": 95487,
+    "after_bytes": 49442,
+    "reduction_percent": 48.22,
+    "quality": 85
   }
 ]

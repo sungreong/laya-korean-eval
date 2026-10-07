@@ -1,0 +1,418 @@
+{
+  "status": "complete",
+  "model": "KoBERT real-[MASK] shared scorer",
+  "checkpoint": "evaluation/kobert-mask-hierarchical-prefix-e1/selected-model",
+  "fixture": "datasets/complaints/unseen",
+  "checkpoint_config": {
+    "base_revision": "359874884642d748079d4dd4ff547f2cdbff67d6",
+    "max_length": 512,
+    "hierarchical_joint": true,
+    "head_layers": 0
+  },
+  "fixture_sha256": {
+    "taxonomy.json": "ada6fc90ec2d0e66eaa09f6a01b99f6d40dd49c3566b04f591d26bea90fc51e1",
+    "cases.json": "ea633b4b91dd36e7bd5f2b2335378bafdaacc572bc28ae088283e4e3300d5321"
+  },
+  "script_sha256": "38bfd6010c9f90a6c1134135a363d070390113fae3cc7880dafead7f9223d94c",
+  "methods": {
+    "flat27": {
+      "strict": {
+        "n": 27,
+        "correct_paths": 0,
+        "major_accuracy": 0.2222222222222222,
+        "middle_path_accuracy": 0.0,
+        "exact_path_accuracy": 0.0,
+        "wilson95_exact": [
+          0.0,
+          0.12455502974186107
+        ],
+        "first_error_level": {
+          "major": 21,
+          "middle": 6,
+          "leaf": 0
+        },
+        "leaf_macro_f1": 0.0
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 9,
+          "correct_paths": 0,
+          "major_accuracy": 0.2222222222222222,
+          "middle_path_accuracy": 0.0,
+          "exact_path_accuracy": 0.0,
+          "wilson95_exact": [
+            0.0,
+            0.2991450484195325
+          ],
+          "first_error_level": {
+            "major": 7,
+            "middle": 2,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.0
+        },
+        "implicit": {
+          "n": 9,
+          "correct_paths": 0,
+          "major_accuracy": 0.2222222222222222,
+          "middle_path_accuracy": 0.0,
+          "exact_path_accuracy": 0.0,
+          "wilson95_exact": [
+            0.0,
+            0.2991450484195325
+          ],
+          "first_error_level": {
+            "major": 7,
+            "middle": 2,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.0
+        },
+        "mixed_context": {
+          "n": 9,
+          "correct_paths": 0,
+          "major_accuracy": 0.2222222222222222,
+          "middle_path_accuracy": 0.0,
+          "exact_path_accuracy": 0.0,
+          "wilson95_exact": [
+            0.0,
+            0.2991450484195325
+          ],
+          "first_error_level": {
+            "major": 7,
+            "middle": 2,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.0
+        }
+      },
+      "under_specified": {
+        "n": 0,
+        "acceptable_path_hits": 0,
+        "note": "Not single-answer accuracy. All these cases require clarification; the classifier was forced to choose."
+      },
+      "latency_ms_p50": 486.2093849806115,
+      "latency_ms_p95": 554.422108019935,
+      "cases_with_input_or_option_truncation": 27,
+      "by_novelty": {
+        "new_leaf": {
+          "n": 9,
+          "correct_paths": 0,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.0,
+          "exact_path_accuracy": 0.0,
+          "wilson95_exact": [
+            0.0,
+            0.2991450484195325
+          ],
+          "first_error_level": {
+            "major": 6,
+            "middle": 3,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.0
+        },
+        "new_major": {
+          "n": 9,
+          "correct_paths": 0,
+          "major_accuracy": 0.0,
+          "middle_path_accuracy": 0.0,
+          "exact_path_accuracy": 0.0,
+          "wilson95_exact": [
+            0.0,
+            0.2991450484195325
+          ],
+          "first_error_level": {
+            "major": 9,
+            "middle": 0,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.0
+        },
+        "new_middle": {
+          "n": 9,
+          "correct_paths": 0,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.0,
+          "exact_path_accuracy": 0.0,
+          "wilson95_exact": [
+            0.0,
+            0.2991450484195325
+          ],
+          "first_error_level": {
+            "major": 6,
+            "middle": 3,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.0
+        }
+      }
+    },
+    "cascade": {
+      "strict": {
+        "n": 27,
+        "correct_paths": 7,
+        "major_accuracy": 0.3333333333333333,
+        "middle_path_accuracy": 0.2962962962962963,
+        "exact_path_accuracy": 0.25925925925925924,
+        "wilson95_exact": [
+          0.13170374561907439,
+          0.4467857131455254
+        ],
+        "first_error_level": {
+          "major": 18,
+          "middle": 1,
+          "leaf": 1
+        },
+        "leaf_macro_f1": 0.03932748538011696
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 9,
+          "correct_paths": 3,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.4444444444444444,
+          "exact_path_accuracy": 0.3333333333333333,
+          "wilson95_exact": [
+            0.12058381838691423,
+            0.6457978644195965
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 0,
+            "leaf": 1
+          },
+          "leaf_macro_f1": 0.05555555555555555
+        },
+        "implicit": {
+          "n": 9,
+          "correct_paths": 2,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.2222222222222222,
+          "exact_path_accuracy": 0.2222222222222222,
+          "wilson95_exact": [
+            0.06322510711784873,
+            0.5474110308930027
+          ],
+          "first_error_level": {
+            "major": 6,
+            "middle": 1,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.026455026455026454
+        },
+        "mixed_context": {
+          "n": 9,
+          "correct_paths": 2,
+          "major_accuracy": 0.2222222222222222,
+          "middle_path_accuracy": 0.2222222222222222,
+          "exact_path_accuracy": 0.2222222222222222,
+          "wilson95_exact": [
+            0.06322510711784873,
+            0.5474110308930027
+          ],
+          "first_error_level": {
+            "major": 7,
+            "middle": 0,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.023148148148148147
+        }
+      },
+      "under_specified": {
+        "n": 0,
+        "acceptable_path_hits": 0,
+        "note": "Not single-answer accuracy. All these cases require clarification; the classifier was forced to choose."
+      },
+      "latency_ms_p50": 469.10419897176325,
+      "latency_ms_p95": 516.058528033318,
+      "cases_with_input_or_option_truncation": 0,
+      "by_novelty": {
+        "new_leaf": {
+          "n": 9,
+          "correct_paths": 3,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.4444444444444444,
+          "exact_path_accuracy": 0.3333333333333333,
+          "wilson95_exact": [
+            0.12058381838691423,
+            0.6457978644195965
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 0,
+            "leaf": 1
+          },
+          "leaf_macro_f1": 0.027777777777777776
+        },
+        "new_major": {
+          "n": 9,
+          "correct_paths": 0,
+          "major_accuracy": 0.0,
+          "middle_path_accuracy": 0.0,
+          "exact_path_accuracy": 0.0,
+          "wilson95_exact": [
+            0.0,
+            0.2991450484195325
+          ],
+          "first_error_level": {
+            "major": 9,
+            "middle": 0,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.0
+        },
+        "new_middle": {
+          "n": 9,
+          "correct_paths": 4,
+          "major_accuracy": 0.5555555555555556,
+          "middle_path_accuracy": 0.4444444444444444,
+          "exact_path_accuracy": 0.4444444444444444,
+          "wilson95_exact": [
+            0.18877852109766918,
+            0.733348706504501
+          ],
+          "first_error_level": {
+            "major": 4,
+            "middle": 1,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.032407407407407406
+        }
+      }
+    },
+    "cascade_prefix": {
+      "strict": {
+        "n": 27,
+        "correct_paths": 3,
+        "major_accuracy": 0.3333333333333333,
+        "middle_path_accuracy": 0.14814814814814814,
+        "exact_path_accuracy": 0.1111111111111111,
+        "wilson95_exact": [
+          0.038520348283099456,
+          0.2805780081827925
+        ],
+        "first_error_level": {
+          "major": 18,
+          "middle": 5,
+          "leaf": 1
+        },
+        "leaf_macro_f1": 0.006410256410256411
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.2222222222222222,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 2,
+            "leaf": 1
+          },
+          "leaf_macro_f1": 0.006944444444444444
+        },
+        "implicit": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.1111111111111111,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 6,
+            "middle": 2,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.006172839506172839
+        },
+        "mixed_context": {
+          "n": 9,
+          "correct_paths": 1,
+          "major_accuracy": 0.2222222222222222,
+          "middle_path_accuracy": 0.1111111111111111,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.019890887638545657,
+            0.43499970557664625
+          ],
+          "first_error_level": {
+            "major": 7,
+            "middle": 1,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.006172839506172839
+        }
+      },
+      "under_specified": {
+        "n": 0,
+        "acceptable_path_hits": 0,
+        "note": "Not single-answer accuracy. All these cases require clarification; the classifier was forced to choose."
+      },
+      "latency_ms_p50": 507.1664329734631,
+      "latency_ms_p95": 580.6508513633162,
+      "cases_with_input_or_option_truncation": 0,
+      "by_novelty": {
+        "new_leaf": {
+          "n": 9,
+          "correct_paths": 3,
+          "major_accuracy": 0.4444444444444444,
+          "middle_path_accuracy": 0.4444444444444444,
+          "exact_path_accuracy": 0.3333333333333333,
+          "wilson95_exact": [
+            0.12058381838691423,
+            0.6457978644195965
+          ],
+          "first_error_level": {
+            "major": 5,
+            "middle": 0,
+            "leaf": 1
+          },
+          "leaf_macro_f1": 0.01515151515151515
+        },
+        "new_major": {
+          "n": 9,
+          "correct_paths": 0,
+          "major_accuracy": 0.0,
+          "middle_path_accuracy": 0.0,
+          "exact_path_accuracy": 0.0,
+          "wilson95_exact": [
+            0.0,
+            0.2991450484195325
+          ],
+          "first_error_level": {
+            "major": 9,
+            "middle": 0,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.0
+        },
+        "new_middle": {
+          "n": 9,
+          "correct_paths": 0,
+          "major_accuracy": 0.5555555555555556,
+          "middle_path_accuracy": 0.0,
+          "exact_path_accuracy": 0.0,
+          "wilson95_exact": [
+            0.0,
+            0.2991450484195325
+          ],
+          "first_error_level": {
+            "major": 4,
+            "middle": 5,
+            "leaf": 0
+          },
+          "leaf_macro_f1": 0.0
+        }
+      }
+    }
+  }
+}

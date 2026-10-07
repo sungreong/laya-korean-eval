@@ -1,0 +1,3063 @@
+[
+  {
+    "id": "L28-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "novelty": "new_leaf",
+    "summary": "투명 페트병과 일반 플라스틱을 어떻게 나눠 버리는지 수거 기준을 알려 달라고 함.",
+    "expected_leaf": "L28",
+    "acceptable_leaves": [
+      "L28"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L20",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "온라인 민원 장애"
+    ],
+    "expected_path": [
+      "생활환경",
+      "청소·폐기물",
+      "재활용품 분리배출"
+    ],
+    "acceptable_paths": [
+      [
+        "생활환경",
+        "청소·폐기물",
+        "재활용품 분리배출"
+      ]
+    ],
+    "latency_ms": 1109.2639419948682,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A3",
+          "probabilities": {
+            "A1": 0.0921,
+            "A2": 0.0809,
+            "A3": 0.7112,
+            "A4": 0.0709,
+            "A5": 0.0314,
+            "A6": 0.0135
+          },
+          "confidence": 0.4307,
+          "answer_confidence": 0.7112,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 235,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A3B1",
+          "probabilities": {
+            "A3B1": 0.9209,
+            "A3B2": 0.017,
+            "A3B3": 0.0255,
+            "A3B4": 0.0366
+          },
+          "confidence": 0.7405,
+          "answer_confidence": 0.9209,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 216,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 3,
+        "answer": {
+          "type": "choice",
+          "choice": "L20",
+          "probabilities": {
+            "L19": 0.0848,
+            "L20": 0.505,
+            "L21": 0.4102
+          },
+          "confidence": 0.1627,
+          "answer_confidence": 0.505,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 195,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L28-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "novelty": "new_leaf",
+    "summary": "내용물을 씻은 유리병과 종이팩을 같은 봉투에 넣어도 되는지 문의함.",
+    "expected_leaf": "L28",
+    "acceptable_leaves": [
+      "L28"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L20",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "온라인 민원 장애"
+    ],
+    "expected_path": [
+      "생활환경",
+      "청소·폐기물",
+      "재활용품 분리배출"
+    ],
+    "acceptable_paths": [
+      [
+        "생활환경",
+        "청소·폐기물",
+        "재활용품 분리배출"
+      ]
+    ],
+    "latency_ms": 1000.9288370492868,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A3",
+          "probabilities": {
+            "A1": 0.1623,
+            "A2": 0.0512,
+            "A3": 0.6521,
+            "A4": 0.0483,
+            "A5": 0.073,
+            "A6": 0.0131
+          },
+          "confidence": 0.3748,
+          "answer_confidence": 0.6521,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 233,
+          "output_tokens": 0,
+          "state_tokens": 44,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A3B1",
+          "probabilities": {
+            "A3B1": 0.5659,
+            "A3B2": 0.0584,
+            "A3B3": 0.1076,
+            "A3B4": 0.268
+          },
+          "confidence": 0.2203,
+          "answer_confidence": 0.5659,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 214,
+          "output_tokens": 0,
+          "state_tokens": 44,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 3,
+        "answer": {
+          "type": "choice",
+          "choice": "L20",
+          "probabilities": {
+            "L19": 0.1415,
+            "L20": 0.6251,
+            "L21": 0.2333
+          },
+          "confidence": 0.1717,
+          "answer_confidence": 0.6251,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 193,
+          "output_tokens": 0,
+          "state_tokens": 44,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L28-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "novelty": "new_leaf",
+    "summary": "일반 쓰레기는 정상 수거됐고 남은 페트병 묶음의 올바른 배출 요일과 방법만 확인하고 싶어 함.",
+    "expected_leaf": "L28",
+    "acceptable_leaves": [
+      "L28"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L01",
+    "predicted_path": [
+      "생활환경",
+      "청소·폐기물",
+      "생활쓰레기 수거"
+    ],
+    "expected_path": [
+      "생활환경",
+      "청소·폐기물",
+      "재활용품 분리배출"
+    ],
+    "acceptable_paths": [
+      [
+        "생활환경",
+        "청소·폐기물",
+        "재활용품 분리배출"
+      ]
+    ],
+    "latency_ms": 1132.3659920017235,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A1",
+          "probabilities": {
+            "A1": 0.4574,
+            "A2": 0.1166,
+            "A3": 0.3328,
+            "A4": 0.0402,
+            "A5": 0.0381,
+            "A6": 0.0149
+          },
+          "confidence": 0.2795,
+          "answer_confidence": 0.4574,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 240,
+          "output_tokens": 0,
+          "state_tokens": 51,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A1B1",
+          "probabilities": {
+            "A1B1": 0.7808,
+            "A1B2": 0.1834,
+            "A1B3": 0.0175,
+            "A1B4": 0.0182
+          },
+          "confidence": 0.5325,
+          "answer_confidence": 0.7808,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 219,
+          "output_tokens": 0,
+          "state_tokens": 51,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "L01",
+          "probabilities": {
+            "L01": 0.8067,
+            "L02": 0.0684,
+            "L03": 0.06,
+            "L28": 0.0649
+          },
+          "confidence": 0.4929,
+          "answer_confidence": 0.8067,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 236,
+          "output_tokens": 0,
+          "state_tokens": 51,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L29-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "novelty": "new_leaf",
+    "summary": "도로 굴착 구간에 안전펜스와 야간 경고등이 없어 보행자 사고가 우려된다고 신고함.",
+    "expected_leaf": "L29",
+    "acceptable_leaves": [
+      "L29"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L29",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "도로공사 안전관리"
+    ],
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "도로공사 안전관리"
+    ],
+    "acceptable_paths": [
+      [
+        "도로·교통",
+        "도로시설",
+        "도로공사 안전관리"
+      ]
+    ],
+    "latency_ms": 1021.8513599829748,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A2",
+          "probabilities": {
+            "A1": 0.0,
+            "A2": 0.997,
+            "A3": 0.0002,
+            "A4": 0.002,
+            "A5": 0.0008,
+            "A6": 0.0
+          },
+          "confidence": 0.9871,
+          "answer_confidence": 0.997,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 238,
+          "output_tokens": 0,
+          "state_tokens": 49,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A2B2",
+          "probabilities": {
+            "A2B1": 0.0025,
+            "A2B2": 0.6302,
+            "A2B3": 0.1193,
+            "A2B4": 0.248
+          },
+          "confidence": 0.347,
+          "answer_confidence": 0.6302,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 224,
+          "output_tokens": 0,
+          "state_tokens": 49,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "L29",
+          "probabilities": {
+            "L13": 0.3223,
+            "L14": 0.2121,
+            "L15": 0.0791,
+            "L29": 0.3866
+          },
+          "confidence": 0.0898,
+          "answer_confidence": 0.3866,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 222,
+          "output_tokens": 0,
+          "state_tokens": 49,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L29-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "novelty": "new_leaf",
+    "summary": "아스팔트 보수 자체보다 작업장 주변 안내 표지와 우회 통로가 없어 위험하다는 요청임.",
+    "expected_leaf": "L29",
+    "acceptable_leaves": [
+      "L29"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L15",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "도로공사 안전관리"
+    ],
+    "acceptable_paths": [
+      [
+        "도로·교통",
+        "도로시설",
+        "도로공사 안전관리"
+      ]
+    ],
+    "latency_ms": 1150.1182689680718,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A2",
+          "probabilities": {
+            "A1": 0.0326,
+            "A2": 0.6102,
+            "A3": 0.2355,
+            "A4": 0.0837,
+            "A5": 0.0244,
+            "A6": 0.0137
+          },
+          "confidence": 0.3802,
+          "answer_confidence": 0.6102,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 236,
+          "output_tokens": 0,
+          "state_tokens": 47,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A2B2",
+          "probabilities": {
+            "A2B1": 0.0213,
+            "A2B2": 0.9193,
+            "A2B3": 0.0421,
+            "A2B4": 0.0172
+          },
+          "confidence": 0.7383,
+          "answer_confidence": 0.9193,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 222,
+          "output_tokens": 0,
+          "state_tokens": 47,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "L15",
+          "probabilities": {
+            "L13": 0.2432,
+            "L14": 0.0033,
+            "L15": 0.7452,
+            "L29": 0.0083
+          },
+          "confidence": 0.5515,
+          "answer_confidence": 0.7452,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 220,
+          "output_tokens": 0,
+          "state_tokens": 47,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L29-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "novelty": "new_leaf",
+    "summary": "공사 소음은 끝났지만 차로에 남은 작업 장비와 쓰러진 안전콘을 정리해 달라고 함.",
+    "expected_leaf": "L29",
+    "acceptable_leaves": [
+      "L29"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L18",
+    "predicted_path": [
+      "도로·교통",
+      "대중교통",
+      "운수종사자 응대"
+    ],
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "도로공사 안전관리"
+    ],
+    "acceptable_paths": [
+      [
+        "도로·교통",
+        "도로시설",
+        "도로공사 안전관리"
+      ]
+    ],
+    "latency_ms": 1055.5061899940483,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A2",
+          "probabilities": {
+            "A1": 0.0142,
+            "A2": 0.9332,
+            "A3": 0.0104,
+            "A4": 0.0293,
+            "A5": 0.0116,
+            "A6": 0.0013
+          },
+          "confidence": 0.8123,
+          "answer_confidence": 0.9332,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 234,
+          "output_tokens": 0,
+          "state_tokens": 45,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A2B3",
+          "probabilities": {
+            "A2B1": 0.3115,
+            "A2B2": 0.1946,
+            "A2B3": 0.4201,
+            "A2B4": 0.0738
+          },
+          "confidence": 0.1066,
+          "answer_confidence": 0.4201,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 220,
+          "output_tokens": 0,
+          "state_tokens": 45,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 3,
+        "answer": {
+          "type": "choice",
+          "choice": "L18",
+          "probabilities": {
+            "L16": 0.2743,
+            "L17": 0.262,
+            "L18": 0.4638
+          },
+          "confidence": 0.0333,
+          "answer_confidence": 0.4638,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 186,
+          "output_tokens": 0,
+          "state_tokens": 45,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L30-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "novelty": "new_leaf",
+    "summary": "복지 지원 내용을 담당자와 상담할 방문 시간을 다음 주로 예약하고 싶어 함.",
+    "expected_leaf": "L30",
+    "acceptable_leaves": [
+      "L30"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L22",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "지원 자격"
+    ],
+    "expected_path": [
+      "행정·복지",
+      "복지지원",
+      "복지 상담 예약"
+    ],
+    "acceptable_paths": [
+      [
+        "행정·복지",
+        "복지지원",
+        "복지 상담 예약"
+      ]
+    ],
+    "latency_ms": 973.0158669990487,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A3",
+          "probabilities": {
+            "A1": 0.0022,
+            "A2": 0.0006,
+            "A3": 0.9898,
+            "A4": 0.0067,
+            "A5": 0.0005,
+            "A6": 0.0003
+          },
+          "confidence": 0.9624,
+          "answer_confidence": 0.9898,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 230,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A3B2",
+          "probabilities": {
+            "A3B1": 0.0,
+            "A3B2": 0.9972,
+            "A3B3": 0.0009,
+            "A3B4": 0.0019
+          },
+          "confidence": 0.9846,
+          "answer_confidence": 0.9972,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 211,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "L22",
+          "probabilities": {
+            "L22": 0.7528,
+            "L23": 0.0554,
+            "L24": 0.0413,
+            "L30": 0.1505
+          },
+          "confidence": 0.4296,
+          "answer_confidence": 0.7528,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 213,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L30-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "novelty": "new_leaf",
+    "summary": "자격이나 서류 답변보다 담당 복지사와 통화 가능한 시간을 먼저 잡아 달라고 함.",
+    "expected_leaf": "L30",
+    "acceptable_leaves": [
+      "L30"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L24",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "신청·제출 서류"
+    ],
+    "expected_path": [
+      "행정·복지",
+      "복지지원",
+      "복지 상담 예약"
+    ],
+    "acceptable_paths": [
+      [
+        "행정·복지",
+        "복지지원",
+        "복지 상담 예약"
+      ]
+    ],
+    "latency_ms": 1086.3833829644136,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A3",
+          "probabilities": {
+            "A1": 0.0081,
+            "A2": 0.0102,
+            "A3": 0.8904,
+            "A4": 0.0744,
+            "A5": 0.0071,
+            "A6": 0.0099
+          },
+          "confidence": 0.7415,
+          "answer_confidence": 0.8904,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 234,
+          "output_tokens": 0,
+          "state_tokens": 45,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A3B2",
+          "probabilities": {
+            "A3B1": 0.0017,
+            "A3B2": 0.9723,
+            "A3B3": 0.0068,
+            "A3B4": 0.0192
+          },
+          "confidence": 0.8933,
+          "answer_confidence": 0.9723,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 215,
+          "output_tokens": 0,
+          "state_tokens": 45,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "L24",
+          "probabilities": {
+            "L22": 0.2931,
+            "L23": 0.2279,
+            "L24": 0.2934,
+            "L30": 0.1857
+          },
+          "confidence": 0.0124,
+          "answer_confidence": 0.2934,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 217,
+          "output_tokens": 0,
+          "state_tokens": 45,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L30-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "novelty": "new_leaf",
+    "summary": "지원금 입금은 확인됐고 기존 상담 약속만 다른 날짜로 변경해 달라는 요청임.",
+    "expected_leaf": "L30",
+    "acceptable_leaves": [
+      "L30"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L35",
+    "predicted_path": [
+      "경제·일자리",
+      "취업지원",
+      "직업훈련 신청"
+    ],
+    "expected_path": [
+      "행정·복지",
+      "복지지원",
+      "복지 상담 예약"
+    ],
+    "acceptable_paths": [
+      [
+        "행정·복지",
+        "복지지원",
+        "복지 상담 예약"
+      ]
+    ],
+    "latency_ms": 778.0544820125215,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A5",
+          "probabilities": {
+            "A1": 0.1781,
+            "A2": 0.1753,
+            "A3": 0.1942,
+            "A4": 0.0294,
+            "A5": 0.3704,
+            "A6": 0.0527
+          },
+          "confidence": 0.1308,
+          "answer_confidence": 0.3704,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 230,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "A5B1",
+          "probabilities": {
+            "A5B1": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 114,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L35",
+          "probabilities": {
+            "L35": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 131,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L31-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "novelty": "new_middle",
+    "summary": "차도 가장자리에 다친 유기견이 움직이지 못하고 있어 구조와 보호를 요청함.",
+    "expected_leaf": "L31",
+    "acceptable_leaves": [
+      "L31"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L20",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "온라인 민원 장애"
+    ],
+    "expected_path": [
+      "생활환경",
+      "동물보호",
+      "유기동물 구조"
+    ],
+    "acceptable_paths": [
+      [
+        "생활환경",
+        "동물보호",
+        "유기동물 구조"
+      ]
+    ],
+    "latency_ms": 941.6427169926465,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A3",
+          "probabilities": {
+            "A1": 0.0327,
+            "A2": 0.2798,
+            "A3": 0.6182,
+            "A4": 0.0404,
+            "A5": 0.0214,
+            "A6": 0.0075
+          },
+          "confidence": 0.4341,
+          "answer_confidence": 0.6182,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 232,
+          "output_tokens": 0,
+          "state_tokens": 43,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A3B1",
+          "probabilities": {
+            "A3B1": 0.7807,
+            "A3B2": 0.0332,
+            "A3B3": 0.0902,
+            "A3B4": 0.0959
+          },
+          "confidence": 0.4603,
+          "answer_confidence": 0.7807,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 213,
+          "output_tokens": 0,
+          "state_tokens": 43,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 3,
+        "answer": {
+          "type": "choice",
+          "choice": "L20",
+          "probabilities": {
+            "L19": 0.1187,
+            "L20": 0.4509,
+            "L21": 0.4305
+          },
+          "confidence": 0.1126,
+          "answer_confidence": 0.4509,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 192,
+          "output_tokens": 0,
+          "state_tokens": 43,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L31-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "novelty": "new_middle",
+    "summary": "목줄 없는 어린 개가 며칠째 공원을 돌며 다리를 절고 있어 안전하게 데려가 달라고 함.",
+    "expected_leaf": "L31",
+    "acceptable_leaves": [
+      "L31"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L35",
+    "predicted_path": [
+      "경제·일자리",
+      "취업지원",
+      "직업훈련 신청"
+    ],
+    "expected_path": [
+      "생활환경",
+      "동물보호",
+      "유기동물 구조"
+    ],
+    "acceptable_paths": [
+      [
+        "생활환경",
+        "동물보호",
+        "유기동물 구조"
+      ]
+    ],
+    "latency_ms": 868.1540249963291,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A5",
+          "probabilities": {
+            "A1": 0.1349,
+            "A2": 0.2156,
+            "A3": 0.1072,
+            "A4": 0.0593,
+            "A5": 0.4533,
+            "A6": 0.0297
+          },
+          "confidence": 0.1789,
+          "answer_confidence": 0.4533,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 235,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "A5B1",
+          "probabilities": {
+            "A5B1": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 119,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L35",
+          "probabilities": {
+            "L35": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 136,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L31-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "novelty": "new_middle",
+    "summary": "공원 쓰레기 문제도 있지만 지금은 벤치 아래 쓰러진 고양이의 긴급 구조가 우선이라고 함.",
+    "expected_leaf": "L31",
+    "acceptable_leaves": [
+      "L31"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L20",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "온라인 민원 장애"
+    ],
+    "expected_path": [
+      "생활환경",
+      "동물보호",
+      "유기동물 구조"
+    ],
+    "acceptable_paths": [
+      [
+        "생활환경",
+        "동물보호",
+        "유기동물 구조"
+      ]
+    ],
+    "latency_ms": 994.355293980334,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A3",
+          "probabilities": {
+            "A1": 0.0578,
+            "A2": 0.0221,
+            "A3": 0.8972,
+            "A4": 0.0096,
+            "A5": 0.0115,
+            "A6": 0.0018
+          },
+          "confidence": 0.7468,
+          "answer_confidence": 0.8972,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 238,
+          "output_tokens": 0,
+          "state_tokens": 49,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A3B1",
+          "probabilities": {
+            "A3B1": 0.5894,
+            "A3B2": 0.0328,
+            "A3B3": 0.2889,
+            "A3B4": 0.0888
+          },
+          "confidence": 0.2805,
+          "answer_confidence": 0.5894,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 219,
+          "output_tokens": 0,
+          "state_tokens": 49,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 3,
+        "answer": {
+          "type": "choice",
+          "choice": "L20",
+          "probabilities": {
+            "L19": 0.1296,
+            "L20": 0.4797,
+            "L21": 0.3907
+          },
+          "confidence": 0.104,
+          "answer_confidence": 0.4797,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 198,
+          "output_tokens": 0,
+          "state_tokens": 49,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L32-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "novelty": "new_middle",
+    "summary": "자전거 전용도로에 적재물이 쌓여 통행할 수 없으니 장애물을 치워 달라고 함.",
+    "expected_leaf": "L32",
+    "acceptable_leaves": [
+      "L32"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L32",
+    "predicted_path": [
+      "도로·교통",
+      "자전거·보행",
+      "자전거도로 장애물"
+    ],
+    "expected_path": [
+      "도로·교통",
+      "자전거·보행",
+      "자전거도로 장애물"
+    ],
+    "acceptable_paths": [
+      [
+        "도로·교통",
+        "자전거·보행",
+        "자전거도로 장애물"
+      ]
+    ],
+    "latency_ms": 906.7537609953433,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A2",
+          "probabilities": {
+            "A1": 0.0002,
+            "A2": 0.9979,
+            "A3": 0.0015,
+            "A4": 0.0002,
+            "A5": 0.0001,
+            "A6": 0.0001
+          },
+          "confidence": 0.9904,
+          "answer_confidence": 0.9979,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 236,
+          "output_tokens": 0,
+          "state_tokens": 47,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A2B4",
+          "probabilities": {
+            "A2B1": 0.0004,
+            "A2B2": 0.2356,
+            "A2B3": 0.0086,
+            "A2B4": 0.7553
+          },
+          "confidence": 0.5695,
+          "answer_confidence": 0.7553,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 222,
+          "output_tokens": 0,
+          "state_tokens": 47,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L32",
+          "probabilities": {
+            "L32": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 139,
+          "output_tokens": 0,
+          "state_tokens": 47,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L32-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "novelty": "new_middle",
+    "summary": "두 바퀴로 지나가는 구간을 공사 자재가 모두 막아 차도로 내려가야 한다고 설명함.",
+    "expected_leaf": "L32",
+    "acceptable_leaves": [
+      "L32"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L29",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "도로공사 안전관리"
+    ],
+    "expected_path": [
+      "도로·교통",
+      "자전거·보행",
+      "자전거도로 장애물"
+    ],
+    "acceptable_paths": [
+      [
+        "도로·교통",
+        "자전거·보행",
+        "자전거도로 장애물"
+      ]
+    ],
+    "latency_ms": 1026.6180960461497,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A2",
+          "probabilities": {
+            "A1": 0.1142,
+            "A2": 0.3396,
+            "A3": 0.287,
+            "A4": 0.1612,
+            "A5": 0.0774,
+            "A6": 0.0206
+          },
+          "confidence": 0.1377,
+          "answer_confidence": 0.3396,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 235,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A2B2",
+          "probabilities": {
+            "A2B1": 0.0574,
+            "A2B2": 0.3855,
+            "A2B3": 0.3557,
+            "A2B4": 0.2014
+          },
+          "confidence": 0.1186,
+          "answer_confidence": 0.3855,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 221,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "L29",
+          "probabilities": {
+            "L13": 0.0929,
+            "L14": 0.0604,
+            "L15": 0.0469,
+            "L29": 0.7998
+          },
+          "confidence": 0.486,
+          "answer_confidence": 0.7998,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 219,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L32-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "novelty": "new_middle",
+    "summary": "불법주차 단속 문의가 아니라 자전거 길 한가운데 세워진 공유 킥보드를 이동해 달라는 요청임.",
+    "expected_leaf": "L32",
+    "acceptable_leaves": [
+      "L32"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L10",
+    "predicted_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "expected_path": [
+      "도로·교통",
+      "자전거·보행",
+      "자전거도로 장애물"
+    ],
+    "acceptable_paths": [
+      [
+        "도로·교통",
+        "자전거·보행",
+        "자전거도로 장애물"
+      ]
+    ],
+    "latency_ms": 955.7372750132345,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A2",
+          "probabilities": {
+            "A1": 0.0007,
+            "A2": 0.9837,
+            "A3": 0.0012,
+            "A4": 0.006,
+            "A5": 0.0072,
+            "A6": 0.0013
+          },
+          "confidence": 0.9421,
+          "answer_confidence": 0.9837,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 239,
+          "output_tokens": 0,
+          "state_tokens": 50,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A2B1",
+          "probabilities": {
+            "A2B1": 0.946,
+            "A2B2": 0.0079,
+            "A2B3": 0.0132,
+            "A2B4": 0.0329
+          },
+          "confidence": 0.8124,
+          "answer_confidence": 0.946,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 225,
+          "output_tokens": 0,
+          "state_tokens": 50,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 3,
+        "answer": {
+          "type": "choice",
+          "choice": "L10",
+          "probabilities": {
+            "L10": 0.588,
+            "L11": 0.4081,
+            "L12": 0.0038
+          },
+          "confidence": 0.3634,
+          "answer_confidence": 0.588,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 194,
+          "output_tokens": 0,
+          "state_tokens": 50,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L33-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "novelty": "new_middle",
+    "summary": "자동차세 고지서의 납부 기한과 온라인 납부 방법을 알려 달라고 함.",
+    "expected_leaf": "L33",
+    "acceptable_leaves": [
+      "L33"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L34",
+    "predicted_path": [
+      "주택·건축",
+      "건축물 안전",
+      "건축물 붕괴 위험"
+    ],
+    "expected_path": [
+      "행정·복지",
+      "지방세",
+      "지방세 납부"
+    ],
+    "acceptable_paths": [
+      [
+        "행정·복지",
+        "지방세",
+        "지방세 납부"
+      ]
+    ],
+    "latency_ms": 812.2933840495534,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A4",
+          "probabilities": {
+            "A1": 0.0153,
+            "A2": 0.1275,
+            "A3": 0.0526,
+            "A4": 0.7651,
+            "A5": 0.0336,
+            "A6": 0.0059
+          },
+          "confidence": 0.5365,
+          "answer_confidence": 0.7651,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 230,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "A4B1",
+          "probabilities": {
+            "A4B1": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 117,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L34",
+          "probabilities": {
+            "L34": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 136,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L33-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "novelty": "new_middle",
+    "summary": "구청에서 부과한 재산 관련 세금을 어느 계좌로 보내야 하는지 문의함.",
+    "expected_leaf": "L33",
+    "acceptable_leaves": [
+      "L33"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L35",
+    "predicted_path": [
+      "경제·일자리",
+      "취업지원",
+      "직업훈련 신청"
+    ],
+    "expected_path": [
+      "행정·복지",
+      "지방세",
+      "지방세 납부"
+    ],
+    "acceptable_paths": [
+      [
+        "행정·복지",
+        "지방세",
+        "지방세 납부"
+      ]
+    ],
+    "latency_ms": 758.0744469887577,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A5",
+          "probabilities": {
+            "A1": 0.048,
+            "A2": 0.0282,
+            "A3": 0.0822,
+            "A4": 0.2636,
+            "A5": 0.5716,
+            "A6": 0.0065
+          },
+          "confidence": 0.3551,
+          "answer_confidence": 0.5716,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 230,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "A5B1",
+          "probabilities": {
+            "A5B1": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 114,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L35",
+          "probabilities": {
+            "L35": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 131,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L33-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "novelty": "new_middle",
+    "summary": "복지 자격 상담은 끝났고 이번 전화에서는 체납된 지방세 내역만 확인하고 싶어 함.",
+    "expected_leaf": "L33",
+    "acceptable_leaves": [
+      "L33"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L33",
+    "predicted_path": [
+      "행정·복지",
+      "지방세",
+      "지방세 납부"
+    ],
+    "expected_path": [
+      "행정·복지",
+      "지방세",
+      "지방세 납부"
+    ],
+    "acceptable_paths": [
+      [
+        "행정·복지",
+        "지방세",
+        "지방세 납부"
+      ]
+    ],
+    "latency_ms": 889.1829579952173,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A3",
+          "probabilities": {
+            "A1": 0.0281,
+            "A2": 0.0143,
+            "A3": 0.9126,
+            "A4": 0.0246,
+            "A5": 0.0173,
+            "A6": 0.0031
+          },
+          "confidence": 0.7634,
+          "answer_confidence": 0.9126,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 233,
+          "output_tokens": 0,
+          "state_tokens": 44,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A3B4",
+          "probabilities": {
+            "A3B1": 0.2245,
+            "A3B2": 0.1286,
+            "A3B3": 0.0038,
+            "A3B4": 0.6431
+          },
+          "confidence": 0.3476,
+          "answer_confidence": 0.6431,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 214,
+          "output_tokens": 0,
+          "state_tokens": 44,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L33",
+          "probabilities": {
+            "L33": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 133,
+          "output_tokens": 0,
+          "state_tokens": 44,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L34-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "novelty": "new_major",
+    "summary": "오래된 상가 외벽에 큰 균열이 생기고 건물이 기울어 붕괴 위험 점검을 요청함.",
+    "expected_leaf": "L34",
+    "acceptable_leaves": [
+      "L34"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L34",
+    "predicted_path": [
+      "주택·건축",
+      "건축물 안전",
+      "건축물 붕괴 위험"
+    ],
+    "expected_path": [
+      "주택·건축",
+      "건축물 안전",
+      "건축물 붕괴 위험"
+    ],
+    "acceptable_paths": [
+      [
+        "주택·건축",
+        "건축물 안전",
+        "건축물 붕괴 위험"
+      ]
+    ],
+    "latency_ms": 855.4458639700897,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A4",
+          "probabilities": {
+            "A1": 0.0868,
+            "A2": 0.0464,
+            "A3": 0.074,
+            "A4": 0.6825,
+            "A5": 0.1085,
+            "A6": 0.0018
+          },
+          "confidence": 0.4081,
+          "answer_confidence": 0.6825,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 237,
+          "output_tokens": 0,
+          "state_tokens": 48,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "A4B1",
+          "probabilities": {
+            "A4B1": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 124,
+          "output_tokens": 0,
+          "state_tokens": 48,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L34",
+          "probabilities": {
+            "L34": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 143,
+          "output_tokens": 0,
+          "state_tokens": 48,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L34-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "novelty": "new_major",
+    "summary": "비가 샌다는 수준이 아니라 벽이 벌어지고 천장에서 콘크리트 조각이 떨어져 긴급 안전 확인이 필요함.",
+    "expected_leaf": "L34",
+    "acceptable_leaves": [
+      "L34"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L06",
+    "predicted_path": [
+      "생활환경",
+      "소음·악취",
+      "악취"
+    ],
+    "expected_path": [
+      "주택·건축",
+      "건축물 안전",
+      "건축물 붕괴 위험"
+    ],
+    "acceptable_paths": [
+      [
+        "주택·건축",
+        "건축물 안전",
+        "건축물 붕괴 위험"
+      ]
+    ],
+    "latency_ms": 1087.4661260168068,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A1",
+          "probabilities": {
+            "A1": 0.4793,
+            "A2": 0.0574,
+            "A3": 0.182,
+            "A4": 0.2405,
+            "A5": 0.0329,
+            "A6": 0.0079
+          },
+          "confidence": 0.2633,
+          "answer_confidence": 0.4793,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 243,
+          "output_tokens": 0,
+          "state_tokens": 54,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A1B2",
+          "probabilities": {
+            "A1B1": 0.2777,
+            "A1B2": 0.4072,
+            "A1B3": 0.1182,
+            "A1B4": 0.197
+          },
+          "confidence": 0.0665,
+          "answer_confidence": 0.4072,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 222,
+          "output_tokens": 0,
+          "state_tokens": 54,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 3,
+        "answer": {
+          "type": "choice",
+          "choice": "L06",
+          "probabilities": {
+            "L04": 0.4192,
+            "L05": 0.1216,
+            "L06": 0.4592
+          },
+          "confidence": 0.1098,
+          "answer_confidence": 0.4592,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 180,
+          "output_tokens": 0,
+          "state_tokens": 54,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L34-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "novelty": "new_major",
+    "summary": "도로 파손 신고가 아니라 도로 옆 빈 건물이 한쪽으로 기울어 보행자를 덮칠까 걱정된다는 민원임.",
+    "expected_leaf": "L34",
+    "acceptable_leaves": [
+      "L34"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L13",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "노면·보도 파손"
+    ],
+    "expected_path": [
+      "주택·건축",
+      "건축물 안전",
+      "건축물 붕괴 위험"
+    ],
+    "acceptable_paths": [
+      [
+        "주택·건축",
+        "건축물 안전",
+        "건축물 붕괴 위험"
+      ]
+    ],
+    "latency_ms": 1069.0061899949796,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A2",
+          "probabilities": {
+            "A1": 0.0005,
+            "A2": 0.9716,
+            "A3": 0.0175,
+            "A4": 0.0079,
+            "A5": 0.0021,
+            "A6": 0.0003
+          },
+          "confidence": 0.9126,
+          "answer_confidence": 0.9716,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 244,
+          "output_tokens": 0,
+          "state_tokens": 55,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A2B2",
+          "probabilities": {
+            "A2B1": 0.0016,
+            "A2B2": 0.9514,
+            "A2B3": 0.0215,
+            "A2B4": 0.0255
+          },
+          "confidence": 0.8313,
+          "answer_confidence": 0.9514,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 230,
+          "output_tokens": 0,
+          "state_tokens": 55,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "L13",
+          "probabilities": {
+            "L13": 0.6498,
+            "L14": 0.2452,
+            "L15": 0.101,
+            "L29": 0.004
+          },
+          "confidence": 0.3662,
+          "answer_confidence": 0.6498,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 228,
+          "output_tokens": 0,
+          "state_tokens": 55,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L35-explicit",
+    "channel": "콜센터",
+    "slice": "explicit",
+    "novelty": "new_major",
+    "summary": "실직 후 참여할 수 있는 용접 직업훈련 과정의 신청 자격과 일정을 문의함.",
+    "expected_leaf": "L35",
+    "acceptable_leaves": [
+      "L35"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L36",
+    "predicted_path": [
+      "교육·문화",
+      "도서관 서비스",
+      "도서 대출 문제"
+    ],
+    "expected_path": [
+      "경제·일자리",
+      "취업지원",
+      "직업훈련 신청"
+    ],
+    "acceptable_paths": [
+      [
+        "경제·일자리",
+        "취업지원",
+        "직업훈련 신청"
+      ]
+    ],
+    "latency_ms": 866.1668450222351,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A6",
+          "probabilities": {
+            "A1": 0.0766,
+            "A2": 0.122,
+            "A3": 0.0428,
+            "A4": 0.0205,
+            "A5": 0.3655,
+            "A6": 0.3726
+          },
+          "confidence": 0.2166,
+          "answer_confidence": 0.3726,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 232,
+          "output_tokens": 0,
+          "state_tokens": 43,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "A6B1",
+          "probabilities": {
+            "A6B1": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 115,
+          "output_tokens": 0,
+          "state_tokens": 43,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L36",
+          "probabilities": {
+            "L36": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 130,
+          "output_tokens": 0,
+          "state_tokens": 43,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L35-implicit",
+    "channel": "인터넷 상담",
+    "slice": "implicit",
+    "novelty": "new_major",
+    "summary": "새 일자리를 구하기 전에 지자체가 지원하는 기술 교육을 어디서 신청하는지 알고 싶어 함.",
+    "expected_leaf": "L35",
+    "acceptable_leaves": [
+      "L35"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L35",
+    "predicted_path": [
+      "경제·일자리",
+      "취업지원",
+      "직업훈련 신청"
+    ],
+    "expected_path": [
+      "경제·일자리",
+      "취업지원",
+      "직업훈련 신청"
+    ],
+    "acceptable_paths": [
+      [
+        "경제·일자리",
+        "취업지원",
+        "직업훈련 신청"
+      ]
+    ],
+    "latency_ms": 842.2839110135101,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A5",
+          "probabilities": {
+            "A1": 0.107,
+            "A2": 0.0819,
+            "A3": 0.0187,
+            "A4": 0.0263,
+            "A5": 0.458,
+            "A6": 0.3081
+          },
+          "confidence": 0.2551,
+          "answer_confidence": 0.458,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 234,
+          "output_tokens": 0,
+          "state_tokens": 45,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "A5B1",
+          "probabilities": {
+            "A5B1": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 118,
+          "output_tokens": 0,
+          "state_tokens": 45,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L35",
+          "probabilities": {
+            "L35": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 135,
+          "output_tokens": 0,
+          "state_tokens": 45,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L35-mixed_context",
+    "channel": "콜센터",
+    "slice": "mixed_context",
+    "novelty": "new_major",
+    "summary": "생계 지원금 상담은 마쳤고 현재 요청은 취업에 필요한 교육 과정 등록 방법 안내임.",
+    "expected_leaf": "L35",
+    "acceptable_leaves": [
+      "L35"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L36",
+    "predicted_path": [
+      "교육·문화",
+      "도서관 서비스",
+      "도서 대출 문제"
+    ],
+    "expected_path": [
+      "경제·일자리",
+      "취업지원",
+      "직업훈련 신청"
+    ],
+    "acceptable_paths": [
+      [
+        "경제·일자리",
+        "취업지원",
+        "직업훈련 신청"
+      ]
+    ],
+    "latency_ms": 744.2302309791557,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A6",
+          "probabilities": {
+            "A1": 0.0025,
+            "A2": 0.0153,
+            "A3": 0.0055,
+            "A4": 0.0034,
+            "A5": 0.0153,
+            "A6": 0.9581
+          },
+          "confidence": 0.8707,
+          "answer_confidence": 0.9581,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 230,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "A6B1",
+          "probabilities": {
+            "A6B1": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 113,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L36",
+          "probabilities": {
+            "L36": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 128,
+          "output_tokens": 0,
+          "state_tokens": 41,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L36-explicit",
+    "channel": "인터넷 상담",
+    "slice": "explicit",
+    "novelty": "new_major",
+    "summary": "도서관에서 반납한 책이 계속 대출 중으로 표시되어 상태 확인을 요청함.",
+    "expected_leaf": "L36",
+    "acceptable_leaves": [
+      "L36"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L36",
+    "predicted_path": [
+      "교육·문화",
+      "도서관 서비스",
+      "도서 대출 문제"
+    ],
+    "expected_path": [
+      "교육·문화",
+      "도서관 서비스",
+      "도서 대출 문제"
+    ],
+    "acceptable_paths": [
+      [
+        "교육·문화",
+        "도서관 서비스",
+        "도서 대출 문제"
+      ]
+    ],
+    "latency_ms": 720.8302569924854,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A6",
+          "probabilities": {
+            "A1": 0.3352,
+            "A2": 0.0399,
+            "A3": 0.0459,
+            "A4": 0.0008,
+            "A5": 0.0011,
+            "A6": 0.5771
+          },
+          "confidence": 0.4606,
+          "answer_confidence": 0.5771,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 228,
+          "output_tokens": 0,
+          "state_tokens": 39,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "A6B1",
+          "probabilities": {
+            "A6B1": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 111,
+          "output_tokens": 0,
+          "state_tokens": 39,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L36",
+          "probabilities": {
+            "L36": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 126,
+          "output_tokens": 0,
+          "state_tokens": 39,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L36-implicit",
+    "channel": "콜센터",
+    "slice": "implicit",
+    "novelty": "new_major",
+    "summary": "예약한 책이 도착했다는 알림을 받았는데 창구에서는 예약 기록이 없다고 하여 확인을 원함.",
+    "expected_leaf": "L36",
+    "acceptable_leaves": [
+      "L36"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L25",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "이용 예약"
+    ],
+    "expected_path": [
+      "교육·문화",
+      "도서관 서비스",
+      "도서 대출 문제"
+    ],
+    "acceptable_paths": [
+      [
+        "교육·문화",
+        "도서관 서비스",
+        "도서 대출 문제"
+      ]
+    ],
+    "latency_ms": 978.1262180185877,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A3",
+          "probabilities": {
+            "A1": 0.1586,
+            "A2": 0.1548,
+            "A3": 0.371,
+            "A4": 0.0894,
+            "A5": 0.157,
+            "A6": 0.0692
+          },
+          "confidence": 0.0847,
+          "answer_confidence": 0.371,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 235,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A3B3",
+          "probabilities": {
+            "A3B1": 0.0414,
+            "A3B2": 0.0005,
+            "A3B3": 0.9363,
+            "A3B4": 0.0218
+          },
+          "confidence": 0.7975,
+          "answer_confidence": 0.9363,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 216,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 3,
+        "answer": {
+          "type": "choice",
+          "choice": "L25",
+          "probabilities": {
+            "L25": 0.9857,
+            "L26": 0.0101,
+            "L27": 0.0042
+          },
+          "confidence": 0.9239,
+          "answer_confidence": 0.9857,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 187,
+          "output_tokens": 0,
+          "state_tokens": 46,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  },
+  {
+    "id": "L36-mixed_context",
+    "channel": "인터넷 상담",
+    "slice": "mixed_context",
+    "novelty": "new_major",
+    "summary": "도서관 운영시간 불만이 아니라 반납함에 넣은 책에 연체료가 붙은 문제를 처리해 달라고 함.",
+    "expected_leaf": "L36",
+    "acceptable_leaves": [
+      "L36"
+    ],
+    "needs_clarification": false,
+    "predicted_leaf": "L33",
+    "predicted_path": [
+      "행정·복지",
+      "지방세",
+      "지방세 납부"
+    ],
+    "expected_path": [
+      "교육·문화",
+      "도서관 서비스",
+      "도서 대출 문제"
+    ],
+    "acceptable_paths": [
+      [
+        "교육·문화",
+        "도서관 서비스",
+        "도서 대출 문제"
+      ]
+    ],
+    "latency_ms": 945.4751859884709,
+    "trace": [
+      {
+        "stage": "major3",
+        "candidate_count": 6,
+        "answer": {
+          "type": "choice",
+          "choice": "A3",
+          "probabilities": {
+            "A1": 0.0735,
+            "A2": 0.1784,
+            "A3": 0.3945,
+            "A4": 0.1518,
+            "A5": 0.0569,
+            "A6": 0.145
+          },
+          "confidence": 0.1095,
+          "answer_confidence": 0.3945,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 238,
+          "output_tokens": 0,
+          "state_tokens": 49,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "middle3",
+        "candidate_count": 4,
+        "answer": {
+          "type": "choice",
+          "choice": "A3B4",
+          "probabilities": {
+            "A3B1": 0.0986,
+            "A3B2": 0.0259,
+            "A3B3": 0.0617,
+            "A3B4": 0.8138
+          },
+          "confidence": 0.522,
+          "answer_confidence": 0.8138,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 219,
+          "output_tokens": 0,
+          "state_tokens": 49,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      },
+      {
+        "stage": "leaf3",
+        "candidate_count": 1,
+        "answer": {
+          "type": "choice",
+          "choice": "L33",
+          "probabilities": {
+            "L33": 1.0
+          },
+          "confidence": 1.0,
+          "answer_confidence": 1.0,
+          "action": {
+            "act_probability": 1.0
+          }
+        },
+        "usage": {
+          "input_tokens": 138,
+          "output_tokens": 0,
+          "state_tokens": 49,
+          "state_tokens_dropped": 0,
+          "truncated": false,
+          "truncated_questions": []
+        }
+      }
+    ]
+  }
+]

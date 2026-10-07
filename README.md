@@ -205,6 +205,8 @@ validation 결과:
 
 KoBERT 결과는 `[MASK]` token을 추출해 계산하는 구현이 **기술적으로 가능함**을 확인하지만, KoBERT에 LAYA의 입출력 형식만 붙이면 같은 능력이 생기지는 않는다는 결과입니다. KoBERT의 한국어 사전학습 목표와 LAYA의 다중 후보 decision-head 학습 목표가 다르고, 512-token 한도 때문에 후보 설명도 손실됐습니다. 고정된 27개 유형만 운영한다면 일반적인 KoBERT `[CLS] → 27 logits` 분류기나 계층별 전용 분류기가 더 단순하고 유리할 가능성이 큽니다. 후보 정의가 추론 때 바뀌는 환경에서만 `[MASK]` 공유 scorer의 유연성이 의미가 있으며, 그 경우에도 decision 형식의 대규모 사전학습이나 encoder 일부/전체 학습을 추가로 검증해야 합니다.
 
+위 1차 수치는 작성자 합성 자료, 단일 정답 시험 81개, 독립 검수 없음, CPU 4개, encoder 동결과 단일 seed 조건의 테스트 케이스입니다. 1차 학습 입력에는 27개 소분류의 이름과 자연어 설명을 후보로 제공했지만, `flat27`만 학습했으며 대·중·소 단계별 supervision은 사용하지 않았습니다. 아래 2차 실험에서 단계별 학습과 unseen-category holdout을 추가했습니다. 두 단계 모두 LAYA와 KoBERT 전체의 우열이나 실서비스 품질을 결론 내릴 근거로 사용하면 안 됩니다.
+
 재현 명령:
 
 ```bash
@@ -218,3 +220,27 @@ docker compose run --rm evaluate python research/run_kobert_complaints.py --chec
 ```
 
 [학습 계획](research/complaint-training-protocol.md), [LAYA 학습 결과](results/complaint-training-2026-10-07/laya/train/summary.json), [LAYA 시험 결과](results/complaint-training-2026-10-07/laya/test/summary.json), [KoBERT 학습 결과](results/complaint-training-2026-10-07/kobert/train/summary.json), [KoBERT 시험 결과](results/complaint-training-2026-10-07/kobert/test/summary.json), [대응표본 비교](results/complaint-training-2026-10-07/comparison.json)에 원 측정값과 문항별 예측을 보존했습니다. 모델 체크포인트는 크기 때문에 Git에 포함하지 않습니다.
+
+## 대·중·소 계층 학습과 predicted-prefix 평가
+
+1차 `flat27` 학습 뒤 같은 729개 학습 문장을 `major3`, `middle3`, `leaf3` 과제로 확장했습니다. 한 epoch은 네 과제 각 243개, 총 972개 task row로 균형 표집합니다. `middle3`에는 정답 대분류, `leaf3`에는 정답 대·중분류를 prefix로 넣어 학습합니다. 실제 시험에서는 gold가 아니라 모델이 앞 단계에서 고른 값을 다음 입력에 넘깁니다.
+
+```text
+학습: gold 대분류 → 중분류 과제, gold 대·중분류 → 소분류 과제
+추론: predicted 대분류 → 중분류 입력, predicted 대·중분류 → 소분류 입력
+```
+
+학습·validation과 기존 시험은 서로 다른 문장입니다. 여기에 학습에서 완전히 제외한 새 소분류 3개, 새 중분류 3개, 새 대분류 3개를 추론 때만 추가한 27개 holdout도 만들었습니다.
+
+| 모델·방식 | 기존 독립 시험 전체 경로 | 미등록 유형 전체 경로 |
+|---|---:|---:|
+| 계층+prefix LAYA·일괄 | 34.6% (28/81) | 29.6% (8/27, 후보 36개) |
+| 계층+prefix LAYA·순차 | 23.5% (19/81) | 22.2% (6/27) |
+| 계층+prefix LAYA·순차+predicted prefix | 23.5% (19/81) | 18.5% (5/27) |
+| 계층+prefix KoBERT·일괄 | 6.2% (5/81) | 0.0% (0/27, 후보 36개) |
+| 계층+prefix KoBERT·순차 | 12.3% (10/81) | 25.9% (7/27) |
+| 계층+prefix KoBERT·순차+predicted prefix | 16.0% (13/81) | 11.1% (3/27) |
+
+![계층·prefix 실험 결과](results/hierarchical-prefix-2026-10-07/hierarchical-prefix-results.webp)
+
+이 실험은 새 후보를 출력층 수정 없이 추가할 수 있음을 확인했지만, 새 후보 정확도가 안정적이라는 증거는 아닙니다. 유형별 표본이 3개이고, 합성 자료·단일 seed·동결 encoder 조건입니다. prefix는 앞 선택을 명시하지만 잘못된 부모도 다음 단계에 전달하므로 결과가 항상 좋아지지 않았습니다. 원 요약과 문항별 trace는 [`results/hierarchical-prefix-2026-10-07`](results/hierarchical-prefix-2026-10-07)에 있습니다.

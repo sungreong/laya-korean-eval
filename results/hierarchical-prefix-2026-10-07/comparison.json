@@ -1,0 +1,77 @@
+{
+  "scope": "Author-created synthetic diagnostic; one seed; frozen encoders; not a production benchmark.",
+  "training_data_separation": {
+    "unique_train_states": 729,
+    "unique_validation_states": 243,
+    "main_test_cases": 90,
+    "unseen_test_cases": 27,
+    "exact_text_overlap": 0
+  },
+  "prefix_protocol": {
+    "training": "Gold parent labels are injected as prefixes (teacher forcing).",
+    "inference": "Predicted parent labels are injected as prefixes; no gold label is available.",
+    "risk": "A wrong parent removes the correct child path from later candidate sets."
+  },
+  "main_test_exact_path_accuracy_percent": {
+    "laya": {
+      "flat27": 34.57,
+      "cascade": 23.46,
+      "cascade_prefix": 23.46
+    },
+    "kobert_mask": {
+      "flat27": 6.17,
+      "cascade": 12.35,
+      "cascade_prefix": 16.05
+    }
+  },
+  "teacher_forced_validation_percent": {
+    "laya": {
+      "flat27": 41.56,
+      "major3": 63.37,
+      "middle3": 58.02,
+      "leaf3": 67.49
+    },
+    "kobert_mask": {
+      "flat27": 13.17,
+      "major3": 52.67,
+      "middle3": 55.56,
+      "leaf3": 59.67
+    }
+  },
+  "unseen_exact_path_accuracy_percent": {
+    "laya": {
+      "flat27": {
+        "new_leaf": 22.22,
+        "new_major": 0.0,
+        "new_middle": 66.67
+      },
+      "cascade": {
+        "new_leaf": 11.11,
+        "new_major": 33.33,
+        "new_middle": 22.22
+      },
+      "cascade_prefix": {
+        "new_leaf": 11.11,
+        "new_major": 33.33,
+        "new_middle": 11.11
+      }
+    },
+    "kobert_mask": {
+      "flat27": {
+        "new_leaf": 0.0,
+        "new_major": 0.0,
+        "new_middle": 0.0
+      },
+      "cascade": {
+        "new_leaf": 33.33,
+        "new_major": 0.0,
+        "new_middle": 44.44
+      },
+      "cascade_prefix": {
+        "new_leaf": 33.33,
+        "new_major": 0.0,
+        "new_middle": 0.0
+      }
+    }
+  }
+}

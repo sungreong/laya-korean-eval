@@ -1,0 +1,27 @@
+{
+  "generator": "research/prepare_prefix_hierarchical_training.py",
+  "source": "datasets/complaints/training",
+  "prefix": {
+    "major3": "none",
+    "middle3": "gold major name",
+    "leaf3": "gold major and middle names",
+    "inference": "predicted major and middle names"
+  },
+  "teacher_forcing": "Training prefixes use gold parents; inference prefixes use predicted parents.",
+  "outputs": {
+    "train": {
+      "source_rows": 729,
+      "expanded_rows": 2916,
+      "sha256_utf8_lf": "8ed95cdf9223b583b2b90ae34047fb6b197e0f3853648d6acb6acdb63b694cd7"
+    },
+    "validation": {
+      "source_rows": 243,
+      "expanded_rows": 972,
+      "sha256_utf8_lf": "cad0dc4993d71cd493261a9a32f128d17f6e96eb4018f1a8fe4b889c2e1d05c7"
+    }
+  },
+  "limitations": [
+    "Wrong-parent recovery is impossible because later candidate sets follow the predicted path.",
+    "No new unique complaint text; task views derive from the separate synthetic training corpus."
+  ]
+}

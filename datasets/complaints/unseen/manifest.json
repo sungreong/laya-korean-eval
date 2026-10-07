@@ -1,0 +1,25 @@
+{
+  "purpose": "Inference-only dynamic-label diagnostic",
+  "counts": {
+    "existing_leaves": 27,
+    "new_leaves": 9,
+    "cases": 27,
+    "per_new_label": 3
+  },
+  "novelty": {
+    "new_leaf": 3,
+    "new_middle": 3,
+    "new_major": 3
+  },
+  "training_use": false,
+  "exact_text_overlap_with_training_validation_or_main_test": false,
+  "limitations": [
+    "Author-written synthetic data",
+    "No independent human review",
+    "Three cases per new label"
+  ],
+  "sha256": {
+    "taxonomy.json": "ada6fc90ec2d0e66eaa09f6a01b99f6d40dd49c3566b04f591d26bea90fc51e1",
+    "cases.json": "ea633b4b91dd36e7bd5f2b2335378bafdaacc572bc28ae088283e4e3300d5321"
+  }
+}
