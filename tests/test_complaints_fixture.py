@@ -42,3 +42,18 @@ class ComplaintFixtureTests(unittest.TestCase):
                 self.assertTrue(case['clarification_needed'])
             else:
                 self.assertEqual(case['acceptable_leaves'], [case['expected_leaf']])
+
+    def test_training_data_is_balanced_diverse_and_disjoint(self):
+        training = FIXTURE / 'training'
+        train = [json.loads(x) for x in (training / 'train.jsonl').read_text('utf-8').splitlines()]
+        validation = [json.loads(x) for x in (training / 'validation.jsonl').read_text('utf-8').splitlines()]
+        heldout = json.loads((FIXTURE / 'cases.json').read_text('utf-8'))
+        self.assertEqual((len(train), len(validation)), (729, 243))
+        def labels(rows):
+            return Counter(max(r['gold']['route']['probabilities'], key=r['gold']['route']['probabilities'].get) for r in rows)
+        self.assertEqual(set(labels(train).values()), {27})
+        self.assertEqual(set(labels(validation).values()), {9})
+        train_text, validation_text = {r['state'] for r in train}, {r['state'] for r in validation}
+        self.assertFalse(train_text & validation_text)
+        self.assertFalse((train_text | validation_text) & {'민원 요약: ' + r['summary'] for r in heldout})
+        self.assertEqual(len(train_text) + len(validation_text), 972)

@@ -156,3 +156,62 @@ docker compose run --rm evaluate python research/run_complaints.py --model evalu
 이 설정의 정확도로 자동 민원 배정을 바로 도입하기는 어렵다는 것이 이번 진단의 해석입니다. 특히 다른 도메인의 감정 학습으로 민원 분류가 충분히 개선됐다고 볼 수 없습니다. 실제 업무 분류표와 독립 검수한 민원 라벨로 학습/검증/시험을 분리하는 후속 실험이 필요합니다. 분류명, 설명, 후보 순서와 한국어 지시문 민감도는 아직 비교하지 않았습니다.
 
 [기본 모델 결과](results/complaints-2026-10-07/base/summary.json), [감정 학습 모델 결과](results/complaints-2026-10-07/trained/summary.json). 각 폴더의 `*_predictions.json`에 입력, 정답, 예측 경로, 단계별 후보 확률과 token 사용량을 보존했습니다.
+
+## 민원 도메인 추가 학습과 실제 `[MASK]` KoBERT 비교
+
+민원 유형별 합성 학습 729개와 validation 243개를 새로 만들었습니다. 27개 소분류마다 학습 27개, validation 9개로 균형을 맞췄습니다. 콜센터 대화체, 인터넷 민원 문장, 짧은 메모, 긴 맥락, 간접 요청, 해결된 과거 문제, 한영 혼합, 모바일 축약, 복합 이슈를 섞었습니다. 기존 90개 시험셋과 완전 동일한 문장은 없습니다.
+
+두 실험 모두 인코더를 동결하고 5 epoch을 실행했습니다. LAYA는 원래 decision head를 학습했고, KoBERT 실험은 실제 tokenizer의 `[MASK]` token(ID 4)을 후보마다 넣은 뒤 해당 hidden vector를 하나의 공유 MLP로 점수화했습니다. KoBERT용 구현은 **공식 LAYA나 공식 KoBERT 분류 방법이 아닌 이 저장소의 실험적 adapter**입니다.
+
+```text
+민원 요약 + 지시문 + ([MASK] 후보 설명 × N)
+        ↓ KoBERT encoder (frozen)
+각 [MASK] 위치의 768차원 hidden vector
+        ↓ 같은 MLP scorer를 모든 후보에 공유
+N개 logit → softmax → 한 후보 선택
+```
+
+KoBERT는 입력 한도가 512 token이라 27개 후보 설명을 그대로 넣은 574-token 질문을 처리하지 못했습니다. 최종 구현은 민원 본문에 최대 128 token을 먼저 예약하고, 각 후보 설명에 같은 token 예산을 배정합니다. 실제 시험의 27개 일괄 방식에서는 후보당 14 token을 썼고 예시 입력 하나에서 후보 설명 100 token이 잘렸습니다. 모든 예측 trace에는 실제 marker token ID, 후보 예산과 잘린 token 수를 기록했습니다.
+
+![LAYA와 KoBERT MASK 학습 곡선](results/complaint-training-2026-10-07/training-curves.webp)
+
+validation 결과:
+
+| Epoch | LAYA 정확도 | LAYA NLL | KoBERT `[MASK]` 정확도 | KoBERT NLL |
+|---:|---:|---:|---:|---:|
+| 학습 전 | — | — | 6.2% | 3.296 |
+| 1 | 37.0% | 2.261 | **7.8%** | 3.280 |
+| 2 | 39.1% | 2.199 | 5.8% | 3.265 |
+| 3 | 39.1% | 2.148 | 7.4% | 3.217 |
+| 4 | 41.2% | 2.124 | 5.3% | 3.199 |
+| 5 | **41.2%** | **2.118** | 5.8% | **3.190** |
+
+정확도를 우선하고 동률이면 NLL이 낮은 모델을 선택했습니다. LAYA는 5 epoch, KoBERT는 1 epoch이 선택됐습니다. LAYA 학습·validation·저장에는 CPU 4개에서 약 2시간 51분, KoBERT에는 약 1시간 20분이 걸렸습니다.
+
+학습에 쓰지 않은 단일 정답 시험 81개 결과:
+
+| 모델·방식 | 대분류 | 대+중 경로 | 전체 대+중+소 경로 | p50 지연 |
+|---|---:|---:|---:|---:|
+| 기본 LAYA·27개 일괄 | 56.8% | 45.7% | 24.7% (20/81) | 1.59초 |
+| 민원 학습 LAYA·27개 일괄 | **67.9%** | **56.8%** | **32.1% (26/81)** | 1.61초 |
+| 민원 학습 LAYA·순차 | 58.0% | 33.3% | 23.5% (19/81) | 0.96초 |
+| KoBERT `[MASK]`·27개 일괄 | 33.3% | 11.1% | 4.9% (4/81) | 0.72초 |
+| KoBERT `[MASK]`·순차 | 33.3% | 17.3% | 6.2% (5/81) | 0.71초 |
+
+민원 학습 LAYA의 일괄 방식은 기본 LAYA보다 6개를 더 맞히고 기존 정답을 잃지 않아 +7.4%p였습니다. 탐색적 paired bootstrap 95% 구간은 +2.5~+13.6%p, exact McNemar p=0.031입니다. 표본이 작고 같은 작성자가 만든 합성 자료이며 여러 비교에 대한 보정을 하지 않았으므로, 이를 실서비스 개선 폭으로 일반화하면 안 됩니다. 순차 방식은 상위 오류 전파 때문에 오히려 기본 모델보다 낮았습니다.
+
+KoBERT 결과는 `[MASK]` token을 추출해 계산하는 구현이 **기술적으로 가능함**을 확인하지만, KoBERT에 LAYA의 입출력 형식만 붙이면 같은 능력이 생기지는 않는다는 결과입니다. KoBERT의 한국어 사전학습 목표와 LAYA의 다중 후보 decision-head 학습 목표가 다르고, 512-token 한도 때문에 후보 설명도 손실됐습니다. 고정된 27개 유형만 운영한다면 일반적인 KoBERT `[CLS] → 27 logits` 분류기나 계층별 전용 분류기가 더 단순하고 유리할 가능성이 큽니다. 후보 정의가 추론 때 바뀌는 환경에서만 `[MASK]` 공유 scorer의 유연성이 의미가 있으며, 그 경우에도 decision 형식의 대규모 사전학습이나 encoder 일부/전체 학습을 추가로 검증해야 합니다.
+
+재현 명령:
+
+```bash
+python research/prepare_complaint_training.py
+docker compose build
+docker compose --profile setup run --rm prepare python research/prepare_kobert.py
+docker compose run --rm evaluate python research/train_complaints.py --epochs 5 --out evaluation/complaint-training-diverse-e5
+docker compose run --rm evaluate python research/run_complaints.py --model evaluation/complaint-training-diverse-e5/selected-model --out evaluation/complaints-domain-trained
+docker compose run --rm evaluate python research/train_kobert_mask.py --epochs 5 --head-layers 0 --head-lr 0.001 --out evaluation/kobert-mask-direct-e5
+docker compose run --rm evaluate python research/run_kobert_complaints.py --checkpoint evaluation/kobert-mask-direct-e5/selected-model --out evaluation/kobert-mask-direct-test
+```
+
+[학습 계획](research/complaint-training-protocol.md), [LAYA 학습 결과](results/complaint-training-2026-10-07/laya/train/summary.json), [LAYA 시험 결과](results/complaint-training-2026-10-07/laya/test/summary.json), [KoBERT 학습 결과](results/complaint-training-2026-10-07/kobert/train/summary.json), [KoBERT 시험 결과](results/complaint-training-2026-10-07/kobert/test/summary.json), [대응표본 비교](results/complaint-training-2026-10-07/comparison.json)에 원 측정값과 문항별 예측을 보존했습니다. 모델 체크포인트는 크기 때문에 Git에 포함하지 않습니다.

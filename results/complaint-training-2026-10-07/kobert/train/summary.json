@@ -1,0 +1,104 @@
+{
+  "status": "complete",
+  "model": "skt/kobert-base-v1",
+  "revision": "359874884642d748079d4dd4ff547f2cdbff67d6",
+  "architecture": "KoBERT + 0 Transformer head layers + shared scorer over real [MASK] positions",
+  "train_rows": 729,
+  "validation_rows": 243,
+  "epochs_planned": 5,
+  "selected_epoch": 1,
+  "settings": {
+    "freeze_encoder": true,
+    "head_layers": 0,
+    "batch_size": 8,
+    "grad_accum": 2,
+    "head_lr": 0.001,
+    "max_length": 512,
+    "seed": 42
+  },
+  "epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 3.30824005085489,
+      "validation": {
+        "n": 243,
+        "accuracy": 0.07818930041152264,
+        "macro_f1": 0.05541428072252213,
+        "nll": 3.280414081388904,
+        "max_tokens": 510,
+        "mean_tokens": 497.5514403292181,
+        "truncated_states": 0,
+        "option_tokens_dropped": 27600
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 3.288026426149451,
+      "validation": {
+        "n": 243,
+        "accuracy": 0.05761316872427984,
+        "macro_f1": 0.041730435669829605,
+        "nll": 3.265335721354331,
+        "max_tokens": 510,
+        "mean_tokens": 497.5514403292181,
+        "truncated_states": 0,
+        "option_tokens_dropped": 27600
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 3.2547673505285513,
+      "validation": {
+        "n": 243,
+        "accuracy": 0.07407407407407407,
+        "macro_f1": 0.036986350551954705,
+        "nll": 3.216835375755064,
+        "max_tokens": 510,
+        "mean_tokens": 497.5514403292181,
+        "truncated_states": 0,
+        "option_tokens_dropped": 27600
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 3.2337729490321614,
+      "validation": {
+        "n": 243,
+        "accuracy": 0.053497942386831275,
+        "macro_f1": 0.023950617283950617,
+        "nll": 3.1993502340009137,
+        "max_tokens": 510,
+        "mean_tokens": 497.5514403292181,
+        "truncated_states": 0,
+        "option_tokens_dropped": 27600
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 3.2254817252573758,
+      "validation": {
+        "n": 243,
+        "accuracy": 0.05761316872427984,
+        "macro_f1": 0.031298844716275906,
+        "nll": 3.1900273369204615,
+        "max_tokens": 510,
+        "mean_tokens": 497.5514403292181,
+        "truncated_states": 0,
+        "option_tokens_dropped": 27600
+      }
+    }
+  ],
+  "script_sha256": "cc4b3460ae444ec62c212fbb9e94e4dbffc273e458d44d3a4209d58f440551fb",
+  "validation_before_training": {
+    "n": 243,
+    "accuracy": 0.06172839506172839,
+    "macro_f1": 0.008534403888957164,
+    "nll": 3.2964302878226004,
+    "max_tokens": 510,
+    "mean_tokens": 497.5514403292181,
+    "truncated_states": 0,
+    "option_tokens_dropped": 27600
+  },
+  "selected_checkpoint": "evaluation/kobert-mask-direct-e5/selected-model",
+  "total_seconds": 4795.828530138009
+}

@@ -1,0 +1,145 @@
+{
+  "status": "complete",
+  "data": "datasets/complaints/training",
+  "train_rows": 729,
+  "validation_rows": 243,
+  "epochs_planned": 5,
+  "selected_epoch": 5,
+  "settings": {
+    "freeze_encoder": true,
+    "loss": "soft-ce",
+    "head_lr": 0.0001,
+    "micro_batch": 4,
+    "grad_accum": 4,
+    "max_len": 2048,
+    "head_max_len": 1536,
+    "seed": 42,
+    "temperature_calibration": false,
+    "device": "cpu",
+    "threads": 4
+  },
+  "epoch_history": [
+    {
+      "epoch": 1,
+      "train_loss": 2.069717945459762,
+      "validation": {
+        "n": 243,
+        "correct": 90,
+        "accuracy": 0.37037037037037035,
+        "wilson95": [
+          0.3121119078399976,
+          0.4326635431681601
+        ],
+        "macro_f1": 0.3894080196746836,
+        "ece10_top_label": 0.06204526748971194,
+        "brier_sum": 0.7688816874074075,
+        "high_confidence_n": 0,
+        "coverage_at_0.9": 0.0,
+        "accuracy_at_0.9": null,
+        "latency_ms_p50": 1578.0731239938177,
+        "latency_ms_p95": 1851.6645287338179,
+        "nll": 2.2610801203255186
+      }
+    },
+    {
+      "epoch": 2,
+      "train_loss": 1.929186886776992,
+      "validation": {
+        "n": 243,
+        "correct": 95,
+        "accuracy": 0.39094650205761317,
+        "wilson95": [
+          0.33174688766708266,
+          0.4535403965143833
+        ],
+        "macro_f1": 0.4102478715742259,
+        "ece10_top_label": 0.0582111111111111,
+        "brier_sum": 0.7555239133744857,
+        "high_confidence_n": 0,
+        "coverage_at_0.9": 0.0,
+        "accuracy_at_0.9": null,
+        "latency_ms_p50": 1464.910376991611,
+        "latency_ms_p95": 1725.5916739057284,
+        "nll": 2.1991401037489475
+      }
+    },
+    {
+      "epoch": 3,
+      "train_loss": 1.9026848377425813,
+      "validation": {
+        "n": 243,
+        "correct": 95,
+        "accuracy": 0.39094650205761317,
+        "wilson95": [
+          0.33174688766708266,
+          0.4535403965143833
+        ],
+        "macro_f1": 0.4122035983547226,
+        "ece10_top_label": 0.05889300411522633,
+        "brier_sum": 0.7418713567901234,
+        "high_confidence_n": 2,
+        "coverage_at_0.9": 0.00823045267489712,
+        "accuracy_at_0.9": 1.0,
+        "latency_ms_p50": 1451.7277359846048,
+        "latency_ms_p95": 1987.3103701043872,
+        "nll": 2.1481019658883596
+      }
+    },
+    {
+      "epoch": 4,
+      "train_loss": 1.9155327343875592,
+      "validation": {
+        "n": 243,
+        "correct": 100,
+        "accuracy": 0.411522633744856,
+        "wilson95": [
+          0.3514936737569615,
+          0.4743054435978128
+        ],
+        "macro_f1": 0.42918685771955983,
+        "ece10_top_label": 0.06311522633744858,
+        "brier_sum": 0.7364431509876544,
+        "high_confidence_n": 1,
+        "coverage_at_0.9": 0.00411522633744856,
+        "accuracy_at_0.9": 1.0,
+        "latency_ms_p50": 1529.6975590172224,
+        "latency_ms_p95": 1778.659496415639,
+        "nll": 2.124241233930491
+      }
+    },
+    {
+      "epoch": 5,
+      "train_loss": 1.8975930715519223,
+      "validation": {
+        "n": 243,
+        "correct": 100,
+        "accuracy": 0.411522633744856,
+        "wilson95": [
+          0.3514936737569615,
+          0.4743054435978128
+        ],
+        "macro_f1": 0.42918685771955983,
+        "ece10_top_label": 0.06323292181069959,
+        "brier_sum": 0.7352139932510288,
+        "high_confidence_n": 1,
+        "coverage_at_0.9": 0.00411522633744856,
+        "accuracy_at_0.9": 1.0,
+        "latency_ms_p50": 1542.258936970029,
+        "latency_ms_p95": 1711.8599287001414,
+        "nll": 2.1184948696436177
+      }
+    }
+  ],
+  "script_sha256": "6d34f5fdd36ae72874ef130148a1fefce683dbacca1c0f91ded339f36c0ee77b",
+  "training_and_validation_seconds": 10230.07295723795,
+  "epoch_losses": [
+    2.069717945459762,
+    1.929186886776992,
+    1.9026848377425813,
+    1.9155327343875592,
+    1.8975930715519223
+  ],
+  "selected_checkpoint": "evaluation/complaint-training-diverse-e5/selected-model",
+  "export_dtype": "float16",
+  "total_seconds": 10243.843290038
+}

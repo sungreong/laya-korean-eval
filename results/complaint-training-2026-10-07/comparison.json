@@ -1,0 +1,38 @@
+{
+  "scope": "flat27, 81 single-answer held-out synthetic complaint cases",
+  "laya_domain_vs_base": {
+    "n": 81,
+    "reference_correct": 20,
+    "candidate_correct": 26,
+    "accuracy_delta": 0.07407407407407407,
+    "paired_bootstrap_95": [
+      0.024691358024691357,
+      0.13580246913580246
+    ],
+    "discordant": {
+      "reference_only": 0,
+      "candidate_only": 6
+    },
+    "mcnemar_exact_two_sided_p": 0.03125,
+    "bootstrap_samples": 10000,
+    "seed": 42
+  },
+  "kobert_mask_vs_base_laya": {
+    "n": 81,
+    "reference_correct": 20,
+    "candidate_correct": 4,
+    "accuracy_delta": -0.19753086419753085,
+    "paired_bootstrap_95": [
+      -0.30864197530864196,
+      -0.08641975308641975
+    ],
+    "discordant": {
+      "reference_only": 20,
+      "candidate_only": 4
+    },
+    "mcnemar_exact_two_sided_p": 0.001543879508972168,
+    "bootstrap_samples": 10000,
+    "seed": 42
+  },
+  "note": "Exploratory paired tests; no multiple-comparison correction."
+}

@@ -1,0 +1,189 @@
+{
+  "status": "complete",
+  "model": "evaluation/complaint-training-diverse-e5/selected-model",
+  "fixture": "datasets/complaints",
+  "fixture_sha256": {
+    "taxonomy.json": "9dd4496820650f7e72608391cde782ebee8687c43232542d4e837d8883d1ff8b",
+    "cases.json": "ab63eb300e010c0602123f60a8b5428dfa2b5db1eb2cfb68aeeb9e6ddfd4cfb2"
+  },
+  "script_sha256": "02a4b9d10c4acfd323b95b053fb4c9de1d30eb4564171bdb650156030cb28856",
+  "counts": {
+    "major": 3,
+    "middle": 9,
+    "leaf": 27,
+    "strict_cases": 81,
+    "under_specified": 9
+  },
+  "settings": {
+    "max_len": 2048,
+    "head_max_len": 1536,
+    "max_option_tokens": 29,
+    "device": "cpu",
+    "threads": 4,
+    "temperature": 1.0,
+    "option_order": "fixed taxonomy order"
+  },
+  "scope": "Synthetic author-defined diagnostic; no independent human review; not a production benchmark.",
+  "methods": {
+    "flat27": {
+      "strict": {
+        "n": 81,
+        "correct_paths": 26,
+        "major_accuracy": 0.6790123456790124,
+        "middle_path_accuracy": 0.5679012345679012,
+        "exact_path_accuracy": 0.32098765432098764,
+        "wilson95_exact": [
+          0.2294222196903903,
+          0.4287637615138068
+        ],
+        "first_error_level": {
+          "major": 26,
+          "middle": 9,
+          "leaf": 20
+        },
+        "leaf_macro_f1": 0.2957725402169847
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 27,
+          "correct_paths": 17,
+          "major_accuracy": 0.7777777777777778,
+          "middle_path_accuracy": 0.7777777777777778,
+          "exact_path_accuracy": 0.6296296296296297,
+          "wilson95_exact": [
+            0.4422923441210288,
+            0.7846748703903407
+          ],
+          "first_error_level": {
+            "major": 6,
+            "middle": 0,
+            "leaf": 4
+          },
+          "leaf_macro_f1": 0.5185185185185185
+        },
+        "implicit": {
+          "n": 27,
+          "correct_paths": 6,
+          "major_accuracy": 0.5925925925925926,
+          "middle_path_accuracy": 0.4074074074074074,
+          "exact_path_accuracy": 0.2222222222222222,
+          "wilson95_exact": [
+            0.10607239452360254,
+            0.40756928866632036
+          ],
+          "first_error_level": {
+            "major": 11,
+            "middle": 5,
+            "leaf": 5
+          },
+          "leaf_macro_f1": 0.1728395061728395
+        },
+        "mixed_context": {
+          "n": 27,
+          "correct_paths": 3,
+          "major_accuracy": 0.6666666666666666,
+          "middle_path_accuracy": 0.5185185185185185,
+          "exact_path_accuracy": 0.1111111111111111,
+          "wilson95_exact": [
+            0.038520348283099456,
+            0.2805780081827925
+          ],
+          "first_error_level": {
+            "major": 9,
+            "middle": 4,
+            "leaf": 11
+          },
+          "leaf_macro_f1": 0.06172839506172839
+        }
+      },
+      "under_specified": {
+        "n": 9,
+        "acceptable_path_hits": 6,
+        "note": "Not single-answer accuracy. All these cases require clarification; the classifier was forced to choose."
+      },
+      "latency_ms_p50": 1606.8589299975429,
+      "latency_ms_p95": 1920.552460118779,
+      "cases_with_input_or_option_truncation": 0
+    },
+    "cascade": {
+      "strict": {
+        "n": 81,
+        "correct_paths": 19,
+        "major_accuracy": 0.5802469135802469,
+        "middle_path_accuracy": 0.3333333333333333,
+        "exact_path_accuracy": 0.2345679012345679,
+        "wilson95_exact": [
+          0.15562502050560403,
+          0.3375472964523435
+        ],
+        "first_error_level": {
+          "major": 34,
+          "middle": 20,
+          "leaf": 8
+        },
+        "leaf_macro_f1": 0.22501736946181392
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 27,
+          "correct_paths": 9,
+          "major_accuracy": 0.6296296296296297,
+          "middle_path_accuracy": 0.4074074074074074,
+          "exact_path_accuracy": 0.3333333333333333,
+          "wilson95_exact": [
+            0.18643261498715957,
+            0.5217523949267941
+          ],
+          "first_error_level": {
+            "major": 10,
+            "middle": 6,
+            "leaf": 2
+          },
+          "leaf_macro_f1": 0.291358024691358
+        },
+        "implicit": {
+          "n": 27,
+          "correct_paths": 5,
+          "major_accuracy": 0.5555555555555556,
+          "middle_path_accuracy": 0.3333333333333333,
+          "exact_path_accuracy": 0.18518518518518517,
+          "wilson95_exact": [
+            0.08180707142976715,
+            0.3669868361854788
+          ],
+          "first_error_level": {
+            "major": 12,
+            "middle": 6,
+            "leaf": 4
+          },
+          "leaf_macro_f1": 0.11552028218694883
+        },
+        "mixed_context": {
+          "n": 27,
+          "correct_paths": 5,
+          "major_accuracy": 0.5555555555555556,
+          "middle_path_accuracy": 0.25925925925925924,
+          "exact_path_accuracy": 0.18518518518518517,
+          "wilson95_exact": [
+            0.08180707142976715,
+            0.3669868361854788
+          ],
+          "first_error_level": {
+            "major": 12,
+            "middle": 8,
+            "leaf": 2
+          },
+          "leaf_macro_f1": 0.1111111111111111
+        }
+      },
+      "under_specified": {
+        "n": 9,
+        "acceptable_path_hits": 6,
+        "note": "Not single-answer accuracy. All these cases require clarification; the classifier was forced to choose."
+      },
+      "latency_ms_p50": 957.103566499427,
+      "latency_ms_p95": 1116.3942739833146,
+      "cases_with_input_or_option_truncation": 0
+    }
+  }
+}

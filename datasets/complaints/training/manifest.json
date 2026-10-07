@@ -1,0 +1,40 @@
+{
+  "generator": "research/prepare_complaint_training.py",
+  "seed": 20261007,
+  "source": "author-written synthetic phrases and frames",
+  "heldout_fixture_used_as_training_source": false,
+  "counts": {
+    "train": 729,
+    "validation": 243,
+    "per_leaf_train": 27,
+    "per_leaf_validation": 9
+  },
+  "diversity": {
+    "train_surface_styles": 27,
+    "validation_surface_styles": 9,
+    "included_styles": [
+      "formal web petition",
+      "call-center transcript",
+      "short memo",
+      "long context",
+      "indirect request",
+      "resolved distractor",
+      "mixed Korean-English",
+      "mobile shorthand",
+      "multi-issue prioritization"
+    ]
+  },
+  "limitations": [
+    "No independent human review",
+    "Template artifacts and shared label vocabulary may inflate results",
+    "Exact-string leakage is checked; semantic similarity is not eliminated"
+  ],
+  "train.jsonl": {
+    "sha256_utf8_lf": "01d0d52f13e54a24f737419518569df3fb067116c773b0a5861f5093d3948b7c",
+    "n": 729
+  },
+  "validation.jsonl": {
+    "sha256_utf8_lf": "bd86a8a940eaa3a13ffff2b5d65e436c8eb5855a0bfa3b47734f82b885804b23",
+    "n": 243
+  }
+}

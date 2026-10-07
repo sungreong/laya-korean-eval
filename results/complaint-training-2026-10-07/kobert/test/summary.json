@@ -1,0 +1,177 @@
+{
+  "status": "complete",
+  "model": "KoBERT real-[MASK] shared scorer",
+  "checkpoint": "evaluation/kobert-mask-direct-e5/selected-model",
+  "checkpoint_config": {
+    "base_revision": "359874884642d748079d4dd4ff547f2cdbff67d6",
+    "max_length": 512,
+    "head_layers": 0
+  },
+  "fixture_sha256": {
+    "taxonomy.json": "9dd4496820650f7e72608391cde782ebee8687c43232542d4e837d8883d1ff8b",
+    "cases.json": "ab63eb300e010c0602123f60a8b5428dfa2b5db1eb2cfb68aeeb9e6ddfd4cfb2"
+  },
+  "script_sha256": "e0d9292399d3b7031e4ff78c821bceab8de4629fe595cea2ce08d27b06a7078b",
+  "methods": {
+    "flat27": {
+      "strict": {
+        "n": 81,
+        "correct_paths": 4,
+        "major_accuracy": 0.3333333333333333,
+        "middle_path_accuracy": 0.1111111111111111,
+        "exact_path_accuracy": 0.04938271604938271,
+        "wilson95_exact": [
+          0.0193693055540343,
+          0.12020230230480689
+        ],
+        "first_error_level": {
+          "major": 54,
+          "middle": 18,
+          "leaf": 5
+        },
+        "leaf_macro_f1": 0.006833981383292094
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 27,
+          "correct_paths": 1,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.1111111111111111,
+          "exact_path_accuracy": 0.037037037037037035,
+          "wilson95_exact": [
+            0.006568145980785381,
+            0.18283465933575266
+          ],
+          "first_error_level": {
+            "major": 18,
+            "middle": 6,
+            "leaf": 2
+          },
+          "leaf_macro_f1": 0.0026455026455026454
+        },
+        "implicit": {
+          "n": 27,
+          "correct_paths": 2,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.1111111111111111,
+          "exact_path_accuracy": 0.07407407407407407,
+          "wilson95_exact": [
+            0.02055465406098929,
+            0.23369592683022572
+          ],
+          "first_error_level": {
+            "major": 18,
+            "middle": 6,
+            "leaf": 1
+          },
+          "leaf_macro_f1": 0.010849233071455293
+        },
+        "mixed_context": {
+          "n": 27,
+          "correct_paths": 1,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.1111111111111111,
+          "exact_path_accuracy": 0.037037037037037035,
+          "wilson95_exact": [
+            0.006568145980785381,
+            0.18283465933575266
+          ],
+          "first_error_level": {
+            "major": 18,
+            "middle": 6,
+            "leaf": 2
+          },
+          "leaf_macro_f1": 0.0027434842249657062
+        }
+      },
+      "under_specified": {
+        "n": 9,
+        "acceptable_path_hits": 2,
+        "note": "Not single-answer accuracy. All these cases require clarification; the classifier was forced to choose."
+      },
+      "latency_ms_p50": 718.447967490647,
+      "latency_ms_p95": 883.1396788038546,
+      "cases_with_input_or_option_truncation": 90
+    },
+    "cascade": {
+      "strict": {
+        "n": 81,
+        "correct_paths": 5,
+        "major_accuracy": 0.3333333333333333,
+        "middle_path_accuracy": 0.1728395061728395,
+        "exact_path_accuracy": 0.06172839506172839,
+        "wilson95_exact": [
+          0.02665251209702975,
+          0.1364924763684185
+        ],
+        "first_error_level": {
+          "major": 54,
+          "middle": 13,
+          "leaf": 9
+        },
+        "leaf_macro_f1": 0.025469277242326886
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 27,
+          "correct_paths": 2,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.18518518518518517,
+          "exact_path_accuracy": 0.07407407407407407,
+          "wilson95_exact": [
+            0.02055465406098929,
+            0.23369592683022572
+          ],
+          "first_error_level": {
+            "major": 18,
+            "middle": 4,
+            "leaf": 3
+          },
+          "leaf_macro_f1": 0.040740740740740744
+        },
+        "implicit": {
+          "n": 27,
+          "correct_paths": 1,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.14814814814814814,
+          "exact_path_accuracy": 0.037037037037037035,
+          "wilson95_exact": [
+            0.006568145980785381,
+            0.18283465933575266
+          ],
+          "first_error_level": {
+            "major": 18,
+            "middle": 5,
+            "leaf": 3
+          },
+          "leaf_macro_f1": 0.003898635477582846
+        },
+        "mixed_context": {
+          "n": 27,
+          "correct_paths": 2,
+          "major_accuracy": 0.3333333333333333,
+          "middle_path_accuracy": 0.18518518518518517,
+          "exact_path_accuracy": 0.07407407407407407,
+          "wilson95_exact": [
+            0.02055465406098929,
+            0.23369592683022572
+          ],
+          "first_error_level": {
+            "major": 18,
+            "middle": 4,
+            "leaf": 3
+          },
+          "leaf_macro_f1": 0.010530137981118372
+        }
+      },
+      "under_specified": {
+        "n": 9,
+        "acceptable_path_hits": 0,
+        "note": "Not single-answer accuracy. All these cases require clarification; the classifier was forced to choose."
+      },
+      "latency_ms_p50": 707.8192339686211,
+      "latency_ms_p95": 869.7663526952965,
+      "cases_with_input_or_option_truncation": 0
+    }
+  }
+}
