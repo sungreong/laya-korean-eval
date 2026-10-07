@@ -9,7 +9,7 @@
 - `assets/`: 그림 원본과 최적화 WebP. HTML은 최적화본만 내장합니다.
 - `evaluation/`, `research/`: 본문에서 직접 연결한 최초 한국어 파일럿의 최소 근거 파일.
 
-후속 민원 실험의 실행 코드는 이 저장소 루트의 `research/`, 데이터는 `datasets/complaints/`, 결과는 `results/complaint-training-2026-10-07/`에 있습니다. 블로그 13절에 3×3×3 taxonomy, 명확·간접·복합·정보 부족 사례, LAYA 추가 학습, 실제 `[MASK]` KoBERT 비교와 전체 Docker 명령을 정리했습니다.
+후속 민원 실험의 실행 코드는 이 저장소 루트의 `research/`, 데이터는 `datasets/complaints/`, 결과는 `results/complaint-training-2026-10-07/`에 있습니다. 블로그 13절에 3×3×3 taxonomy, 명확·간접·복합·정보 부족 사례, LAYA 추가 학습, 실제 `[MASK]` KoBERT 비교와 전체 Docker 명령을 정리했습니다. 27개 일괄 방식은 학습 전 24.7%에서 학습 후 32.1%로 올랐고, 대→중→소 순차 방식은 24.7%에서 23.5%로 개선되지 않았습니다.
 
 ```bash
 git clone https://github.com/sungreong/laya-korean-eval.git
