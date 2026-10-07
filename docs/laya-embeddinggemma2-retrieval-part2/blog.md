@@ -296,6 +296,132 @@ top-3에서는 `74/81 × 41/74 = 41/81`, 즉 50.6%다. 후보 검색은 이미 9
 
 **H3은 제한적으로 지지됐다.** 새 유형 9개의 학습 example을 EmbeddingGemma에 보여 주지 않았는데도 설명만으로 59.3∼63.0% top-1을 얻었다. 이는 고정 output head를 교체하지 않고 유형을 추가할 수 있다는 장점을 실제로 확인한 것이다. 하지만 사람이 만든 설명과 시험 문장이 어휘를 공유했을 가능성이 있고, 9유형 × 3문항은 너무 작다.
 
+### 왜 이런 결과가 나왔는가
+
+이번 과제는 겉으로는 27개 분류지만, 입력과 정답의 관계는 사실상 **짧은 민원 query와 유형 설명 document 사이의 검색**에 가깝다. EmbeddingGemma 2는 바로 그 관계를 학습한 모델이다. 반면 LAYA는 민원·질문·27개 후보를 한 sequence에서 비교하는 범용 decision model이다. 범용성이 특정 과제의 적합성을 자동으로 이기는 것은 아니다.
+
+첫째, **학습 목적과 평가 방식이 일치했다.** EmbeddingGemma 2는 query와 관련 document를 가까이 두는 contrastive embedding 모델이고, 평가는 cosine top-1이었다. 공식 `SearchQuery` prefix와 `title: ... | text: ...` document 형식도 그대로 적용했다. LAYA에는 같은 수준으로 민원 taxonomy에 특화된 retrieval 학습을 하지 않았다.
+
+둘째, **flat leaf 검색은 계층 오류를 누적하지 않는다.** “버스가 정류장에 서지 않고 지나갔다”는 문장이 `도로·교통`과 `대중교통`을 별도로 통과하지 않아도 `버스 무정차` 설명과 직접 가까워질 수 있다. hard cascade는 대분류 하나를 틀리는 순간 올바른 leaf를 잃는다.
+
+셋째, **합성 시험 문장과 유형 설명의 언어가 가까웠다.** 두 자료를 같은 taxonomy 정의에서 만들었기 때문에 관련 어휘와 표현이 공유됐을 가능성이 있다. EmbeddingGemma 2에는 유리한 조건이다. 실제 상담원이 쓴 축약어·오탈자·간접 표현·복수 요구에서는 간격이 커질 수 있다. 이 결과가 실제 민원 71.6%를 보장하지 않는 가장 중요한 이유다.
+
+넷째, **현재 LAYA는 검색 hard negative를 고르도록 학습되지 않았다.** EmbeddingGemma가 top-3에 남긴 후보는 서로 가장 비슷한 세 유형이다. 쉬운 무관 후보를 많이 본 모델보다 이런 미세 경계를 집중 학습한 reranker가 필요하다. 검색 점수까지 버리고 LAYA 점수만으로 순서를 다시 정하면서 맞았던 top-1을 뒤집었다.
+
+마지막으로 256차원이 768차원보다 높았던 차이는 2건에 불과하다. 축소된 vector가 불필요한 특징을 줄여 regularization처럼 작동했을 수 있지만, 표본 변동일 수도 있다. 독립 평가와 여러 seed 없이 “한국어는 256차원이 더 좋다”고 일반화하면 안 된다.
+
+## EmbeddingGemma 2를 민원 데이터로 추가 학습한다면
+
+Google은 2026년 10월 7일 [EmbeddingGemma 2 text fine-tuning 공식 가이드](https://ai.google.dev/gemma/docs/embeddinggemma/fine-tuning-embeddinggemma-with-sentence-transformers)를 공개했다. 공식 경로는 `SentenceTransformerTrainer`와 `MultipleNegativesRankingLoss`를 이용한 contrastive triplet 학습이다. open weight와 Apache 2.0 license이므로 자체 데이터로 fine-tuning하고 배포할 수 있다. 이번 글에서는 이 학습을 실행하지 않았으며, 아래는 공식 방법을 민원 분류에 맞게 옮긴 **후속 실험 설계**다.
+
+### 학습 표본은 라벨 하나가 아니라 세 문장으로 만든다
+
+각 행은 `(anchor, positive, negative)` triplet이다.
+
+| 필드 | 민원 데이터에서의 의미 | 예시 |
+| --- | --- | --- |
+| `anchor` | 실제 상담 요약 또는 독립적으로 작성한 paraphrase | 버스가 손을 들었는데 정류장을 그냥 지나감 |
+| `positive` | 정답 유형의 경로·포함 기준·제외 기준 | 도로·교통 > 대중교통 > 버스 무정차: 승객이 기다리는 정류장을 통과한 경우 |
+| `negative` | 의미가 비슷하지만 틀린 유형 설명 | 버스 배차 지연: 예정 시각보다 늦게 도착하거나 배차 간격이 긴 경우 |
+
+negative는 무작위 다른 대분류보다 **실제 검색에서 위로 올라온 오답**이 중요하다. 현재 baseline prediction JSON에서 각 anchor의 2∼5위를 hard negative로 수집할 수 있다. 같은 중분류 sibling, 표현이 겹치는 다른 대분류, 기존 모델이 높은 점수를 준 오답을 섞는다.
+
+```json
+{"anchor":"버스가 정류장에서 손을 들었는데 서지 않고 통과했습니다.",
+ "positive":"title: 도로·교통 > 대중교통 > 버스 무정차 | text: 승객이 기다리는 정류장을 버스가 정차하지 않고 통과한 민원",
+ "negative":"title: 도로·교통 > 대중교통 > 버스 배차 지연 | text: 버스가 예정 시각보다 늦거나 배차 간격이 긴 민원"}
+```
+
+같은 민원을 단어만 조금 바꾼 문장으로 train과 test에 나누면 누출이 생긴다. 실제 상담 원문 단위로 먼저 split하고, 같은 사건·상담·template에서 나온 변형은 한 split에만 둬야 한다. 새 유형 대응력을 보려면 일부 leaf 전체를 train에서 빼는 **label-holdout set**도 별도로 유지한다.
+
+### loss가 실제로 하는 계산
+
+한 batch의 각 query `qᵢ`와 정답 document `dᵢ⁺`를 가깝게 만들고, 명시적으로 넣은 hard negative와 다른 행의 document를 멀게 만든다.
+
+```text
+Lᵢ = -log exp(sim(qᵢ,dᵢ⁺)/τ)
+          / Σⱼ exp(sim(qᵢ,dⱼ)/τ)
+```
+
+이때 batch 안의 다른 positive도 현재 query에는 negative로 사용된다. 같은 label description이 batch에 중복되면 사실은 정답인 문장을 오답으로 밀어내는 false negative가 생긴다. Sentence Transformers는 이런 loss에 `BatchSamplers.NO_DUPLICATES`를 권장한다. 민원 데이터에서는 한 batch에 같은 leaf의 동일 positive가 중복되지 않도록 sampling하거나, 여러 정답 설명을 가진 경우 relevance-aware 학습으로 바꿔야 한다. [Sentence Transformers sampler 문서](https://sbert.net/docs/package_reference/sentence_transformer/sampler.html)
+
+### 공식 예제를 민원 검색에 맞춘 최소 코드
+
+공식 예제는 text-only일 때 vision·audio encoder를 끄고 271,002,624개 parameter를 load한다. GPU에서는 `float16`을 쓰면 안 되고 `bfloat16`을 사용한다. 공식 가이드는 L4 또는 A100 같은 BF16 GPU를 전제로 한다. CPU float32 학습은 메모리보다 시간이 현실적인 병목이 될 가능성이 크다.
+
+```python
+from datasets import Dataset
+from sentence_transformers import (
+    SentenceTransformer,
+    SentenceTransformerTrainer,
+    SentenceTransformerTrainingArguments,
+    losses,
+)
+from sentence_transformers.training_args import BatchSamplers
+
+model = SentenceTransformer(
+    "google/embeddinggemma-2",
+    config_kwargs={"vision_config": None, "audio_config": None},
+)
+
+train = Dataset.from_json("complaint_triplets.train.jsonl")
+valid = Dataset.from_json("complaint_triplets.valid.jsonl")
+
+loss = losses.MultipleNegativesRankingLoss(model)
+args = SentenceTransformerTrainingArguments(
+    output_dir="models/embeddinggemma2-complaints",
+    prompts={"anchor": model.prompts["SearchQuery"]},
+    num_train_epochs=3,
+    learning_rate=2e-5,
+    per_device_train_batch_size=16,
+    per_device_eval_batch_size=16,
+    batch_sampler=BatchSamplers.NO_DUPLICATES,
+    bf16=True,
+    fp16=False,
+    eval_strategy="epoch",
+    save_strategy="epoch",
+    load_best_model_at_end=True,
+)
+
+trainer = SentenceTransformerTrainer(
+    model=model,
+    args=args,
+    train_dataset=train,
+    eval_dataset=valid,
+    loss=loss,
+)
+trainer.train()
+model.save_pretrained("models/embeddinggemma2-complaints/selected-model")
+```
+
+위 `3 epoch`, batch 16, learning rate `2e-5`는 시작점이지 검증된 민원 최적값이 아니다. Google의 작은 공식 예시는 5 epoch, batch 1, `2e-5`를 사용하지만, 문서도 production에는 수백∼수천 triplet을 권장한다. 실제 학습에서는 epoch별 validation Recall@k와 MRR로 checkpoint를 선택해야 한다. training loss가 계속 내려가는지만 보고 고르면 안 된다.
+
+### 전체 fine-tuning과 LoRA 중 무엇을 고를까
+
+| 방법 | 장점 | 부담과 위험 | 이 프로젝트의 권장 순서 |
+| --- | --- | --- | --- |
+| 전체 text encoder 학습 | domain 경계를 가장 직접적으로 바꿈 | GPU memory·저장량이 크고 일반 의미 표현을 잊을 수 있음 | 충분한 실제 triplet과 GPU가 있을 때 비교군 |
+| LoRA/PEFT adapter | 학습·배포할 parameter가 적고 업무별 adapter 분리 가능 | EmbeddingGemma 2에서 목표 module과 품질을 직접 검증해야 함 | 자원이 작을 때 우선 pilot |
+| encoder 고정 + 별도 reranker | 기존 embedding index를 유지하면서 어려운 후보만 학습 | 2단계 지연과 운영 복잡도 | 검색 top-1을 이기도록 hard negative 전용 학습 |
+
+Sentence Transformers는 `SentenceTransformer.add_adapter()`를 통한 LoRA/PEFT 학습을 공식 지원한다. 다만 제공된 예제가 곧 EmbeddingGemma 2 민원 성능을 보장하지는 않는다. 이 글에서는 LoRA를 실행하지 않았으므로 **지원되는 일반 경로**로만 제시한다. [Sentence Transformers PEFT 가이드](https://www.sbert.net/examples/sentence_transformer/training/peft/README.html)
+
+### 256차원 성능을 유지하려면
+
+768차원만 대상으로 fine-tuning한 뒤 앞 256차원을 잘라 쓰면 기존 MRL 성질이 얼마나 유지될지 다시 검증해야 한다. 여러 출력 차원을 동시에 보존하려면 기본 ranking loss를 `MatryoshkaLoss`로 감싸 768·512·256·128차원의 loss를 함께 계산하는 방식을 비교할 수 있다. 이는 Sentence Transformers가 제공하는 방법이지만, 이 프로젝트에서 EmbeddingGemma 2에 실행해 확인한 결과는 아니다. [Sentence Transformers loss 문서](https://sbert.net/docs/package_reference/sentence_transformer/losses.html)
+
+### 학습 전후에 반드시 함께 볼 지표
+
+1. 기존 27유형 top-1, Recall@3·5·8, MRR
+2. 새 label-holdout 유형의 zero-shot 성능
+3. 쉬운 문장과 애매한 문장별 성능
+4. top-1과 top-2 score margin, open-set 거부율
+5. 유형별 최소 recall과 혼동 matrix
+6. 128·256·768차원별 성능
+7. 일반 한국어 검색 세트의 회귀와 기존 유형 forgetting
+
+fine-tuning의 성공 기준도 “training 정확도 상승”이 아니다. 독립 test에서 71.6%를 넘고, Recall@k를 유지하며, 새 유형과 일반 한국어 의미 검색이 크게 나빠지지 않아야 한다. LAYA reranker를 다시 학습한다면 EmbeddingGemma top-3에 정답이 있는 74건 중 현재 41건인 조건부 정답 수가 얼마나 늘었는지를 별도로 본다.
+
 ## 대→중→소 분류를 계속 써야 한다면
 
 검색 결과가 좋다고 계층을 버릴 필요는 없다. 계층은 운영 규칙, 담당 조직, 설명 가능성에 유용하다. 다만 **예측 순서를 강제하는 hard cascade** 대신 검색된 leaf의 경로를 이용해 대·중 후보 점수를 모으는 편이 낫다.
@@ -331,7 +457,8 @@ middle score(대중교통) = aggregate(score(L17), score(L18), score(L16))
 3. 민원 query를 encoding하고 256차원 top-k와 score를 얻는다.
 4. top-1 margin이 충분하면 검색 결과를 사용한다.
 5. margin이 작거나 open-set score가 낮으면 사람 검토 또는 별도 reranker로 보낸다.
-6. LAYA를 reranker로 쓸 경우 **retrieval이 만든 hard negative 후보**로 따로 학습하고, 검색 score를 feature 또는 결합 점수로 보존한다.
+6. EmbeddingGemma 2를 fine-tuning할 경우 실제 검색 오답을 hard negative로 만든 triplet과 label-holdout 검증을 사용한다.
+7. LAYA를 reranker로 쓸 경우 **retrieval이 만든 hard negative 후보**로 따로 학습하고, 검색 score를 feature 또는 결합 점수로 보존한다.
 
 단순 결합 점수도 다음 실험 후보가 된다.
 
@@ -360,7 +487,7 @@ final_score_i = α × embedding_score_i + (1 - α) × calibrated_laya_score_i
 
 한국어 장점이 유지되는가라는 질문에는 “짧은 합성 민원 의미 검색에서는 유의미한 신호가 나왔다”까지 답할 수 있다. 실제 도입 가치는 taxonomy가 자주 바뀌고 label description을 잘 관리할 수 있는 민원 routing, FAQ routing, 내부 문서 분류에 있다. 고정 유형과 충분한 라벨 데이터가 있다면 KoBERT·ModernBERT 같은 전용 classifier도 같은 split에서 다시 비교해야 한다.
 
-Production에 바로 자동 처분기로 적용할 단계는 아니다. 먼저 실제 익명화 민원으로 300개 유형 Recall@k, top-1, open-set 거부율, 유형별 최소 성능, 사람 검토율, latency와 memory를 측정해야 한다. 다음 실험의 우선순위는 **retrieval hard negative로 학습한 reranker**, **embedding score와 LAYA score의 보정 결합**, **한국어 전용 embedding baseline**, **실제 300유형 평가**다.
+Production에 바로 자동 처분기로 적용할 단계는 아니다. 먼저 실제 익명화 민원으로 300개 유형 Recall@k, top-1, open-set 거부율, 유형별 최소 성능, 사람 검토율, latency와 memory를 측정해야 한다. 다음 실험의 우선순위는 **실제 오답 hard negative로 EmbeddingGemma 2를 contrastive fine-tuning하는 실험**, **검색 후보에 특화한 LAYA reranker**, **embedding score와 LAYA score의 보정 결합**, **한국어 전용 embedding baseline**, **실제 300유형 평가**다.
 
 코드, Docker Compose, 고정 revision, 문항별 예측과 summary JSON은 [laya-korean-eval GitHub 저장소](https://github.com/sungreong/laya-korean-eval)에 공개했다.
 
