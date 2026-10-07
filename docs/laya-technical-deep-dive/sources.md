@@ -31,6 +31,20 @@
 | [RLCD ablation #741](https://github.com/NandhaKishorM/laya/issues/741) | soft CE와 RLCD의 비교 필요. 한 사용자의 제한된 실험 |
 | [방글라어 추가 학습 사례](https://huggingface.co/nafiullah/laya-multilingual-bn-ecom-voice/blob/main/results/FINETUNE_RESULTS.md) | 개선·퇴행 동시 관찰. 일부 미검수 정답과 성공 기준 미통과를 함께 소개 |
 
+### Jev 성능·한국어 전망 보강 자료 (2026-10-07)
+
+| 자료 | 사용할 근거 | 해석할 때의 제한 |
+| --- | --- | --- |
+| [TypeSafe Jev 공식 발표](https://typesafe.ai/blog/introducing-system-one-models-and-jev) | early-access 공개일, parallel sampler·RLCD·가격·지연·context에 대한 제작사 설명 | 내부 아키텍처 명세가 아니며 수치는 제작사 주장 |
+| [TypeSafe API 명세](https://api.typesafe.ai/redoc) | `state`/questions 요청, choice·noul·score 출력, choice 후보 상한 | 서비스 버전에 따라 바뀔 수 있어 호출 시 재확인 필요 |
+| [Evaluating and Benchmarking the System One Model Jev](https://arxiv.org/html/2609.37647v1) | 37개 데이터셋·346,009 요청, 다국어 편차, calibration과 threshold 분석 | arXiv v1이며 한국어 민원 분류 연구가 아님 |
+| [jev-benchmarking 코드·응답](https://github.com/AppliedMachineLearning-Lab/jev-benchmarking) | 고정 template, 응답 cache, 평가 재현 절차 | Jev 응답은 별도 연구용 라이선스 조건 확인 필요 |
+| [Decision-gate 비교 연구](https://arxiv.org/html/2610.00346v1) | 같은 CLINC150 표본에서 후보 수 5/20/50/150 및 two-stage 비교 | 영어 intent이며 이 글의 한국어 추가 학습 조건과 다름 |
+| [Jev 한국어 표본 점검](https://github.com/mahlernim/jev-korean-benchmark) | 대응 영어·한국어 Belebele/PAWS-X 각 100문항, KorMedMCQA, 지연·비용·순서 교란 | 제3자 탐색 실험, 셀당 100문항·단일 시점·민원 과제 아님 |
+| [한국어 표본 점검 방법](https://github.com/mahlernim/jev-korean-benchmark/blob/main/docs/methodology.md) | frozen manifest, sampling, Wilson interval, matched comparison 조건 | 외부 사전등록이 아니며 작은 표본의 다중 비교 |
+
+Jev 한국어 수치는 LAYA Docker 결과와 같은 시험지에서 측정한 것이 아니다. 이 글에서는 한국어 적용 가능성의 초기 신호와 후속 실험 설계 근거로만 사용했다. API key와 과금 계정이 없어 현재 저장소에서 Jev를 직접 호출한 결과는 포함하지 않았다.
+
 ## 논문
 
 1. [BERT](https://arxiv.org/abs/1810.04805), Devlin et al., 2018 / NAACL 2019. 기반 인코더 설명.
@@ -42,6 +56,13 @@
 7. [Evaluating and Benchmarking the System One Model Jev](https://arxiv.org/abs/2609.37647), Deußer et al., 2026 preprint. Jev 평가이며 Laya 직접 비교가 아님.
 8. [Just Ask Jev](https://arxiv.org/abs/2609.29429), 2026 preprint. 질문과 입력 구성에 따른 정렬 실패 탐지 평가.
 9. [OpenJev-RLCD](https://arxiv.org/abs/2609.38850), Gao and Wang, 2026 preprint. 별도 연구 구현이며 Jev의 공식 내부 공개가 아님.
+10. [Scheduled Sampling](https://arxiv.org/abs/1506.03099), Bengio et al., 2015. 학습 시 정답 history와 추론 시 예측 history의 차이.
+11. [Top-down Hierarchical Text Classification](https://aclanthology.org/2021.alta-1.20.pdf), 2021. 상위 단계 오류가 하위 경로에 전파되는 문제.
+12. [Learning Hierarchy-Aware Features](https://aclanthology.org/2022.emnlp-main.268/), 2022. global/local hierarchy 정보를 함께 학습하는 접근.
+13. [Hierarchy structure for zero-shot classification](https://proceedings.mlr.press/v70/jernite17a.html), Jernite et al., ICML 2017. label tree 구조가 일반화에 미치는 영향.
+14. [Label descriptions for few/zero-shot classification](https://aclanthology.org/2023.emnlp-main.853/), 2023. 자연어 label description을 학습 신호로 쓰는 접근.
+15. [Description sensitivity in zero-shot classification](https://aclanthology.org/2024.findings-acl.562/), 2024. label 설명 표현에 따른 성능 변화.
+16. [Retrieval-based Extreme Multi-label Classification](https://aclanthology.org/2023.findings-eacl.81.pdf), 2023. 많은 label에서 후보 검색을 결합하는 접근.
 
 동명의 EEG Laya 논문은 대상 모델과 무관해 근거에서 제외했다. 공식 Laya 대표 학술 논문은 이번 조사 범위에서 확인하지 못했다.
 

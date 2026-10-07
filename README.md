@@ -2,7 +2,7 @@
 
 Docker Compose로 LAYA Multilingual의 **한국어 분류 성능, 추론 지연, 메모리, 추가 학습 전후 변화**를 측정하는 독립 실험 프로젝트입니다. 생성형 챗봇 평가나 공식 LAYA 벤치마크는 아닙니다.
 
-전체 배경, Jev와의 차이, 아키텍처, 한국어 NSMC 실험과 27개 민원 유형 후속 실험을 한 문서로 읽으려면 [standalone Technical Deep Dive](docs/laya-technical-deep-dive/blog.html)를 내려받아 브라우저에서 여세요. 수정 가능한 [Markdown 원고](docs/laya-technical-deep-dive/blog.md)와 [출처 목록](docs/laya-technical-deep-dive/sources.md)도 함께 제공합니다.
+전체 배경, Jev와의 차이, 아키텍처, 한국어 NSMC 실험, 27개 민원 유형 후속 실험, 300개 유형 확장안과 Jev 한국어 전망을 한 문서로 읽으려면 [standalone Technical Deep Dive](docs/laya-technical-deep-dive/blog.html)를 내려받아 브라우저에서 여세요. 수정 가능한 [Markdown 원고](docs/laya-technical-deep-dive/blog.md)와 [출처 목록](docs/laya-technical-deep-dive/sources.md)도 함께 제공합니다.
 
 ## 빠른 시작
 
@@ -50,7 +50,7 @@ docker compose run --rm -e LAYA_RESULTS_DIR=evaluation/run-02 -e LAYA_FINETUNED_
 | LAYA, 영어 질문·한국어 리뷰 | 73% |
 | 판단 헤드 2 epoch 학습 후, 한국어 질문 | 66% |
 
-이 수치는 한국어 전체 능력이나 서비스 품질을 대표하지 않는 소규모 파일럿입니다. 학습으로 정확도가 개선되지 않은 결과도 그대로 공개합니다. 자체 진단 24개는 독립 검수가 없고, Jev·한국어 BERT 직접 비교, GPU 및 다중 seed 평가는 수행하지 않았습니다. LAYA는 문장을 생성하지 않으므로 한국어 생성 품질은 평가 대상이 아닙니다.
+이 수치는 한국어 전체 능력이나 서비스 품질을 대표하지 않는 소규모 파일럿입니다. 학습으로 정확도가 개선되지 않은 결과도 그대로 공개합니다. 자체 진단 24개는 독립 검수가 없고, Jev 직접 호출, 일반적인 고정-head KoBERT, GPU 및 다중 seed 평가는 수행하지 않았습니다. 블로그의 Jev 수치는 외부 공개 연구이며 이 저장소의 LAYA 시험과 같은 데이터에서 나온 직접 비교가 아닙니다. LAYA는 문장을 생성하지 않으므로 한국어 생성 품질은 평가 대상이 아닙니다.
 
 ## 코드 구조
 
