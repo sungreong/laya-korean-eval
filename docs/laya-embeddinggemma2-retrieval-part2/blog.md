@@ -52,19 +52,7 @@ EmbeddingGemma 2는 답변 문장을 생성하는 Gemma 챗봇이 아니다. 입
 
 텍스트 쪽은 24개 layer, model dimension 512, hidden dimension 2,048, 4 attention head, 8,192 token context를 사용한다. local과 global attention 비율은 5:1이고, mean pooling 뒤 512→768 projection으로 최종 embedding을 만든다. 이 숫자는 [Google 공식 모델 카드](https://ai.google.dev/gemma/docs/embeddinggemma/model_card_2)의 기술 사양이다.
 
-```mermaid
-flowchart LR
-  A[민원 요약] --> B[Text tokenizer]
-  B --> C[130M text backbone]
-  C --> D[Mean pooling]
-  D --> E[140M embedder]
-  E --> F[768차원 vector]
-  G[유형 이름과 설명] --> H[같은 text encoder]
-  H --> I[유형 vector]
-  F --> J[Cosine similarity]
-  I --> J
-  J --> K[top-k 후보]
-```
+![민원 요약과 유형 설명을 각각 벡터로 변환해 코사인 유사도를 계산하는 EmbeddingGemma 2 text-only 아키텍처](assets/04-text-only-architecture.webp)
 
 그림 2. 이번 text-only 검색 경로. 이미지·영상·음성 encoder는 load하지 않았다.
 
@@ -125,17 +113,7 @@ Transformer 한 layer의 self-attention은 결합 sequence 길이 `N`에 대해 
 
 EmbeddingGemma 2가 300개 중 의미상 가까운 3∼8개를 고르고, LAYA가 그 후보를 민원과 함께 정밀 비교하는 구조를 만들 수 있다. 정보 검색에서 흔히 쓰는 **retrieve then rerank** 패턴이다.
 
-```mermaid
-flowchart LR
-  A[민원 한 건] --> B[EmbeddingGemma 2]
-  C[유형 설명 27개 또는 300개] --> D[미리 계산한 vector index]
-  B --> E[Cosine top-k]
-  D --> E
-  E --> F[후보 3개에서 8개]
-  F --> G[LAYA reranker]
-  A --> G
-  G --> H[최종 대 > 중 > 소]
-```
+![EmbeddingGemma 2가 후보를 검색하고 판단 모델이 작은 후보군만 재평가하는 retrieve and rerank 구조](assets/05-retrieve-rerank-architecture.webp)
 
 그림 3. 검증한 2단계 구조. 좋은 설계처럼 보이지만, 실제 결과에서는 reranker가 검색 top-1을 이기지 못했다.
 

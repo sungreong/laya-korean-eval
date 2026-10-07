@@ -31,5 +31,27 @@
     "original_bytes": 65185,
     "optimized_bytes": 24596,
     "reduction_pct": 62.3
+  },
+  {
+    "original": "04-text-only-architecture.png",
+    "optimized": "04-text-only-architecture.webp",
+    "dimensions": [
+      1800,
+      771
+    ],
+    "original_bytes": 123981,
+    "optimized_bytes": 44588,
+    "reduction_pct": 64.0
+  },
+  {
+    "original": "05-retrieve-rerank-architecture.png",
+    "optimized": "05-retrieve-rerank-architecture.webp",
+    "dimensions": [
+      1800,
+      817
+    ],
+    "original_bytes": 120062,
+    "optimized_bytes": 41230,
+    "reduction_pct": 65.7
   }
 ]
