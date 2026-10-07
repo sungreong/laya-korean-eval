@@ -2,6 +2,8 @@
 
 Docker Compose로 LAYA Multilingual의 **한국어 분류 성능, 추론 지연, 메모리, 추가 학습 전후 변화**를 측정하는 독립 실험 프로젝트입니다. 생성형 챗봇 평가나 공식 LAYA 벤치마크는 아닙니다.
 
+전체 배경, Jev와의 차이, 아키텍처, 한국어 NSMC 실험과 27개 민원 유형 후속 실험을 한 문서로 읽으려면 [standalone Technical Deep Dive](docs/laya-technical-deep-dive/blog.html)를 내려받아 브라우저에서 여세요. 수정 가능한 [Markdown 원고](docs/laya-technical-deep-dive/blog.md)와 [출처 목록](docs/laya-technical-deep-dive/sources.md)도 함께 제공합니다.
+
 ## 빠른 시작
 
 Docker Desktop의 Linux 컨테이너(또는 Linux Docker Engine)와 Docker Compose v2가 필요합니다. CPU 전용이며 컨테이너에는 CPU 4개 quota와 메모리 8GiB를 할당합니다. 기본 모델과 학습 모델을 저장할 디스크 공간도 필요합니다.

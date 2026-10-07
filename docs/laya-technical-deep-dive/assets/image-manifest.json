@@ -1,0 +1,114 @@
+[
+  {
+    "original": "01-dynamic-categories.png",
+    "optimized": "01-dynamic-categories.webp",
+    "original_dimensions": [
+      1352,
+      751
+    ],
+    "display_dimensions": [
+      1352,
+      751
+    ],
+    "before_bytes": 97043,
+    "after_bytes": 48862,
+    "reduction_percent": 49.6,
+    "quality": 85
+  },
+  {
+    "original": "02-architecture.png",
+    "optimized": "02-architecture.webp",
+    "original_dimensions": [
+      1352,
+      912
+    ],
+    "display_dimensions": [
+      1352,
+      912
+    ],
+    "before_bytes": 115292,
+    "after_bytes": 52386,
+    "reduction_percent": 54.6,
+    "quality": 85
+  },
+  {
+    "original": "03-finetuning-retention.png",
+    "optimized": "03-finetuning-retention.webp",
+    "original_dimensions": [
+      1352,
+      783
+    ],
+    "display_dimensions": [
+      1352,
+      783
+    ],
+    "before_bytes": 91002,
+    "after_bytes": 44288,
+    "reduction_percent": 51.3,
+    "quality": 85
+  },
+  {
+    "original": "04-independent-benchmark.png",
+    "optimized": "04-independent-benchmark.webp",
+    "original_dimensions": [
+      1632,
+      795
+    ],
+    "display_dimensions": [
+      1632,
+      795
+    ],
+    "before_bytes": 74339,
+    "after_bytes": 28678,
+    "reduction_percent": 61.4,
+    "quality": 85
+  },
+  {
+    "original": "05-official-long-context.png",
+    "optimized": "05-official-long-context.webp",
+    "original_dimensions": [
+      1258,
+      693
+    ],
+    "display_dimensions": [
+      1258,
+      693
+    ],
+    "before_bytes": 100980,
+    "after_bytes": 57676,
+    "reduction_percent": 42.9,
+    "quality": 85
+  },
+  {
+    "original": "06-korean-measurements.png",
+    "optimized": "06-korean-measurements.webp",
+    "original_dimensions": [
+      1337,
+      712
+    ],
+    "display_dimensions": [
+      1337,
+      712
+    ],
+    "before_bytes": 58250,
+    "after_bytes": 29140,
+    "reduction_percent": 50.0,
+    "quality": 85
+  },
+  {
+    "original": "08-complaint-training-curves.png",
+    "optimized": "08-complaint-training-curves.webp",
+    "original_dimensions": [
+      2096,
+      666
+    ],
+    "display_dimensions": [
+      2096,
+      666
+    ],
+    "before_bytes": 78981,
+    "after_bytes": 40744,
+    "reduction_percent": 48.41,
+    "quality": 85
+  }
+]

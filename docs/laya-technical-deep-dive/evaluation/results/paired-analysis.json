@@ -1,0 +1,41 @@
+{
+  "note": "Exploratory paired analyses, unadjusted p values; not confirmatory multi-hypothesis inference. Bootstrap resamples rows, 20000 replicates, seed42.",
+  "pairs": [
+    {
+      "a": "base_ko",
+      "b": "base_en",
+      "delta_b_minus_a": 0.07,
+      "paired_bootstrap95": [
+        0.005,
+        0.135
+      ],
+      "a_only_correct": 15,
+      "b_only_correct": 29,
+      "mcnemar_exact_p_unadjusted": 0.048766765904474596
+    },
+    {
+      "a": "base_ko",
+      "b": "finetuned_raw",
+      "delta_b_minus_a": 0.0,
+      "paired_bootstrap95": [
+        0.0,
+        0.0
+      ],
+      "a_only_correct": 0,
+      "b_only_correct": 0,
+      "mcnemar_exact_p_unadjusted": 1.0
+    },
+    {
+      "a": "tfidf_logreg",
+      "b": "base_ko",
+      "delta_b_minus_a": -0.04,
+      "paired_bootstrap95": [
+        -0.13,
+        0.05
+      ],
+      "a_only_correct": 49,
+      "b_only_correct": 41,
+      "mcnemar_exact_p_unadjusted": 0.46079247271897156
+    }
+  ]
+}

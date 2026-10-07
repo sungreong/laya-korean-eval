@@ -1,0 +1,16 @@
+{
+  "original": "outputs\\laya-blog-2026-10-05\\assets\\07-laya-korean-thumbnail-original.png",
+  "optimized": "outputs\\laya-blog-2026-10-05\\assets\\07-laya-korean-thumbnail.webp",
+  "original_dimensions": [
+    1672,
+    940
+  ],
+  "optimized_dimensions": [
+    1600,
+    900
+  ],
+  "original_bytes": 1443058,
+  "optimized_bytes": 80978,
+  "reduction_percent": 94.4,
+  "quality": 85
+}
