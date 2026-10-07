@@ -3896,7 +3896,7 @@ N개 logit → softmax → 하나 선택</code></pre>
 
     <section class="md-section level-4 template-default" data-section-id="results-정답을-모르는-실제-조건에서는-어땠나" data-template="default">
       <h4 id="results-정답을-모르는-실제-조건에서는-어땠나" class="section-heading level-4">Results: 정답을 모르는 실제 조건에서는 어땠나</h4>
-      <p class="md-paragraph" data-block-id="results-정답을-모르는-실제-조건에서는-어땠나__paragraph_1">아래 표는 모델 선택에 쓰지 않은 기존 독립 시험 81개에서 측정했다. <code>순차+prefix</code>는 gold가 아니라 앞 단계의 <strong>실제 예측값</strong>을 넘겼다.</p>
+      <p class="md-paragraph" data-block-id="results-정답을-모르는-실제-조건에서는-어땠나__paragraph_1">계층·prefix 학습을 마친 최종 체크포인트로 <strong>기존 독립 시험 90건 전체를 처음부터 다시 추론했다.</strong> 이전 실험의 예측값이나 확률을 재사용하지 않았다. 단일 정답 81건은 아래 정확도 계산에 사용했고, 정답을 하나로 확정할 수 없는 정보 부족 9건도 세 방법으로 다시 실행하되 정확도에서는 제외해 별도 재질문 대상 분석으로 보존했다. LAYA와 KoBERT 각각 <code>27개 일괄</code>, <code>순차</code>, <code>순차+prefix</code>를 모두 다시 실행했으므로, 표의 최종 수치는 새 체크포인트가 같은 시험을 실제로 다시 계산한 결과다.</p><p class="md-paragraph" data-block-id="results-정답을-모르는-실제-조건에서는-어땠나__paragraph_2"><code>순차+prefix</code>는 gold가 아니라 앞 단계의 <strong>실제 예측값</strong>을 넘겼다. 따라서 90건마다 대분류부터 다시 고르고, 그 예측을 중분류 입력에 넣은 뒤, 다시 예측한 중분류까지 소분류 입력에 전달했다. 모델 선택에 독립 시험은 사용하지 않았다.</p>
       <div class="md-table-shell" data-block-id="results-정답을-모르는-실제-조건에서는-어땠나__table_1">
 
         <table class="md-table">
@@ -3909,7 +3909,7 @@ N개 logit → softmax → 하나 선택</code></pre>
           </tbody>
         </table>
       </div>
-    <p class="md-paragraph" data-block-id="results-정답을-모르는-실제-조건에서는-어땠나__paragraph_2">LAYA의 일괄 결과는 1차 학습 32.1%에서 34.6%로 2건 늘었다. 하지만 순차 LAYA는 23.5%로 그대로였고 prefix도 최종 정답 수를 늘리지 못했다. KoBERT는 계층 과제를 직접 학습한 뒤 순차 12.3%, predicted-prefix 16.0%로 1차 순차 결과 6.2%보다 높아졌다. 그래도 절대 정확도는 낮다. 한 seed의 작은 합성 시험이므로 이 차이에 통계적·운영적 의미를 부여하지 않았다.</p>
+    <p class="md-paragraph" data-block-id="results-정답을-모르는-실제-조건에서는-어땠나__paragraph_3">LAYA의 일괄 결과는 1차 학습 32.1%에서 34.6%로 2건 늘었다. 하지만 순차 LAYA는 23.5%로 그대로였고 prefix도 최종 정답 수를 늘리지 못했다. KoBERT는 계층 과제를 직접 학습한 뒤 순차 12.3%, predicted-prefix 16.0%로 1차 순차 결과 6.2%보다 높아졌다. 그래도 절대 정확도는 낮다. 한 seed의 작은 합성 시험이므로 이 차이에 통계적·운영적 의미를 부여하지 않았다.</p>
     </section>
 
     <section class="md-section level-4 template-default" data-section-id="학습에-전혀-없던-유형도-후보-설명만-추가할-수-있나" data-template="default">
@@ -3927,7 +3927,7 @@ N개 logit → softmax → 하나 선택</code></pre>
           </tbody>
         </table>
       </div>
-    <p class="md-paragraph" data-block-id="학습에-전혀-없던-유형도-후보-설명만-추가할-수-있나__paragraph_2">각 유형은 직접 표현, 간접 표현, 다른 문제를 섞은 복합 문맥 한 건씩 만들었다. 27개 모두 학습·validation·기존 시험과 문장이 겹치지 않는다. 일괄 방식에서는 36개 설명을 한 번에 채점했고, 순차 방식은 새 대·중·소 후보를 해당 단계에 넣었다. 고정 <code>27 logits</code> head라면 출력층을 36개로 바꾸고 재학습해야 하지만, 공유 scorer는 파라미터 모양을 바꾸지 않았다.</p>
+    <p class="md-paragraph" data-block-id="학습에-전혀-없던-유형도-후보-설명만-추가할-수-있나__paragraph_2">각 유형은 직접 표현, 간접 표현, 다른 문제를 섞은 복합 문맥 한 건씩 만들었다. 27개 모두 학습·validation·기존 시험과 문장이 겹치지 않는다. 일괄 방식에서는 36개 설명을 한 번에 채점했고, 순차 방식은 새 대·중·소 후보를 해당 단계에 넣었다. 고정 <code>27 logits</code> head라면 출력층을 36개로 바꾸고 재학습해야 하지만, 공유 scorer는 파라미터 모양을 바꾸지 않았다.</p><p class="md-paragraph" data-block-id="학습에-전혀-없던-유형도-후보-설명만-추가할-수-있나__paragraph_3">이 27건도 기존 결과에서 일부만 골라 계산한 것이 아니다. 최종 LAYA와 최종 KoBERT로 세 추론 방식을 각각 전부 새로 실행했다. 따라서 모델당 <code>27건 × 3방법</code>, 두 모델을 합쳐 162개의 최종 예측 record가 남아 있다. 비교를 위해 기본 LAYA도 같은 27건과 세 방법을 별도로 다시 예측했다.</p>
       <div class="md-table-shell" data-block-id="학습에-전혀-없던-유형도-후보-설명만-추가할-수-있나__table_2">
 
         <table class="md-table">
@@ -3940,7 +3940,7 @@ N개 logit → softmax → 하나 선택</code></pre>
           </tbody>
         </table>
       </div>
-    <p class="md-paragraph" data-block-id="학습에-전혀-없던-유형도-후보-설명만-추가할-수-있나__paragraph_3">이 결과는 <strong>새 후보를 계산 그래프에 넣을 수 있음</strong>을 확인하지만, <strong>새 후보를 잘 일반화함</strong>을 입증하지 않는다. 유형별 3건이라 Wilson 구간도 매우 넓다. 특히 KoBERT 일괄 36개는 모두 틀렸고 입력 27건 모두에서 길이 제한에 따른 후보 설명 truncation이 발생했다. LAYA도 일괄 방식의 새 대분류를 하나도 맞히지 못했다. 반대로 일부 순차 결과가 우연히 높게 나온 유형도 있어 더 큰 holdout 없이는 순위를 해석하면 안 된다.</p>
+    <p class="md-paragraph" data-block-id="학습에-전혀-없던-유형도-후보-설명만-추가할-수-있나__paragraph_4">이 결과는 <strong>새 후보를 계산 그래프에 넣을 수 있음</strong>을 확인하지만, <strong>새 후보를 잘 일반화함</strong>을 입증하지 않는다. 유형별 3건이라 Wilson 구간도 매우 넓다. 특히 KoBERT 일괄 36개는 모두 틀렸고 입력 27건 모두에서 길이 제한에 따른 후보 설명 truncation이 발생했다. LAYA도 일괄 방식의 새 대분류를 하나도 맞히지 못했다. 반대로 일부 순차 결과가 우연히 높게 나온 유형도 있어 더 큰 holdout 없이는 순위를 해석하면 안 된다.</p>
     </section>
 
     <section class="md-section level-4 template-default" data-section-id="discussion-prefix는-왜-항상-좋아지지-않았나" data-template="default">

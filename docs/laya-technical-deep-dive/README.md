@@ -9,7 +9,7 @@
 - `assets/`: 그림 원본과 최적화 WebP. HTML은 최적화본만 내장합니다.
 - `evaluation/`, `research/`: 본문에서 직접 연결한 최초 한국어 파일럿의 최소 근거 파일.
 
-후속 민원 실험의 실행 코드는 이 저장소 루트의 `research/`, 데이터는 `datasets/complaints/`, 결과는 `results/complaint-training-2026-10-07/`와 `results/hierarchical-prefix-2026-10-07/`에 있습니다. 블로그 13절에 3×3×3 taxonomy, 명확·간접·복합·정보 부족 사례, LAYA 추가 학습, 실제 `[MASK]` KoBERT 비교, 대·중·소 단계별 학습과 predicted-prefix 평가를 정리했습니다. 최종 독립 시험에서 LAYA 일괄 방식은 34.6%, 순차+prefix는 23.5%, KoBERT `[MASK]` 순차+prefix는 16.0%였습니다. 학습에서 제외한 9개 유형도 추론 때 후보로 추가했지만 정확도는 불안정했습니다. 작은 합성 시험과 제한된 CPU·단일 seed·동결 encoder 조건이므로 모델의 우열을 결론 내리지 않습니다.
+후속 민원 실험의 실행 코드는 이 저장소 루트의 `research/`, 데이터는 `datasets/complaints/`, 결과는 `results/complaint-training-2026-10-07/`와 `results/hierarchical-prefix-2026-10-07/`에 있습니다. 블로그 13절에 3×3×3 taxonomy, 명확·간접·복합·정보 부족 사례, LAYA 추가 학습, 실제 `[MASK]` KoBERT 비교, 대·중·소 단계별 학습과 predicted-prefix 평가를 정리했습니다. 최종 체크포인트로 기존 독립 시험 90건과 미등록 유형 27건을 세 추론 방식에서 전부 다시 예측했으며 이전 예측값을 재사용하지 않았습니다. 최종 독립 시험에서 LAYA 일괄 방식은 34.6%, 순차+prefix는 23.5%, KoBERT `[MASK]` 순차+prefix는 16.0%였습니다. 학습에서 제외한 9개 유형도 추론 때 후보로 추가했지만 정확도는 불안정했습니다. 작은 합성 시험과 제한된 CPU·단일 seed·동결 encoder 조건이므로 모델의 우열을 결론 내리지 않습니다.
 
 ```bash
 git clone https://github.com/sungreong/laya-korean-eval.git
