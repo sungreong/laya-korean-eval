@@ -246,3 +246,9 @@ docker compose run --rm evaluate python research/run_kobert_complaints.py --chec
 ![계층·prefix 실험 결과](results/hierarchical-prefix-2026-10-07/hierarchical-prefix-results.webp)
 
 이 실험은 새 후보를 출력층 수정 없이 추가할 수 있음을 확인했지만, 새 후보 정확도가 안정적이라는 증거는 아닙니다. 유형별 표본이 3개이고, 합성 자료·단일 seed·동결 encoder 조건입니다. prefix는 앞 선택을 명시하지만 잘못된 부모도 다음 단계에 전달하므로 결과가 항상 좋아지지 않았습니다. 원 요약과 문항별 trace는 [`results/hierarchical-prefix-2026-10-07`](results/hierarchical-prefix-2026-10-07)에 있습니다.
+
+### Top-2 계층 후보를 12개까지 유지한 후속 실험
+
+대분류 Top-2, 각 부모의 중분류 Top-2를 유지하고 네 경로 아래 소분류 세 개를 모두 모아 12개의 전체 경로를 재평가했다. 정답은 62/81(76.5%)에서 최종 후보 안에 남았지만 최종 Top-1은 7/81(8.6%)였다. 기존 flat-27 점수를 동일한 후보에 제한한 사후 분석도 26/81(32.1%)로 제한 없는 flat-27 28/81(34.6%)보다 낮았다. p50 지연은 2.059초로 flat-27 1.394초와 hard cascade 0.849초보다 길었다.
+
+이번 모델은 `대 > 중 > 소` 전체 경로 설명 12개를 한 번에 비교하는 형식으로 학습되지 않았다. 따라서 높은 후보 생존율이 최종 정확도로 이어지지 않았다. 결과·전체 trace·분석은 [`results/beam12-2026-10-07`](results/beam12-2026-10-07)에 있다.

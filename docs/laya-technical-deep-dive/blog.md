@@ -14,7 +14,7 @@ viewer-chrome: hidden
 
 고정 BERT 분류기처럼 클래스별 출력 뉴런을 정해 두는 대신, 요청마다 주어진 후보 위치를 같은 채점기로 평가한다. 분류 체계를 바꾸기 쉽고 문장을 한 토큰씩 생성하지 않는다는 점이 주목할 부분이다. 동적 후보 분류 자체가 최초의 발명이라는 뜻은 아니다.
 
-한국어 도입 판단부터 말하면, **실험할 가치는 있지만 이 글의 결과만으로 전면 자동화할 근거는 부족하다.** Docker Compose CPU 환경에서 NSMC 리뷰 200개를 직접 평가했을 때 한국어 질문은 **66.0%**, 같은 한국어 본문에 영어 질문을 붙이면 **73.0%**였다. 이어서 27개 민원 유형용 합성 학습 729개를 만들자 LAYA의 독립 시험 일괄 정확도는 **24.7% → 32.1% → 34.6%**로 올랐다. 대·중·소를 따로 학습하고 앞 단계 예측을 prefix로 넘긴 순차 방식은 **23.5%**에 머물렀다. 실제 `[MASK]` token을 쓴 KoBERT adapter는 계층·prefix 학습 후 순차 정확도가 **6.2%에서 16.0%**로 올랐지만 절대 성능은 낮았다. 학습에서 제외한 9개 유형도 출력층 교체 없이 후보로 추가할 수 있었으나, 유형별 정확도는 0∼44.4%로 불안정했다. 한국어 encoder를 쓴다는 사실이나 동적 후보를 넣을 수 있다는 사실만으로 정확도가 보장되지는 않는다.
+한국어 도입 판단부터 말하면, **실험할 가치는 있지만 이 글의 결과만으로 전면 자동화할 근거는 부족하다.** Docker Compose CPU 환경에서 NSMC 리뷰 200개를 직접 평가했을 때 한국어 질문은 **66.0%**, 같은 한국어 본문에 영어 질문을 붙이면 **73.0%**였다. 이어서 27개 민원 유형용 합성 학습 729개를 만들자 LAYA의 독립 시험 일괄 정확도는 **24.7% → 32.1% → 34.6%**로 올랐다. 대·중·소를 따로 학습하고 앞 단계 예측을 prefix로 넘긴 순차 방식은 **23.5%**에 머물렀다. 대분류·중분류 Top-2를 남기고 소분류 12개를 최종 재평가한 후속 실험은 정답 후보를 **76.5%**까지 보존했지만 최종 정확도는 오히려 **8.6%**였다. 실제 `[MASK]` token을 쓴 KoBERT adapter는 계층·prefix 학습 후 순차 정확도가 **6.2%에서 16.0%**로 올랐지만 절대 성능은 낮았다. 학습에서 제외한 9개 유형도 출력층 교체 없이 후보로 추가할 수 있었으나, 유형별 정확도는 0∼44.4%로 불안정했다. 한국어 encoder를 쓴다는 사실이나 동적 후보를 넣을 수 있다는 사실만으로 정확도가 보장되지는 않는다.
 
 그렇다면 상용 API인 **Jev는 어떨까?** 공개된 독립 실험에서는 후보가 많을수록 LAYA보다 훨씬 안정적인 신호가 있다. 같은 CLINC150 조건에서 Jev는 **91.3%**, LAYA Multilingual은 **0.5%**였고, Jev도 150개를 한 번에 판단한 91.3%보다 두 단계로 쪼갠 67.3%가 낮았다. 별도의 한국어 100문항 표본 점검에서는 Belebele 독해 **96/100**, PAWS-X 의미 동등성 **76/100**이었다. 다만 전자는 영어 intent이고 후자는 작은 탐색 실험이다. **한국어 민원 300개 유형 성능을 직접 보여 주는 결과는 아직 없다.** 현재 근거로는 Jev가 대규모 동적 후보의 유력한 비교 대상이지만, 한국어 민원에서는 동일 시험지로 검증하기 전까지 전망으로만 다뤄야 한다.
 
@@ -948,6 +948,23 @@ prefix는 다음 단계에 “앞에서 무엇을 골랐는지”를 명시한�
 
 이때 계층은 정답을 잘라 내는 gate보다 검색 feature, 허용 경로 제약, auxiliary loss로 쓸 수 있다. 순차가 필요하면 부모 하나가 아니라 top-2 또는 top-3를 유지한다. label description은 이름만 쓰지 말고 정의, 포함 기준, 제외 기준, 대표 사례, 헷갈리는 이웃 유형을 담는다. 자연어 label description과 retrieval을 결합하는 연구들은 이런 설계가 극단적 다중 분류에서 유효한 방향임을 보여 주지만, 이번 민원 자료의 300개 성능을 보증하지는 않는다. [Label description 기반 학습](https://aclanthology.org/2023.emnlp-main.853/), [Description 표현 민감도](https://aclanthology.org/2024.findings-acl.562/), [Retrieval 기반 extreme classification](https://aclanthology.org/2023.findings-eacl.81.pdf)
 
+#### Top-k 권장 구조를 실제로 실행한 결과
+
+가능성만 말하지 않기 위해 최종 계층+prefix LAYA를 다시 실행했다. 대분류 Top-2를 남기고, 각 부모 아래 중분류 Top-2를 남긴 뒤, 네 개 대·중 경로의 소분류 세 개를 모두 합쳤다. 마지막에는 `대 > 중 > 소: 설명` 형식의 12개 후보를 한 번에 재평가했다. 학습은 추가하지 않았고 같은 Docker CPU와 같은 81개 단일 정답 시험을 사용했다.
+
+| LAYA 추론 방식 | 정답 | 정확도 | p50 지연 |
+| --- | ---: | ---: | ---: |
+| 일괄 27개 | 28/81 | **34.6%** | 1.394초 |
+| 대→중→소 hard cascade | 19/81 | 23.5% | 0.849초 |
+| predicted-prefix cascade | 19/81 | 23.5% | 0.907초 |
+| **Top-2/Top-2 → 12개 전체 경로 재평가** | **7/81** | **8.6%** | **2.059초** |
+
+결과는 예상과 반대였다. Top-k 탐색은 정답 소분류를 **62/81, 76.5%**에서 최종 12개 안에 남겼다. 그러나 최종 재평가가 그중 7건, 11.3%만 Top-1으로 골랐다. flat-27에서 맞힌 28건 가운데 beam12도 맞힌 사례는 한 건뿐이었고, beam12만 새로 맞힌 사례는 6건이었다. 후보 recall은 크게 올랐지만 decision ranking이 바뀌면서 최종 정확도가 무너졌다.
+
+원인을 더 분리하기 위해 기존 flat-27의 확률을 새로 계산하지 않고 동일한 beam 12개에만 제한해 선택했다. 이 후처리는 **26/81, 32.1%**로 beam12 전체 경로 재평가보다는 높았지만, 제한하지 않은 flat-27의 28/81보다 두 건 낮았다. beam 제한이 flat 오답 두 건을 복구한 대신 flat 정답 네 건을 제거했기 때문이다.
+
+따라서 이 실험에서 입증된 것은 “Top-k면 좋아진다”가 아니라 **Top-k는 정답 후보를 보존할 수 있지만, 그 후보를 고르는 reranker가 같은 형식으로 학습돼 있어야 한다**는 점이다. 현재 모델은 전체 경로 설명 12개를 비교하는 학습을 받지 않았고 후보 수와 설명 형식이 동시에 바뀌었다. 다음 실험에서는 12-way 전체 경로 학습 자료를 따로 만들거나, stage log-probability를 validation에서 정한 가중치로 결합하거나, 별도 cross-encoder reranker를 학습해야 한다. 이 결과를 보지 않고 후보 생존율 76.5%를 최종 정확도 전망으로 사용하면 안 된다.
+
 #### 새 유형 일반화를 어떻게 다시 평가할까
 
 최종 LAYA 일괄 방식은 미등록 27건 중 8건으로 기본 LAYA의 7건보다 한 건만 늘었다. 새 소분류 2/9, 새 중분류 6/9, 새 대분류 0/9였고, 직접 표현 4/9·간접 표현 3/9·복합 문맥 1/9였다. 맞힌 답도 9개 새 label 가운데 5개에 몰렸다. 즉 **새 label을 등록할 수 있는 API 유연성**과 **새 의미를 안정적으로 알아보는 일반화**를 구분해야 한다.
@@ -1017,6 +1034,9 @@ python research/prepare_unseen_complaints.py
 docker compose run --rm evaluate python research/train_hierarchical_complaints.py --epochs 2 --base-model evaluation/complaint-training-diverse-e5/selected-model --data datasets/complaints/hierarchical-training --out evaluation/complaint-hierarchical-balanced-e2
 docker compose run --rm evaluate python research/train_hierarchical_complaints.py --epochs 1 --base-model evaluation/complaint-hierarchical-balanced-e2/selected-model --data datasets/complaints/hierarchical-prefix-training --out evaluation/complaint-hierarchical-prefix-e1
 docker compose run --rm evaluate python research/run_complaints.py --model evaluation/complaint-hierarchical-prefix-e1/selected-model --out evaluation/complaints-hierarchical-prefix-final --methods flat27 cascade cascade_prefix
+
+# 대 Top-2 × 부모별 중 Top-2 × 소 3개 = 12개 전체 경로 재평가
+docker compose run --rm evaluate python research/run_complaints.py --model evaluation/complaint-hierarchical-prefix-e1/selected-model --out evaluation/complaints-beam12 --methods beam12
 
 # KoBERT도 별도 컨테이너에서 같은 순서로 실행
 docker compose run --rm evaluate python research/train_hierarchical_kobert_mask.py --epochs 2 --base-checkpoint evaluation/kobert-mask-direct-e5/selected-model --data datasets/complaints/hierarchical-training --out evaluation/kobert-mask-hierarchical-balanced-e2
@@ -1147,6 +1167,8 @@ Jev 평가 논문은 37개 데이터셋을 다루며 선택형 확률과 이진 
 **핵심 혁신은 무엇인가?** 자연어 질문·동적 후보·공통 채점·형식화된 확률 출력을 작은 인코더 기반 판단 시스템으로 묶었다는 데 있다. 고정 클래스의 출력층을 매번 수정하는 부담을 줄인다. 동적 분류 자체는 NLI와 label-conditioned 모델에서도 가능한 접근이다.
 
 **실제로 무엇이 좋아졌는가?** 후보를 입력으로 바꾸고 자유 생성 없이 구조화된 판단을 반환하는 사용 방식은 코드에서 확인했다. 민원 도메인 729개로 head를 학습하고 계층·prefix 과제를 추가하자 27개 일괄 시험은 24.7%에서 32.1%, 다시 34.6%로 변했다. 하지만 LAYA 순차 계층 분류는 최종 23.5%였고, prefix도 정답 수를 늘리지 못했다. KoBERT `[MASK]` 순차 방식은 6.2%에서 16.0%로 변했지만 여전히 낮았다. 데이터와 추론 방식에 따라 이득이 달랐다.
+
+**Top-k로 부모 후보를 늘리면 좋아졌는가?** 이번 구현에서는 아니다. 대 Top-2와 부모별 중 Top-2를 유지해 정답 후보 생존율은 76.5%가 됐지만, 학습하지 않은 12-way 전체 경로 재평가의 최종 정확도는 8.6%로 떨어졌다. 후보를 살리는 retrieval과 최종 순위를 정하는 reranking은 별도 문제다. Top-k를 production 설계로 채택하려면 동일한 후보 형식으로 reranker를 학습하고 end-to-end 정확도를 다시 측정해야 한다.
 
 **한국어에서도 장점이 유지되는가?** 한국어 텍스트에 동적 후보를 적용하고 민원 자료로 추가 학습할 수는 있었다. 정확도는 질문 표현과 과제에 민감했고, NSMC 표본은 66∼73%, 민원 27개 유형의 최종 일괄 결과는 34.6%였다. KoBERT adapter의 최종 predicted-prefix 결과는 16.0%였다. 한국어 전용 encoder만으로 동적 판단 장점이 유지되지는 않았고, 다른 언어의 점수나 사전학습 규모를 품질의 대용 지표로 쓰면 안 된다.
 

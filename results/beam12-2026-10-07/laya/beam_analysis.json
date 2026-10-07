@@ -1,0 +1,40 @@
+{
+  "scope": "81 single-answer synthetic complaint cases; post-hoc diagnostics, not a new benchmark.",
+  "beam_predictions": "results/beam12-2026-10-07/laya/beam12_predictions.json",
+  "flat_predictions": "results/hierarchical-prefix-2026-10-07/laya/test/flat27_predictions.json",
+  "strict_cases": 81,
+  "beam_candidate_survival": {
+    "count": 62,
+    "rate": 0.7654320987654321
+  },
+  "beam12_full_path_rerank": {
+    "correct": 7,
+    "accuracy": 0.08641975308641975,
+    "accuracy_given_gold_survived": 0.11290322580645161
+  },
+  "flat27_scores_restricted_to_beam12": {
+    "correct": 26,
+    "accuracy": 0.32098765432098764,
+    "rescued_vs_unrestricted_flat27": 2,
+    "lost_vs_unrestricted_flat27": 4
+  },
+  "gold_rank_within_final_beam": {
+    "2": 6,
+    "5": 5,
+    "4": 11,
+    "3": 8,
+    "9": 2,
+    "7": 6,
+    "1": 7,
+    "8": 2,
+    "12": 3,
+    "10": 4,
+    "6": 4,
+    "11": 4
+  },
+  "interpretation": [
+    "The beam retained the gold leaf in most cases, but the unseen 12-way full-path reranking format failed.",
+    "Restricting the existing flat-27 scores to beam candidates also did not beat unrestricted flat-27.",
+    "Top-k candidate recall and top-1 end-to-end accuracy must be reported separately."
+  ]
+}
