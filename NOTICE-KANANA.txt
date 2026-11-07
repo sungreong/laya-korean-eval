@@ -1,0 +1,7 @@
+Kanana is licensed in accordance with the Kanana Open License Agreement.
+Copyright © KAKAO Corp. All Rights Reserved.
+
+This repository does not redistribute the Kanana model weights. It contains
+independent evaluation code, derived measurements, and documentation that
+reference kakaocorp/kanana-2-v-decide-3b-2611. Review the upstream license
+before distributing a fine-tuned model or offering a third-party service.

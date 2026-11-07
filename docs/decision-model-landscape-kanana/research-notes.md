@@ -66,3 +66,12 @@
 - fixture: 기존 합성 민원 90건, 단일 정답 81건, candidate 27개
 - task-specific fine-tuning: 없음
 - scope: 저자 작성 합성 진단이며 독립 검수·production benchmark가 아님
+
+## Kanana GPU·서빙·학습·라이선스 보강
+
+- Kakao 공식 자료는 H200 GPU 1장, 한국어 상품 리뷰의 판단 1건 약 42ms를 보고하지만 batch, 후보 수와 cache 상태가 로컬 실험과 같지 않아 CPU 6.65초와 직접 속도 배수로 비교하지 않는다.
+- 로컬 공개 구현의 candidate cache는 2,560차원 FP32 vector를 최대 4,096개 저장한다. 순수 vector 크기는 27개 0.26MiB, 300개 2.93MiB, 4,096개 40MiB다.
+- reference server는 HTTP thread와 queue를 제공하지만 단일 `Decider.turn` lock으로 model inference를 직렬화한다. Production 설계는 별도의 queue, worker 수, warm-up, 인증과 관측성을 검증해야 한다.
+- 공식 checkpoint와 inference 코드는 fine-tuning 가능성을 열지만 training script와 recipe는 없다. `embed_messages`가 `no_grad`이므로 custom trainable forward가 필요하다.
+- Kanana Open License는 자사 서비스 운영을 허용하지만 유료 API/cloud access, 제3자 SI·on-prem, on-device 판매에는 Kakao의 별도 commercial license를 요구한다. 재배포·파생 모델에는 Notice와 `Powered by Kanana` 등 조건이 있다.
+- 사용자 제공 Kakao Tech 영상 `2crSurA7R-U`의 제목과 설명을 확인했다. 영상 대상은 Kanana-v-embedding이며 V-Decide 자체가 아니므로, 멀티모달 embedding 학습·검색 서비스 적용의 계열 배경으로만 사용하고 V-Decide fine-tuning 근거로 일반화하지 않는다.

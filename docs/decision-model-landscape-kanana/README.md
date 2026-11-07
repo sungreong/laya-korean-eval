@@ -21,6 +21,7 @@ Kakao Kanana-2 V-Decide의 모델 구성, query/candidate dual-encoder 데이터
 - 동일 자료의 flat·계층·검색 재비교: `../../results/method-comparison-2026-11-08/`
 - 조건: BF16, CPU 8 thread, memory 11GiB, 27개 후보, 단일 정답 81건
 - 결과: 75/81, accuracy 92.6%, Macro-F1 92.1%, warm p50 6.65초
+- 라이선스 검토: 저장소 루트 `../../NOTICE-KANANA.txt`, 원문은 Kanana Open License
 
 ## 조사 범위
 

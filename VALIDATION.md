@@ -53,3 +53,12 @@
 - 공개 결과의 문항 수·정답 수·동일 fixture 해시·세 비교군 수치를 검사하는 회귀 테스트 2개를 추가했다. 전체 단위 테스트 29개가 통과했다.
 - 기존 예측을 다시 읽어 flat-27, hard cascade, predicted-prefix cascade, retrieval top-1의 대분류·대+중·전체 경로 정확도를 동일 81건 기준으로 계산했다. beam12의 후보 생존율과 최종 top-1 정확도도 분리해 `results/method-comparison-2026-11-08/`에 기록했다.
 - 재계산된 주요 정답 수와 beam recall/top-1 분리를 검사하는 테스트 2개를 추가했다. 전체 단위 테스트는 31개다.
+
+### 공식 자료·운영·라이선스 검토 보강
+
+- Kakao Tech 글, 모델 카드·설정, 공식 `server_kanana_v_decide.py`, Kanana Open License, Kakao의 멀티모달 임베딩 발표 영상을 교차 확인해 통합 기술 글을 보강했다.
+- Kakao가 공개한 H200 약 42ms는 공급사 측 한국어 상품 리뷰 판단 1건 수치다. 로컬에는 사용 가능한 CUDA 환경이 없어 GPU 속도는 재현하지 않았으며, 로컬 CPU 6.65초와 직접적인 배속 비교를 하지 않았다.
+- 공개 서버는 요청 queue와 API key를 제공하지만 모델 호출을 전역 lock으로 직렬화한다. 따라서 고처리량 production server가 아니라 참고 구현으로 평가했다.
+- 공식 checkpoint는 fine-tuning 가능한 공개 가중치지만, 2026-11-08 확인 기준 공식 학습 script·loss·dataset schema·LoRA recipe는 제공되지 않았다. 글의 LoRA 경로는 일반 PEFT 자료와 공개 아키텍처를 바탕으로 한 실험 제안으로 표시했다.
+- Kanana 계산 구조가 일반 embedding bi-encoder, Kanana V-Decide, cross-encoder reranker와 어떻게 다른지 별도 절로 구분했다. 앞선 LAYA 경로는 독립 인코딩형이며 이름만으로 cross-encoder reranker라고 간주하지 않았다.
+- Kanana Open License 원문을 검토하고 필수 고지문을 `NOTICE-KANANA.txt`에 추가했다. 자체 서비스와 제3자 API·SI·on-device 재판매의 조건이 다르며, 법률 자문이 아니라 기술 검토임을 명시했다.

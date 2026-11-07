@@ -23,8 +23,9 @@ Jev와 Microsoft Decision-1을 포함한 시장 타임라인은 배경으로만 
 2. **핵심 구조는 query/candidate dual encoding이다.** `state + question`과 각 후보 설명을 각각 2,560차원 L2 정규화 벡터로 만들고 cosine similarity와 softmax로 확률을 계산한다. 후보 벡터는 최대 4,096개까지 LRU cache한다.
 3. **LAYA와 가장 큰 차이는 option marker 하나를 공동 입력 안에서 scoring하지 않는다는 점이다.** Kanana는 후보 설명을 독립 문서처럼 encoding한다. EmbeddingGemma 검색과 닮았지만 decision 학습, typed question renderer, vision 입력과 확률 출력이 한 모델에 들어 있다.
 4. **동일 합성 민원 81건에서는 Kanana flat-27이 92.6%로 가장 높았다.** EmbeddingGemma 검색 71.6%, 계층 학습 LAYA flat-27 34.6%, LAYA 순차+prefix 23.5%였다.
-5. **정확도 대가는 CPU 비용이다.** warm-cache p50 6.65초, 첫 27개 후보 embedding을 만드는 요청 35.8초, warm RSS 약 6.29GB였다. 즉 CPU 실시간 대화보다 GPU 또는 비동기 batch에 가깝다.
-6. **현재 도입 판단은 ‘가능성 높음, 즉시 전면 교체는 아님’이다.** 이 데이터는 작성자 합성 자료이고 27개 label뿐이다. 300개 label, 독립 실데이터, option 순서 변화, 새 label과 calibration을 추가 검증해야 한다.
+5. **정확도 대가는 CPU 비용이지만 GPU에서는 전망이 다르다.** 로컬 CPU는 warm-cache p50 6.65초였지만 Kakao는 한국어 상품 리뷰 조건에서 H200 GPU 1장 기준 약 42ms를 보고했다. 서로 다른 조건이므로 직접 속도 배수로 비교하지 않는다.
+6. **공개 모델 중에서는 ‘이번에 직접 실행한 비교군’에서 가장 좋다.** 모든 오픈소스 decision model을 같은 조건으로 돌린 세계 순위는 아니다. 그래도 LAYA·KoBERT·EmbeddingGemma와 동일 81건을 비교한 범위에서는 Kanana가 명확한 1위다.
+7. **현재 도입 판단은 ‘가능성 높음, 즉시 전면 교체는 아님’이다.** 이 데이터는 작성자 합성 자료이고 27개 label뿐이다. 300개 label, 독립 실데이터, GPU, option 순서 변화, 새 label, calibration과 라이선스 조건을 추가 검증해야 한다.
 
 ## Kanana-2 V-Decide는 어떤 모델인가
 
@@ -273,6 +274,41 @@ Cloudflare도 Decision Index에서 Clef가 Jev보다 앞선다고 발표했다. 
 - **선택지가 수백 개면 비용과 구분 난도가 커진다.** 후보 retrieval 또는 계층 분류가 필요하다.
 - **공개 benchmark가 아직 작고 중복이 많다.** 공급사별 1등 주장이 공존한다.
 
+## Bi-encoder와 reranker처럼 보이는데, 무엇이 다른가
+
+결론부터 말하면 **Kanana V-Decide의 점수 계산 형태는 bi-encoder와 매우 비슷하다.** 질문과 후보를 각각 같은 backbone으로 인코딩하고, 마지막 유효 token의 벡터를 정규화한 뒤 cosine 유사도를 계산한다. 후보 벡터를 미리 계산해 둘 수 있다는 점도 전형적인 bi-encoder의 장점이다. 따라서 이를 cross-encoder reranker와 같은 구조라고 부르면 정확하지 않다.
+
+```text
+Kanana V-Decide / bi-encoder형
+질문 ── Encoder ── q ──┐
+                        ├─ cosine(q, c) / temperature ─ softmax ─ 선택 확률
+후보 ── Encoder ── c ──┘
+          ↑ 후보별로 미리 계산·캐시 가능
+
+전형적인 cross-encoder reranker
+[질문 ; 후보 1] ─ Encoder ─ score 1
+[질문 ; 후보 2] ─ Encoder ─ score 2
+...질문과 후보를 붙인 전체 token을 후보마다 다시 계산
+```
+
+후보가 \(N\)개이고 encoder 한 번의 비용을 \(E\), 임베딩 차원을 \(d\)라고 단순화하면, 캐시가 채워진 Kanana의 요청당 비용은 대략 `E(question) + O(Nd)`다. 반면 cross-encoder는 후보마다 질문과 후보의 token-level interaction을 다시 계산하므로 대략 `N × E(question, candidate)`가 된다. 대신 cross-encoder는 “이 질문에서 이 후보의 어떤 표현이 서로 영향을 주는가”를 attention으로 직접 볼 수 있어, 비슷한 후보를 정밀하게 가르는 최종 reranking에서 유리할 수 있다.
+
+| 구분 | 일반 embedding bi-encoder | Kanana V-Decide | cross-encoder reranker |
+| --- | --- | --- | --- |
+| 입력 방식 | query와 문서를 독립 인코딩 | state/question과 선택지를 독립 인코딩 | query와 후보를 한 sequence로 결합 |
+| 후보 캐시 | 가능 | 가능, 공개 코드에 candidate cache 구현 | 사실상 불가 |
+| 후보 수 증가 비용 | 벡터 비교가 주로 증가 | 벡터 비교와 softmax가 주로 증가 | 후보마다 backbone forward 증가 |
+| 출력 의미 | 검색 유사도 | 선택지 집합 안의 정규화된 결정 확률 | 후보별 relevance logit/score |
+| 학습 목표 | 검색·대조 학습이 일반적 | 다지선다 decision task에 맞춘 학습이라고 Kakao가 설명 | relevance·pairwise/listwise ranking이 일반적 |
+| 강점 | 대규모 후보 recall | 제한된 선택지 판단, Noul/Score 인터페이스 | top-k 후보의 미세한 상호작용 판별 |
+| 약점 | 점수가 곧 의사결정 확률은 아님 | 후보 집합·표현이 바뀌면 확률도 달라짐 | 느리고 후보 재사용 효과가 작음 |
+
+즉 **구조만 보면 Kanana는 “decision task에 맞게 학습·보정된 bi-encoder”에 가깝다.** 일반 embedding 검색과의 차이는 cosine 계산 자체가 아니라 학습 데이터, 질문·선택지 템플릿, temperature, Choice·Noul·Score라는 제품 인터페이스에 있다. 공개 자료만으로는 이 학습 recipe 전체를 재현할 수 없으므로, 이 문장은 아키텍처와 Kakao 설명을 종합한 해석이다.
+
+LAYA를 reranker로 사용할 때도 구현에 따라 구분해야 한다. 후보를 각각 독립 인코딩해 민원 벡터와 비교했다면 bi-encoder형이고, `[민원; 후보 설명]`을 붙여 후보마다 다시 읽혔다면 cross-encoder형이다. 앞선 로컬 LAYA 실험은 전자에 가까우며, 이름을 `reranker`라고 붙였다고 해서 자동으로 token-level cross-encoder가 되는 것은 아니다.
+
+실무에서는 경쟁 관계보다 역할 분담으로 보는 편이 낫다. 300개 유형을 embedding으로 8개까지 줄이고, Kanana로 8개 중 결정을 내리면 두 단계 모두 독립 인코딩 계열이라 빠르고 캐시하기 쉽다. 그래도 경계 유형이 자주 충돌한다면 마지막 2~4개만 cross-encoder나 강한 생성형 모델에 넘기는 3단계 구성이 정확도와 비용의 균형을 만들 수 있다.
+
 ## Production 권장 구조
 
 가장 현실적인 구조는 decision model이 모든 것을 대체하는 형태가 아니다.
@@ -399,9 +435,171 @@ Cold start에서는 모델 객체 생성이 1.74초였지만 memory-mapped weigh
 
 가장 눈에 띄는 오답은 “비가 오면 물도 고이지만, 배수관보다 움푹 팬 아스팔트 구멍을 메워 달라”는 사례다. 정답은 `노면·보도 파손`이지만 Kanana는 `도로 배수`에 0.794를 줬다. `배수보다 포트홀`이라는 배제 표현보다 앞의 “물 고임” 단서를 강하게 잡은 것이다. 높은 전체 정확도와 별개로 negation·우선순위 문장은 별도 stress test가 필요하다.
 
-92.6%가 높게 나온 이유는 세 가지로 해석할 수 있다. 첫째, Kanana가 한국어 decision training을 받은 모델이다. 둘째, query와 candidate 설명을 같은 embedding space에서 직접 맞추는 구조가 이 과제와 잘 맞는다. 셋째, 평가 문장과 유형 설명을 같은 작성자가 만들었기 때문에 실제 민원보다 어휘·의미 경계가 정돈돼 있다. 세 번째 요인은 성능을 크게 부풀릴 수 있다.
+#### 왜 Kanana가 가장 좋았나: 확인된 사실과 추정
+
+먼저 범위를 정확히 해야 한다. **Kanana는 이번에 동일 81건으로 직접 실행한 공개 모델·구성 가운데 가장 좋았다.** 모든 공개 decision model을 동일 장비와 설정으로 평가한 것은 아니며 Jev·Microsoft-Decision-1 같은 비공개 API도 이 로컬 비교에 넣지 않았다.
+
+| 근거 수준 | 관찰 또는 자료 | 해석 |
+| --- | --- | --- |
+| 로컬 측정 | Kanana 75/81, EmbeddingGemma 58/81, 계층 학습 LAYA flat-27 28/81 | 이 fixture에서는 Kanana가 명확한 1위 |
+| 로컬 측정 | Kanana 대분류 79/81 → 대+중 77/81 → 전체 75/81 | leaf 세부 경계까지 성능 하락이 작음 |
+| 공식 자료 | Kakao 내부 한국어 15,909문항에서 모델 카드 기준 72.50 | 한국어 decision post-training이 있었음을 뒷받침하지만 데이터 비공개 |
+| 공식 자료 | Decision Index text 61.34, vision 61.12, 공개 2종 평균 61.23 | 공급사 비교에서도 경쟁력이 있으나 독립 재현은 아님 |
+| 구조적 추정 | query와 label 설명을 같은 2,560차원 공간에 맞추는 dual encoding | “민원 의미 ↔ 유형 정의” 과제와 구조적으로 잘 맞았을 가능성 |
+| 데이터 한계 | 민원 문장과 유형 설명을 같은 작성자가 작성 | 실제 데이터보다 어휘·의미 경계가 정돈돼 성능이 부풀 수 있음 |
+
+가장 설득력 있는 이유는 **과제와 representation의 궁합**이다. 이 실험은 고정 label ID를 외우는 문제가 아니라 `도로·교통 > 도로시설 > 노면·보도 파손: 차도 포트홀과 보도블록 파손 보수`처럼 의미가 담긴 정의를 민원 요약과 비교하는 문제다. Kanana는 바로 이 두 텍스트를 query와 candidate vector로 맞추도록 decision 학습된 모델이다.
+
+Kakao Tech의 관련 영상 [“그 사진 찾아줘” 한마디면 끝: Kanana 멀티모달 임베딩 모델 개발기](https://www.youtube.com/watch?v=2crSurA7R-U)는 Kanana-v-embedding의 GPU memory 제약을 다룬 대규모 학습과 RAG·상품 검색·추천 연동을 소개한다. 이 영상은 V-Decide의 직접 학습 recipe는 아니지만, Kakao가 같은 Kanana 계열에서 text·image를 공동 embedding space로 만들고 실제 검색 서비스에 연결해 온 배경을 보여 준다. 따라서 이번 성능을 “우연히 cosine을 쓴 결과”보다 **한국어·멀티모달 embedding 경험을 decision post-training으로 확장한 결과일 가능성**으로 해석할 보조 근거가 된다. 다만 두 checkpoint의 데이터와 loss가 같다는 증거는 없으므로 직접적인 인과 근거로 사용하지 않는다.
+
+EmbeddingGemma도 같은 의미 검색 구조라 71.6%까지 올라갔지만, 일반 검색 embedding은 typed question과 선택지 사이의 상대 확률을 decision 과제로 학습한 모델은 아니다. Kanana가 검색 top-1보다 21.0%p 높았다는 결과는 **retrieval representation 위에 decision-specific post-training이 더해진 효과일 수 있다.** 다만 backbone 크기, 학습 데이터와 renderer가 모두 다르므로 post-training 하나의 인과 효과로 확정할 수는 없다.
+
+LAYA가 불리했던 이유도 반대 방향에서 설명할 수 있다. 322M급 LAYA는 27개 option marker를 한 입력 안에 넣어 공동 scoring하며, 기본 모델 카드도 zero-shot typed decision이 약하다고 밝힌다. 우리가 수행한 합성 학습만으로는 3.67B Kanana가 이미 가진 한국어 의미 표현과 decision 학습량을 따라가지 못했다. 순차 대→중→소 방식에서는 첫 단계 오류가 정답 leaf를 후보에서 제거해 추가 손실도 생겼다.
+
+따라서 현재 결론은 “Kanana 구조가 언제나 우월하다”가 아니다. **한국어 의미가 담긴 label 설명을 runtime 후보로 주고, 별도 생성 없이 하나를 고르는 이번 과제에서 Kanana의 사전학습·decision 학습·dual-encoder 구조가 동시에 잘 맞았다**는 것이 가장 합리적인 해석이다.
 
 따라서 이 결과로 “Kanana의 한국어 실서비스 정확도가 92.6%”라고 결론 내릴 수 없다. 실제 도입 전에는 독립 상담원 라벨, 시간 분리 test, 기관별 표현, 개인정보 masking, 300개 label, 새 label holdout, option 순서 변경, image 입력과 confidence threshold를 다시 검증해야 한다. 추가 확인이 필요한 9건에서 허용 경로 9개를 모두 골랐지만 모델을 강제로 선택시킨 결과라 보류 능력을 측정한 것도 아니다.
+
+## CPU 결과를 GPU에서 어떻게 해석할까
+
+Kakao는 공식 기술 글에서 **H200 GPU 1장, 한국어 상품 리뷰 데이터 기준 판단 1건 약 42ms**를 보고했다. GPT-6 Luna보다 약 43배 빠르다는 공급사 측정이다. 토큰 수에 따라 달라진다고 명시했지만 batch, 후보 수, cache 상태와 질문 수의 전체 조건은 공개 글만으로 재현하기 어렵다.
+
+| 측정 | 장비·조건 | 결과 | 해석 |
+| --- | --- | ---: | --- |
+| 이 글의 로컬 실험 | Ryzen 7 PRO 7840U, CPU 8 thread, 27후보 warm cache | p50 6.65초 | 독립 실행했지만 CPU 결과 |
+| 이 글의 cold 후보 생성 | 같은 CPU, 27후보 cache miss | 첫 요청 35.8초 | candidate forward 27회를 포함 |
+| Kakao 공식 측정 | H200 1장, 한국어 상품 리뷰, 판단 1건 | 약 42ms | vendor-reported, 로컬 조건과 직접 비교 불가 |
+
+따라서 “GPU면 CPU보다 정확하다”가 아니라 **정확도는 같은 checkpoint라면 대체로 유지되고 latency와 throughput이 크게 달라질 것**이라고 보는 편이 맞다. BF16 weight 파일이 7.33GB라 8GB GPU에는 가중치만으로도 여유가 거의 없다. 짧은 text inference는 12~16GB급 GPU부터 실측해 볼 수 있다는 것이 합리적인 추정이지만, image·긴 문맥·동시 요청까지 포함한 공식 최소 VRAM은 공개되지 않았다.
+
+공개 구현은 generation KV cache를 사용하지 않고 `use_cache=False`로 forward한다. 대신 후보 embedding을 float32로 GPU memory에 저장한다. 순수 vector 크기는 작다.
+
+| cached candidates | `N × 2,560 × FP32` | 순수 vector 크기 |
+| ---: | ---: | ---: |
+| 27 | 276,480 bytes | 0.26MiB |
+| 300 | 3,072,000 bytes | 2.93MiB |
+| 4,096, 기본 LRU 상한 | 41,943,040 bytes | 40.0MiB |
+
+실제 cache에는 tensor와 Python 객체 overhead가 더해지지만, memory의 대부분은 candidate vector가 아니라 7.33GB model weights와 forward activation이다. 300개 유형에서 더 큰 문제는 cache 용량보다 **최초 300개 candidate forward 시간**이다.
+
+GPU 검증에서는 다음 조건을 고정해야 CPU 결과와 의미 있게 비교할 수 있다.
+
+- text 길이: 128, 512, 2K tokens
+- 후보 수: 27, 100, 300
+- 질문 수: 한 요청에 1개와 여러 개
+- candidate cache: cold와 warm 분리
+- batch/concurrency: 1, 4, 8 이상
+- 결과: p50·p95, requests/s, peak VRAM, 정확도와 option-order 안정성
+
+현재 개발 환경에서는 CUDA GPU 실측을 하지 못했으므로, 이 글에는 Kakao의 H200 수치를 공급사 자료로만 인용하고 RTX 4090·L4·A10 등의 수치는 추정해 넣지 않았다.
+
+## 공식 서버 코드를 Production에서 어떻게 볼까
+
+Kakao는 [`server_kanana_v_decide.py`](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/server_kanana_v_decide.py)를 제공한다. `POST /v1/systemone`, `GET /v1/models`, `GET /health`를 구현하고 Jev 호환 client가 base URL만 바꿔 호출할 수 있게 만든 **좋은 reference server**다. 하지만 그대로 고트래픽 Production server라고 보기는 어렵다.
+
+공개 코드를 보면 HTTP layer는 `ThreadingHTTPServer`지만 `Decider.turn`이라는 단일 `Lock` 안에서 `model.system_one()`을 호출한다. 대기 queue는 128개지만 **model inference는 한 번에 한 요청만 실행**된다. 이는 GPU forward와 candidate cache를 안전하게 다루기에는 단순하고 예측 가능하지만, 여러 요청을 batch로 묶어 throughput을 높이는 구현은 아니다.
+
+권장 운영 구조는 다음과 같다.
+
+```text
+Client
+  → TLS / 인증 / rate limit
+  → bounded request queue
+  → GPU worker 1개 또는 검증된 소수 worker
+      → 장시간 유지한 Kanana model instance
+      → 시작 시 공통 taxonomy candidate warm-up
+      → process-local LRU candidate cache
+  → confidence policy / fallback / audit log
+```
+
+1. **모델 process를 오래 유지한다.** scale-to-zero와 잦은 restart는 7.33GB weight load와 candidate warm-up 비용을 반복시킨다.
+2. **후보 문자열을 canonicalize한다.** cache key가 dtype, device, candidate token ID이므로 공백·구두점·설명 변경도 cache miss를 만들 수 있다. schema version과 candidate hash를 기록한다.
+3. **자주 쓰는 taxonomy는 시작 직후 warm-up한다.** 27개나 300개 설명을 실제 traffic 전에 한 번 encoding한다.
+4. **worker 수를 무작정 늘리지 않는다.** 각 process가 weights와 cache를 별도로 가지므로 여러 worker는 VRAM을 중복 사용한다. 한 GPU에서는 먼저 단일 model worker와 외부 queue를 검증한다.
+5. **고동시성은 별도 batching 구현이 필요하다.** 공개 `embed_messages`는 입력을 하나씩 순회해 각각 forward한다. micro-batching이나 전용 inference engine으로 바꿀 때는 확률과 cache 동작이 원본과 동일한지 회귀 시험해야 한다.
+6. **공개 server의 보안 기본값을 유지한다.** 기본 bind는 `127.0.0.1`이고 외부 공개 시 `DECISION_API_KEY`, reverse proxy, TLS, request body 제한, image 검증과 timeout을 추가한다.
+7. **confidence만 믿지 않는다.** model version, taxonomy version, 후보별 probability, latency, fallback 결과와 사람 재분류를 함께 저장해 재보정한다.
+
+후보 개수는 구조적으로 고정 answer-code에 묶이지 않지만 계산이 공짜라는 뜻은 아니다. 특히 choice 후보는 기본적으로 query에도 포함되므로 300개 설명을 모두 넣으면 query token도 늘 수 있다. `query_schemas`로 query에 보이는 option을 조정할 수 있지만 정확도 변화부터 검증해야 한다.
+
+## 재학습할 수 있나
+
+**원칙적으로는 가능하지만 현재 공개물은 inference-first release에 가깝다.** Kakao는 checkpoint를 각자 데이터로 fine-tuning할 수 있다고 설명한다. Kanana Open License도 fine-tuning과 derivative work를 허용한다. 그러나 2026년 11월 8일 기준 모델 저장소에는 공식 training script, 학습 dataset schema, loss 구현, LoRA target과 재현 recipe가 없다.
+
+또한 공개 `system_one()` 경로의 `embed_messages()`에는 `@torch.no_grad()`가 붙고 마지막에 logits를 Python list로 바꾸므로 그대로는 역전파할 수 없다. 재학습하려면 `model.forward()`의 hidden state를 직접 사용해 trainable query/candidate path와 loss를 작성해야 한다.
+
+현실적인 적용 순서는 다음과 같다.
+
+| 단계 | 모델 weight 변경 | 필요한 작업 | 권장 상황 |
+| --- | --- | --- | --- |
+| 0. 설명 개선 | 없음 | label 이름·정의·포함/제외 기준·대표 예시 정리 | 가장 먼저 수행 |
+| 1. Calibration | 없음 | validation에서 temperature와 자동 처리 threshold 선택 | 확률을 운영 정책에 사용할 때 |
+| 2. Retrieval 보조 | 없음 | 300개 중 top-k를 검색하고 Kanana로 최종 판단 | label이 수백 개일 때 |
+| 3. LoRA 실험 | 일부 adapter | custom training loop, 명시적 target module, hard negative | zero-shot 오류가 반복될 때 |
+| 4. Full/MOPD 재학습 | 다수 weight | teacher model·대규모 decision data·분산 GPU | 연구·대규모 조직 |
+
+### 공식 recipe가 나오기 전 가능한 LoRA 연구 경로
+
+아래는 **공식 Kakao recipe가 아니라 공개 구조를 바탕으로 한 구현 제안**이다.
+
+1. text-only 유형 분류라면 vision encoder를 먼저 고정한다.
+2. `state + instructions (+ options)`를 query input, `label path + description`을 candidate input으로 만든다.
+3. 각 input의 마지막 유효 token을 pooling하고 L2 normalize한다.
+4. 정답 candidate와의 cosine logit에는 높은 점수, sibling·혼동 유형에는 낮은 점수가 가도록 cross-entropy 또는 contrastive loss를 사용한다.
+5. 같은 중분류의 다른 소분류, negation 문장, 혼합 문맥을 hard negative로 많이 넣는다.
+6. Hugging Face PEFT는 custom model에서도 `target_modules`를 명시하면 LoRA를 적용할 수 있다. Qwen3-VL 계열 attention의 `q_proj`, `v_proj` 또는 검증된 linear layer를 후보로 삼되 실제 적용 layer와 trainable parameter 수를 출력해 확인한다.
+7. 학습 전후에 기존 81건, 독립 실데이터, 새 label holdout, option reorder와 calibration을 모두 재평가한다.
+
+```text
+q = normalize(pool(model(query_tokens).last_hidden_state))
+c = normalize(pool(model(candidate_tokens).last_hidden_state))
+logits = q @ c.T / temperature
+loss = cross_entropy(logits, gold_candidate_index)
+```
+
+이 방식의 장점은 고정된 27-class linear head가 아니라 label 설명을 계속 input으로 유지한다는 점이다. 잘 학습되면 기존 27개 성능을 높이면서 새로운 유형 설명도 어느 정도 활용할 여지가 있다. 반대로 학습 데이터의 label 문구를 외워 버리면 zero-shot 장점이 사라질 수 있으므로 **학습에 없던 새 유형과 바꿔 쓴 설명**을 반드시 holdout해야 한다.
+
+Kakao 기술 글은 MOPD(Multi-teacher On-Policy Distillation)를 사용해 teacher의 확률 분포로 safety와 confidence를 개선했다고 설명한다. 이는 decision model 학습에 hard label만이 아니라 teacher distribution도 유용하다는 근거지만, 현재 공개 파일만으로 동일한 MOPD 학습을 재현할 수 있는 것은 아니다.
+
+## 유형 분류를 넘어 어디에 쓸 수 있나
+
+Kanana는 일반 생성형 모델보다 작고 답변 생성 loop가 없으며, 선택지 설명을 runtime에 바꿀 수 있다. 따라서 새 모델을 매번 학습하지 않고도 다음 과제를 먼저 zero-shot으로 시험할 수 있다.
+
+- 고객 문의·민원·상품·문서 유형 분류
+- AI agent의 tool·workflow·담당자 routing
+- 상품 사진과 설명의 일치 여부, 파손 여부 같은 text+image `noul`
+- 리뷰 만족도·위험도·우선순위 같은 ordered `score`
+- 정책 위반, 승인 가능성, 사람 검토 필요 여부
+- 검색 결과 top-k 중 최종 action 또는 문서를 고르는 decision layer
+- 한 state에 유형, 긴급도, 감정, 담당 부서를 동시에 묻는 multi-question 판단
+
+좋은 유형 설명이 곧 모델의 runtime 지식이 된다는 점이 가장 큰 활용 가치다. `유형명`만 주기보다 정의, 포함 기준, 제외 기준, 헷갈리는 이웃 유형과 예시를 짧고 일관되게 작성하는 것이 중요하다. 다만 선택지 밖의 답을 만들지 못하므로 `기타`, `판단 불가`, `추가 질문 필요` 후보와 confidence 기반 escalation을 함께 설계해야 한다.
+
+## Kanana Open License로 실제 활용 가능한가
+
+결론부터 말하면 **자사 서비스에서 직접 운영하고 fine-tuning하는 것은 가능하지만, Apache-2.0처럼 무조건 자유로운 라이선스는 아니다.** 아래는 2026년 11월 8일 공개된 Kanana Open License 원문을 기술적으로 요약한 것이며 법률 자문은 아니다.
+
+| 활용 방식 | 원문상 판단 | 주요 조건 |
+| --- | --- | --- |
+| 연구·내부 실험·자사 서비스 운영 | 별도 상업 라이선스 없이 가능 | 관련 법과 Kakao Responsible AI Guidelines 준수 |
+| 모델 수정·fine-tuning·distillation | 허용되는 derivative work | Kanana Open License 조건과 표시 의무 적용 |
+| 모델·파생 모델 재배포 | 가능 | 라이선스 사본, 수정 표시, NOTICE, 사용 제한 전달, `Powered by Kanana` 표시 |
+| Kanana 기반 결과로 학습한 모델 배포 | 가능하나 derivative 범위가 넓음 | 배포 모델 이름 앞에 `Kanana` prefix 요구 가능성 포함 |
+| 제3자에게 유료 API·cloud access 판매 | **Kakao 별도 commercial license 필요** | Section 4.1(i) |
+| 제3자 대상 SI·on-prem 구축 판매 | **별도 commercial license 필요** | Section 4.1(ii) |
+| 제3자 대상 on-device embedded 판매 | **별도 commercial license 필요** | Section 4.1(iii) |
+| 생성된 output | Kakao가 권리를 주장하지 않음 | output 사용 책임은 사용자에게 있음 |
+
+재배포 시에는 다음 문구를 포함한 Notice가 요구된다.
+
+```text
+Kanana is licensed in accordance with the Kanana Open License Agreement.
+Copyright © KAKAO Corp. All Rights Reserved.
+```
+
+Section 3.1의 재배포·공개·Kanana 포함 제품/서비스 조건에 해당할 때는 관련 웹사이트, UI, 블로그, 소개 페이지 또는 제품 문서에 쉽게 알아볼 수 있는 **“Powered by Kanana”** 표시도 요구된다. 이 글과 저장소는 model weight를 재배포하지 않지만 출처와 라이선스를 명시하고, 실제 제품화 전에는 회사 법무가 Section 3과 4를 다시 검토해야 한다.
+
+**Powered by Kanana**
 
 ## 어떤 모델을 선택할까
 
@@ -437,15 +635,21 @@ Microsoft-Decision-1의 등장은 Jev의 끝이라기보다 **decision model이 
 
 1. **bounded decision에는 생성 LLM이 과한 경우가 많다.** parsing이 필요 없는 확률 출력은 실제 운영 이점이 있다.
 2. **과제와 readout·평가 방식의 궁합이 중요하다.** 이 합성 민원에서는 candidate 설명을 별도로 encoding해 27개 전체 경로를 비교한 Kanana가 크게 앞섰다. LAYA는 flat-27이 cascade보다 나았고 KoBERT는 그 반대였으므로, 계층화만으로 개선된다고 볼 수 없다.
-3. **승부는 단일 model benchmark보다 시스템 설계에서 난다.** retrieval, decision scoring, calibration, escalation, audit log를 함께 설계해야 한다.
+3. **이번에 직접 실행한 공개 모델 조합 중 Kanana가 가장 좋았다.** 92.6%는 독립 실서비스 정확도가 아니라 합성 81건의 결과지만, EmbeddingGemma 71.6%와 LAYA 34.6%보다 큰 차이로 높았다.
+4. **GPU에서는 실시간 가능성이 있다.** Kakao는 H200에서 약 42ms를 보고했지만, 우리 조건의 27·300개 후보와 보급형 GPU에서는 cold/warm cache를 나눠 다시 재야 한다.
+5. **승부는 단일 model benchmark보다 시스템 설계에서 난다.** candidate warm-up, 장기 실행 worker, calibration, fallback, audit log와 라이선스를 함께 설계해야 한다.
 
-한국어에서도 가능성은 충분하며, 이번 27-label zero-shot 결과는 그 기대를 이전보다 강하게 뒷받침한다. 잘 만든 유형 설명을 candidate encoder가 읽게 하면 고정 label classifier보다 taxonomy 변경에 유연할 수 있다는 가설도 합리적이다. 다만 300개 선택지, 독립 실데이터, 새 label, calibration과 비용은 아직 검증되지 않았다. 지금은 production 전체를 교체할 시점보다 **shadow traffic에서 Kanana·검색 모델·기존 분류기를 나란히 평가하고 자동 처리 구간을 찾을 시점**이다.
+한국어에서도 가능성은 충분하며, 이번 27-label zero-shot 결과는 그 기대를 이전보다 강하게 뒷받침한다. 잘 만든 유형 설명을 candidate encoder가 읽게 하면 고정 label classifier보다 taxonomy 변경에 유연할 수 있다는 가설도 합리적이다. 모델을 학습하지 않아도 유형·일반 분류·tool routing·image 판단을 먼저 시험할 수 있고, 반복 오류가 확인된 뒤에 calibration·retrieval·LoRA 순으로 투자하는 것이 합리적이다.
+
+다만 300개 선택지, 독립 실데이터, 새 label, 보급형 GPU, fine-tuning recipe와 calibration은 아직 검증되지 않았다. 공식 server는 훌륭한 reference지만 inference를 직렬화하므로 그대로 고트래픽 배포하기보다 queue와 장기 실행 GPU worker를 붙여야 한다. 라이선스상 자사 서비스 운영은 가능하지만 유료 API·SI·on-device 판매에는 별도 commercial license가 필요하다. 지금은 production 전체를 교체할 시점보다 **shadow traffic에서 Kanana·검색 모델·기존 분류기를 나란히 평가하고 자동 처리 구간을 찾을 시점**이다.
 
 ---
 
 ## 핵심 출처
 
 - [Kakao Tech — Kanana-2-v-decide 오픈소스 공개](https://tech.kakao.com/posts/846)
+- [Kakao Tech 영상 — Kanana 멀티모달 임베딩 모델 개발기](https://www.youtube.com/watch?v=2crSurA7R-U)
+- [Kakao 공식 보도자료 — Kanana-2-v-decide 공개](https://www.kakaocorp.com/page/detail/12193?lang=KOR)
 - [TypeSafe AI — Introducing System One Models & Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)
 - [Microsoft — Introducing Microsoft-Decision-1](https://commandline.microsoft.com/microsoft-decision-1-model-foundry/)
 - [OpenAI — Decisions API](https://developers.openai.com/api/docs/guides/decisions)
@@ -457,6 +661,10 @@ Microsoft-Decision-1의 등장은 Jev의 끝이라기보다 **decision model이 
 - [Kakao — Kanana-2-v-decide-3b-2611 model card](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611)
 - [Kakao — Kanana-2 V-Decide config](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/config.json)
 - [Kakao — Kanana-2 V-Decide model implementation](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/modeling_kanana_v_decide.py)
+- [Kakao — Kanana-2 V-Decide reference server](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/server_kanana_v_decide.py)
+- [Kanana Open License](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/LICENSE)
+- [Hugging Face PEFT — Custom models](https://huggingface.co/docs/peft/developer_guides/custom_models)
+- [Hugging Face PEFT — LoRA](https://huggingface.co/docs/peft/package_reference/lora)
 - [Strands Decider](https://github.com/strands-labs/strands-decider)
 - [Typed Decision Models: An Early Evidence Audit](https://arxiv.org/abs/2609.32160)
 

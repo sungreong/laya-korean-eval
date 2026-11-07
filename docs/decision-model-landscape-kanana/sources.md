@@ -58,11 +58,21 @@
 ## Kakao / Kanana-2-v-decide
 
 - [Kakao Tech — AI 에이전트를 위한 멀티모달 의사결정 모델 공개](https://tech.kakao.com/posts/846) — Kakao 공식 공개 소개
+- [Kakao Tech 영상 — “그 사진 찾아줘” 한마디면 끝: Kanana 멀티모달 임베딩 모델 개발기](https://www.youtube.com/watch?v=2crSurA7R-U) — Kanana-v-embedding의 대규모 학습, GPU memory 제약, RAG·상품 검색·추천 연동 배경. V-Decide의 직접 학습 recipe로 취급하지 않음
+- [Kakao 공식 보도자료](https://www.kakaocorp.com/page/detail/12193?lang=KOR) — H200 1장 평균 0.04초 이내, 한국어 15,909문항, 웹 검색·상품 카테고리 내부 적용 계획과 상업 활용 가능 라이선스라는 공급사 설명
 - [Kanana-2-v-decide collection](https://huggingface.co/collections/kakaocorp/kanana-2-v-decide) — 2026-11-06 공개된 모델 컬렉션
 - [Kanana-2-v-decide-3b-2611 model card](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611) — 3.67B 구성, cosine-similarity decision architecture, 입력 형식, Kanana Open License, 공급사 benchmark
 - [공개 config](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/config.json)와 [모델 구현](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/modeling_kanana_v_decide.py) — 32-layer text config, 27-layer vision config, last-token pooling, L2 normalization, 4,096-entry candidate LRU cache와 cosine logit 구현 확인
+- [공식 reference server](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/server_kanana_v_decide.py) — System One API, 단일 inference lock, localhost 기본 bind, API key 옵션
+- [Kanana Open License](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/LICENSE) — 자사 서비스, 파생 모델·재배포 조건과 별도 commercial license가 필요한 API·SI·on-device 판매 범위
 - 공급사 모델 카드의 `Kanana Decision Bench 72.50`, `Decision Index 61.34`, `Decision Index Vision 61.12`는 Kakao가 보고한 값이다. 한국어 내부 평가셋 15,909문항은 공개 데이터가 아니므로 독립 재현 결과로 취급하지 않는다.
 - 로컬 CPU 평가는 `laya-korean-eval/research/run_kanana_complaints.py`와 `evaluation/kanana-2-v-decide-flat27-cpu-*`에 별도로 기록한다. 이 평가는 저자 작성 합성 민원 90건 진단이며 공식 benchmark와 직접 비교하지 않는다.
+
+## Fine-tuning 참고
+
+- [Hugging Face PEFT custom models](https://huggingface.co/docs/peft/developer_guides/custom_models) — 지원 목록에 없는 custom architecture도 target module을 명시해 LoRA를 적용하는 일반 지침
+- [Hugging Face PEFT LoRA](https://huggingface.co/docs/peft/package_reference/lora) — `target_modules`, adapter 저장과 custom head 보존에 관한 공식 문서
+- Kanana model repository에는 2026-11-08 기준 inference·server 코드는 있지만 공식 training script, dataset schema, LoRA target과 재현 recipe는 확인되지 않았다. 본문의 학습 경로는 공식 recipe가 아니라 공개 forward 구조와 PEFT 문서를 결합한 제안이다.
 
 ## Strands
 
