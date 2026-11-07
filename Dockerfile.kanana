@@ -1,0 +1,8 @@
+FROM python:3.12-slim
+ENV PYTHONUNBUFFERED=1 PIP_DISABLE_PIP_VERSION_CHECK=1 TOKENIZERS_PARALLELISM=false
+RUN pip install --no-cache-dir torch==2.10.0 torchvision==0.25.0 --index-url https://download.pytorch.org/whl/cpu
+COPY requirements-kanana.txt /tmp/requirements-kanana.txt
+RUN grep -vE '^(torch|torchvision)==' /tmp/requirements-kanana.txt > /tmp/requirements-kanana-runtime.txt \
+    && pip install --no-cache-dir --timeout 300 --retries 10 -r /tmp/requirements-kanana-runtime.txt
+WORKDIR /work
+CMD ["python", "-u", "research/run_kanana_complaints.py"]

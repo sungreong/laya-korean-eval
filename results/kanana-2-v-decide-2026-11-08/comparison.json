@@ -1,0 +1,60 @@
+{
+  "scope": "Synthetic author-defined diagnostic; no independent human review; not a production benchmark.",
+  "n": 81,
+  "correct": 75,
+  "accuracy": 0.9259259259259259,
+  "wilson95_accuracy": [
+    0.8476712613403236,
+    0.9656103695876189
+  ],
+  "multiclass_brier": 0.09745887953853793,
+  "nll": 0.22763290905291408,
+  "ece_10_bin": 0.06742009302463053,
+  "mean_max_probability": 0.8783976648843959,
+  "mean_max_probability_correct": 0.9085572969196327,
+  "mean_max_probability_wrong": 0.5014022644439348,
+  "comparisons": {
+    "LAYA base flat27": {
+      "baseline_correct": 20,
+      "baseline_accuracy": 0.24691358024691357,
+      "kanana_correct": 75,
+      "kanana_accuracy": 0.9259259259259259,
+      "difference_percentage_points": 67.90123456790124,
+      "paired_bootstrap_95_difference": [
+        0.5679012345679012,
+        0.7777777777777778
+      ],
+      "kanana_only_correct": 55,
+      "baseline_only_correct": 0,
+      "exact_mcnemar_p": 5.551115123125783e-17
+    },
+    "LAYA complaint-trained flat27": {
+      "baseline_correct": 26,
+      "baseline_accuracy": 0.32098765432098764,
+      "kanana_correct": 75,
+      "kanana_accuracy": 0.9259259259259259,
+      "difference_percentage_points": 60.49382716049383,
+      "paired_bootstrap_95_difference": [
+        0.49382716049382713,
+        0.7160493827160493
+      ],
+      "kanana_only_correct": 49,
+      "baseline_only_correct": 0,
+      "exact_mcnemar_p": 3.552713678800501e-15
+    },
+    "EmbeddingGemma 2 256d top1": {
+      "baseline_correct": 58,
+      "baseline_accuracy": 0.7160493827160493,
+      "kanana_correct": 75,
+      "kanana_accuracy": 0.9259259259259259,
+      "difference_percentage_points": 20.987654320987655,
+      "paired_bootstrap_95_difference": [
+        0.12345679012345678,
+        0.30864197530864196
+      ],
+      "kanana_only_correct": 18,
+      "baseline_only_correct": 1,
+      "exact_mcnemar_p": 7.62939453125e-05
+    }
+  }
+}

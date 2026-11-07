@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="760" viewBox="0 0 1600 760" role="img" aria-labelledby="title desc">
+  <title id="title">Typed decision model 공통 아키텍처</title>
+  <desc id="desc">상태와 런타임 질문이 backbone과 option scoring head를 거쳐 확률 분포와 정책 행동으로 이어지는 흐름</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#071c3b"/><stop offset="1" stop-color="#063f4a"/></linearGradient>
+    <linearGradient id="box" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#133d68"/><stop offset="1" stop-color="#0b5961"/></linearGradient>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 Z" fill="#61e7d7"/></marker>
+    <style>
+      .title{font:700 42px 'Segoe UI','Malgun Gothic',sans-serif;fill:#fff}.sub{font:400 22px 'Segoe UI','Malgun Gothic',sans-serif;fill:#b8d7e6}.h{font:700 25px 'Segoe UI','Malgun Gothic',sans-serif;fill:#fff}.p{font:400 18px 'Segoe UI','Malgun Gothic',sans-serif;fill:#d9edf3}.small{font:400 16px 'Segoe UI','Malgun Gothic',sans-serif;fill:#a9ccd7}.box{fill:url(#box);stroke:#56d5d0;stroke-width:2}.arrow{stroke:#61e7d7;stroke-width:5;fill:none;marker-end:url(#arrow)}
+    </style>
+  </defs>
+  <rect width="1600" height="760" fill="url(#bg)"/>
+  <text x="800" y="70" text-anchor="middle" class="title">Typed Decision Model: 생성 대신 선택지를 점수화한다</text>
+  <text x="800" y="110" text-anchor="middle" class="sub">공개 구현마다 backbone과 readout은 다르지만, 추론 계약은 거의 같다</text>
+  <rect x="55" y="190" width="250" height="210" rx="8" class="box"/>
+  <text x="180" y="238" text-anchor="middle" class="h">① 입력 계약</text>
+  <text x="82" y="285" class="p">• 상태: 문서·티켓·JSON</text><text x="82" y="324" class="p">• 질문: 무엇을 판단?</text><text x="82" y="363" class="p">• 선택지: 런타임 정의</text>
+  <path d="M305 295 H390" class="arrow"/>
+  <rect x="410" y="190" width="275" height="210" rx="8" class="box"/>
+  <text x="548" y="238" text-anchor="middle" class="h">② Backbone</text>
+  <text x="438" y="285" class="p">Encoder: LAYA</text><text x="438" y="324" class="p">Decoder prefill: Typical</text><text x="438" y="363" class="p">Large VLM torso: Clef</text>
+  <path d="M685 295 H770" class="arrow"/>
+  <rect x="790" y="190" width="300" height="210" rx="8" class="box"/>
+  <text x="940" y="238" text-anchor="middle" class="h">③ Option Scoring Head</text>
+  <text x="820" y="285" class="p">• [MASK] marker scorer</text><text x="820" y="324" class="p">• pointer/readout head</text><text x="820" y="363" class="p">• joint schema attention</text>
+  <path d="M1090 295 H1175" class="arrow"/>
+  <rect x="1195" y="190" width="350" height="210" rx="8" class="box"/>
+  <text x="1370" y="238" text-anchor="middle" class="h">④ 확률과 정책</text>
+  <text x="1225" y="285" class="p">softmax → 선택지별 확률</text><text x="1225" y="324" class="p">confidence / abstain</text><text x="1225" y="363" class="p">threshold → 행동 또는 보류</text>
+  <rect x="185" y="500" width="360" height="135" rx="8" fill="#102e50" stroke="#f5b942" stroke-width="2"/>
+  <text x="365" y="548" text-anchor="middle" class="h">높은 확신</text><text x="365" y="590" text-anchor="middle" class="p">코드가 즉시 route·filter·act</text>
+  <rect x="620" y="500" width="360" height="135" rx="8" fill="#102e50" stroke="#f5b942" stroke-width="2"/>
+  <text x="800" y="548" text-anchor="middle" class="h">중간 확신</text><text x="800" y="590" text-anchor="middle" class="p">강한 LLM으로 재판단</text>
+  <rect x="1055" y="500" width="360" height="135" rx="8" fill="#102e50" stroke="#f5b942" stroke-width="2"/>
+  <text x="1235" y="548" text-anchor="middle" class="h">낮은 확신·고위험</text><text x="1235" y="590" text-anchor="middle" class="p">사람 검토 또는 fail closed</text>
+  <path d="M1370 400 V455 H365 V490" class="arrow"/><path d="M800 455 V490" class="arrow"/><path d="M1235 455 V490" class="arrow"/>
+  <text x="800" y="700" text-anchor="middle" class="small">핵심은 모델 단독 정확도보다 확률 임계값과 escalation 정책을 함께 설계하는 것이다.</text>
+</svg>

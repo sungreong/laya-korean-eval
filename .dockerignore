@@ -1,5 +1,7 @@
 **
 !Dockerfile
 !Dockerfile.retrieval
+!Dockerfile.kanana
 !requirements-docker.txt
 !requirements-retrieval.txt
+!requirements-kanana.txt

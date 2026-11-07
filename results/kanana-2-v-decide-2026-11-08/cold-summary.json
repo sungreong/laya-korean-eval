@@ -1,0 +1,15 @@
+{
+  "status": "complete",
+  "model": "kakaocorp/kanana-2-v-decide-3b-2611",
+  "device": "cpu",
+  "dtype": "bfloat16",
+  "threads": 8,
+  "candidate_count": 27,
+  "load_seconds": 1.7425601810000444,
+  "first_request_seconds_including_27_candidate_embeddings": 35.80409807700016,
+  "second_request_seconds_candidate_cache_hit": 6.208316170999751,
+  "rss_after_first_bytes": 6304477184,
+  "rss_after_second_bytes": 6305656832,
+  "first_choice": "L01",
+  "second_choice": "L01"
+}

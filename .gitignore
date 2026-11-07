@@ -3,6 +3,7 @@
 /research/tmp*/
 /evaluation/
 .venv/
+.venv-kanana/
 venv/
 __pycache__/
 *.py[cod]

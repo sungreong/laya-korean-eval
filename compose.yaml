@@ -67,3 +67,37 @@ services:
       HF_HUB_OFFLINE: "0"
       TRANSFORMERS_OFFLINE: "0"
     command: ["python", "-u", "research/prepare_embeddinggemma2.py"]
+
+  kanana-cpu:
+    build:
+      context: .
+      dockerfile: Dockerfile.kanana
+    image: laya-korean-kanana:local
+    working_dir: /work
+    init: true
+    cpus: 8.0
+    mem_limit: 11g
+    shm_size: 512m
+    network_mode: none
+    environment:
+      HF_HUB_OFFLINE: "1"
+      TRANSFORMERS_OFFLINE: "1"
+      TOKENIZERS_PARALLELISM: "false"
+      OMP_NUM_THREADS: "8"
+      MKL_NUM_THREADS: "8"
+      PYTHONDONTWRITEBYTECODE: "1"
+      HF_HOME: /work/evaluation/hf-cache
+    volumes:
+      - ./:/work
+    command: ["python", "-u", "research/run_kanana_complaints.py"]
+
+  prepare-kanana:
+    extends:
+      service: kanana-cpu
+    profiles: ["setup"]
+    network_mode: bridge
+    environment:
+      HF_HUB_OFFLINE: "0"
+      TRANSFORMERS_OFFLINE: "0"
+      HF_XET_HIGH_PERFORMANCE: "1"
+    command: ["python", "-u", "research/prepare_kanana.py"]

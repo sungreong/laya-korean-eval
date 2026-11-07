@@ -39,3 +39,15 @@
 - 27개 후보 원문은 574 token으로 KoBERT의 512 한도를 넘었다. 동일 후보 예산으로 줄인 뒤 본문 잘림은 없었고 후보 설명 잘림은 결과에 기록했다.
 - 원 PNG 그래프를 보존하고 2096×666 WebP quality 85를 README에 사용했다. 78,981 bytes에서 40,744 bytes로 48.41% 줄었으며 글자, 선, 데스크톱 폭을 육안 검사했다.
 - `python -m unittest discover -s tests -v`와 `docker compose --profile test run --rm test`: 총 14개 테스트가 모두 통과했다. 전체 Python 구문 검사와 `git diff --check`도 통과했다.
+
+## Kanana-2 V-Decide 동일 민원 평가
+
+검증일: 2026-11-08 (Asia/Seoul). Docker Desktop Linux 컨테이너, CPU quota 8, 메모리 한도 11GiB.
+
+- `kakaocorp/kanana-2-v-decide-3b-2611` revision `1489062def4145ae3a0a9261fbac4f4d88a8c6d1`을 별도 `kanana-cpu` 서비스에서 실행했다.
+- 기존 27개 유형·90개 민원 fixture를 그대로 사용했다. 엄격 단일 정답 81건에서 75/81(92.6%), Macro-F1 92.1%를 기록했다.
+- 같은 81건에서 EmbeddingGemma 2 검색 top-1은 58/81(71.6%), 민원 학습 LAYA는 26/81(32.1%), 기본 LAYA는 20/81(24.7%)였다.
+- Kanana의 CPU p50은 6.65초, p95는 7.34초였다. 27개 후보 캐시를 만드는 첫 요청은 35.8초, cache-hit 요청은 6.21초, warm RSS는 약 6.29GB였다.
+- 결과는 `results/kanana-2-v-decide-2026-11-08/`, 통합 기술 글은 `docs/decision-model-landscape-kanana/`에 보존했다.
+- 이 수치는 단일 작성자가 만든 합성 표본의 탐색 실험이다. 모델별 스레드 수·프레임워크·캐시 조건도 완전히 같지 않아 일반적인 한국어 성능이나 운영 우위를 확정하지 않는다.
+- 공개 결과의 문항 수·정답 수·동일 fixture 해시·세 비교군 수치를 검사하는 회귀 테스트 2개를 추가했다. 전체 단위 테스트 29개가 통과했다.

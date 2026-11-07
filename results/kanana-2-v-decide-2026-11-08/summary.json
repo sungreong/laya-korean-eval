@@ -1,0 +1,98 @@
+{
+  "status": "complete",
+  "model": "kakaocorp/kanana-2-v-decide-3b-2611",
+  "model_local_path": "evaluation/models/kanana-2-v-decide-3b-2611",
+  "model_revision": "1489062def4145ae3a0a9261fbac4f4d88a8c6d1",
+  "model_weight_bytes": 7330945212,
+  "model_weight_sha256": "528930fa261b31ed1f47eecbe7d08efd2e226207508124ae186e1a65dbbbda3b",
+  "fixture": "datasets/complaints",
+  "fixture_sha256": {
+    "taxonomy.json": "9dd4496820650f7e72608391cde782ebee8687c43232542d4e837d8883d1ff8b",
+    "cases.json": "ab63eb300e010c0602123f60a8b5428dfa2b5db1eb2cfb68aeeb9e6ddfd4cfb2"
+  },
+  "script_sha256": "d7e0c29841122d4484509df6a1b06c056aad32174dea814aa79c8d28656a41d5",
+  "scope": "Synthetic author-defined diagnostic; no independent human review; not a production benchmark.",
+  "environment": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "attention": "sdpa",
+    "threads": 8,
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+    "torch": "2.10.0+cpu",
+    "container_memory_limit_bytes": "11811160064"
+  },
+  "counts": {
+    "candidates": 27,
+    "cases": 90,
+    "strict": 81
+  },
+  "load_seconds": 2.0260293219998857,
+  "rss_after_load_bytes": 380141568,
+  "rss_after_warmup_bytes": 6289539072,
+  "method": "flat27 zero-shot; candidate path and description supplied at inference; fixed taxonomy order",
+  "metrics": {
+    "strict": {
+      "n": 81,
+      "correct": 75,
+      "accuracy": 0.9259259259259259,
+      "macro_f1": 0.9214285714285715
+    },
+    "by_slice": {
+      "explicit": {
+        "n": 27,
+        "correct": 27,
+        "accuracy": 1.0,
+        "macro_f1": 1.0
+      },
+      "implicit": {
+        "n": 27,
+        "correct": 24,
+        "accuracy": 0.8888888888888888,
+        "macro_f1": 0.8518518518518519
+      },
+      "mixed_context": {
+        "n": 27,
+        "correct": 24,
+        "accuracy": 0.8888888888888888,
+        "macro_f1": 0.8518518518518519
+      }
+    },
+    "under_specified": {
+      "n": 9,
+      "acceptable_hits": 9,
+      "note": "Forced-choice diagnostic; these cases require clarification."
+    },
+    "latency_ms_p50": 6649.585745499735,
+    "latency_ms_p95": 7344.944469149914,
+    "confidence_mean": 0.8637746256669913
+  },
+  "prediction_distribution": {
+    "L01": 2,
+    "L02": 4,
+    "L03": 3,
+    "L04": 3,
+    "L05": 4,
+    "L06": 3,
+    "L07": 3,
+    "L08": 3,
+    "L09": 4,
+    "L10": 2,
+    "L27": 4,
+    "L11": 3,
+    "L12": 4,
+    "L13": 2,
+    "L15": 5,
+    "L14": 3,
+    "L16": 2,
+    "L21": 4,
+    "L17": 3,
+    "L18": 4,
+    "L19": 1,
+    "L24": 7,
+    "L20": 3,
+    "L22": 3,
+    "L23": 4,
+    "L25": 4,
+    "L26": 3
+  }
+}
