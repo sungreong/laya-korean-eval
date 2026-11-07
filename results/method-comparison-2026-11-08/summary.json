@@ -1,0 +1,143 @@
+{
+  "scope": "Existing-run comparison on the same author-created synthetic fixture; not a newly controlled benchmark.",
+  "fixture_sha256": {
+    "taxonomy.json": "9dd4496820650f7e72608391cde782ebee8687c43232542d4e837d8883d1ff8b",
+    "cases.json": "ab63eb300e010c0602123f60a8b5428dfa2b5db1eb2cfb68aeeb9e6ddfd4cfb2"
+  },
+  "dataset": {
+    "taxonomy": "3 major × 3 middle per major × 3 leaf per middle = 27 leaf labels",
+    "major_labels": [
+      "생활환경",
+      "도로·교통",
+      "행정·복지"
+    ],
+    "strict_cases": 81,
+    "strict_slices": {
+      "explicit": 27,
+      "implicit": 27,
+      "mixed_context": 27
+    },
+    "under_specified_cases_excluded_from_accuracy": 9,
+    "provenance": "독립 검수 없는 작성자 정의의 가상 민원 분류 체계. 공식 지자체 분류표가 아님."
+  },
+  "methods": [
+    {
+      "model": "Kanana-2 V-Decide",
+      "method": "flat27 zero-shot",
+      "n": 81,
+      "major_correct": 79,
+      "major_accuracy": 0.9753086419753086,
+      "middle_path_correct": 77,
+      "middle_path_accuracy": 0.9506172839506173,
+      "exact_path_correct": 75,
+      "exact_path_accuracy": 0.9259259259259259,
+      "note": "27개 전체 경로와 설명을 한 번에 비교"
+    },
+    {
+      "model": "EmbeddingGemma 2 256d",
+      "method": "retrieval top-1",
+      "n": 81,
+      "major_correct": 75,
+      "major_accuracy": 0.9259259259259259,
+      "middle_path_correct": 69,
+      "middle_path_accuracy": 0.8518518518518519,
+      "exact_path_correct": 58,
+      "exact_path_accuracy": 0.7160493827160493,
+      "note": "27개 설명 문서 중 cosine top-1 검색"
+    },
+    {
+      "model": "LAYA",
+      "method": "flat27",
+      "n": 81,
+      "major_correct": 56,
+      "major_accuracy": 0.691358024691358,
+      "middle_path_correct": 48,
+      "middle_path_accuracy": 0.5925925925925926,
+      "exact_path_correct": 28,
+      "exact_path_accuracy": 0.345679012345679,
+      "note": "cascade_prefix는 예측한 상위 경로를 다음 단계 입력 prefix로 전달"
+    },
+    {
+      "model": "LAYA",
+      "method": "cascade",
+      "n": 81,
+      "major_correct": 48,
+      "major_accuracy": 0.5925925925925926,
+      "middle_path_correct": 29,
+      "middle_path_accuracy": 0.35802469135802467,
+      "exact_path_correct": 19,
+      "exact_path_accuracy": 0.2345679012345679,
+      "note": "cascade_prefix는 예측한 상위 경로를 다음 단계 입력 prefix로 전달"
+    },
+    {
+      "model": "LAYA",
+      "method": "cascade_prefix",
+      "n": 81,
+      "major_correct": 48,
+      "major_accuracy": 0.5925925925925926,
+      "middle_path_correct": 30,
+      "middle_path_accuracy": 0.37037037037037035,
+      "exact_path_correct": 19,
+      "exact_path_accuracy": 0.2345679012345679,
+      "note": "cascade_prefix는 예측한 상위 경로를 다음 단계 입력 prefix로 전달"
+    },
+    {
+      "model": "KoBERT [MASK]",
+      "method": "flat27",
+      "n": 81,
+      "major_correct": 27,
+      "major_accuracy": 0.3333333333333333,
+      "middle_path_correct": 12,
+      "middle_path_accuracy": 0.14814814814814814,
+      "exact_path_correct": 5,
+      "exact_path_accuracy": 0.06172839506172839,
+      "note": "cascade_prefix는 예측한 상위 경로를 다음 단계 입력 prefix로 전달"
+    },
+    {
+      "model": "KoBERT [MASK]",
+      "method": "cascade",
+      "n": 81,
+      "major_correct": 43,
+      "major_accuracy": 0.5308641975308642,
+      "middle_path_correct": 19,
+      "middle_path_accuracy": 0.2345679012345679,
+      "exact_path_correct": 10,
+      "exact_path_accuracy": 0.12345679012345678,
+      "note": "cascade_prefix는 예측한 상위 경로를 다음 단계 입력 prefix로 전달"
+    },
+    {
+      "model": "KoBERT [MASK]",
+      "method": "cascade_prefix",
+      "n": 81,
+      "major_correct": 43,
+      "major_accuracy": 0.5308641975308642,
+      "middle_path_correct": 21,
+      "middle_path_accuracy": 0.25925925925925924,
+      "exact_path_correct": 13,
+      "exact_path_accuracy": 0.16049382716049382,
+      "note": "cascade_prefix는 예측한 상위 경로를 다음 단계 입력 prefix로 전달"
+    }
+  ],
+  "beam12_posthoc": {
+    "candidate_survival": {
+      "count": 62,
+      "rate": 0.7654320987654321
+    },
+    "full_path_rerank": {
+      "correct": 7,
+      "accuracy": 0.08641975308641975,
+      "accuracy_given_gold_survived": 0.11290322580645161
+    },
+    "flat27_scores_restricted_to_beam12": {
+      "correct": 26,
+      "accuracy": 0.32098765432098764,
+      "rescued_vs_unrestricted_flat27": 2,
+      "lost_vs_unrestricted_flat27": 4
+    }
+  },
+  "comparability_limits": [
+    "문항과 taxonomy는 같지만 model size, training recipe, thread 수, cache와 framework는 같지 않다.",
+    "Kanana와 EmbeddingGemma에는 동일 fixture의 cascade 실행이 없어 flat 결과만 비교했다.",
+    "합성 문장과 label 설명을 같은 작성자가 만들어 실제 민원보다 의미 경계가 선명할 수 있다."
+  ]
+}

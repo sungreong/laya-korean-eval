@@ -23,7 +23,7 @@ toc: false
 2. **Jev가 시장의 이름과 API 계약을 대중화했고, 오픈소스가 내부 구현을 빠르게 다양화했다.** LAYA는 encoder와 option marker, Typical·Strands는 decoder torso와 readout/pointer head, Clef는 큰 Qwen backbone과 joint schema head를 택했다.
 3. **상용 API 가격은 현재 100만 input tokens당 대략 0.038~0.24달러다.** 500-token 요청 1,000건이면 약 0.019~0.12달러다. 단, 네트워크·로그·검토·재시도 비용은 별도다.
 4. **오픈 가중치는 무료 API가 아니다.** 라이선스 비용이 없을 뿐 GPU, 운영, batch 효율, idle time, 관측성 비용을 부담한다. H2O는 특정 측정 조건에서 1,000 decisions당 0.021달러를 추정했지만 모든 환경에 일반화할 수 없다.
-5. **Kanana는 한국어 가능성을 구체화했지만 결론을 끝내지는 않았다.** Kakao는 비공개 한국어 평가셋에서 72.50을 보고했다. 이 글의 합성 민원 81건에서는 zero-shot 92.6%를 기록했지만, 독립 실서비스 benchmark가 아니므로 한국어 일반 성능으로 확대하면 안 된다.
+5. **이 글의 동일 민원 데이터에서는 Kanana flat-27이 냉정하게 가장 낫다.** 81건에서 Kanana 92.6%, EmbeddingGemma 검색 71.6%, 계층 학습 LAYA flat-27 34.6%였다. 다만 서로 다른 크기·학습법의 모델이므로 “flat 방식이 항상 우월하다”거나 한국어 일반 성능이 92.6%라고 확대하면 안 된다.
 6. **현재 권장 구조는 decision model 단독 자동화가 아니라 선택적 escalation이다.** 높은 확신은 바로 실행하고, 낮은 확신이나 고위험 항목은 강한 LLM 또는 사람에게 보낸다.
 
 ![2026년 9월부터 11월까지 주요 decision model 공개 타임라인](assets/timeline.svg)
@@ -299,6 +299,40 @@ Kanana 공개 전에는 “Microsoft-Decision-1이 한국어에서도 1등” �
 | EmbeddingGemma 2 256d 검색 top-1 | 71.6% (58/81) | — | 0.155초 | 측정 RSS 약 1.05GB |
 | **Kanana-2 V-Decide zero-shot** | **92.6% (75/81)** | **92.1%** | **6.65초** | **warm RSS 6.29GB · weights 7.33GB** |
 
+### 같은 자료를 대·중·소 단계로 다시 평가하면
+
+이 평가 자료는 공식 지자체 데이터가 아니라 직접 만든 가상 민원이다. 대분류는 `생활환경`, `도로·교통`, `행정·복지` 3개이고, 각 대분류 아래 중분류 3개, 각 중분류 아래 소분류 3개를 둬 총 27개 leaf를 만들었다. 예를 들면 `도로·교통 > 도로시설 > 노면·보도 파손`처럼 전체 경로와 유형 설명이 붙는다.
+
+전체 90건 중 정확도 계산에는 단일 정답이 있는 81건만 사용했다. 27개 유형마다 유형명이 직접 드러나는 문장, 간접 표현, 다른 단서가 섞인 문장을 하나씩 넣어 `명시적 27 + 암시적 27 + 혼합 문맥 27`로 구성했다. 어느 유형인지 추가 질문이 필요한 9건은 모델이 강제로 하나를 고르게 하되 정확도에서는 제외했다. 문장과 유형 설명을 같은 작성자가 만들었고 독립 검수도 없으므로, 실제 민원보다 경계가 선명할 수 있다.
+
+평가 방식은 다음처럼 구분된다.
+
+1. **일괄 flat-27:** `대 > 중 > 소: 설명` 27개를 한꺼번에 주고 최종 경로 하나를 바로 고른다.
+2. **hard cascade:** 대분류 3개 중 하나를 고른 뒤, 그 아래 중분류 3개, 다시 소분류 3개를 순서대로 고른다. 앞 단계가 틀리면 정답 소분류는 다음 후보에서 사라진다.
+3. **predicted-prefix cascade:** hard cascade와 같지만, 앞에서 고른 대·중분류 이름을 다음 단계 입력 prefix로 함께 제공한다. 학습 때는 정답 부모를, 실전에는 예측 부모를 쓴다.
+4. **top-k beam12:** 대분류 top-2와 각 경로의 중분류 top-2를 유지해 4개 대·중 경로를 만들고, 그 아래 소분류 3개씩 총 12개를 최종 재평가한다.
+5. **retrieval top-1:** 유형 설명 27개를 embedding으로 검색해 가장 가까운 leaf 하나를 고른다.
+
+같은 81건의 최종 예측을 부모 경로까지 다시 계산하면 다음과 같다. `대+중`은 대분류와 중분류가 모두 맞은 비율이며, `전체 경로`는 대·중·소가 모두 맞은 비율이다.
+
+| 모델·방식 | 대분류 | 대+중 경로 | 전체 대+중+소 | 냉정한 해석 |
+| --- | ---: | ---: | ---: | --- |
+| **Kanana flat-27 zero-shot** | **97.5%** | **95.1%** | **92.6% (75/81)** | 이 데이터에서 현재 최선. 다만 가장 느리고 cascade 미측정 |
+| EmbeddingGemma 2 검색 top-1 | 92.6% | 85.2% | 71.6% (58/81) | 빠르고 강한 baseline. 최종 leaf 경계에서 오답 증가 |
+| LAYA 계층 학습 flat-27 | 69.1% | 59.3% | 34.6% (28/81) | 같은 LAYA 순차 방식보다 낫다 |
+| LAYA hard cascade | 59.3% | 35.8% | 23.5% (19/81) | 앞 단계 오류가 그대로 전파됐다 |
+| LAYA predicted-prefix cascade | 59.3% | 37.0% | 23.5% (19/81) | prefix가 중간 경로를 조금 개선했지만 최종 정답 수는 그대로 |
+| KoBERT `[MASK]` flat-27 | 33.3% | 14.8% | 6.2% (5/81) | 27개 전체 비교 형식에 거의 적응하지 못했다 |
+| KoBERT `[MASK]` predicted-prefix | 53.1% | 25.9% | 16.0% (13/81) | 계층화로 상대 개선됐지만 절대 성능은 낮다 |
+
+**현재 결과만 놓고 고르면 Kanana의 일괄 flat-27이 가장 낫다.** 그다음은 EmbeddingGemma 검색 단독이다. LAYA에서는 flat-27이 순차 분류보다 11.1%p 높았고, KoBERT에서는 반대로 predicted-prefix가 flat-27보다 9.9%p 높았다. 즉 계층 구조 자체가 성능을 보장하지 않는다. 모델이 학습한 후보 표현, 한 번에 비교하는 선택지 수, prefix의 학습·추론 일치 여부가 함께 맞아야 한다.
+
+top-k도 자동으로 좋아지지 않았다. beam12는 정답 leaf를 62/81건(76.5%)에서 후보 안에 남겼지만, 학습하지 않은 12-way 전체 경로 재평가는 7/81(8.6%)만 맞혔다. 기존 flat-27 점수를 beam 후보에 제한하는 사후 계산도 26/81(32.1%)로 unrestricted flat-27의 28/81(34.6%)을 넘지 못했다. **후보 recall과 최종 top-1 정확도는 별개 지표**라는 뜻이다.
+
+이 결과가 flat 방식을 보편적으로 추천한다는 뜻은 아니다. 현재는 leaf가 27개라 전체 후보를 한 번에 비교할 수 있었지만, 300개가 되면 입력 길이·후보 간 경계·추론 비용이 달라진다. 300개 환경에서는 retrieval로 넓게 top-k를 찾고, 그 후보 형식으로 따로 학습·검증한 decision scorer가 재평가하는 구조가 더 현실적이다. 이때도 `Recall@k`, `후보 내 조건부 정확도`, `최종 top-1`, `대·중·소 단계 정확도`를 각각 보고해야 한다.
+
+또한 Kanana와 EmbeddingGemma에는 같은 fixture의 순차 cascade 실행이 없고, 모델 크기·학습 데이터·CPU thread·cache도 같지 않다. 따라서 이 표는 **현재 확보한 실행 결과에서 어느 조합이 잘 맞았는지**를 말할 뿐, flat과 cascade의 순수한 구조 효과를 통제한 실험은 아니다.
+
 Kanana의 accuracy Wilson 95% 구간은 84.8~96.6%, p95 latency는 7.34초였다. NLL 0.228, multiclass Brier 0.097, 10-bin ECE 0.067을 기록했다. 정답 75건의 평균 최고 확률은 0.909, 오답 6건은 0.501이었다. 단, calibration split 없이 test set 자체에서 계산한 기술통계다.
 
 같은 문항의 paired 비교에서 Kanana는 민원 head 학습 LAYA보다 +60.5%p, EmbeddingGemma 2 top-1보다 +21.0%p 높았다. EmbeddingGemma와 비교하면 Kanana만 맞힌 문항이 18개, EmbeddingGemma만 맞힌 문항이 1개였고 탐색적 exact McNemar p는 0.000076이었다. 이 검정은 한 번의 합성 데이터·단일 seed 결과이며 여러 비교 보정을 하지 않았다.
@@ -346,7 +380,7 @@ Microsoft-Decision-1의 등장은 Jev의 끝이라기보다 **decision model이 
 현재 가장 강한 결론은 세 가지다.
 
 1. **bounded decision에는 생성 LLM이 과한 경우가 많다.** parsing이 필요 없는 확률 출력은 실제 운영 이점이 있다.
-2. **과제와 readout의 궁합이 중요하다.** 이 합성 민원에서는 candidate 설명을 별도로 encoding하는 Kanana가 크게 앞섰지만, CPU 지연과 memory 비용도 가장 컸다.
+2. **과제와 readout·평가 방식의 궁합이 중요하다.** 이 합성 민원에서는 candidate 설명을 별도로 encoding해 27개 전체 경로를 비교한 Kanana가 크게 앞섰다. LAYA는 flat-27이 cascade보다 나았고 KoBERT는 그 반대였으므로, 계층화만으로 개선된다고 볼 수 없다.
 3. **승부는 단일 model benchmark보다 시스템 설계에서 난다.** retrieval, decision scoring, calibration, escalation, audit log를 함께 설계해야 한다.
 
 한국어에서도 가능성은 충분하며, 이번 27-label zero-shot 결과는 그 기대를 이전보다 강하게 뒷받침한다. 잘 만든 유형 설명을 candidate encoder가 읽게 하면 고정 label classifier보다 taxonomy 변경에 유연할 수 있다는 가설도 합리적이다. 다만 300개 선택지, 독립 실데이터, 새 label, calibration과 비용은 아직 검증되지 않았다. 지금은 production 전체를 교체할 시점보다 **shadow traffic에서 Kanana·검색 모델·기존 분류기를 나란히 평가하고 자동 처리 구간을 찾을 시점**이다.

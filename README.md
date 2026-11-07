@@ -6,7 +6,7 @@ Docker Compose로 LAYA Multilingual의 **한국어 분류 성능, 추론 지연,
 
 후속편에서는 EmbeddingGemma 2를 text-only 검색기로 붙여 같은 민원 시험지를 다시 평가했습니다. 256차원 검색 단독은 27개 유형에서 71.6%, 검색 top-3를 기존 LAYA가 재순위화한 결과는 50.6%였습니다. 새 9개 유형은 설명만 index에 추가해 59.3% top-1을 얻었습니다. [2편 standalone 글](docs/laya-embeddinggemma2-retrieval-part2/blog.html), [원고](docs/laya-embeddinggemma2-retrieval-part2/blog.md), [실험 결과](results/embeddinggemma2-retrieval-2026-10-07/README.md)를 제공합니다.
 
-2026-11-08에는 Kakao의 `Kanana-2-v-decide-3b-2611`을 별도 Docker CPU 서비스에서 같은 27개 유형·81개 단일 정답으로 평가했습니다. 추가 학습 없이 75/81, **92.6%**를 기록해 민원 head 학습 LAYA 32.1%, EmbeddingGemma 2 검색 71.6%보다 높았습니다. 대신 warm-cache p50이 6.65초, 첫 요청이 35.8초, warm RSS가 약 6.29GB로 CPU 운영 비용이 컸습니다. [통합 Technical Deep Dive](docs/decision-model-landscape-kanana/blog.html), [Markdown 원고](docs/decision-model-landscape-kanana/blog.md), [실험 결과와 한계](results/kanana-2-v-decide-2026-11-08/README.md)를 제공합니다.
+2026-11-08에는 Kakao의 `Kanana-2-v-decide-3b-2611`을 별도 Docker CPU 서비스에서 같은 27개 유형·81개 단일 정답으로 평가했습니다. 추가 학습 없이 75/81, **92.6%**를 기록해 민원 head 학습 LAYA 32.1%, EmbeddingGemma 2 검색 71.6%보다 높았습니다. 대신 warm-cache p50이 6.65초, 첫 요청이 35.8초, warm RSS가 약 6.29GB로 CPU 운영 비용이 컸습니다. [통합 Technical Deep Dive](docs/decision-model-landscape-kanana/blog.html), [Markdown 원고](docs/decision-model-landscape-kanana/blog.md), [Kanana 실험 결과와 한계](results/kanana-2-v-decide-2026-11-08/README.md), [flat·계층·검색 방식 재비교](results/method-comparison-2026-11-08/README.md)를 제공합니다.
 
 ### Kanana-2 V-Decide CPU 실험 빠른 실행
 

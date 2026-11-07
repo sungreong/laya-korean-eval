@@ -51,3 +51,5 @@
 - 결과는 `results/kanana-2-v-decide-2026-11-08/`, 통합 기술 글은 `docs/decision-model-landscape-kanana/`에 보존했다.
 - 이 수치는 단일 작성자가 만든 합성 표본의 탐색 실험이다. 모델별 스레드 수·프레임워크·캐시 조건도 완전히 같지 않아 일반적인 한국어 성능이나 운영 우위를 확정하지 않는다.
 - 공개 결과의 문항 수·정답 수·동일 fixture 해시·세 비교군 수치를 검사하는 회귀 테스트 2개를 추가했다. 전체 단위 테스트 29개가 통과했다.
+- 기존 예측을 다시 읽어 flat-27, hard cascade, predicted-prefix cascade, retrieval top-1의 대분류·대+중·전체 경로 정확도를 동일 81건 기준으로 계산했다. beam12의 후보 생존율과 최종 top-1 정확도도 분리해 `results/method-comparison-2026-11-08/`에 기록했다.
+- 재계산된 주요 정답 수와 beam recall/top-1 분리를 검사하는 테스트 2개를 추가했다. 전체 단위 테스트는 31개다.
