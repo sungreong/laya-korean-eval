@@ -57,8 +57,10 @@
 
 ## Kakao / Kanana-2-v-decide
 
+- [Kakao Tech — AI 에이전트를 위한 멀티모달 의사결정 모델 공개](https://tech.kakao.com/posts/846) — Kakao 공식 공개 소개
 - [Kanana-2-v-decide collection](https://huggingface.co/collections/kakaocorp/kanana-2-v-decide) — 2026-11-06 공개된 모델 컬렉션
 - [Kanana-2-v-decide-3b-2611 model card](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611) — 3.67B 구성, cosine-similarity decision architecture, 입력 형식, Kanana Open License, 공급사 benchmark
+- [공개 config](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/config.json)와 [모델 구현](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/modeling_kanana_v_decide.py) — 32-layer text config, 27-layer vision config, last-token pooling, L2 normalization, 4,096-entry candidate LRU cache와 cosine logit 구현 확인
 - 공급사 모델 카드의 `Kanana Decision Bench 72.50`, `Decision Index 61.34`, `Decision Index Vision 61.12`는 Kakao가 보고한 값이다. 한국어 내부 평가셋 15,909문항은 공개 데이터가 아니므로 독립 재현 결과로 취급하지 않는다.
 - 로컬 CPU 평가는 `laya-korean-eval/research/run_kanana_complaints.py`와 `evaluation/kanana-2-v-decide-flat27-cpu-*`에 별도로 기록한다. 이 평가는 저자 작성 합성 민원 90건 진단이며 공식 benchmark와 직접 비교하지 않는다.
 

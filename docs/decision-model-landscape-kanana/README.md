@@ -1,6 +1,6 @@
-# Decision Model Landscape 2026
+# Kakao Kanana-2 V-Decide Technical Deep Dive
 
-2026년 10월 12일 최초 조사 뒤, 11월 8일 Kakao Kanana-2 V-Decide의 공식 자료와 동일 민원 CPU 실험을 보강한 블로그 제작 폴더입니다.
+Kakao Kanana-2 V-Decide의 모델 구성, query/candidate dual-encoder 데이터 흐름, 기존 decision·검색 모델과의 차이, 동일 한국어 민원 CPU 실험을 중심으로 정리한 블로그 제작 폴더입니다. Jev 이후 decision model 타임라인은 기술 배경으로 포함합니다.
 
 ## 파일
 

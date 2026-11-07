@@ -1,32 +1,90 @@
 ---
-title: "Jev에서 Kanana-2 V-Decide까지: 두 달 만에 확장된 Decision Model 경쟁"
+title: "카카오 Kanana-2 V-Decide 기술 분석: 아키텍처와 한국어 민원 성능 검증"
 theme: report
 intent: narrative
 pageWidth: 1120px
 toc: false
 ---
 
-# Jev에서 Kanana-2 V-Decide까지: 두 달 만에 확장된 Decision Model 경쟁
+# 카카오 Kanana-2 V-Decide 기술 분석: 아키텍처와 한국어 민원 성능 검증
 
-> **최초 조사:** 2026년 10월 12일 · **Kanana 보강:** 2026년 11월 8일  
-> **한 줄 정의:** Decision model은 글을 쓰는 모델이 아니라, 프로그램이 미리 정한 선택지를 읽고 각 선택지의 확률을 돌려주는 모델이다.
+> **최초 조사:** 2026년 10월 12일 · **Kanana 실험 보강:** 2026년 11월 8일
+> **한 줄 정의:** Kanana-2 V-Decide는 답변 문장을 생성하지 않고, 입력과 선택지 설명을 각각 벡터로 만든 뒤 가장 적합한 선택지의 확률을 반환하는 Kakao의 3.67B 멀티모달 decision model이다.
 
-최근 본 [“Jev 벌써 끝? MS Decision-1 미쳤다”](https://youtube.com/shorts/EtWkF5Ocr8E)라는 Shorts는 과장이 섞인 제목처럼 보이지만, 시장의 속도만큼은 정확히 짚었다. TypeSafe AI가 Jev를 공개한 2026년 9월 15일부터 Microsoft가 Decision-1을 발표한 10월 9일까지 24일밖에 걸리지 않았다. 그 사이 LAYA, THIS/THAT, Typical, Clef, Strands Decider, H2O-Lightning과 OpenAI Decisions API가 연달아 등장했다.
+2026년 11월 6일 Kakao가 [Kanana-2-v-decide-3b-2611](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611)을 오픈소스로 공개했다. 이 모델은 일반적인 생성형 LLM처럼 설명이나 답변을 쓰지 않는다. 대신 프로그램이 전달한 `choice`, `noul`, `score` 질문을 읽고 각 후보의 확률을 계산한다. text와 JSON, 대화 기록, 최대 10개 image를 받을 수 있고 후보 설명은 추론 시점에 바꿀 수 있다.
 
-11월 6일에는 Kakao가 [Kanana-2-v-decide-3b-2611](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611)을 공개했다. 한국어 전용 decision benchmark 수치를 제시하고 가중치와 구현을 함께 공개했다는 점에서, “한국어에서도 되는가”라는 질문을 직접 시험할 수 있는 첫 사례가 추가됐다.
+이 글의 질문은 세 가지다. **Kanana는 내부에서 어떤 구조로 선택지를 판단하는가? 기존 LAYA·KoBERT·EmbeddingGemma와 무엇이 다른가? 같은 한국어 민원 81건을 넣었을 때 실제로 얼마나 잘하는가?** 공식 모델 카드와 공개 구현을 읽고, Docker CPU 환경에서 동일 평가 자료를 실행해 확인했다.
 
-이 글은 “어느 모델이 1등인가”를 선언하려는 글이 아니다. 공개된 아키텍처와 가격, 재현 가능한 자료, 아직 확인되지 않은 주장을 분리해 **무엇이 실제로 새롭고 어디에 쓸 만한지** 판단하는 것이 목적이다.
+Jev와 Microsoft Decision-1을 포함한 시장 타임라인은 배경으로만 다룬다. 글의 중심은 Kanana의 모델 구성, query/candidate 데이터 흐름, candidate cache, 계산 특성, 동일 데이터 성능과 운영 trade-off다. 공급사의 주장, 로컬 측정, 필자의 해석은 구분한다.
 
 ## BLUF: 먼저 결론
 
-1. **Decision model의 핵심 가치는 정확도 단독 우승이 아니다.** 자유 텍스트 생성과 파싱을 없애고, 런타임 선택지에 대한 확률을 한 번의 scoring pass로 반환한다. 그래서 routing, 분류, 검증, 우선순위화처럼 호출량이 많은 지점에서 latency와 비용을 크게 줄일 수 있다.
-2. **Jev가 시장의 이름과 API 계약을 대중화했고, 오픈소스가 내부 구현을 빠르게 다양화했다.** LAYA는 encoder와 option marker, Typical·Strands는 decoder torso와 readout/pointer head, Clef는 큰 Qwen backbone과 joint schema head를 택했다.
-3. **상용 API 가격은 현재 100만 input tokens당 대략 0.038~0.24달러다.** 500-token 요청 1,000건이면 약 0.019~0.12달러다. 단, 네트워크·로그·검토·재시도 비용은 별도다.
-4. **오픈 가중치는 무료 API가 아니다.** 라이선스 비용이 없을 뿐 GPU, 운영, batch 효율, idle time, 관측성 비용을 부담한다. H2O는 특정 측정 조건에서 1,000 decisions당 0.021달러를 추정했지만 모든 환경에 일반화할 수 없다.
-5. **이 글의 동일 민원 데이터에서는 Kanana flat-27이 냉정하게 가장 낫다.** 81건에서 Kanana 92.6%, EmbeddingGemma 검색 71.6%, 계층 학습 LAYA flat-27 34.6%였다. 다만 서로 다른 크기·학습법의 모델이므로 “flat 방식이 항상 우월하다”거나 한국어 일반 성능이 92.6%라고 확대하면 안 된다.
-6. **현재 권장 구조는 decision model 단독 자동화가 아니라 선택적 escalation이다.** 높은 확신은 바로 실행하고, 낮은 확신이나 고위험 항목은 강한 LLM 또는 사람에게 보낸다.
+1. **Kanana는 3.18B 언어 모델과 0.49B vision encoder를 합친 3.67B 멀티모달 decision model이다.** 최대 20,480-token 입력과 10개 image, 여러 typed question을 지원하며 생성 token은 만들지 않는다.
+2. **핵심 구조는 query/candidate dual encoding이다.** `state + question`과 각 후보 설명을 각각 2,560차원 L2 정규화 벡터로 만들고 cosine similarity와 softmax로 확률을 계산한다. 후보 벡터는 최대 4,096개까지 LRU cache한다.
+3. **LAYA와 가장 큰 차이는 option marker 하나를 공동 입력 안에서 scoring하지 않는다는 점이다.** Kanana는 후보 설명을 독립 문서처럼 encoding한다. EmbeddingGemma 검색과 닮았지만 decision 학습, typed question renderer, vision 입력과 확률 출력이 한 모델에 들어 있다.
+4. **동일 합성 민원 81건에서는 Kanana flat-27이 92.6%로 가장 높았다.** EmbeddingGemma 검색 71.6%, 계층 학습 LAYA flat-27 34.6%, LAYA 순차+prefix 23.5%였다.
+5. **정확도 대가는 CPU 비용이다.** warm-cache p50 6.65초, 첫 27개 후보 embedding을 만드는 요청 35.8초, warm RSS 약 6.29GB였다. 즉 CPU 실시간 대화보다 GPU 또는 비동기 batch에 가깝다.
+6. **현재 도입 판단은 ‘가능성 높음, 즉시 전면 교체는 아님’이다.** 이 데이터는 작성자 합성 자료이고 27개 label뿐이다. 300개 label, 독립 실데이터, option 순서 변화, 새 label과 calibration을 추가 검증해야 한다.
 
-![2026년 9월부터 11월까지 주요 decision model 공개 타임라인](assets/timeline.svg)
+## Kanana-2 V-Decide는 어떤 모델인가
+
+Kakao가 공개한 모델 카드의 제품 수준 설명과 공개된 [`config.json`](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/config.json), [`modeling_kanana_v_decide.py`](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/modeling_kanana_v_decide.py)에서 확인한 구현을 합치면 구성은 다음과 같다.
+
+| 구성 요소 | 실제 구성 | 책임 |
+| --- | --- | --- |
+| Language model | 3.18B, 32 layers, hidden 2,560, attention head 32, KV head 8, MLP 8,192 | text·JSON·대화·question을 읽고 query/candidate 표현 생성 |
+| Vision encoder | 0.49B, 27 layers, hidden 1,152, 16 heads, patch 16, gated attention | image를 patch representation으로 바꿔 language hidden 2,560에 연결 |
+| Pooling | 마지막 유효 token hidden state의 앞 2,560차원 | 입력 하나를 하나의 고정 길이 vector로 요약 |
+| Normalization | L2 normalization | dot product를 cosine similarity로 만듦 |
+| Decision scoring | `candidate_vector @ query_vector / 0.056139 / user_temperature` | 후보별 logit 계산 |
+| Answer renderer | `choice`, `noul`, `score` | softmax 확률을 key 선택, 참 확률, 기대 score로 변환 |
+| Candidate cache | token ID와 dtype·device를 key로 하는 4,096-entry LRU | 반복되는 taxonomy 후보의 forward pass 재사용 |
+
+여기서 중요한 점은 **별도의 거대한 classification head가 보이지 않는다는 것**이다. 공개 코드에서는 Kanana-2 V backbone의 마지막 유효 token을 pooling하고 L2 정규화한 뒤, query와 candidate의 내적으로 logit을 만든다. 즉 성능의 핵심은 특정 27개 label에 고정된 출력층보다, question과 후보 설명이 가까워지도록 학습된 backbone representation에 있다.
+
+### 입력부터 출력까지 단계별 데이터 흐름
+
+민원 한 건과 27개 유형을 넣는다고 가정하면 다음 순서로 동작한다.
+
+1. **State 구성:** 상담 채널, 민원 요약, 필요하면 image를 text·JSON·messages 형식으로 renderer에 전달한다.
+2. **Typed question 구성:** `민원 유형을 분류하라`는 instructions와 `대 > 중 > 소: 설명` 27개 criteria를 만든다.
+3. **Query encoding:** state와 question을 chat template로 렌더링해 Kanana-2 V에 넣고 마지막 유효 token을 2,560차원 query vector로 만든다. 기본 설정에서는 choice/noul 후보 정보도 query에 포함된다.
+4. **Candidate encoding:** 후보 설명 27개를 각각 별도 문서 형식으로 encoding한다. 같은 token ID의 후보가 cache에 있으면 이 forward pass는 생략한다.
+5. **정규화와 유사도:** query와 candidate vector를 L2 정규화하고 27개의 cosine similarity를 계산한다.
+6. **확률화:** similarity를 학습된 decision temperature 0.056139와 호출자가 준 temperature로 나눈 뒤 softmax한다.
+7. **Typed output:** 가장 높은 key, 전체 probabilities, 최고 확률과 나머지 평균의 차이인 confidence를 반환한다. 생성 token 수는 0이다.
+
+```text
+민원 state + question (+ images)
+        │
+        ▼
+Kanana-2 V query forward ──> 마지막 유효 token ──> L2 normalize ──> q ∈ R²⁵⁶⁰
+
+후보 설명 1..K
+        │  cache miss일 때만 각각 forward
+        ▼
+Kanana-2 V candidate forward ──> 마지막 유효 token ──> L2 normalize ──> c₁..cₖ
+
+logitᵢ = (cᵢ · q) / 0.056139 / temperature
+probabilities = softmax(logits)
+```
+
+계산량은 대략 `질문 수만큼 query forward + cache에 없는 고유 후보 수만큼 candidate forward + K×2,560 내적`이다. Transformer forward가 지배적이고 마지막 내적 비용은 작다. 후보가 고정된 반복 분류에서는 cache가 유리하지만, 후보 설명을 매번 바꾸거나 scale-to-zero로 프로세스가 자주 재시작되면 장점이 사라진다. 또한 여러 질문은 같은 state를 쓰더라도 공개 구현에서 각각 별도 query forward를 수행하므로, 모든 질문을 공동 attention으로 한 번에 처리하는 LAYA·THIS/THAT 계열과 계산 특성이 다르다.
+
+![Kanana-2 V-Decide의 dual-encoder 구조와 동일 민원 평가의 정확도 및 CPU 비용](assets/kanana2-v-decide-architecture-benchmark-ko.webp)
+
+*그림 1. Kanana의 실제 데이터 흐름. 후보 cache가 채워진 뒤에는 반복 taxonomy의 candidate forward를 건너뛸 수 있다. 성능 수치는 같은 합성 민원 81건의 관측값이다.*
+
+### LAYA·EmbeddingGemma·KoBERT와 구조적으로 무엇이 다른가
+
+| 방식 | 입력과 후보 처리 | 점수 계산 | 강점 | 이번 실험에서 드러난 약점 |
+| --- | --- | --- | --- | --- |
+| **Kanana-2 V-Decide** | state+question과 후보를 별도 forward로 encoding | 정규화된 2,560차원 cosine + softmax | decision 학습, 한국어·vision, 새 후보 설명, 후보 cache | CPU가 느리고 6GB 이상 memory 필요 |
+| LAYA multilingual | state·질문·모든 option marker를 encoder가 한 번에 공동 처리 | 각 `[MASK]` 위치를 decision head가 scoring | 322M급, 한 pass에서 여러 질문 처리 | 기본 zero-shot과 많은 선택지에 약함 |
+| EmbeddingGemma 2 | 민원 query와 27개 유형 설명 문서를 독립 embedding | cosine nearest-neighbor | 매우 빠른 후보 검색, 설명 기반 새 label 대응 | typed question·abstention·decision probability 전용 학습이 아님 |
+| KoBERT `[MASK]` 실험 | 후보별 실제 `[MASK]` hidden state를 공유 scorer에 입력 | 작은 MLP score | 한국어 encoder 재사용 가능성 확인 | 512-token 한도와 decision 사전학습 부재로 절대 성능 낮음 |
+
+Kanana는 구조만 보면 embedding 검색과 가깝다. 그러나 일반 retrieval encoder와 달리 state+typed question을 query로 만들고 `choice`, `noul`, `score`의 상대 확률을 직접 반환하도록 학습됐다. 반대로 LAYA는 후보들을 한 입력 안에서 서로 보게 하므로 후보 간 상호작용이 가능하지만, 선택지가 늘수록 한 sequence의 token budget을 공유한다. Kanana는 후보마다 별도 forward가 필요하지만 반복 후보를 cache해 이 비용을 상쇄한다.
 
 ## 무엇이 새롭고, 무엇은 원래 있던 기술인가
 
@@ -43,7 +101,9 @@ toc: false
 
 따라서 혁신의 중심은 “Transformer가 처음으로 판단했다”가 아니라 **생성 모델 중심의 인터페이스를 machine-native probability interface로 바꾼 것**에 가깝다. 2026년 9월의 [초기 증거 감사 논문](https://arxiv.org/abs/2609.32160)도 typed readout 자체가 같은 backbone의 label-probability 방식보다 독립적인 정확도 우위를 보였다고 말하기는 어렵고, 가장 분명한 이점은 latency와 비용이라고 정리한다.
 
-## 시장은 어떻게 두 달 만에 커졌나
+## 배경: Jev 이후 decision model은 어떻게 확장됐나
+
+![2026년 9월부터 11월까지 주요 decision model 공개 타임라인](assets/timeline.svg)
 
 | 날짜 | 기업·팀 | 공개 내용 | 의미 |
 | --- | --- | --- | --- |
@@ -63,7 +123,7 @@ toc: false
 
 한편 [DecisionEval 디렉터리](https://decisioneval.dev/models/)는 9월 28일 기준 140개 모델을 기록했다. 이 숫자는 생태계의 속도를 보여주지만 품질을 뜻하지 않는다. 디렉터리 스스로도 대부분을 공급자 모델 카드만 확인한 community 항목으로 표시한다.
 
-## 공통 아키텍처: 생성 loop를 scoring pass로 바꾼다
+## 기존 모델과 비교하기 위한 공통 아키텍처
 
 ![상태와 질문이 backbone, option scoring head, 확률 정책을 거치는 공통 구조](assets/common-architecture.svg)
 
@@ -108,7 +168,7 @@ p(o_i | state, q) = exp(z_i) / Σ_j exp(z_j)
 - 장점: 큰 backbone과 multimodal 입력을 활용해 어려운 zero-shot 판단을 노린다.
 - 단점: 9B~27B dense model은 LAYA보다 memory와 GPU 요구량이 크다. open weights여도 edge 배포가 가벼운 것은 아니다.
 
-### Dual encoder와 cosine scoring: Kanana-2 V-Decide
+### 기존 모델과 비교하면: Kanana의 dual encoder
 
 Kanana-2 V-Decide는 state와 question을 합쳐 2,560차원 query embedding을 만들고, 각 candidate answer도 별도 2,560차원 embedding으로 만든다. 두 embedding의 cosine similarity를 온도 0.0561로 나눈 logit에 softmax를 적용한다.
 
@@ -124,10 +184,6 @@ pᵢ = softmax(z)ᵢ
 
 - 장점: runtime에 처음 보는 한국어 label 설명을 직접 비교하고, 동일 후보를 반복하는 routing에서 cache를 재사용할 수 있다.
 - 단점: 한 요청에서 모든 option을 공동 attention하는 구조가 아니며, 후보가 자주 바뀌면 cache 이점이 줄어든다. 7.33GB BF16 weights와 Kanana Open License 조건도 운영 전에 검토해야 한다.
-
-![Kanana-2 V-Decide의 dual-encoder 구조와 동일 민원 평가의 정확도 및 CPU 비용](assets/kanana2-v-decide-architecture-benchmark-ko.webp)
-
-*그림 2. query와 candidate를 별도로 encoding해 cosine similarity로 비교한다. 아래 수치는 같은 합성 민원 81건에서 측정한 결과이며, 모델 크기와 CPU thread 조건은 서로 다르다.*
 
 ### Closed hosted model: Jev, OpenAI, Microsoft
 
@@ -389,6 +445,7 @@ Microsoft-Decision-1의 등장은 Jev의 끝이라기보다 **decision model이 
 
 ## 핵심 출처
 
+- [Kakao Tech — Kanana-2-v-decide 오픈소스 공개](https://tech.kakao.com/posts/846)
 - [TypeSafe AI — Introducing System One Models & Jev](https://typesafe.ai/blog/introducing-system-one-models-and-jev)
 - [Microsoft — Introducing Microsoft-Decision-1](https://commandline.microsoft.com/microsoft-decision-1-model-foundry/)
 - [OpenAI — Decisions API](https://developers.openai.com/api/docs/guides/decisions)
@@ -398,6 +455,8 @@ Microsoft-Decision-1의 등장은 Jev의 끝이라기보다 **decision model이 
 - [FLock.io — THIS/THAT paper](https://arxiv.org/abs/2609.23886)
 - [H2O-Lightning-4B model card](https://huggingface.co/h2oai/h2o-lightning-4b)
 - [Kakao — Kanana-2-v-decide-3b-2611 model card](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611)
+- [Kakao — Kanana-2 V-Decide config](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/config.json)
+- [Kakao — Kanana-2 V-Decide model implementation](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/modeling_kanana_v_decide.py)
 - [Strands Decider](https://github.com/strands-labs/strands-decider)
 - [Typed Decision Models: An Early Evidence Audit](https://arxiv.org/abs/2609.32160)
 
