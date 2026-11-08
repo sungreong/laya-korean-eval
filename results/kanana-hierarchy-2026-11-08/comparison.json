@@ -1,0 +1,204 @@
+{
+  "scope": "Same 81 strict synthetic complaint cases; zero-shot; CPU Docker; no independent review.",
+  "flat27": {
+    "correct": 75,
+    "n": 81
+  },
+  "methods": {
+    "basic_greedy_cascade": {
+      "strict": {
+        "n": 81,
+        "correct_paths": 73,
+        "major_correct": 76,
+        "middle_path_correct": 74,
+        "exact_path_correct": 73,
+        "major_accuracy": 0.9382716049382716,
+        "middle_path_accuracy": 0.9135802469135802,
+        "exact_path_accuracy": 0.9012345679012346,
+        "leaf_macro_f1": 0.8989417989417989,
+        "wilson95_exact": [
+          0.8170349859835269,
+          0.9490998837312017
+        ],
+        "first_error_level": {
+          "major": 5,
+          "middle": 2,
+          "leaf": 1
+        }
+      },
+      "latency_ms_p50": 4819.887695502985,
+      "latency_ms_p95": 6878.953445502339,
+      "model_calls_mean": 3,
+      "candidate_survival": null,
+      "paired_vs_flat": {
+        "both_correct": 70,
+        "candidate_only": 3,
+        "reference_only": 5,
+        "both_wrong": 3
+      }
+    },
+    "basic_top2_branch": {
+      "strict": {
+        "n": 81,
+        "correct_paths": 75,
+        "major_correct": 78,
+        "middle_path_correct": 76,
+        "exact_path_correct": 75,
+        "major_accuracy": 0.9629629629629629,
+        "middle_path_accuracy": 0.9382716049382716,
+        "exact_path_accuracy": 0.9259259259259259,
+        "leaf_macro_f1": 0.9221340388007055,
+        "wilson95_exact": [
+          0.8476712613403236,
+          0.9656103695876189
+        ],
+        "first_error_level": {
+          "major": 3,
+          "middle": 2,
+          "leaf": 1
+        }
+      },
+      "latency_ms_p50": 12015.925854502711,
+      "latency_ms_p95": 37232.43656809973,
+      "model_calls_mean": 7,
+      "candidate_survival": {
+        "major_top2": {
+          "count": 81,
+          "rate": 1.0
+        },
+        "middle_path_top2": {
+          "count": 80,
+          "rate": 0.9876543209876543
+        },
+        "leaf_path_top2": {
+          "count": 80,
+          "rate": 0.9876543209876543
+        },
+        "final8": {
+          "count": 80,
+          "rate": 0.9876543209876543
+        }
+      },
+      "paired_vs_flat": {
+        "both_correct": 72,
+        "candidate_only": 3,
+        "reference_only": 3,
+        "both_wrong": 3
+      }
+    },
+    "enriched_greedy_cascade": {
+      "strict": {
+        "n": 81,
+        "correct_paths": 72,
+        "major_correct": 74,
+        "middle_path_correct": 72,
+        "exact_path_correct": 72,
+        "major_accuracy": 0.9135802469135802,
+        "middle_path_accuracy": 0.8888888888888888,
+        "exact_path_accuracy": 0.8888888888888888,
+        "leaf_macro_f1": 0.8785714285714286,
+        "wilson95_exact": [
+          0.8021290531846268,
+          0.9404324359234946
+        ],
+        "first_error_level": {
+          "major": 7,
+          "middle": 2,
+          "leaf": 0
+        }
+      },
+      "latency_ms_p50": 8635.193389003689,
+      "latency_ms_p95": 12996.75938074688,
+      "model_calls_mean": 3,
+      "candidate_survival": null,
+      "paired_vs_flat": {
+        "both_correct": 67,
+        "candidate_only": 5,
+        "reference_only": 8,
+        "both_wrong": 1
+      }
+    },
+    "enriched_top2_branch": {
+      "strict": {
+        "n": 81,
+        "correct_paths": 74,
+        "major_correct": 78,
+        "middle_path_correct": 75,
+        "exact_path_correct": 74,
+        "major_accuracy": 0.9629629629629629,
+        "middle_path_accuracy": 0.9259259259259259,
+        "exact_path_accuracy": 0.9135802469135802,
+        "leaf_macro_f1": 0.9107583774250442,
+        "wilson95_exact": [
+          0.8322008336612947,
+          0.9575074166600406
+        ],
+        "first_error_level": {
+          "major": 3,
+          "middle": 3,
+          "leaf": 1
+        }
+      },
+      "latency_ms_p50": 17913.865512498887,
+      "latency_ms_p95": 25674.29210695118,
+      "model_calls_mean": 7,
+      "candidate_survival": {
+        "major_top2": {
+          "count": 81,
+          "rate": 1.0
+        },
+        "middle_path_top2": {
+          "count": 80,
+          "rate": 0.9876543209876543
+        },
+        "leaf_path_top2": {
+          "count": 80,
+          "rate": 0.9876543209876543
+        },
+        "final8": {
+          "count": 80,
+          "rate": 0.9876543209876543
+        }
+      },
+      "paired_vs_flat": {
+        "both_correct": 71,
+        "candidate_only": 3,
+        "reference_only": 4,
+        "both_wrong": 3
+      }
+    }
+  },
+  "top2_failure_decomposition": {
+    "basic": {
+      "gold_dropped_before_final8": 1,
+      "gold_survived_final8": 80,
+      "correct_given_gold_survived": 75,
+      "wrong_score_selection_given_gold_survived": 5
+    },
+    "enriched": {
+      "gold_dropped_before_final8": 1,
+      "gold_survived_final8": 80,
+      "correct_given_gold_survived": 74,
+      "wrong_score_selection_given_gold_survived": 6
+    }
+  },
+  "description_change": {
+    "greedy_cascade": {
+      "both_correct": 68,
+      "candidate_only": 4,
+      "reference_only": 5,
+      "both_wrong": 4
+    },
+    "top2_branch": {
+      "both_correct": 74,
+      "candidate_only": 0,
+      "reference_only": 1,
+      "both_wrong": 6
+    }
+  },
+  "limits": [
+    "The taxonomy has 27 leaves, not 1,000; this tests hierarchy mechanics, not 1,000-label scale.",
+    "Stage softmax probabilities from different candidate sets are summed in log space without a separate calibration split.",
+    "The enriched descriptions were authored after observing the task design, but not by copying test-case answers."
+  ]
+}

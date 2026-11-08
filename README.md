@@ -8,6 +8,8 @@ Docker Compose로 LAYA Multilingual의 **한국어 분류 성능, 추론 지연,
 
 2026-11-08에는 Kakao의 `Kanana-2-v-decide-3b-2611`을 별도 Docker CPU 서비스에서 같은 27개 유형·81개 단일 정답으로 평가했습니다. 추가 학습 없이 75/81, **92.6%**를 기록해 민원 head 학습 LAYA 32.1%, EmbeddingGemma 2 검색 71.6%보다 높았습니다. 대신 warm-cache p50이 6.65초, 첫 요청이 35.8초, warm RSS가 약 6.29GB로 CPU 운영 비용이 컸습니다. [통합 Technical Deep Dive](docs/decision-model-landscape-kanana/blog.html), [Markdown 원고](docs/decision-model-landscape-kanana/blog.md), [Kanana 실험 결과와 한계](results/kanana-2-v-decide-2026-11-08/README.md), [flat·계층·검색 방식 재비교](results/method-comparison-2026-11-08/README.md)를 제공합니다.
 
+같은 날 Kanana 자체의 계층 예측도 추가 실행했습니다. predicted-prefix Greedy cascade는 73/81(90.1%), 단계마다 top-2를 유지해 최종 8개 경로의 누적 로그확률을 비교한 방식은 75/81(92.6%)로 flat-27 성능을 유지했습니다. 범위·제외 기준을 길게 쓴 보강 설명은 Greedy 72/81, Top-2 74/81로 개선되지 않았습니다. 전체 trace와 1,000개 이상 taxonomy를 위한 데이터 준비 지침은 [Kanana 계층 평가](results/kanana-hierarchy-2026-11-08/README.md)에 정리했습니다.
+
 > **License:** Kanana Open License는 자사 서비스 운영과 fine-tuning을 허용하지만, 제3자 대상 유료 API/cloud access, SI·on-premise 구축 판매, on-device 판매에는 Kakao의 별도 commercial license가 필요합니다. 재배포·파생 모델에는 표시·Notice 등의 조건이 있습니다. [원문](https://huggingface.co/kakaocorp/kanana-2-v-decide-3b-2611/blob/main/LICENSE)과 `NOTICE-KANANA.txt`를 확인하세요. 법률 자문이 아닙니다.
 
 ### Kanana-2 V-Decide CPU 실험 빠른 실행

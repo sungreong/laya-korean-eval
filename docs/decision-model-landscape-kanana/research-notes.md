@@ -75,3 +75,11 @@
 - 공식 checkpoint와 inference 코드는 fine-tuning 가능성을 열지만 training script와 recipe는 없다. `embed_messages`가 `no_grad`이므로 custom trainable forward가 필요하다.
 - Kanana Open License는 자사 서비스 운영을 허용하지만 유료 API/cloud access, 제3자 SI·on-prem, on-device 판매에는 Kakao의 별도 commercial license를 요구한다. 재배포·파생 모델에는 Notice와 `Powered by Kanana` 등 조건이 있다.
 - 사용자 제공 Kakao Tech 영상 `2crSurA7R-U`의 제목과 설명을 확인했다. 영상 대상은 Kanana-v-embedding이며 V-Decide 자체가 아니므로, 멀티모달 embedding 학습·검색 서비스 적용의 계열 배경으로만 사용하고 V-Decide fine-tuning 근거로 일반화하지 않는다.
+
+## Kanana 계층 예측 보강 실험
+
+- 같은 81개 단일 정답으로 predicted-prefix Greedy와 단계별 Top-2 branch를 새로 실행했다. Greedy는 73/81, Top-2는 75/81로 flat-27 75/81과 같았다.
+- Top-2는 대 top-2에서 81/81, 대+중과 최종 leaf에서 80/81의 정답 후보를 유지했다. 생존 80건 중 누적 로그확률 top-1은 75건이 정답이었다.
+- Top-2 경로 점수는 `log P(대)+log P(중|대)+log P(소|대,중)`이다. 서로 다른 후보 집합의 softmax를 별도 calibration 없이 합쳤다는 한계가 있다.
+- 범위·대표 예·제외 경계를 추가한 보강 설명 profile을 별도로 실행했으나 Greedy 72/81, Top-2 74/81로 개선되지 않았다. 긴 설명의 p50도 각각 8.64초, 17.91초로 기본 4.82초, 12.02초보다 느렸다.
+- taxonomy는 27개 leaf뿐이므로 이 결과를 1,000개 유형에 외삽하지 않는다. 대규모 검증에는 retrieval recall, 단계별 후보 생존, 후보 내 조건부 정확도, path-score calibration과 독립 신규 label holdout이 필요하다.

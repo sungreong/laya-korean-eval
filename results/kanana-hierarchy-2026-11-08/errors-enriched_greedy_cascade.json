@@ -1,0 +1,164 @@
+[
+  {
+    "id": "L10-implicit",
+    "slice": "implicit",
+    "summary": "유모차를 밀고 건너야 하는 턱 낮은 부분을 차가 계속 막고 있어 이동시켜 달라고 함.",
+    "expected_leaf": "L10",
+    "expected_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "predicted_leaf": "L13",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "노면·보도 파손"
+    ],
+    "latency_ms": 8452.493149001384
+  },
+  {
+    "id": "L11-implicit",
+    "slice": "implicit",
+    "summary": "구청에서 운영하는 주차 공간을 매일 쓰려는데 하루씩 내지 않고 한 달 단위로 결제할 수 있는지 질문함.",
+    "expected_leaf": "L11",
+    "expected_path": [
+      "도로·교통",
+      "주정차",
+      "주차시설 이용"
+    ],
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "latency_ms": 6402.558205998503
+  },
+  {
+    "id": "L11-mixed_context",
+    "slice": "mixed_context",
+    "summary": "주변 골목의 주차 단속에 항의하려는 것이 아니라 공영주차장 할인 대상과 이용 요금을 확인하려는 상담임.",
+    "expected_leaf": "L11",
+    "expected_path": [
+      "도로·교통",
+      "주정차",
+      "주차시설 이용"
+    ],
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "latency_ms": 6142.762915995263
+  },
+  {
+    "id": "L14-explicit",
+    "slice": "explicit",
+    "summary": "골목 가로등이 켜지지 않아 수리를 요청함.",
+    "expected_leaf": "L14",
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "가로등 고장"
+    ],
+    "predicted_leaf": "L08",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "공원시설 파손"
+    ],
+    "latency_ms": 10266.921153997828
+  },
+  {
+    "id": "L14-implicit",
+    "slice": "implicit",
+    "summary": "해가 지면 집 앞 길만 캄캄해지며 전봇대에 달린 등이 며칠째 들어오지 않는다고 함.",
+    "expected_leaf": "L14",
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "가로등 고장"
+    ],
+    "predicted_leaf": "L07",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "수목 관리"
+    ],
+    "latency_ms": 10093.744710000465
+  },
+  {
+    "id": "L15-implicit",
+    "slice": "implicit",
+    "summary": "비만 오면 인도 가장자리 철제 덮개 쪽으로 물이 빠지지 않아 가게 입구까지 차오른다고 함.",
+    "expected_leaf": "L15",
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "predicted_leaf": "L08",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "공원시설 파손"
+    ],
+    "latency_ms": 11628.826412001217
+  },
+  {
+    "id": "L15-mixed_context",
+    "slice": "mixed_context",
+    "summary": "낙엽이 원인으로 보이지만 나무 가지치기 요청은 아니며, 빗물이 빠지도록 도로 배수구를 뚫어 달라고 함.",
+    "expected_leaf": "L15",
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "predicted_leaf": "L07",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "수목 관리"
+    ],
+    "latency_ms": 7783.381427994755
+  },
+  {
+    "id": "L20-mixed_context",
+    "slice": "mixed_context",
+    "summary": "복지 지원 신청 중 발생했지만 서류나 자격 문제가 아니라 지자체 사이트가 첨부파일 전송 때 멈추는 오류 해결을 요청함.",
+    "expected_leaf": "L20",
+    "expected_path": [
+      "행정·복지",
+      "민원행정",
+      "온라인 민원 장애"
+    ],
+    "predicted_leaf": "L24",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "신청·제출 서류"
+    ],
+    "latency_ms": 12844.655098000658
+  },
+  {
+    "id": "L26-implicit",
+    "slice": "implicit",
+    "summary": "주민센터 안 화장실 수도꼭지가 잠기지 않아 계속 물이 흐른다고 알림.",
+    "expected_leaf": "L26",
+    "expected_path": [
+      "행정·복지",
+      "공공시설",
+      "시설 고장"
+    ],
+    "predicted_leaf": "L01",
+    "predicted_path": [
+      "생활환경",
+      "청소·폐기물",
+      "생활쓰레기 수거"
+    ],
+    "latency_ms": 6083.673850997002
+  }
+]

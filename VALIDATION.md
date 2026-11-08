@@ -62,3 +62,12 @@
 - 공식 checkpoint는 fine-tuning 가능한 공개 가중치지만, 2026-11-08 확인 기준 공식 학습 script·loss·dataset schema·LoRA recipe는 제공되지 않았다. 글의 LoRA 경로는 일반 PEFT 자료와 공개 아키텍처를 바탕으로 한 실험 제안으로 표시했다.
 - Kanana 계산 구조가 일반 embedding bi-encoder, Kanana V-Decide, cross-encoder reranker와 어떻게 다른지 별도 절로 구분했다. 앞선 LAYA 경로는 독립 인코딩형이며 이름만으로 cross-encoder reranker라고 간주하지 않았다.
 - Kanana Open License 원문을 검토하고 필수 고지문을 `NOTICE-KANANA.txt`에 추가했다. 자체 서비스와 제3자 API·SI·on-device 재판매의 조건이 다르며, 법률 자문이 아니라 기술 검토임을 명시했다.
+
+## Kanana 계층형 예측 후속 실행
+
+- 같은 90건 fixture에서 Kanana predicted-prefix Greedy cascade와 단계별 Top-2 branch를 Docker CPU 8 thread로 실제 실행했다. 단일 정답 81건의 최종 정확도는 각각 73/81(90.1%), 75/81(92.6%)였다.
+- Top-2는 대 top-2 81/81, 대+중 경로와 최종 leaf 80/81에서 정답 후보를 유지했다. 정답이 최종 8개에 남은 80건 중 75건을 누적 로그확률 top-1으로 선택했다.
+- 별도 `hierarchy-descriptions-enriched.json`에 대·중·소 범위와 제외 기준을 보강해 재실행했다. Greedy 72/81(88.9%), Top-2 74/81(91.4%)로 개선되지 않았고 p50은 8.64초와 17.91초로 늘었다.
+- 실행은 매 문항 JSON 저장과 `--resume`을 지원한다. 최초 실행 중 추가 확인 필요 문항의 null 정답 처리 오류가 발생했지만, 이미 저장된 81건 뒤부터 수정본으로 재개했다. 공개 결과의 실행본은 수정 후 script와 일치한다.
+- `results/kanana-hierarchy-2026-11-08/`에 두 description profile의 summary, 90건 전체 trace, 오답, paired 비교를 보존했다. 27개 결과이므로 1,000개 taxonomy 성능으로 일반화하지 않는다.
+- 로컬 `python -m unittest discover -s tests -q`와 `docker compose --profile test run --rm test`에서 전체 33개 테스트가 통과했다.

@@ -1,0 +1,415 @@
+[
+  {
+    "id": "L10-implicit",
+    "slice": "implicit",
+    "summary": "유모차를 밀고 건너야 하는 턱 낮은 부분을 차가 계속 막고 있어 이동시켜 달라고 함.",
+    "expected_leaf": "L10",
+    "expected_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "predicted_leaf": "L13",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "노면·보도 파손"
+    ],
+    "latency_ms": 22061.307980999118,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": false,
+      "leaf_path_top2": false,
+      "final8": false
+    },
+    "top_branches": [
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L13",
+        "stage_probabilities": {
+          "major": 0.7677171766774462,
+          "middle": 0.8989518632564976,
+          "leaf": 0.8337653061763812
+        },
+        "log_probability_sum": -0.5526629875903372
+      },
+      {
+        "major_id": "A1",
+        "middle_id": "A1B3",
+        "leaf_id": "L08",
+        "stage_probabilities": {
+          "major": 0.1870720700913974,
+          "middle": 0.7673875273140497,
+          "leaf": 0.7950430622628288
+        },
+        "log_probability_sum": -2.170383688719451
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L15",
+        "stage_probabilities": {
+          "major": 0.7677171766774462,
+          "middle": 0.8989518632564976,
+          "leaf": 0.10834821191089236
+        },
+        "log_probability_sum": -2.593264717937017
+      }
+    ]
+  },
+  {
+    "id": "L11-implicit",
+    "slice": "implicit",
+    "summary": "구청에서 운영하는 주차 공간을 매일 쓰려는데 하루씩 내지 않고 한 달 단위로 결제할 수 있는지 질문함.",
+    "expected_leaf": "L11",
+    "expected_path": [
+      "도로·교통",
+      "주정차",
+      "주차시설 이용"
+    ],
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "latency_ms": 18167.1391350028,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A3",
+        "middle_id": "A3B3",
+        "leaf_id": "L27",
+        "stage_probabilities": {
+          "major": 0.6933438606069359,
+          "middle": 0.7722973139954276,
+          "leaf": 0.9333678249177911
+        },
+        "log_probability_sum": -0.6935708097451493
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B1",
+        "leaf_id": "L11",
+        "stage_probabilities": {
+          "major": 0.1872271902170636,
+          "middle": 0.8635738546819028,
+          "leaf": 0.9361224426672161
+        },
+        "log_probability_sum": -1.8881173304453065
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B1",
+        "leaf_id": "L19",
+        "stage_probabilities": {
+          "major": 0.6933438606069359,
+          "middle": 0.1729146596587958,
+          "leaf": 0.643969480620846
+        },
+        "log_probability_sum": -2.561290258808703
+      }
+    ]
+  },
+  {
+    "id": "L11-mixed_context",
+    "slice": "mixed_context",
+    "summary": "주변 골목의 주차 단속에 항의하려는 것이 아니라 공영주차장 할인 대상과 이용 요금을 확인하려는 상담임.",
+    "expected_leaf": "L11",
+    "expected_path": [
+      "도로·교통",
+      "주정차",
+      "주차시설 이용"
+    ],
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "latency_ms": 15207.30067799741,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A3",
+        "middle_id": "A3B3",
+        "leaf_id": "L27",
+        "stage_probabilities": {
+          "major": 0.49082440375538094,
+          "middle": 0.7794758811050001,
+          "leaf": 0.955815714043589
+        },
+        "log_probability_sum": -1.0059925296857286
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B1",
+        "leaf_id": "L11",
+        "stage_probabilities": {
+          "major": 0.36796850028639033,
+          "middle": 0.8507951901643702,
+          "leaf": 0.8966113905808116
+        },
+        "log_probability_sum": -1.2704745336530907
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B1",
+        "leaf_id": "L19",
+        "stage_probabilities": {
+          "major": 0.49082440375538094,
+          "middle": 0.11873897642191274,
+          "leaf": 0.6356678960395272
+        },
+        "log_probability_sum": -3.2955755435480327
+      }
+    ]
+  },
+  {
+    "id": "L13-mixed_context",
+    "slice": "mixed_context",
+    "summary": "비가 오면 물도 고이지만 배수관 점검보다 움푹 패인 아스팔트 구멍 자체를 메워 달라는 요청임.",
+    "expected_leaf": "L13",
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "노면·보도 파손"
+    ],
+    "predicted_leaf": "L15",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "latency_ms": 15364.888906995475,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L15",
+        "stage_probabilities": {
+          "major": 0.5836619197905545,
+          "middle": 0.9764758936925738,
+          "leaf": 0.531203698532211
+        },
+        "log_probability_sum": -1.194848301906746
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L13",
+        "stage_probabilities": {
+          "major": 0.5836619197905545,
+          "middle": 0.9764758936925738,
+          "leaf": 0.46714217522228346
+        },
+        "log_probability_sum": -1.323360207576912
+      },
+      {
+        "major_id": "A1",
+        "middle_id": "A1B3",
+        "leaf_id": "L08",
+        "stage_probabilities": {
+          "major": 0.38287398827752045,
+          "middle": 0.530593649346213,
+          "leaf": 0.6986909848089587
+        },
+        "log_probability_sum": -1.9523548787479876
+      }
+    ]
+  },
+  {
+    "id": "L15-mixed_context",
+    "slice": "mixed_context",
+    "summary": "낙엽이 원인으로 보이지만 나무 가지치기 요청은 아니며, 빗물이 빠지도록 도로 배수구를 뚫어 달라고 함.",
+    "expected_leaf": "L15",
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "predicted_leaf": "L07",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "수목 관리"
+    ],
+    "latency_ms": 19579.50836999953,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A1",
+        "middle_id": "A1B3",
+        "leaf_id": "L07",
+        "stage_probabilities": {
+          "major": 0.7387952653541232,
+          "middle": 0.8284512580901026,
+          "leaf": 0.7919414608206554
+        },
+        "log_probability_sum": -0.7241995176054294
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L15",
+        "stage_probabilities": {
+          "major": 0.20033232036096055,
+          "middle": 0.9447124056538893,
+          "leaf": 0.9533873371809211
+        },
+        "log_probability_sum": -1.7123864380588305
+      },
+      {
+        "major_id": "A1",
+        "middle_id": "A1B3",
+        "leaf_id": "L09",
+        "stage_probabilities": {
+          "major": 0.7387952653541232,
+          "middle": 0.8284512580901026,
+          "leaf": 0.17820841207335164
+        },
+        "log_probability_sum": -2.2157332738615327
+      }
+    ]
+  },
+  {
+    "id": "L19-mixed_context",
+    "slice": "mixed_context",
+    "summary": "복지 신청에 사용할 서류이지만 수급 자격 상담은 아니며, 주민등록초본을 대리 발급받는 절차를 문의함.",
+    "expected_leaf": "L19",
+    "expected_path": [
+      "행정·복지",
+      "민원행정",
+      "증명서 발급"
+    ],
+    "predicted_leaf": "L24",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "신청·제출 서류"
+    ],
+    "latency_ms": 14917.532138999377,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A3",
+        "middle_id": "A3B2",
+        "leaf_id": "L24",
+        "stage_probabilities": {
+          "major": 0.9654216987429715,
+          "middle": 0.5236041904954585,
+          "leaf": 0.8757093548745664
+        },
+        "log_probability_sum": -0.8149305510933068
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B1",
+        "leaf_id": "L19",
+        "stage_probabilities": {
+          "major": 0.9654216987429715,
+          "middle": 0.430047125690919,
+          "leaf": 0.9924894126252106
+        },
+        "log_probability_sum": -0.886589695108344
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B2",
+        "leaf_id": "L22",
+        "stage_probabilities": {
+          "major": 0.9654216987429715,
+          "middle": 0.5236041904954585,
+          "leaf": 0.10808882020895655
+        },
+        "log_probability_sum": -2.907011501830306
+      }
+    ]
+  },
+  {
+    "id": "L20-mixed_context",
+    "slice": "mixed_context",
+    "summary": "복지 지원 신청 중 발생했지만 서류나 자격 문제가 아니라 지자체 사이트가 첨부파일 전송 때 멈추는 오류 해결을 요청함.",
+    "expected_leaf": "L20",
+    "expected_path": [
+      "행정·복지",
+      "민원행정",
+      "온라인 민원 장애"
+    ],
+    "predicted_leaf": "L24",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "신청·제출 서류"
+    ],
+    "latency_ms": 15528.053410998837,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A3",
+        "middle_id": "A3B2",
+        "leaf_id": "L24",
+        "stage_probabilities": {
+          "major": 0.9208399727056849,
+          "middle": 0.7838688109901943,
+          "leaf": 0.6563201838365089
+        },
+        "log_probability_sum": -0.7470891412224421
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B2",
+        "leaf_id": "L22",
+        "stage_probabilities": {
+          "major": 0.9208399727056849,
+          "middle": 0.7838688109901943,
+          "leaf": 0.21834522707233517
+        },
+        "log_probability_sum": -1.8476604755844723
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B1",
+        "leaf_id": "L20",
+        "stage_probabilities": {
+          "major": 0.9208399727056849,
+          "middle": 0.13234748606708543,
+          "leaf": 0.9619759859799967
+        },
+        "log_probability_sum": -2.1435591479701968
+      }
+    ]
+  }
+]

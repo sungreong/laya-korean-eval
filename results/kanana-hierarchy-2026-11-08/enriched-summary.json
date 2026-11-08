@@ -1,0 +1,304 @@
+{
+  "status": "complete",
+  "model": "kakaocorp/kanana-2-v-decide-3b-2611",
+  "model_local_path": "evaluation/models/kanana-2-v-decide-3b-2611",
+  "model_revision": "1489062def4145ae3a0a9261fbac4f4d88a8c6d1",
+  "fixture": "datasets/complaints",
+  "fixture_sha256": {
+    "taxonomy.json": "9dd4496820650f7e72608391cde782ebee8687c43232542d4e837d8883d1ff8b",
+    "cases.json": "ab63eb300e010c0602123f60a8b5428dfa2b5db1eb2cfb68aeeb9e6ddfd4cfb2"
+  },
+  "description_profile": {
+    "path": "datasets/complaints/hierarchy-descriptions-enriched.json",
+    "sha256": "1bf7c561b15d0e2435938e658fa3513078a11fc475823a020da8ee921dadb5bd",
+    "name": "hierarchy-enriched-v1"
+  },
+  "scope": "Synthetic author-defined diagnostic; no independent human review; not a production benchmark.",
+  "environment": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "attention": "sdpa",
+    "threads": 8,
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+    "torch": "2.10.0+cpu",
+    "container_memory_limit_bytes": "11811160064"
+  },
+  "counts": {
+    "major": 3,
+    "middle": 9,
+    "leaf": 27,
+    "cases": 90,
+    "strict": 81
+  },
+  "methods": {
+    "greedy_cascade": {
+      "strict": {
+        "n": 81,
+        "correct_paths": 72,
+        "major_correct": 74,
+        "middle_path_correct": 72,
+        "exact_path_correct": 72,
+        "major_accuracy": 0.9135802469135802,
+        "middle_path_accuracy": 0.8888888888888888,
+        "exact_path_accuracy": 0.8888888888888888,
+        "leaf_macro_f1": 0.8785714285714286,
+        "wilson95_exact": [
+          0.8021290531846268,
+          0.9404324359234946
+        ],
+        "first_error_level": {
+          "major": 7,
+          "middle": 2,
+          "leaf": 0
+        }
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 27,
+          "correct_paths": 26,
+          "major_correct": 26,
+          "middle_path_correct": 26,
+          "exact_path_correct": 26,
+          "major_accuracy": 0.9629629629629629,
+          "middle_path_accuracy": 0.9629629629629629,
+          "exact_path_accuracy": 0.9629629629629629,
+          "leaf_macro_f1": 0.9506172839506173,
+          "wilson95_exact": [
+            0.8171653406642414,
+            0.9934318540192149
+          ],
+          "first_error_level": {
+            "major": 1,
+            "middle": 0,
+            "leaf": 0
+          }
+        },
+        "implicit": {
+          "n": 27,
+          "correct_paths": 22,
+          "major_correct": 23,
+          "middle_path_correct": 22,
+          "exact_path_correct": 22,
+          "major_accuracy": 0.8518518518518519,
+          "middle_path_accuracy": 0.8148148148148148,
+          "exact_path_accuracy": 0.8148148148148148,
+          "leaf_macro_f1": 0.7530864197530863,
+          "wilson95_exact": [
+            0.6330131638145156,
+            0.9181929285702346
+          ],
+          "first_error_level": {
+            "major": 4,
+            "middle": 1,
+            "leaf": 0
+          }
+        },
+        "mixed_context": {
+          "n": 27,
+          "correct_paths": 24,
+          "major_correct": 25,
+          "middle_path_correct": 24,
+          "exact_path_correct": 24,
+          "major_accuracy": 0.9259259259259259,
+          "middle_path_accuracy": 0.8888888888888888,
+          "exact_path_accuracy": 0.8888888888888888,
+          "leaf_macro_f1": 0.8518518518518519,
+          "wilson95_exact": [
+            0.7194219918172017,
+            0.9614796517169016
+          ],
+          "first_error_level": {
+            "major": 2,
+            "middle": 1,
+            "leaf": 0
+          }
+        }
+      },
+      "under_specified": {
+        "n": 9,
+        "acceptable_hits": 9,
+        "note": "Forced-choice diagnostic; excluded from single-answer accuracy."
+      },
+      "latency_ms_p50": 8635.193389003689,
+      "latency_ms_p95": 12996.75938074688,
+      "model_calls_mean": 3,
+      "prediction_distribution": {
+        "L01": 4,
+        "L02": 3,
+        "L03": 3,
+        "L04": 3,
+        "L05": 4,
+        "L06": 3,
+        "L07": 5,
+        "L08": 5,
+        "L09": 4,
+        "L10": 2,
+        "L13": 4,
+        "L11": 1,
+        "L27": 6,
+        "L12": 4,
+        "L14": 1,
+        "L15": 2,
+        "L16": 3,
+        "L17": 3,
+        "L18": 4,
+        "L19": 4,
+        "L20": 2,
+        "L24": 5,
+        "L21": 3,
+        "L22": 3,
+        "L23": 4,
+        "L25": 3,
+        "L26": 2
+      }
+    },
+    "top2_branch": {
+      "strict": {
+        "n": 81,
+        "correct_paths": 74,
+        "major_correct": 78,
+        "middle_path_correct": 75,
+        "exact_path_correct": 74,
+        "major_accuracy": 0.9629629629629629,
+        "middle_path_accuracy": 0.9259259259259259,
+        "exact_path_accuracy": 0.9135802469135802,
+        "leaf_macro_f1": 0.9107583774250442,
+        "wilson95_exact": [
+          0.8322008336612947,
+          0.9575074166600406
+        ],
+        "first_error_level": {
+          "major": 3,
+          "middle": 3,
+          "leaf": 1
+        }
+      },
+      "by_slice": {
+        "explicit": {
+          "n": 27,
+          "correct_paths": 27,
+          "major_correct": 27,
+          "middle_path_correct": 27,
+          "exact_path_correct": 27,
+          "major_accuracy": 1.0,
+          "middle_path_accuracy": 1.0,
+          "exact_path_accuracy": 1.0,
+          "leaf_macro_f1": 1.0,
+          "wilson95_exact": [
+            0.8754449702581328,
+            0.9999999999999998
+          ],
+          "first_error_level": {
+            "major": 0,
+            "middle": 0,
+            "leaf": 0
+          }
+        },
+        "implicit": {
+          "n": 27,
+          "correct_paths": 25,
+          "major_correct": 26,
+          "middle_path_correct": 25,
+          "exact_path_correct": 25,
+          "major_accuracy": 0.9629629629629629,
+          "middle_path_accuracy": 0.9259259259259259,
+          "exact_path_accuracy": 0.9259259259259259,
+          "leaf_macro_f1": 0.9012345679012346,
+          "wilson95_exact": [
+            0.7663040731697686,
+            0.9794453459390113
+          ],
+          "first_error_level": {
+            "major": 1,
+            "middle": 1,
+            "leaf": 0
+          }
+        },
+        "mixed_context": {
+          "n": 27,
+          "correct_paths": 22,
+          "major_correct": 25,
+          "middle_path_correct": 23,
+          "exact_path_correct": 22,
+          "major_accuracy": 0.9259259259259259,
+          "middle_path_accuracy": 0.8518518518518519,
+          "exact_path_accuracy": 0.8148148148148148,
+          "leaf_macro_f1": 0.7716049382716049,
+          "wilson95_exact": [
+            0.6330131638145156,
+            0.9181929285702346
+          ],
+          "first_error_level": {
+            "major": 2,
+            "middle": 2,
+            "leaf": 1
+          }
+        }
+      },
+      "under_specified": {
+        "n": 9,
+        "acceptable_hits": 8,
+        "note": "Forced-choice diagnostic; excluded from single-answer accuracy."
+      },
+      "latency_ms_p50": 17913.865512498887,
+      "latency_ms_p95": 25674.29210695118,
+      "model_calls_mean": 7,
+      "prediction_distribution": {
+        "L01": 3,
+        "L02": 3,
+        "L03": 3,
+        "L04": 3,
+        "L05": 4,
+        "L06": 3,
+        "L07": 4,
+        "L08": 3,
+        "L09": 4,
+        "L10": 2,
+        "L13": 4,
+        "L11": 1,
+        "L27": 6,
+        "L12": 3,
+        "L15": 4,
+        "L14": 3,
+        "L16": 3,
+        "L17": 3,
+        "L18": 4,
+        "L19": 3,
+        "L24": 6,
+        "L20": 2,
+        "L21": 3,
+        "L22": 3,
+        "L23": 4,
+        "L25": 3,
+        "L26": 3
+      },
+      "candidate_survival": {
+        "major_top2": {
+          "count": 81,
+          "rate": 1.0
+        },
+        "middle_path_top2": {
+          "count": 80,
+          "rate": 0.9876543209876543
+        },
+        "leaf_path_top2": {
+          "count": 80,
+          "rate": 0.9876543209876543
+        },
+        "final8": {
+          "count": 80,
+          "rate": 0.9876543209876543
+        }
+      }
+    }
+  },
+  "script_sha256": "d4f3b943a5958d4d0b3b78a4be9c4eb19f38a9a314de5d7d8c4afdbc6eb2f658",
+  "load_seconds_latest_process": 2.344641423005669,
+  "rss_after_load_bytes_latest_process": 381702144,
+  "scoring": {
+    "greedy_cascade": "Predicted top-1 parent is injected as context at the next stage.",
+    "top2_branch": "Keep top-2 at all three stages; choose the final leaf with max sum of stage log probabilities.",
+    "caveat": "Softmax probabilities from different candidate sets are not calibrated to be directly comparable."
+  },
+  "rss_after_warmup_bytes_latest_process": 6287605760
+}

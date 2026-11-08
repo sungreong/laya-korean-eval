@@ -1,0 +1,356 @@
+[
+  {
+    "id": "L10-implicit",
+    "slice": "implicit",
+    "summary": "유모차를 밀고 건너야 하는 턱 낮은 부분을 차가 계속 막고 있어 이동시켜 달라고 함.",
+    "expected_leaf": "L10",
+    "expected_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "predicted_leaf": "L13",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "노면·보도 파손"
+    ],
+    "latency_ms": 12213.416713995684,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": false,
+      "leaf_path_top2": false,
+      "final8": false
+    },
+    "top_branches": [
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L13",
+        "stage_probabilities": {
+          "major": 0.8644768932360138,
+          "middle": 0.8358042727832701,
+          "leaf": 0.907356258257995
+        },
+        "log_probability_sum": -0.4222116379543186
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L15",
+        "stage_probabilities": {
+          "major": 0.8644768932360138,
+          "middle": 0.8358042727832701,
+          "leaf": 0.07562075394768168
+        },
+        "log_probability_sum": -2.9070160298152805
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B3",
+        "leaf_id": "L16",
+        "stage_probabilities": {
+          "major": 0.8644768932360138,
+          "middle": 0.10479947373503262,
+          "leaf": 0.5022538408072094
+        },
+        "log_probability_sum": -3.089986859522348
+      }
+    ]
+  },
+  {
+    "id": "L11-implicit",
+    "slice": "implicit",
+    "summary": "구청에서 운영하는 주차 공간을 매일 쓰려는데 하루씩 내지 않고 한 달 단위로 결제할 수 있는지 질문함.",
+    "expected_leaf": "L11",
+    "expected_path": [
+      "도로·교통",
+      "주정차",
+      "주차시설 이용"
+    ],
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "latency_ms": 13121.194967003248,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A3",
+        "middle_id": "A3B3",
+        "leaf_id": "L27",
+        "stage_probabilities": {
+          "major": 0.695262335417142,
+          "middle": 0.80606117302882,
+          "leaf": 0.9303755742101545
+        },
+        "log_probability_sum": -0.6512286170242778
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B1",
+        "leaf_id": "L11",
+        "stage_probabilities": {
+          "major": 0.256265653243184,
+          "middle": 0.9602877467887913,
+          "leaf": 0.9711092358512223
+        },
+        "log_probability_sum": -1.4313792864782775
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B1",
+        "leaf_id": "L19",
+        "stage_probabilities": {
+          "major": 0.695262335417142,
+          "middle": 0.14201578366558731,
+          "leaf": 0.7198266234019903
+        },
+        "log_probability_sum": -2.6440280153890674
+      }
+    ]
+  },
+  {
+    "id": "L11-mixed_context",
+    "slice": "mixed_context",
+    "summary": "주변 골목의 주차 단속에 항의하려는 것이 아니라 공영주차장 할인 대상과 이용 요금을 확인하려는 상담임.",
+    "expected_leaf": "L11",
+    "expected_path": [
+      "도로·교통",
+      "주정차",
+      "주차시설 이용"
+    ],
+    "predicted_leaf": "L27",
+    "predicted_path": [
+      "행정·복지",
+      "공공시설",
+      "운영·이용 불편"
+    ],
+    "latency_ms": 12493.556285997329,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A3",
+        "middle_id": "A3B3",
+        "leaf_id": "L27",
+        "stage_probabilities": {
+          "major": 0.5381977453764263,
+          "middle": 0.8225201222855686,
+          "leaf": 0.9423019494916798
+        },
+        "log_probability_sum": -0.8743410766542695
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B1",
+        "leaf_id": "L11",
+        "stage_probabilities": {
+          "major": 0.4128595941258206,
+          "middle": 0.9713141236816819,
+          "leaf": 0.9683132671446887
+        },
+        "log_probability_sum": -0.9459526882674222
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B2",
+        "leaf_id": "L22",
+        "stage_probabilities": {
+          "major": 0.5381977453764263,
+          "middle": 0.1053789750383158,
+          "leaf": 0.4951208627869879
+        },
+        "log_probability_sum": -3.5726747494499613
+      }
+    ]
+  },
+  {
+    "id": "L13-mixed_context",
+    "slice": "mixed_context",
+    "summary": "비가 오면 물도 고이지만 배수관 점검보다 움푹 패인 아스팔트 구멍 자체를 메워 달라는 요청임.",
+    "expected_leaf": "L13",
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "노면·보도 파손"
+    ],
+    "predicted_leaf": "L15",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "latency_ms": 12311.005365998426,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L15",
+        "stage_probabilities": {
+          "major": 0.6070836848964515,
+          "middle": 0.9921304369506486,
+          "leaf": 0.6164298373125393
+        },
+        "log_probability_sum": -0.990800093463046
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L13",
+        "stage_probabilities": {
+          "major": 0.6070836848964515,
+          "middle": 0.9921304369506486,
+          "leaf": 0.3808273530439272
+        },
+        "log_probability_sum": -1.472398470690829
+      },
+      {
+        "major_id": "A1",
+        "middle_id": "A1B3",
+        "leaf_id": "L08",
+        "stage_probabilities": {
+          "major": 0.29734771716302455,
+          "middle": 0.38599623573248004,
+          "leaf": 0.7022752705259712
+        },
+        "log_probability_sum": -2.5182105502449366
+      }
+    ]
+  },
+  {
+    "id": "L15-mixed_context",
+    "slice": "mixed_context",
+    "summary": "낙엽이 원인으로 보이지만 나무 가지치기 요청은 아니며, 빗물이 빠지도록 도로 배수구를 뚫어 달라고 함.",
+    "expected_leaf": "L15",
+    "expected_path": [
+      "도로·교통",
+      "도로시설",
+      "도로 배수"
+    ],
+    "predicted_leaf": "L07",
+    "predicted_path": [
+      "생활환경",
+      "공원·녹지",
+      "수목 관리"
+    ],
+    "latency_ms": 11851.735058997292,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A1",
+        "middle_id": "A1B3",
+        "leaf_id": "L07",
+        "stage_probabilities": {
+          "major": 0.720974065530343,
+          "middle": 0.6420236282432477,
+          "leaf": 0.7813898535756831
+        },
+        "log_probability_sum": -1.0169633657100627
+      },
+      {
+        "major_id": "A1",
+        "middle_id": "A1B1",
+        "leaf_id": "L01",
+        "stage_probabilities": {
+          "major": 0.720974065530343,
+          "middle": 0.314534151262466,
+          "leaf": 0.6898765780344694
+        },
+        "log_probability_sum": -1.8550573019537357
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L15",
+        "stage_probabilities": {
+          "major": 0.14363220130599702,
+          "middle": 0.9873476661032754,
+          "leaf": 0.9827113763735791
+        },
+        "log_probability_sum": -1.9706722777402992
+      }
+    ]
+  },
+  {
+    "id": "L19-mixed_context",
+    "slice": "mixed_context",
+    "summary": "복지 신청에 사용할 서류이지만 수급 자격 상담은 아니며, 주민등록초본을 대리 발급받는 절차를 문의함.",
+    "expected_leaf": "L19",
+    "expected_path": [
+      "행정·복지",
+      "민원행정",
+      "증명서 발급"
+    ],
+    "predicted_leaf": "L24",
+    "predicted_path": [
+      "행정·복지",
+      "복지지원",
+      "신청·제출 서류"
+    ],
+    "latency_ms": 11744.161305003217,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A3",
+        "middle_id": "A3B2",
+        "leaf_id": "L24",
+        "stage_probabilities": {
+          "major": 0.9811239021802591,
+          "middle": 0.5526720068555739,
+          "leaf": 0.9422623328247376
+        },
+        "log_probability_sum": -0.6715186531152847
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B1",
+        "leaf_id": "L19",
+        "stage_probabilities": {
+          "major": 0.9811239021802591,
+          "middle": 0.44308522402456657,
+          "leaf": 0.998731475913818
+        },
+        "log_probability_sum": -0.8343190029710018
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B2",
+        "leaf_id": "L22",
+        "stage_probabilities": {
+          "major": 0.9811239021802591,
+          "middle": 0.5526720068555739,
+          "leaf": 0.05205288436877889
+        },
+        "log_probability_sum": -3.567542165001881
+      }
+    ]
+  }
+]
