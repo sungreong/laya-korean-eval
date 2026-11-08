@@ -23,6 +23,11 @@ Kakao Kanana-2 V-Decide의 모델 구성, query/candidate dual-encoder 데이터
 - 결과: 75/81, accuracy 92.6%, Macro-F1 92.1%, warm p50 6.65초
 - 라이선스 검토: 저장소 루트 `../../NOTICE-KANANA.txt`, 원문은 Kanana Open License
 
+## 블로그 썸네일
+
+- 게시용 WebP: `assets/kanana-test-thumbnail.webp` (1599×900, quality 85)
+- 생성 원본 PNG: `assets/kanana-test-thumbnail-original.png`
+
 ## 조사 범위
 
 이 문서에서 decision model은 **사용자가 런타임에 정의한 유한 선택지에 대해 자유 텍스트를 생성하지 않고 확률 분포를 반환하는 모델 또는 전용 API**를 뜻합니다. Decision Transformer, 의사결정나무, 일반적인 LLM JSON 출력은 별도 계열로 보았습니다.
