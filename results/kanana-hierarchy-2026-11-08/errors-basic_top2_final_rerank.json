@@ -1,0 +1,120 @@
+[
+  {
+    "id": "L10-implicit",
+    "slice": "implicit",
+    "summary": "유모차를 밀고 건너야 하는 턱 낮은 부분을 차가 계속 막고 있어 이동시켜 달라고 함.",
+    "expected_leaf": "L10",
+    "expected_path": [
+      "도로·교통",
+      "주정차",
+      "불법주정차"
+    ],
+    "predicted_leaf": "L13",
+    "predicted_path": [
+      "도로·교통",
+      "도로시설",
+      "노면·보도 파손"
+    ],
+    "latency_ms": 14997.472025992465,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": false,
+      "leaf_path_top2": false,
+      "final8": false
+    },
+    "top_branches": [
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L13",
+        "stage_probabilities": {
+          "major": 0.8644768932360138,
+          "middle": 0.8358042727832701,
+          "leaf": 0.907356258257995
+        },
+        "log_probability_sum": -0.4222116379543186
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B2",
+        "leaf_id": "L15",
+        "stage_probabilities": {
+          "major": 0.8644768932360138,
+          "middle": 0.8358042727832701,
+          "leaf": 0.07562075394768168
+        },
+        "log_probability_sum": -2.9070160298152805
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B3",
+        "leaf_id": "L16",
+        "stage_probabilities": {
+          "major": 0.8644768932360138,
+          "middle": 0.10479947373503262,
+          "leaf": 0.5022538408072094
+        },
+        "log_probability_sum": -3.089986859522348
+      }
+    ]
+  },
+  {
+    "id": "L16-implicit",
+    "slice": "implicit",
+    "summary": "안내된 간격보다 훨씬 오래 기다렸고 같은 번호 차량 두 대가 붙어서 와 출근이 늦었다고 함.",
+    "expected_leaf": "L16",
+    "expected_path": [
+      "도로·교통",
+      "대중교통",
+      "버스 운행"
+    ],
+    "predicted_leaf": "L21",
+    "predicted_path": [
+      "행정·복지",
+      "민원행정",
+      "처리 지연·공무원 응대"
+    ],
+    "latency_ms": 15179.027583006246,
+    "survival": {
+      "major_top2": true,
+      "middle_path_top2": true,
+      "leaf_path_top2": true,
+      "final8": true
+    },
+    "top_branches": [
+      {
+        "major_id": "A2",
+        "middle_id": "A2B3",
+        "leaf_id": "L16",
+        "stage_probabilities": {
+          "major": 0.6094615943396405,
+          "middle": 0.8240520091513763,
+          "leaf": 0.7143299579321168
+        },
+        "log_probability_sum": -1.0251112743909392
+      },
+      {
+        "major_id": "A3",
+        "middle_id": "A3B1",
+        "leaf_id": "L21",
+        "stage_probabilities": {
+          "major": 0.36739974732910485,
+          "middle": 0.46725076487276845,
+          "leaf": 0.9917048733124207
+        },
+        "log_probability_sum": -1.770523712311959
+      },
+      {
+        "major_id": "A2",
+        "middle_id": "A2B3",
+        "leaf_id": "L18",
+        "stage_probabilities": {
+          "major": 0.6094615943396405,
+          "middle": 0.8240520091513763,
+          "leaf": 0.26749642774333426
+        },
+        "log_probability_sum": -2.007350043922189
+      }
+    ]
+  }
+]

@@ -17,6 +17,9 @@ class KananaHierarchyPublishedResultsTest(unittest.TestCase):
         self.assertEqual(methods["basic_top2_branch"]["strict"]["correct_paths"], 75)
         self.assertEqual(methods["enriched_greedy_cascade"]["strict"]["correct_paths"], 72)
         self.assertEqual(methods["enriched_top2_branch"]["strict"]["correct_paths"], 74)
+        self.assertEqual(methods["basic_top2_final_rerank"]["strict"]["correct_paths"], 79)
+        self.assertEqual(methods["enriched_top2_final_rerank"]["strict"]["correct_paths"], 79)
+        self.assertEqual(methods["basic_top2_final_rerank"]["model_calls_mean"], 8)
         self.assertEqual(
             methods["basic_top2_branch"]["candidate_survival"]["final8"]["count"],
             80,
@@ -28,6 +31,18 @@ class KananaHierarchyPublishedResultsTest(unittest.TestCase):
                 "gold_survived_final8": 80,
                 "correct_given_gold_survived": 75,
                 "wrong_score_selection_given_gold_survived": 5,
+            },
+        )
+        self.assertEqual(
+            comparison["final_rerank_change"]["basic"],
+            {
+                "both_correct": 74,
+                "candidate_only": 5,
+                "reference_only": 1,
+                "both_wrong": 1,
+                "gold_survived_final8": 80,
+                "correct_given_gold_survived": 79,
+                "wrong_rerank_selection_given_gold_survived": 1,
             },
         )
 
@@ -42,6 +57,17 @@ class KananaHierarchyPublishedResultsTest(unittest.TestCase):
                 self.assertEqual(len(row["trace"]), 7)
                 self.assertEqual(len(row["final_branches"]), 8)
                 self.assertEqual(len({branch["leaf_id"] for branch in row["final_branches"]}), 8)
+
+    def test_final_rerank_trace_shape(self):
+        for profile in ("basic", "enriched"):
+            rows = json.loads(
+                (RESULTS / f"{profile}-final-rerank-predictions.json").read_text("utf-8")
+            )
+            self.assertEqual(len(rows), 90)
+            for row in rows:
+                self.assertEqual(len(row["trace"]), 8)
+                self.assertEqual(row["trace"][-1]["stage"], "final8_direct_rerank")
+                self.assertEqual(row["trace"][-1]["candidate_count"], 8)
 
 
 if __name__ == "__main__":

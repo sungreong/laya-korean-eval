@@ -1,0 +1,168 @@
+{
+  "status": "complete",
+  "model": "kakaocorp/kanana-2-v-decide-3b-2611",
+  "model_revision": "1489062def4145ae3a0a9261fbac4f4d88a8c6d1",
+  "scope": "Synthetic author-defined diagnostic; no independent human review; not a production benchmark.",
+  "method": "Reuse the final eight paths from per-branch Top-2 search, then make one additional Kanana choice call over all eight full paths.",
+  "source": "evaluation/kanana-2-v-decide-hierarchy-enriched-cpu/top2_branch_predictions.json",
+  "source_sha256": "666a1eb47927d4e79142422e63947d5aa0bd23367e10d81b05b8179d5134ed9e",
+  "fixture_sha256": {
+    "taxonomy.json": "9dd4496820650f7e72608391cde782ebee8687c43232542d4e837d8883d1ff8b"
+  },
+  "description_profile": {
+    "path": "datasets/complaints/hierarchy-descriptions-enriched.json",
+    "sha256": "1bf7c561b15d0e2435938e658fa3513078a11fc475823a020da8ee921dadb5bd",
+    "name": "hierarchy-enriched-v1"
+  },
+  "environment": {
+    "device": "cpu",
+    "dtype": "bfloat16",
+    "attention": "sdpa",
+    "threads": 8,
+    "platform": "Linux-6.6.87.2-microsoft-standard-WSL2-x86_64-with-glibc2.41",
+    "torch": "2.10.0+cpu"
+  },
+  "load_seconds": 1.7045280389938853,
+  "rss_after_warmup_bytes": 6280437760,
+  "metrics": {
+    "strict": {
+      "n": 81,
+      "correct_paths": 79,
+      "major_correct": 80,
+      "middle_path_correct": 79,
+      "exact_path_correct": 79,
+      "major_accuracy": 0.9876543209876543,
+      "middle_path_accuracy": 0.9753086419753086,
+      "exact_path_accuracy": 0.9753086419753086,
+      "leaf_macro_f1": 0.9746031746031746,
+      "wilson95_exact": [
+        0.9143727407780347,
+        0.9932024125763359
+      ],
+      "first_error_level": {
+        "major": 1,
+        "middle": 1,
+        "leaf": 0
+      }
+    },
+    "by_slice": {
+      "explicit": {
+        "n": 27,
+        "correct_paths": 27,
+        "major_correct": 27,
+        "middle_path_correct": 27,
+        "exact_path_correct": 27,
+        "major_accuracy": 1.0,
+        "middle_path_accuracy": 1.0,
+        "exact_path_accuracy": 1.0,
+        "leaf_macro_f1": 1.0,
+        "wilson95_exact": [
+          0.8754449702581328,
+          0.9999999999999998
+        ],
+        "first_error_level": {
+          "major": 0,
+          "middle": 0,
+          "leaf": 0
+        }
+      },
+      "implicit": {
+        "n": 27,
+        "correct_paths": 25,
+        "major_correct": 26,
+        "middle_path_correct": 25,
+        "exact_path_correct": 25,
+        "major_accuracy": 0.9629629629629629,
+        "middle_path_accuracy": 0.9259259259259259,
+        "exact_path_accuracy": 0.9259259259259259,
+        "leaf_macro_f1": 0.9012345679012346,
+        "wilson95_exact": [
+          0.7663040731697686,
+          0.9794453459390113
+        ],
+        "first_error_level": {
+          "major": 1,
+          "middle": 1,
+          "leaf": 0
+        }
+      },
+      "mixed_context": {
+        "n": 27,
+        "correct_paths": 27,
+        "major_correct": 27,
+        "middle_path_correct": 27,
+        "exact_path_correct": 27,
+        "major_accuracy": 1.0,
+        "middle_path_accuracy": 1.0,
+        "exact_path_accuracy": 1.0,
+        "leaf_macro_f1": 1.0,
+        "wilson95_exact": [
+          0.8754449702581328,
+          0.9999999999999998
+        ],
+        "first_error_level": {
+          "major": 0,
+          "middle": 0,
+          "leaf": 0
+        }
+      }
+    },
+    "under_specified": {
+      "n": 9,
+      "acceptable_hits": 9,
+      "note": "Forced-choice diagnostic; excluded from single-answer accuracy."
+    },
+    "latency_ms_p50": 22798.941855500743,
+    "latency_ms_p95": 30484.154144247077,
+    "model_calls_mean": 8,
+    "prediction_distribution": {
+      "L01": 3,
+      "L02": 3,
+      "L03": 3,
+      "L04": 3,
+      "L05": 4,
+      "L06": 3,
+      "L07": 3,
+      "L08": 3,
+      "L09": 4,
+      "L10": 2,
+      "L13": 4,
+      "L11": 3,
+      "L12": 4,
+      "L14": 3,
+      "L15": 4,
+      "L16": 2,
+      "L21": 4,
+      "L17": 3,
+      "L18": 4,
+      "L19": 3,
+      "L20": 3,
+      "L22": 3,
+      "L23": 4,
+      "L24": 5,
+      "L25": 3,
+      "L26": 3,
+      "L27": 4
+    },
+    "candidate_survival": {
+      "major_top2": {
+        "count": 81,
+        "rate": 1.0
+      },
+      "middle_path_top2": {
+        "count": 80,
+        "rate": 0.9876543209876543
+      },
+      "leaf_path_top2": {
+        "count": 80,
+        "rate": 0.9876543209876543
+      },
+      "final8": {
+        "count": 80,
+        "rate": 0.9876543209876543
+      }
+    },
+    "rerank_latency_ms_mean": 4750.171506144721
+  },
+  "script_sha256": "f64d1f8fffc475314e65be4c6ae5cbbd3e3c81ce8b21d2276d5ea0da7dc5a499"
+}

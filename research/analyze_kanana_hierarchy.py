@@ -60,12 +60,16 @@ def main():
     parser.add_argument("--flat", default="evaluation/kanana-2-v-decide-flat27-cpu")
     parser.add_argument("--basic", default="evaluation/kanana-2-v-decide-hierarchy-basic-cpu")
     parser.add_argument("--enriched", default="evaluation/kanana-2-v-decide-hierarchy-enriched-cpu")
+    parser.add_argument("--basic-rerank", default="evaluation/kanana-2-v-decide-final-rerank-basic-cpu")
+    parser.add_argument("--enriched-rerank", default="evaluation/kanana-2-v-decide-final-rerank-enriched-cpu")
     parser.add_argument("--out", default="results/kanana-hierarchy-2026-11-08")
     args = parser.parse_args()
 
     flat_dir = ROOT / args.flat
     basic_dir = ROOT / args.basic
     enriched_dir = ROOT / args.enriched
+    basic_rerank_dir = ROOT / args.basic_rerank
+    enriched_rerank_dir = ROOT / args.enriched_rerank
     out = ROOT / args.out
     out.mkdir(parents=True, exist_ok=True)
 
@@ -83,6 +87,20 @@ def main():
                 "metrics": summary["methods"][method],
                 "paired_vs_flat": paired(flat, rows),
             }
+    for profile, directory in (
+        ("basic", basic_rerank_dir),
+        ("enriched", enriched_rerank_dir),
+    ):
+        summary = load(directory / "summary.json")
+        if summary["status"] != "complete":
+            raise RuntimeError(f"Incomplete run: {directory}")
+        rows = strict_map(load(directory / "predictions.json"))
+        name = f"{profile}_top2_final_rerank"
+        runs[name] = {
+            "rows": rows,
+            "metrics": summary["metrics"],
+            "paired_vs_flat": paired(flat, rows),
+        }
 
     comparison = {
         "scope": "Same 81 strict synthetic complaint cases; zero-shot; CPU Docker; no independent review.",
@@ -102,6 +120,7 @@ def main():
             for name, run in runs.items()
         },
         "top2_failure_decomposition": {},
+        "final_rerank_change": {},
         "description_change": {},
         "limits": [
             "The taxonomy has 27 leaves, not 1,000; this tests hierarchy mechanics, not 1,000-label scale.",
@@ -122,6 +141,21 @@ def main():
             ),
             "wrong_score_selection_given_gold_survived": sum(
                 row["predicted_leaf"] != row["expected_leaf"] for row in survived
+            ),
+        }
+        reranked = runs[f"{profile}_top2_final_rerank"]["rows"]
+        comparison["final_rerank_change"][profile] = {
+            **paired(rows, reranked),
+            "gold_survived_final8": len(survived),
+            "correct_given_gold_survived": sum(
+                row["predicted_leaf"] == row["expected_leaf"]
+                for row in reranked.values()
+                if row["survival"]["final8"]
+            ),
+            "wrong_rerank_selection_given_gold_survived": sum(
+                row["predicted_leaf"] != row["expected_leaf"]
+                for row in reranked.values()
+                if row["survival"]["final8"]
             ),
         }
 
@@ -145,7 +179,12 @@ def main():
         enriched_dir / "summary.json": out / "enriched-summary.json",
         enriched_dir / "greedy_cascade_predictions.json": out / "enriched-greedy-predictions.json",
         enriched_dir / "top2_branch_predictions.json": out / "enriched-top2-predictions.json",
+        basic_rerank_dir / "summary.json": out / "basic-final-rerank-summary.json",
+        basic_rerank_dir / "predictions.json": out / "basic-final-rerank-predictions.json",
+        enriched_rerank_dir / "summary.json": out / "enriched-final-rerank-summary.json",
+        enriched_rerank_dir / "predictions.json": out / "enriched-final-rerank-predictions.json",
         basic_dir / "executed-run_kanana_hierarchy.py": out / "executed-run_kanana_hierarchy.py",
+        basic_rerank_dir / "executed-run_kanana_final_rerank.py": out / "executed-run_kanana_final_rerank.py",
     }
     for source, destination in copies.items():
         shutil.copy2(source, destination)
