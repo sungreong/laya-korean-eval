@@ -2,9 +2,12 @@
 
 `Kanana-2-v-decide-3b-2611`을 기존 3×3×3 민원 taxonomy와 동일한 단일 정답 81건에 적용해, flat-27과 단계별 예측을 비교한 Docker CPU 실험이다. 추가 확인이 필요한 9건도 강제 선택 trace에는 포함했지만 정확도에서는 제외했다.
 
+![3회 Global Beam과 8회 final rerank 비교](../../docs/decision-model-landscape-kanana/assets/kanana-global-beam-evaluation-infographic-ko.webp)
+
 ## 결론
 
 - **기본 설명 Top-2 branch 뒤에 최종 8개 경로를 Kanana가 직접 다시 비교하자 79/81, 97.5%로 올라갔다.** 누적 로그점수 방식 75/81보다 4건, flat-27 75/81보다 4건 높았다.
+- **단계마다 전체 후보에서 Top-2만 남기는 3회 Global Beam은 75/81, 92.6%였다.** 정확도는 8회 방식보다 4건 낮았지만 CPU p50은 14.97초에서 6.52초로 56.5% 감소했다.
 - 기본 Greedy cascade는 73/81, 90.1%였다. 처음 선택한 부모를 하나만 유지하면서 2건을 더 잃었다.
 - Top-2는 정답 대분류를 81/81, 정답 대·중 경로와 leaf를 80/81에서 최종 8개 후보 안에 남겼다. 누적 로그확률은 그중 75건을 골랐지만, 직접 8-way final rerank는 79건을 골랐다.
 - 범위·대표 예·제외 기준을 길게 붙인 보강 설명도 final rerank에서는 79/81로 같았지만 CPU p50이 14.97초에서 22.80초로 늘었다.
@@ -45,6 +48,16 @@ score(path)
 
 7회 탐색으로 만든 8개 전체 경로와 설명을 민원 원문과 함께 Kanana에 다시 넣고, 동일한 한 번의 choice 문제에서 최종 1개를 고르게 했다. 총 호출은 8회다. 마지막 호출이 후보를 같은 softmax 안에서 직접 비교하므로 서로 다른 단계의 확률을 더하는 문제를 피한다.
 
+### 4. Global Beam Top-2, 총 3회
+
+```text
+1회: 대분류 3개 → Global Top-2
+2회: 대 2개 아래 중분류 전체 6개 → Global Top-2 경로
+3회: 중 경로 2개 아래 소분류 전체 6개 → 최종 Top-1
+```
+
+부모 경로는 다음 단계 candidate 설명과 state context에 모두 포함했다. 분기마다 별도 호출하지 않으므로 정확히 3회지만, 중·소 단계에서 각각 6개 전체 경로를 한 softmax로 비교한다.
+
 ## 결과
 
 | 설명·방식 | 대분류 | 대+중 경로 | 전체 경로 | Macro-F1 | CPU p50 | CPU p95 | 호출 수 |
@@ -53,6 +66,7 @@ score(path)
 | 기본 Greedy cascade | 93.8% | 91.4% | 90.1% (73/81) | 89.9% | **4.82초** | 6.88초 | 3 |
 | **기본 Top-2 branch** | 96.3% | 93.8% | **92.6% (75/81)** | **92.2%** | 12.02초 | 37.23초 | 7 |
 | **기본 Top-2 + final rerank** | **98.8%** | **97.5%** | **97.5% (79/81)** | **97.5%** | 14.97초 | 40.10초 | 8 |
+| **Global Beam Top-2** | 97.5% | 95.1% | 92.6% (75/81) | 92.2% | **6.52초** | 7.88초 | **3** |
 | 보강 Greedy cascade | 91.4% | 88.9% | 88.9% (72/81) | 87.9% | 8.64초 | 13.00초 | 3 |
 | 보강 Top-2 branch | 96.3% | 92.6% | 91.4% (74/81) | 91.1% | 17.91초 | 25.67초 | 7 |
 | 보강 Top-2 + final rerank | **98.8%** | **97.5%** | **97.5% (79/81)** | **97.5%** | 22.80초 | 30.48초 | 8 |
@@ -81,6 +95,8 @@ Top-2와 flat은 전체 정답 수가 같지만 같은 문항을 맞힌 것은 �
 | final rerank top-1 정답 | **79/81** | **79/81** |
 
 기본 Top-2 누적점수에서 실패한 6건 중 1건만 탐색 단계에서 정답 후보가 사라졌다. final rerank는 기존 오답 5건을 정답으로 바꿨지만 기존 정답 1건을 오답으로 바꿔 순증은 4건이었다. 정답이 최종 8개에 남은 80건 중 79건을 맞혔다. 따라서 병목은 대부분 탐색보다 최종 점수 결합이었으며, 직접 비교가 효과적이었다.
+
+3회 Global Beam도 정답 경로를 최종 6개에 80/81건 남겼지만 그중 75건만 최종 선택했다. 8회 방식과 문항별로 비교하면 둘 다 정답 75건, 8회 방식만 정답 4건, 3회 방식만 정답인 문항은 0건이었다. 즉 이 표본에서는 **3회 방식이 8회 방식의 정답을 새로 복구하지 못하면서 속도만 크게 개선한 정확도 우선순위의 하위 선택지**였다.
 
 예를 들어 “구청 운영 주차 공간을 한 달 단위로 결제할 수 있는가”라는 문항은 정답 `도로·교통 > 주정차 > 주차시설 이용`이 최종 8개에 남았지만 누적점수에서는 오답이었다. final rerank는 전체 경로를 직접 비교해 이런 점수 결합 오류를 복구했다. 남은 오답 2건 중 1건은 정답 경로가 탐색에서 탈락했고, 1건은 정답이 남아 있었지만 `버스 운행`을 `처리 지연·공무원 응대`로 잘못 골랐다.
 
@@ -126,6 +142,10 @@ docker compose run --rm kanana-cpu \
   --source evaluation/kanana-2-v-decide-hierarchy-basic-cpu/top2_branch_predictions.json \
   --out evaluation/kanana-2-v-decide-final-rerank-basic-cpu
 
+docker compose run --rm kanana-cpu \
+  python -u research/run_kanana_global_beam.py \
+  --out evaluation/kanana-2-v-decide-global-beam-basic-cpu
+
 python research/analyze_kanana_hierarchy.py
 ```
 
@@ -137,8 +157,10 @@ python research/analyze_kanana_hierarchy.py
 - `basic-summary.json`, `enriched-summary.json`: 실행 환경과 전체 지표
 - `*-predictions.json`: 문항별 stage trace, probabilities, 최종 branch
 - `basic-final-rerank-*`, `enriched-final-rerank-*`: 최종 8개 경로를 한 번 더 직접 비교한 8번째 호출 결과
+- `global-beam-3call-*`: 3·6·6 후보를 세 번 비교한 Global Beam 결과
 - `errors-*.json`: 오답과 Top-2 상위 branch
 - `executed-run_kanana_hierarchy.py`: 실제 Docker 실행본
 - `executed-run_kanana_final_rerank.py`: final rerank 실제 Docker 실행본
+- `executed-run_kanana_global_beam.py`: 3회 Global Beam 실제 Docker 실행본
 
 이 결과는 단일 작성자의 합성 taxonomy와 문항으로 수행한 탐색 실험이며, 공식 Kakao benchmark나 실서비스 정확도가 아니다.

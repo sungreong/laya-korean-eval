@@ -50,7 +50,11 @@ def compact_errors(rows):
         }
         if "survival" in row:
             item["survival"] = row["survival"]
-            item["top_branches"] = row["final_branches"][:3]
+            if "final_branches" in row:
+                item["top_branches"] = row["final_branches"][:3]
+            if "candidate_pools" in row:
+                item["candidate_pools"] = row["candidate_pools"]
+                item["final_probabilities"] = row["trace"][-1]["probabilities"]
         result.append(item)
     return result
 
@@ -62,6 +66,7 @@ def main():
     parser.add_argument("--enriched", default="evaluation/kanana-2-v-decide-hierarchy-enriched-cpu")
     parser.add_argument("--basic-rerank", default="evaluation/kanana-2-v-decide-final-rerank-basic-cpu")
     parser.add_argument("--enriched-rerank", default="evaluation/kanana-2-v-decide-final-rerank-enriched-cpu")
+    parser.add_argument("--global-beam", default="evaluation/kanana-2-v-decide-global-beam-basic-cpu")
     parser.add_argument("--out", default="results/kanana-hierarchy-2026-11-08")
     args = parser.parse_args()
 
@@ -70,6 +75,7 @@ def main():
     enriched_dir = ROOT / args.enriched
     basic_rerank_dir = ROOT / args.basic_rerank
     enriched_rerank_dir = ROOT / args.enriched_rerank
+    global_beam_dir = ROOT / args.global_beam
     out = ROOT / args.out
     out.mkdir(parents=True, exist_ok=True)
 
@@ -101,6 +107,15 @@ def main():
             "metrics": summary["metrics"],
             "paired_vs_flat": paired(flat, rows),
         }
+    global_summary = load(global_beam_dir / "summary.json")
+    if global_summary["status"] != "complete":
+        raise RuntimeError(f"Incomplete run: {global_beam_dir}")
+    global_rows = strict_map(load(global_beam_dir / "predictions.json"))
+    runs["basic_global_beam_3call"] = {
+        "rows": global_rows,
+        "metrics": global_summary["metrics"],
+        "paired_vs_flat": paired(flat, global_rows),
+    }
 
     comparison = {
         "scope": "Same 81 strict synthetic complaint cases; zero-shot; CPU Docker; no independent review.",
@@ -121,6 +136,7 @@ def main():
         },
         "top2_failure_decomposition": {},
         "final_rerank_change": {},
+        "global_beam_vs_final_rerank": {},
         "description_change": {},
         "limits": [
             "The taxonomy has 27 leaves, not 1,000; this tests hierarchy mechanics, not 1,000-label scale.",
@@ -164,6 +180,20 @@ def main():
         enriched = runs[f"enriched_{method}"]["rows"]
         comparison["description_change"][method] = paired(basic, enriched)
 
+    global_rows = runs["basic_global_beam_3call"]["rows"]
+    rerank_rows = runs["basic_top2_final_rerank"]["rows"]
+    survived = [row for row in global_rows.values() if row["survival"]["leaf_final6"]]
+    comparison["global_beam_vs_final_rerank"] = {
+        "paired_8call_reference_vs_3call_candidate": paired(rerank_rows, global_rows),
+        "gold_survived_final6": len(survived),
+        "correct_given_gold_survived": sum(
+            row["predicted_leaf"] == row["expected_leaf"] for row in survived
+        ),
+        "wrong_final_selection_given_gold_survived": sum(
+            row["predicted_leaf"] != row["expected_leaf"] for row in survived
+        ),
+    }
+
     (out / "comparison.json").write_text(
         json.dumps(comparison, ensure_ascii=False, indent=2), "utf-8"
     )
@@ -183,8 +213,11 @@ def main():
         basic_rerank_dir / "predictions.json": out / "basic-final-rerank-predictions.json",
         enriched_rerank_dir / "summary.json": out / "enriched-final-rerank-summary.json",
         enriched_rerank_dir / "predictions.json": out / "enriched-final-rerank-predictions.json",
+        global_beam_dir / "summary.json": out / "global-beam-3call-summary.json",
+        global_beam_dir / "predictions.json": out / "global-beam-3call-predictions.json",
         basic_dir / "executed-run_kanana_hierarchy.py": out / "executed-run_kanana_hierarchy.py",
         basic_rerank_dir / "executed-run_kanana_final_rerank.py": out / "executed-run_kanana_final_rerank.py",
+        global_beam_dir / "executed-run_kanana_global_beam.py": out / "executed-run_kanana_global_beam.py",
     }
     for source, destination in copies.items():
         shutil.copy2(source, destination)

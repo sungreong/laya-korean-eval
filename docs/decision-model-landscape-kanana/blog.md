@@ -22,7 +22,7 @@ Jev와 Microsoft Decision-1을 포함한 시장 타임라인은 배경으로만 
 1. **Kanana는 3.18B 언어 모델과 0.49B vision encoder를 합친 3.67B 멀티모달 decision model이다.** 최대 20,480-token 입력과 10개 image, 여러 typed question을 지원하며 생성 token은 만들지 않는다.
 2. **핵심 구조는 query/candidate dual encoding이다.** `state + question`과 각 후보 설명을 각각 2,560차원 L2 정규화 벡터로 만들고 cosine similarity와 softmax로 확률을 계산한다. 후보 벡터는 최대 4,096개까지 LRU cache한다.
 3. **LAYA와 가장 큰 차이는 option marker 하나를 공동 입력 안에서 scoring하지 않는다는 점이다.** Kanana는 후보 설명을 독립 문서처럼 encoding한다. EmbeddingGemma 검색과 닮았지만 decision 학습, typed question renderer, vision 입력과 확률 출력이 한 모델에 들어 있다.
-4. **동일 합성 민원 81건에서 Top-2 계층 탐색 뒤 최종 8개 경로를 Kanana가 직접 다시 비교하자 97.5%(79/81)였다.** 누적 로그점수로 고른 기존 Top-2와 flat-27은 92.6%(75/81), Greedy cascade는 90.1%였다. final rerank는 정확도를 4.9%p 높였지만 CPU p50은 14.97초, 총 호출은 8회였다.
+4. **동일 합성 민원 81건에서 Top-2 계층 탐색 뒤 최종 8개 경로를 Kanana가 직접 다시 비교하자 97.5%(79/81)였다.** 단계마다 전체 후보 중 Top-2만 남기는 3회 Global Beam은 92.6%(75/81)였지만 CPU p50은 6.52초로, 8회 방식의 14.97초보다 56.5% 짧았다. 정확도 우선이면 8회, 지연 우선이면 3회라는 trade-off가 확인됐다.
 5. **정확도 대가는 CPU 비용이지만 GPU에서는 전망이 다르다.** 로컬 CPU는 warm-cache p50 6.65초였지만 Kakao는 한국어 상품 리뷰 조건에서 H200 GPU 1장 기준 약 42ms를 보고했다. 서로 다른 조건이므로 직접 속도 배수로 비교하지 않는다.
 6. **공개 모델 중에서는 ‘이번에 직접 실행한 비교군’에서 가장 좋다.** 모든 오픈소스 decision model을 같은 조건으로 돌린 세계 순위는 아니다. 그래도 LAYA·KoBERT·EmbeddingGemma와 동일 81건을 비교한 범위에서는 Kanana가 명확한 1위다.
 7. **현재 도입 판단은 ‘가능성 높음, 즉시 전면 교체는 아님’이다.** 이 데이터는 작성자 합성 자료이고 27개 label뿐이다. 1,000개 이상의 taxonomy에서는 retrieval, 계층 후보 생존율, path-score calibration, 독립 실데이터와 GPU를 다시 검증해야 한다.
@@ -375,12 +375,16 @@ Kanana 공개 전에는 “Microsoft-Decision-1이 한국어에서도 1등” �
 | 데이터 | 저자 작성 합성 민원 90건: 단일 정답 81건 + 추가 확인 필요 9건 |
 | 분류표 | 대분류 3 × 중분류 3 × 소분류 3 = leaf 27개 |
 | 입력 | 상담 채널과 한국어 민원 요약 |
-| 후보·방식 | flat-27, predicted-prefix Greedy cascade, 단계별 top-2를 유지한 최종 8개 branch, 8개 전체 경로 직접 final rerank |
+| 후보·방식 | flat-27, predicted-prefix Greedy cascade, 분기별 Top-2 8회 방식, 단계 전체 Global Top-2 3회 방식 |
 | 학습 | 이 분류표로 추가 학습하지 않은 zero-shot |
 | 측정 | accuracy, Macro-F1, Wilson 95%, 단계별 경로 정확도, 후보 생존율, p50/p95 latency |
 | 지연 조건 | 첫 요청으로 candidate embedding cache를 채운 뒤 90건 측정 |
 
 비교 대상은 같은 81건과 같은 27개 label을 사용한 기존 실행이다. 다만 LAYA와 EmbeddingGemma는 CPU 4 thread, Kanana는 8 thread였고 framework·cache 방식도 다르므로 latency는 통제된 모델 순위가 아니라 이 장비의 관측값이다.
+
+![Kanana 한국어 계층 분류 평가의 데이터 구성, 기본·보강 설명 Profile, 추론 방식, 측정 지표와 실측 결과를 연결한 전체 설계 인포그래픽](assets/kanana-evaluation-design-profile-ko.webp)
+
+*그림 2. 평가 전체 설계. 동일한 81건과 27개 유형을 유지하고 설명 Profile과 추론 방식만 바꿔 정확도·후보 생존율·CPU 지연을 비교했다. 보강 설명은 정확도를 높이지 못하고 지연만 늘렸다.*
 
 ### Results
 
@@ -393,6 +397,7 @@ Kanana 공개 전에는 “Microsoft-Decision-1이 한국어에서도 1등” �
 | Kanana 기본 Greedy cascade | 90.1% (73/81) | 89.9% | 4.82초 | 3회 순차 호출 |
 | Kanana 기본 Top-2 branch·누적점수 | 92.6% (75/81) | 92.2% | 12.02초 | 7회 호출·최종 8개 branch |
 | **Kanana 기본 Top-2 + final rerank** | **97.5% (79/81)** | **97.5%** | 14.97초 | 8회 호출·8개 경로 직접 비교 |
+| **Kanana Global Beam Top-2** | 92.6% (75/81) | 92.2% | **6.52초** | **3회 호출·3→6→6 후보** |
 
 ### 같은 자료를 대·중·소 단계로 다시 평가하면
 
@@ -407,8 +412,13 @@ Kanana 공개 전에는 “Microsoft-Decision-1이 한국어에서도 1등” �
 3. **predicted-prefix cascade:** hard cascade와 같지만, 앞에서 고른 대·중분류 이름을 다음 단계 입력 prefix로 함께 제공한다. 학습 때는 정답 부모를, 실전에는 예측 부모를 쓴다.
 4. **Kanana Top-2 branch·누적점수:** 대 top-2, 각 branch의 중 top-2, 각 branch의 소 top-2를 유지해 최종 8개 경로를 만든다. 별도 reranker 없이 `log P(대)+log P(중|대)+log P(소|대,중)`가 가장 큰 경로를 고른다.
 5. **Kanana Top-2 + final rerank:** 같은 8개 전체 경로와 설명을 민원 원문과 함께 Kanana에 한 번 더 넣어, 동일한 choice softmax 안에서 최종 하나를 직접 비교한다. 탐색 7회와 마지막 판단 1회를 합쳐 총 8회다.
-6. **LAYA top-k beam12:** 대분류 top-2와 각 경로의 중분류 top-2를 유지해 4개 대·중 경로를 만들고, 그 아래 소분류 3개씩 총 12개를 최종 재평가한다.
-7. **retrieval top-1:** 유형 설명 27개를 embedding으로 검색해 가장 가까운 leaf 하나를 고른다.
+6. **Kanana Global Beam Top-2:** 대분류 3개에서 전체 Top-2, 그 아래 중분류 6개에서 전체 Top-2, 그 아래 소분류 전체 경로 6개에서 최종 Top-1을 고른다. 부모 경로를 candidate 설명과 context에 포함하며 총 3회다.
+7. **LAYA top-k beam12:** 대분류 top-2와 각 경로의 중분류 top-2를 유지해 4개 대·중 경로를 만들고, 그 아래 소분류 3개씩 총 12개를 최종 재평가한다.
+8. **retrieval top-1:** 유형 설명 27개를 embedding으로 검색해 가장 가까운 leaf 하나를 고른다.
+
+![Kanana 계층 평가에서 3회 Global Beam과 8회 분기별 Top-2 final rerank의 후보 수, 정확도, CPU 지연을 비교한 가로형 인포그래픽](assets/kanana-global-beam-evaluation-infographic-ko.webp)
+
+*그림 3. 3회 Global Beam은 `3 → 6 → 6` 후보를 단계마다 한 번씩 비교해 p50 6.52초를 기록했다. 8회 방식은 더 느렸지만 79/81로 4건 더 맞혔다. 두 방식 모두 정답 후보를 80/81에서 최종 후보군에 남겼다.*
 
 같은 81건의 최종 예측을 부모 경로까지 다시 계산하면 다음과 같다. `대+중`은 대분류와 중분류가 모두 맞은 비율이며, `전체 경로`는 대·중·소가 모두 맞은 비율이다.
 
@@ -418,6 +428,7 @@ Kanana 공개 전에는 “Microsoft-Decision-1이 한국어에서도 1등” �
 | Kanana Greedy predicted-prefix | 93.8% | 91.4% | 90.1% (73/81) | 상위 top-1 오류가 누적됐지만 CPU p50 4.82초 |
 | Kanana Top-2 branch·누적점수 | 96.3% | 93.8% | 92.6% (75/81) | 최종 8개 누적점수 선택, CPU p50 12.02초 |
 | **Kanana Top-2 + final rerank** | **98.8%** | **97.5%** | **97.5% (79/81)** | 최종 8개 직접 비교, CPU p50 14.97초 |
+| **Kanana Global Beam Top-2** | 97.5% | 95.1% | 92.6% (75/81) | 3→6→6 후보를 총 3회 비교, CPU p50 6.52초 |
 | EmbeddingGemma 2 검색 top-1 | 92.6% | 85.2% | 71.6% (58/81) | 빠르고 강한 baseline. 최종 leaf 경계에서 오답 증가 |
 | LAYA 계층 학습 flat-27 | 69.1% | 59.3% | 34.6% (28/81) | 같은 LAYA 순차 방식보다 낫다 |
 | LAYA hard cascade | 59.3% | 35.8% | 23.5% (19/81) | 앞 단계 오류가 그대로 전파됐다 |
@@ -426,6 +437,8 @@ Kanana 공개 전에는 “Microsoft-Decision-1이 한국어에서도 1등” �
 | KoBERT `[MASK]` predicted-prefix | 53.1% | 25.9% | 16.0% (13/81) | 계층화로 상대 개선됐지만 절대 성능은 낮다 |
 
 **현재 결과만 놓고 보면 Kanana Top-2 + final rerank가 79/81로 1위다.** Top-2 탐색은 정답 대분류를 81/81, 정답 대·중 경로와 leaf를 80/81에서 최종 8개 후보 안에 남겼다. 누적 로그확률은 그중 75건만 골랐지만, 마지막에 8개 전체 경로를 같은 choice 문제로 직접 비교하자 79건을 골랐다. 기존 누적점수 오답 5건을 복구하고 기존 정답 1건을 잃어 순증은 4건이었다. 탐색 recall은 충분히 높았고, 실제 병목은 서로 다른 단계의 softmax 점수를 합산한 최종 선택이었다.
+
+사용자 관점에서 더 단순한 3회 Global Beam도 실제로 다시 돌렸다. 정답은 최종 6개에 80/81건 남았지만 최종 Top-1은 75/81이었다. 8회 방식과 paired 비교하면 둘 다 정답 75건, 8회 방식만 정답 4건, 3회 방식만 정답인 문항은 없었다. 호출 수는 8회에서 3회로 줄고 CPU p50도 56.5% 감소했지만 정확도는 4.9%p 낮아졌다. 따라서 **3회 구조는 틀린 설계가 아니라 속도 우선 설계이며, 이번 표본의 최고 정확도 구조는 여전히 8회 final rerank**다.
 
 LAYA에서는 flat-27이 순차 분류보다 11.1%p 높았고, KoBERT에서는 반대로 predicted-prefix가 flat-27보다 9.9%p 높았다. 즉 계층 구조 자체가 성능을 보장하지 않는다. 모델이 학습한 후보 표현, 한 번에 비교하는 선택지 수, prefix의 학습·추론 일치 여부가 함께 맞아야 한다.
 
@@ -464,7 +477,7 @@ EmbeddingGemma에는 같은 fixture의 순차 cascade 실행이 없고, 모델 �
 6. **독립 split:** 문장 중복을 제거하고 시간·기관·상담원 단위 test, 학습에 없던 신규 label holdout을 둔다.
 7. **분리 지표:** 대 top-k recall, 중 경로 recall, leaf Recall@8, 후보 내 조건부 top-1, 전체 경로 정확도와 latency를 함께 본다.
 
-1,000개 환경의 권장 구조는 `retrieval top-k → 계층 Top-2/Top-k → 최종 후보 직접 rerank → 낮은 confidence 사람 검토`다. 이번 결과에서 final rerank가 누적점수보다 4건 개선됐다는 사실은 이 구조를 더 시험할 근거는 되지만, 대규모 성능을 보장하지는 않는다. 전체 trace와 설명 profile은 [GitHub의 Kanana 계층 평가 결과](https://github.com/sungreong/laya-korean-eval/tree/main/results/kanana-hierarchy-2026-11-08)에 공개했다.
+1,000개 환경의 권장 구조는 트래픽 조건에 따라 나뉜다. 정확도 우선이면 `retrieval top-k → 분기별 Top-k → 최종 후보 직접 rerank`, 지연 우선이면 `retrieval top-k → 단계별 Global Top-k → 최종 Top-1`, 낮은 confidence는 사람 검토로 보낸다. 이번 27개 결과는 8회 방식이 3회 방식보다 4건 더 맞혔다는 증거일 뿐, 1,000개에서도 같은 차이가 난다는 보장은 없다. 전체 trace는 [GitHub의 Kanana 계층 평가 결과](https://github.com/sungreong/laya-korean-eval/tree/main/results/kanana-hierarchy-2026-11-08)에 공개했다.
 
 Kanana의 accuracy Wilson 95% 구간은 84.8~96.6%, p95 latency는 7.34초였다. NLL 0.228, multiclass Brier 0.097, 10-bin ECE 0.067을 기록했다. 정답 75건의 평균 최고 확률은 0.909, 오답 6건은 0.501이었다. 단, calibration split 없이 test set 자체에서 계산한 기술통계다.
 
@@ -675,7 +688,7 @@ Microsoft-Decision-1의 등장은 Jev의 끝이라기보다 **decision model이 
 현재 가장 강한 결론은 세 가지다.
 
 1. **bounded decision에는 생성 LLM이 과한 경우가 많다.** parsing이 필요 없는 확률 출력은 실제 운영 이점이 있다.
-2. **과제와 최종 선택 방식의 궁합이 중요하다.** Top-2 탐색 뒤 누적점수는 92.6%였지만, 최종 8개 경로를 Kanana가 직접 다시 비교하자 97.5%로 올랐다. Greedy는 90.1%였고 긴 설명은 final rerank 정확도를 더 높이지 못했다.
+2. **과제와 최종 선택 방식의 궁합이 중요하다.** 3회 Global Beam은 92.6%·p50 6.52초, 8회 final rerank는 97.5%·p50 14.97초였다. 호출을 줄이면 빨라졌지만 이번 표본에서는 정확도 4건을 잃었다. 긴 설명은 final rerank 정확도를 더 높이지 못했다.
 3. **이번에 직접 실행한 공개 모델 조합 중 Kanana가 가장 좋았다.** 97.5%는 독립 실서비스 정확도가 아니라 합성 81건의 결과지만, EmbeddingGemma 71.6%와 LAYA 34.6%보다 큰 차이로 높았다. 동시에 Top-2가 정답 후보를 80/81에서 살리고 final rerank가 그중 79건을 골랐다는 점은 대규모 taxonomy 탐색을 후속 검증할 근거가 된다.
 4. **GPU에서는 실시간 가능성이 있다.** Kakao는 H200에서 약 42ms를 보고했지만, 우리 조건의 27·300개 후보와 보급형 GPU에서는 cold/warm cache를 나눠 다시 재야 한다.
 5. **승부는 단일 model benchmark보다 시스템 설계에서 난다.** candidate warm-up, 장기 실행 worker, 단계별 score calibration, fallback, audit log와 라이선스를 함께 설계해야 한다.

@@ -20,6 +20,12 @@ class KananaHierarchyPublishedResultsTest(unittest.TestCase):
         self.assertEqual(methods["basic_top2_final_rerank"]["strict"]["correct_paths"], 79)
         self.assertEqual(methods["enriched_top2_final_rerank"]["strict"]["correct_paths"], 79)
         self.assertEqual(methods["basic_top2_final_rerank"]["model_calls_mean"], 8)
+        self.assertEqual(methods["basic_global_beam_3call"]["strict"]["correct_paths"], 75)
+        self.assertEqual(methods["basic_global_beam_3call"]["model_calls_mean"], 3)
+        self.assertEqual(
+            methods["basic_global_beam_3call"]["candidate_survival"]["leaf_final6"]["count"],
+            80,
+        )
         self.assertEqual(
             methods["basic_top2_branch"]["candidate_survival"]["final8"]["count"],
             80,
@@ -68,6 +74,17 @@ class KananaHierarchyPublishedResultsTest(unittest.TestCase):
                 self.assertEqual(len(row["trace"]), 8)
                 self.assertEqual(row["trace"][-1]["stage"], "final8_direct_rerank")
                 self.assertEqual(row["trace"][-1]["candidate_count"], 8)
+
+    def test_global_beam_trace_shape(self):
+        rows = json.loads(
+            (RESULTS / "global-beam-3call-predictions.json").read_text("utf-8")
+        )
+        self.assertEqual(len(rows), 90)
+        for row in rows:
+            self.assertEqual([step["candidate_count"] for step in row["trace"]], [3, 6, 6])
+            self.assertEqual(len(row["candidate_pools"]["major_top2"]), 2)
+            self.assertEqual(len(row["candidate_pools"]["middle_top2"]), 2)
+            self.assertEqual(len(row["candidate_pools"]["final_leaf_candidates"]), 6)
 
 
 if __name__ == "__main__":
