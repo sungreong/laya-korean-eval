@@ -25,6 +25,8 @@ Kakao Kanana-2 V-Decide의 모델 구성, query/candidate dual-encoder 데이터
 
 ## 블로그 썸네일
 
+- **최종 권장 WebP:** `assets/kanana-decision-model-thumbnail-v2.webp` (1598×900, quality 85)
+- 최종 생성 원본 PNG: `assets/kanana-decision-model-thumbnail-v2-original.png`
 - 게시용 WebP: `assets/kanana-test-thumbnail.webp` (1599×900, quality 85)
 - 생성 원본 PNG: `assets/kanana-test-thumbnail-original.png`
 
